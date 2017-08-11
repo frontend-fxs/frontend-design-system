@@ -158,17 +158,17 @@
             </div>
             <!-- /Social & RSS links -->
             <!--<div class="fxs_socialLinks_nav">
-            <ul class="fxs_shareOptions_boxed">
-                <li class="fxs_site_clock">
-                    <a href="#" title="change timezone" class="fxs_timezone_btn_navbar" id="showTimezoneClock">
-                        <span class="fxs_event_time">
-                            <i class="fa fa-clock-o"></i>
-                            <time datetime="2015-12-01 12:44:00">12:44:29 UTC</time>
-                        </span>
-                    </a>
-                </li>
-            </ul>
-        </div>-->
+                    <ul class="fxs_shareOptions_boxed">
+                        <li class="fxs_site_clock">
+                            <a href="#" title="change timezone" class="fxs_timezone_btn_navbar" id="showTimezoneClock">
+                                <span class="fxs_event_time">
+                                    <i class="fa fa-clock-o"></i>
+                                    <time datetime="2015-12-01 12:44:00">12:44:29 UTC</time>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>-->
             <!-- /Social & RSS links -->
 
 
@@ -1512,7 +1512,7 @@
             var posts = client.initIndex('test_post');
             var assets = client.initIndex('test_asset');
 
-            autocomplete('#aa-search-input') [
+            autocomplete('#aa-search-input', [
             {
                 source: autocomplete.sources.hits(posts, { hitsPerPage: 5 }),
                 displayKey: 'name',

@@ -1,8 +1,8 @@
-﻿///#source 1 1 /widgets/core/js/app/widget-base.js
 (function () {
     FXStreetWidgets.Widget.Base = function (loaderBase) {
         var _this = {};
 
+        _this.Container = FXStreetWidgets.Widget.Base.prototype.Container;
         _this.loaderBase = loaderBase;
         _this.data = FXStreetWidgets.Widget.Base.prototype.data;
         _this.interval = FXStreetWidgets.Widget.Base.prototype.interval;
@@ -15,9 +15,12 @@
         _this.setDatesToJson = FXStreetWidgets.Widget.Base.prototype.setDatesToJson;
         _this.renderHtml = FXStreetWidgets.Widget.Base.prototype.renderHtml;
         _this.log = FXStreetWidgets.Widget.Base.prototype.log;
+        _this.jsonDataIsValid = FXStreetWidgets.Widget.Base.prototype.jsonDataIsValid;
+        _this.handleJsonInvalidData = FXStreetWidgets.Widget.Base.prototype.handleJsonInvalidData;
 
         return _this;
     };
+    FXStreetWidgets.Widget.Base.prototype.Container = null;
     FXStreetWidgets.Widget.Base.prototype.loaderBase = null;
     FXStreetWidgets.Widget.Base.prototype.data = null;
     FXStreetWidgets.Widget.Base.prototype.interval = null;
@@ -40,25 +43,34 @@
     };
     FXStreetWidgets.Widget.Base.prototype.loadDataFromUrl = function (url, request) {
         var _this = this;
-        FXStreetWidgets.Util.ajaxJsonGetter(url, request).done(function (data) {
-            _this.data = data;
-            if (_this.loaderBase.isReady()) {
-                _this.log("start renderHtml for: " + _this.loaderBase.config.WidgetName);
-                _this.renderHtml();
-            } else {
-                _this.interval = setInterval(function () {
-                    if (_this.loaderBase.isReady()) {
-                        clearInterval(_this.interval);
-                        _this.log("start renderHtml for: " + _this.loaderBase.config.WidgetName);
-                        _this.renderHtml();
-                    }
-                }, _this.intervalTimeToWaitForReady);
-            }
-        });
+        FXStreetWidgets.Util.ajaxJsonGetter(url, request)
+            .done(function (data) {
+                if (!_this.jsonDataIsValid(data)) {
+                    _this.handleJsonInvalidData();
+                    return;
+                }
+
+                _this.data = data;
+                if (_this.loaderBase.isReady()) {
+                    _this.log("start renderHtml for: " + _this.loaderBase.config.WidgetName);
+                    _this.renderHtml();
+                } else {
+                    _this.interval = setInterval(function () {
+                        if (_this.loaderBase.isReady()) {
+                            clearInterval(_this.interval);
+                            _this.log("start renderHtml for: " + _this.loaderBase.config.WidgetName);
+                            _this.renderHtml();
+                        }
+                    }, _this.intervalTimeToWaitForReady);
+                }
+            })
+            .error(function () {
+                _this.handleJsonInvalidData();
+            });
     };
     FXStreetWidgets.Widget.Base.prototype.setDatesToJson = function (json, dateResponse) {
-        var date = FXStreetWidgets.Util.formatDateResponse(dateResponse);
-        json.LastUpdatedDate = dateResponse.Value;
+        var date = FXStreetWidgets.Util.formatDate(dateResponse);
+        json.LastUpdatedDate = dateResponse;
         json.LastUpdatedHour = date;
         return json;
     };
@@ -66,8 +78,21 @@
     FXStreetWidgets.Widget.Base.prototype.log = function(msg) {
         FXStreetWidgets.Util.log(msg);
     };
+    FXStreetWidgets.Widget.Base.prototype.jsonDataIsValid = function (data) {
+        var result = FXStreetWidgets.Util.isValid(data)
+                    && FXStreetWidgets.Util.arrayIsValid(data.Values)
+                    && FXStreetWidgets.Util.isValid(data.Values[0]);
+        return result;
+    };
+    FXStreetWidgets.Widget.Base.prototype.handleJsonInvalidData = function () {
+        var _this = this;
+        var noDataMessage = _this.loaderBase.config.Translations['NoDataAvailable'];
+        if (!FXStreetWidgets.Util.isValid(noDataMessage)) {
+            noDataMessage = 'No data available';
+        }
+        _this.Container.html(noDataMessage);
+    };
 }());
-///#source 1 1 /widgets/core/js/app/loader-base.js
 (function ($) {
     FXStreetWidgets.Widget.LoaderBase = function (options) {
         var _this = {};
@@ -80,20 +105,23 @@
         _this.getContainer = FXStreetWidgets.Widget.LoaderBase.prototype.getContainer;
         _this.getHost = FXStreetWidgets.Widget.LoaderBase.prototype.getHost;
         _this.getVersion = FXStreetWidgets.Widget.LoaderBase.prototype.getVersion;
-        _this.getCss = FXStreetWidgets.Widget.LoaderBase.prototype.getCss;
         _this.getCustomJs = FXStreetWidgets.Widget.LoaderBase.prototype.getCustomJs;
+        _this.getSharedJs = FXStreetWidgets.Widget.LoaderBase.prototype.getSharedJs;
         _this.getEndPoint = FXStreetWidgets.Widget.LoaderBase.prototype.getEndPoint;
         _this.getEndPointTranslation = FXStreetWidgets.Widget.LoaderBase.prototype.getEndPointTranslation;
         _this.initWidgets = FXStreetWidgets.Widget.LoaderBase.prototype.initWidgets;
         _this.log = FXStreetWidgets.Widget.LoaderBase.prototype.log;
+        _this.chartLibrariesAreLoaded = FXStreetWidgets.Widget.LoaderBase.prototype.chartLibrariesAreLoaded;
 
         _this.mustachesCount = 0;
         _this.mustachesLoadedCount = 0;
         _this.customJsCount = 0;
         _this.customJsLoadedCount = 0;
+        _this.sharedJsCount = 0;
+        _this.sharedJsLoadedCount = 0;
         _this.translationsLoaded = false;
-        _this.cssLoaded = false;
         _this.haveCustomJs = false;
+        _this.haveSharedJs = false;
 
         _this.init = function () {
             if (!FXStreetWidgets.Util.isValid(_this.options)
@@ -109,7 +137,9 @@
             _this.loadUtils();
 
             var widgets = $("div[fxs_widget][fxs_name='" + _this.options.WidgetName + "']");
-            _this.initWidgets(widgets);
+            FXStreetWidgets.Util.async(function () {
+                _this.initWidgets(widgets);
+            });
         };
 
         _this.loadDeferred = function (container) {
@@ -124,19 +154,34 @@
                 _this.config.Translations = data.Values;
             });
 
-            var cssUrl = FXStreetWidgets.Configuration.getCssUrl(_this.config.Css + ".min.css", _this.config.Css);
+            $.each(_this.config.CustomJs, function (index, custom) {
+                _this.customJsCount++;
+                var url = "";
+                var name = "";
+                var customLoadedDelegate;
 
-            FXStreetWidgets.ResourceManagerObj.load(_this.config.Css, FXStreetWidgets.ResourceType.Css, cssUrl, function () {
-                _this.cssLoaded = true;
+                if (typeof custom === 'string') {
+                    name = custom;
+                    url = FXStreetWidgets.Configuration.getCoreJsUrl(name);
+                }
+                else if (custom && typeof custom === 'object') {
+                    name = custom.Js;
+                    url = FXStreetWidgets.Configuration.getCoreJsUrl(name);
+                    customLoadedDelegate = custom.CustomLoadedDelegate;
+                }
+
+                FXStreetWidgets.ResourceManagerObj.load(name, FXStreetWidgets.ResourceType.Js, url, function () {
+                    _this.customJsLoadedCount++;
+                }, customLoadedDelegate);
             });
 
-            $.each(_this.config.CustomJs, function (index, name) {
-                _this.customJsCount++;
-                var url = FXStreetWidgets.Configuration.getCoreJsUrl(name);
+            $.each(_this.config.SharedJs, function (index, shared) {
+                _this.sharedJsCount++;
+                var url = FXStreetWidgets.Configuration.createResourceUrl(shared.Container, shared.Js);
 
-                FXStreetWidgets.ResourceManagerObj.load(url, FXStreetWidgets.ResourceType.Js, url, function () {
-                    _this.customJsLoadedCount++;
-                });
+                FXStreetWidgets.ResourceManagerObj.load(shared.Js, FXStreetWidgets.ResourceType.Js, url, function () {
+                    _this.sharedJsLoadedCount++;
+                }, shared.CustomLoadedDelegate);
             });
 
             $.each(_this.config.Mustaches, function (key, value) {
@@ -151,6 +196,26 @@
             });
         };
 
+        _this.async_loadjs = function (url, callback) {
+            var x = document.getElementsByTagName('script')[0],
+                s = document.createElement('script');
+            s.type = 'text/javascript';
+            s.async = true;
+            s.src = url;
+            if (callback && typeof callback === "function") {
+                if (s.addEventListener) {
+                    s.addEventListener('load', callback, false);
+                } else {
+                    s.onreadystatechange = function () {
+                        if (this.readyState === "complete" || this.readyState === "loaded") {
+                            callback.call();
+                        }
+                    };
+                }
+            }
+            x.parentNode.insertBefore(s, x);
+        };
+
         return _this;
     };
     FXStreetWidgets.Widget.LoaderBase.prototype.config = {};
@@ -161,8 +226,8 @@
         var container = this.getContainer();
         var host = this.getHost(container);
         var version = this.getVersion(container);
-        var css = this.getCss();
         var customJs = this.getCustomJs();
+        var sharedJs = this.getSharedJs();
 
         this.config = {
             WidgetName: this.options.WidgetName,
@@ -170,8 +235,8 @@
             EndPoint: this.getEndPoint(host, version),
             EndPointTranslation: this.getEndPointTranslation(host, version),
             DefaultHost: this.options.DefaultHost,
-            Css: css,
             CustomJs: customJs,
+            SharedJs: sharedJs,
             Mustaches: this.options.Mustaches,
             Translations: {}
         };
@@ -189,35 +254,59 @@
     FXStreetWidgets.Widget.LoaderBase.prototype.getVersion = function (container) {
         container = container || this.getContainer();
         var version = container.attr("fxs_version") || this.options.DefaultVersion;
-        version = FXStreetWidgets.Util.isUndefined(version) ? "" : version + "/";
+        version = FXStreetWidgets.Util.isUndefined(version) ? "" : version;
         return version;
-    };
-    FXStreetWidgets.Widget.LoaderBase.prototype.getCss = function () {
-        var name = FXStreetWidgets.Util.isValid(this.options.Css) ? this.options.Css : this.options.WidgetName;
-        return name;
     };
     FXStreetWidgets.Widget.LoaderBase.prototype.getCustomJs = function () {
         var customJs = [];
 
-        if (FXStreetWidgets.Util.arrayIsValid(this.options.CustomJs)){
+        if (FXStreetWidgets.Util.arrayIsValid(this.options.CustomJs)) {
             this.haveCustomJs = true;
             customJs = this.options.CustomJs;
         }
 
         return customJs;
     };
+    FXStreetWidgets.Widget.LoaderBase.prototype.getSharedJs = function () {
+        var sharedJs = [];
+
+        if (FXStreetWidgets.Util.arrayIsValid(this.options.SharedJs)) {
+            this.haveSharedJs = true;
+            sharedJs = this.options.SharedJs;
+        }
+
+        return sharedJs;
+    };
+    var getFormattedEndpoint = function (formatEndpoint, version) {
+        var result = formatEndpoint.replace(/{version}/g, version).replace(/{culture}/g, FXStreetWidgets.Configuration.getCulture());
+        return result;
+    };
     FXStreetWidgets.Widget.LoaderBase.prototype.getEndPoint = function (host, version) {
-        var endPoint = host + version + FXStreetWidgets.Configuration.getCulture() + "/" + this.options.EndPoint;
-        return endPoint;
+        debugger;
+        var result;
+        if (this.options.EndPointV2) {
+            var formattedEndpoint = getFormattedEndpoint(this.options.EndPointV2, version);
+            result = host + formattedEndpoint;
+        } else {
+            result = host + (version ? version + '/' : "") + FXStreetWidgets.Configuration.getCulture() + "/" + this.options.EndPoint;
+        }
+        return result;
     };
     FXStreetWidgets.Widget.LoaderBase.prototype.getEndPointTranslation = function (host, version) {
-        var endPoint = host + version + FXStreetWidgets.Configuration.getCulture() + "/" + this.options.EndPointTranslation;
-        return endPoint;
+        debugger;
+        var result;
+        if (this.options.EndPointTranslationV2) {
+            var formattedEndpoint = getFormattedEndpoint(this.options.EndPointTranslationV2, version);
+            result = host + formattedEndpoint;
+        } else {
+            result = host + (version ? version + '/' : "") + FXStreetWidgets.Configuration.getCulture() + "/" + this.options.EndPointTranslation;
+        }
+        return result;
     };
     FXStreetWidgets.Widget.LoaderBase.prototype.isReady = function () {
         var result = this.translationsLoaded === true
-            && this.cssLoaded === true
             && ((this.haveCustomJs === false) || (this.haveCustomJs === true && this.customJsLoadedCount >= this.customJsCount))
+            && ((this.haveSharedJs === false) || (this.haveSharedJs === true && this.sharedJsLoadedCount >= this.sharedJsCount))
             && this.mustachesLoadedCount === this.mustachesCount;
 
         result = result && this.isReadyCustomCheck();
@@ -239,13 +328,11 @@
         FXStreetWidgets.Util.log(msg);
     };
 }(FXStreetWidgets.$));
-///#source 1 1 /widgets/heatmap/js/base.js
 (function ($) {
     FXStreetWidgets.Widget.HeatMapBase = function (loaderBase) {
         var parent = FXStreetWidgets.Widget.Base(loaderBase),
             _this = FXStreetWidgets.Util.extendObject(parent);
 
-        _this.Container = null;
         _this.WidgetId = null;
         _this.AssetIds = "";
         _this.Seo = false;
@@ -290,10 +377,6 @@
         }
 
         _this.renderHtml = function () {
-            if (_this.data.Values === null || _this.data.Values.length === 0) {
-                return;
-            }
-
             var jsonData = {
                 Studies: _this.getStudies(_this.data.Values),
                 Translations: _this.loaderBase.config.Translations,
@@ -383,7 +466,6 @@
         return _this;
     };
 }(FXStreetWidgets.$));
-///#source 1 1 /widgets/heatmap/js/widget.js
 (function ($) {
     FXStreetWidgets.Widget.HeatMap = function (loaderBase) {
         var parent = FXStreetWidgets.Widget.HeatMapBase(loaderBase),
@@ -394,20 +476,18 @@
         return _this;
     };
 }(FXStreetWidgets.$));
-///#source 1 1 /widgets/heatmap/js/loader.js
 (function ($) {
     FXStreetWidgets.Widget.LoaderHeatMap = function () {
         var options = {
             WidgetName: "heatmap",
-            EndPoint: "heatmap/study/",
-            EndPointTranslation: "heatmap/localization/",
-            DefaultHost: "http://markettools.api.fxstreet.com/",
+            EndPointV2: "api/v2/heatmap/study/",
+            EndPointTranslationV2: "api/v2/cultures/{culture}/heatmap/",
+            DefaultHost: "https://markettools.fxstreet.com/",
             Mustaches:
                 {
                     "heatmap": ""
                 },
-            Css: "heatmap",
-            DefaultVersion: "v1"
+            DefaultVersion: "v2"
         };
 
         var parent = FXStreetWidgets.Widget.LoaderBase(options),
@@ -422,7 +502,7 @@
                     AssetIds: jHeatMap.attr("fxs_assets"),
                     FormatUrl: jHeatMap.attr("fxs_format_url")
                 };
-                
+
                 if (!FXStreetWidgets.Util.isUndefined(initJson.AssetIds)) {
                     var validAssets = true;
                     initJson.AssetIds.split(',').forEach(function (asset) {

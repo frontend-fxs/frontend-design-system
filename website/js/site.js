@@ -113,7 +113,7 @@ $(document).ready(function () {
     // typeahead filter rates nad charts prototype
 
     var ratesFilter = {
-        pairs: [ 
+        pairs: [
             "EUR/USD", "GBP/USD", "USD/JPY", "USD/CAD", "AUD/USD", "USD/CHF",
             "NZD/USD", "GBP/JPY"
         ]
@@ -191,8 +191,8 @@ $(document).ready(function () {
     });
 
 
-    
-    // Layout - Menu 
+
+    // Layout - Menu
 
     var menuLeft = document.getElementById('cbp-spmenu-s1'),
         menuRight = document.getElementById('cbp-spmenu-s2'),
@@ -209,7 +209,7 @@ $(document).ready(function () {
         $(this).toggleClass('active');
         $(body).toggleClass('cbp-spmenu-push-toright');
         $(menuLeft).toggleClass('cbp-spmenu-open');
-        $(body).removeClass('fxs_push_timezone'); //add 
+        $(body).removeClass('fxs_push_timezone'); //add
         $('.fxs_listView').removeClass('cbp-spmenu-open');
         $('.fxs_toggleList').removeClass('active');
         disableOther('showLeftPush');
@@ -267,7 +267,7 @@ $(document).ready(function () {
     // METIDO A SACO para que funcione el trigger del filtro
     //$('.fxs_btn_filter').click(function(evt) {
         //$(this).closest('.fxs_filter').toggleClass("active");
-    //}); 
+    //});
 
     // ESTO ESTÁ METIDO MÁS A SACO AÚN: DESACTIVAR EL TRIGGER AL CLICKAR FUERA
     $('.fxs_dismissQuery').click(function() {
@@ -288,7 +288,7 @@ $(document).ready(function () {
         $('.fxs_timezone_items').addClass('fxs_show_timezoneHours');
     });
 
-    $('[data-toggle="fxs_timezone_items"]').click(function () {         
+    $('[data-toggle="fxs_timezone_items"]').click(function () {
         $('.fxs_timezone_items').removeClass('fxs_show_timezoneHours');
     });
 
@@ -303,7 +303,7 @@ $(document).ready(function () {
     // USER ZONE
 
     // user logout
-    $('.fxs_logout_user').click(function () {         
+    $('.fxs_logout_user').click(function () {
         $('.fxs_user_logged').removeClass('fxs_show_user_logged'); // hide right column
         $('.fxs_show_usermenu').removeClass('fxs_show_user_icon_logged') // change icon color
     });
@@ -313,11 +313,11 @@ $(document).ready(function () {
     $(".fxs_login_btn").on("click", startLoading); // call startLoading function
 
     var timer;
-    // display preload and after certain time display right column with user settings 
+    // display preload and after certain time display right column with user settings
     function startLoading(){
       $(".fxs_custom_site_elements_preload").css('visibility', 'visible');
       timer = setTimeout(function(){
-          $('.fxs_user_logged').addClass('fxs_show_user_logged');  
+          $('.fxs_user_logged').addClass('fxs_show_user_logged');
           $('.fxs_show_usermenu').addClass('fxs_show_user_icon_logged');
           $(".fxs_custom_site_elements_preload").css('visibility', 'hidden');
       }, 2000);
@@ -328,8 +328,8 @@ $(document).ready(function () {
      //hide
      $('.fxs_simulate_preload').hide();
      // hide preload and show widget
-     $('.fxs_preload_modules').delay(10000).hide(0); 
-     $('.fxs_simulate_preload').delay(10100).show(0); 
+     $('.fxs_preload_modules').delay(10000).hide(0);
+     $('.fxs_simulate_preload').delay(10100).show(0);
 
 
     // hide and show listview left column in responive mode //
@@ -353,29 +353,18 @@ $(document).ready(function () {
     $('.fxs_listView_item').click(function(){
         var bodyHasParentSection = $('body').hasClass('fxs_isParent_section');
 
-        // on the first list element click we destroy the fucking class 'fxs_isParent_section' 
+        // on the first list element click we destroy the fucking class 'fxs_isParent_section'
         if(bodyHasParentSection){
             $('body').removeClass('fxs_isParent_section');
-        } 
+        }
 
-        // copy the same properties of event function "showLeftPush.onclick = function ()" line:129   
+        // copy the same properties of event function "showLeftPush.onclick = function ()" line:129
         $(this).toggleClass('active');
         $(menuLeft).toggleClass('cbp-spmenu-open');
         $('.fxs_listView').removeClass('cbp-spmenu-open');
         $('.fxs_toggleList').removeClass('active');
         disableOther('showLeftPush');
     });
-
-    /////////////////////// CHAPUZON /////////////////////////////////
-
-    // SEARCH CLOSE BUTON simulate focus in and out
-    /*$('.fxs_typeheadContainer_custom').focusin(function(){
-        $('.fxs_dismissQuery').removeClass('fxs_dismissQuery_disabled');
-    })
-
-    $('.fxs_queryResults').on('click', function(){
-        $('.fxs_dismissQuery').addClass('fxs_dismissQuery_disabled');
-    })*/
 
     // FILTER CLOSE BUTTON simulate focus in and focus out
     $('.fxs_typeheadContainer_custom').focusin(function(){
@@ -390,249 +379,240 @@ $(document).ready(function () {
 
 
     $('.sticky').fixTo('.sticky-holder',{
-        top: 130
+        top: 55
     });
 
-    //$('.sticky').fixTo('.sticky-holder');
-    // sticky
-    // disable when sidebar is active
-    // $('#showRightPush').on('click',function(){
-    //     $(".pinned" ).toggle();
-    // })
-    // $(".pinned").pin({
-    //     containerSelector: ".container", minWidth: 940, padding: {top: 0, bottom: 10}
-    // })
 
 });
 
 // algolia advanced search
 
-'use strict';
-/* global instantsearch */
+//'use strict';
+///* global instantsearch */
 
-var search = instantsearch({
-    appId: '50DEV6P9K0',
-    apiKey: '3805ad29c0e7ea0077d1acab07993f62',
-    indexName: 'FxsIndexQa',
-    urlSync: true
-});
-
-search.addWidget(
-  instantsearch.widgets.searchBox({
-      container: '#q',
-      placeholder: 'Search a product'
-  })
-);
-
-search.addWidget(
-  instantsearch.widgets.stats({
-      container: '#stats'
-  })
-);
-
-search.on('render', function () {
-    $('.product-picture img').addClass('transparent');
-    $('.product-picture img').one('load', function () {
-        $(this).removeClass('transparent');
-    }).each(function () {
-        if (this.complete) $(this).load();
-    });
-});
-
-var hitTemplate =
-'<div class="fxs_entryFeatured">' +
-    '<article class="fxs_clearfix">' +
-        '<div class="fxs_squareImage">' +
-            '<a href="/">' +
-                '<img src="{{ImageUrl}}" />' +
-            '</a>' +
-        '</div>' +
-        '<div class="fxs_floatingMedia_textBody">' +
-            '<h4 class="fxs_headline_tiny">' +
-                '<a href="{{FullUrl}}">{{{_highlightResult.Title.value}}}</a>' +
-            '</h4>' +
-            '<address class="fxs_entry_metaInfo">' +
-                '<span class="fxs_article_author">' +
-                '<a href="{{AuthorUrl}}">{{_highlightResult.AuthorName.value}}</a>'+
-                '</span>{{#PublicationTime}} | <time pubdate="" datetime="{{PublicationTime}}">{{PublicationTime}}</time>{{/PublicationTime}}' +
-            '</address>' +
-            '<span class="fxs_label fxs_label_muted">{{Category}}</span>' +
-        '</div>' +
-    '</article>' +
-'</div>';
-
-var noResultsTemplate =
-  '<div class="text-center">No results found matching <strong>{{query}}</strong>.</div>';
-
-var menuTemplate =
-  '<a href="javascript:void(0);" class="facet-item {{#isRefined}}active{{/isRefined}}"><span class="facet-name"><i class="fa fa-angle-right"></i> {{name}}</span class="facet-name"></a>';
-
-var facetTemplateCheckbox =
-  '<a href="javascript:void(0);" class="facet-item">' +
-    '<input type="checkbox" class="{{cssClasses.checkbox}}" value="{{name}}" {{#isRefined}}checked{{/isRefined}} />{{name}}' +
-    '<span class="facet-count">({{count}})</span>' +
-  '</a>';
-
-var facetTemplateColors =
-  '<a href="javascript:void(0);" data-facet-value="{{name}}" class="facet-color {{#isRefined}}checked{{/isRefined}}"></a>';
+//var search = instantsearch({
+//    appId: '50DEV6P9K0',
+//    apiKey: '3805ad29c0e7ea0077d1acab07993f62',
+//    indexName: 'FxsIndexQa',
+//    urlSync: true
+//});
 
 //search.addWidget(
-//  instantsearch.widgets.infiniteHits({
+//  instantsearch.widgets.searchBox({
+//      container: '#q',
+//      placeholder: 'Search a product'
+//  })
+//);
+
+//search.addWidget(
+//  instantsearch.widgets.stats({
+//      container: '#stats'
+//  })
+//);
+
+//search.on('render', function () {
+//    $('.product-picture img').addClass('transparent');
+//    $('.product-picture img').one('load', function () {
+//        $(this).removeClass('transparent');
+//    }).each(function () {
+//        if (this.complete) $(this).load();
+//    });
+//});
+
+//var hitTemplate =
+//'<div class="fxs_col fxs_col_50"><div class="fxs_entryFeatured">' +
+//    '<article class="fxs_clearfix">' +
+//        '<div class="fxs_squareImage">' +
+//            '<a href="/">' +
+//                '<img src="{{ImageUrl}}" />' +
+//            '</a>' +
+//        '</div>' +
+//        '<div class="fxs_floatingMedia_textBody">' +
+//            '<h4 class="fxs_headline_tiny">' +
+//                '<a href="{{FullUrl}}">{{{_highlightResult.Title.value}}}</a>' +
+//            '</h4>' +
+//            '<address class="fxs_entry_metaInfo">' +
+//                '<span class="fxs_article_author">' +
+//                '<a href="{{AuthorUrl}}">{{_highlightResult.AuthorName.value}}</a>'+
+//                '</span>{{#PublicationTime}} | <time pubdate="" datetime="{{PublicationTime}}">{{PublicationTime}}</time>{{/PublicationTime}}' +
+//            '</address>' +
+//            '<span class="fxs_label fxs_label_muted">{{Category}}</span>' +
+//        '</div>' +
+//    '</article>' +
+//'</div></div>';
+
+//var noResultsTemplate =
+//  '<div class="text-center">No results found matching <strong>{{query}}</strong>.</div>';
+
+//var menuTemplate =
+//  '<a href="javascript:void(0);" class="facet-item {{#isRefined}}active{{/isRefined}}"><span class="facet-name"><i class="fa fa-angle-right"></i> {{name}}</span class="facet-name"></a>';
+
+//var facetTemplateCheckbox =
+//  '<a href="javascript:void(0);" class="facet-item">' +
+//    '<input type="checkbox" class="{{cssClasses.checkbox}}" value="{{name}}" {{#isRefined}}checked{{/isRefined}} />{{name}}' +
+//    '<span class="facet-count">({{count}})</span>' +
+//  '</a>';
+
+//var facetTemplateColors =
+//  '<a href="javascript:void(0);" data-facet-value="{{name}}" class="facet-color {{#isRefined}}checked{{/isRefined}}"></a>';
+
+////search.addWidget(
+////  instantsearch.widgets.infiniteHits({
+////      container: '#hits',
+////      templates: {
+////          empty: noResultsTemplate,
+////          item: hitTemplate
+////      },
+////      hitsPerPage: 3
+////  })
+////);
+
+
+//search.addWidget(
+//  instantsearch.widgets.hits({
 //      container: '#hits',
+//      hitsPerPage: 20,
 //      templates: {
 //          empty: noResultsTemplate,
 //          item: hitTemplate
 //      },
-//      hitsPerPage: 3
+//      transformData: function (hit) {
+//          hit.stars = [];
+//          hit.Publication = getPublicationDate(hit.Publication);
+//          for (var i = 1; i <= 5; ++i) {
+//              hit.stars.push(i <= hit.rating);
+//          }
+//          return hit;
+//      }
 //  })
 //);
 
-
-search.addWidget(
-  instantsearch.widgets.hits({
-      container: '#hits',
-      hitsPerPage: 20,
-      templates: {
-          empty: noResultsTemplate,
-          item: hitTemplate
-      },
-      transformData: function (hit) {
-          hit.stars = [];
-          hit.Publication = getPublicationDate(hit.Publication);
-          for (var i = 1; i <= 5; ++i) {
-              hit.stars.push(i <= hit.rating);
-          }
-          return hit;
-      }
-  })
-);
-
-search.addWidget(
-  instantsearch.widgets.pagination({
-      container: '#pagination',
-      cssClasses: {
-          active: 'active'
-      },
-      labels: {
-          previous: '<span><i class="fa fa-angle-left fa-2x"></i> Previous page</span>',
-          next: '<span>Next page  <i class="fa fa-angle-right fa-2x"></i></span>'
-      },
-      showFirstLast: false
-  })
-);
-
-search.addWidget(
-  instantsearch.widgets.refinementList({
-      container: '#filter-categories',
-      attributeName: 'Category',
-      operator: 'or',
-      limit: 10,
-      templates: {
-          item: facetTemplateCheckbox,
-          header: '<h3 class="fxs_subtitle">Categories</h3>'
-      },
-      collapsible: true
-  })
-);
-
-search.addWidget(
-  instantsearch.widgets.refinementList({
-      container: '#filter-tags',
-      attributeName: 'Tags',
-      operator: 'or',
-      limit: 10,
-      searchForFacetValues: {
-          placeholder: 'Search for tags',
-          templates: {
-              noResults: '<div class="sffv_no-results">No matching tags.</div>',
-          },
-      },
-      templates: {
-          item: facetTemplateCheckbox,
-          header: '<h3 class="fxs_subtitle">Tags</h3>'
-      },
-      collapsible: true
-  })
-);
-
-search.addWidget(
-  instantsearch.widgets.refinementList({
-      container: '#filter-authors',
-      attributeName: 'AuthorName',
-      operator: 'or',
-      limit: 10,
-      searchForFacetValues: {
-          placeholder: 'Search for authors',
-          templates: {
-              noResults: '<div class="sffv_no-results">No matching authors.</div>',
-          },
-      },
-      templates: {
-          item: facetTemplateCheckbox,
-          header: '<h3 class="fxs_subtitle">Authors</h3>'
-      },
-      collapsible: true
-  })
-);
+//search.addWidget(
+//  instantsearch.widgets.pagination({
+//      container: '#pagination',
+//      cssClasses: {
+//          active: 'active'
+//      },
+//      labels: {
+//          previous: '<span><i class="fa fa-angle-left fa-2x"></i> Previous page</span>',
+//          next: '<span>Next page  <i class="fa fa-angle-right fa-2x"></i></span>'
+//      },
+//      showFirstLast: false
+//  })
+//);
 
 //search.addWidget(
-//  instantsearch.widgets.rangeSlider({
-//      container: '#dates',
-//      attributeName: 'Publication',
+//  instantsearch.widgets.refinementList({
+//      container: '#filter-categories',
+//      attributeName: 'Category',
+//      operator: 'or',
+//      limit: 10,
 //      templates: {
-//          header: '<div class="facet-title">Publication</div class="facet-title">'
+//          item: facetTemplateCheckbox,
+//          header: '<h3 class="fxs_subtitle">Categories</h3>'
 //      },
-//      tooltips: {
-//          format: getPublicationDate
-//      },
-//      pips: false,
 //      collapsible: true
 //  })
 //);
 
-function getPublicationDate(rawValue) {
-    var offset = (((rawValue / 60) / 60) / 24);
-    var date = new Date("1970-01-01");
-    var utcoffset = parseInt(date.getUTCOffset()) / 100;
-    date = date.addDays(offset).addHours(-utcoffset);
-    return date.toString("MMM dd hh:mm") + " GMT";
-};
 //search.addWidget(
-//  instantsearch.widgets.priceRanges({
-//    container: '#dates',
-//    attributeName: 'Publication',
-//    cssClasses: {
-//      list: 'nav nav-list',
-//      count: 'badge pull-right',
-//      active: 'active'
-//    },
-//    templates: {
-//      header: '<div class="facet-title">Prices</div class="facet-title">'
-//    }
+//  instantsearch.widgets.refinementList({
+//      container: '#filter-tags',
+//      attributeName: 'Tags',
+//      operator: 'or',
+//      limit: 10,
+//      searchForFacetValues: {
+//          placeholder: 'Search for tags',
+//          templates: {
+//              noResults: '<div class="sffv_no-results">No matching tags.</div>',
+//          },
+//      },
+//      templates: {
+//          item: facetTemplateCheckbox,
+//          header: '<h3 class="fxs_subtitle">Tags</h3>'
+//      },
+//      collapsible: true
 //  })
 //);
 
 //search.addWidget(
-//  instantsearch.widgets.sortBySelector({
-//    container: '#sort-by-selector',
-//    indices: [
-//      { name: 'test_post', label: 'Publication' }
-//    ],
-//    label:'sort by'
+//  instantsearch.widgets.refinementList({
+//      container: '#filter-authors',
+//      attributeName: 'AuthorName',
+//      operator: 'or',
+//      limit: 10,
+//      searchForFacetValues: {
+//          placeholder: 'Search for authors',
+//          templates: {
+//              noResults: '<div class="sffv_no-results">No matching authors.</div>',
+//          },
+//      },
+//      templates: {
+//          item: facetTemplateCheckbox,
+//          header: '<h3 class="fxs_subtitle">Authors</h3>'
+//      },
+//      collapsible: true
 //  })
 //);
 
-search.addWidget(
-  instantsearch.widgets.clearAll({
-      container: '#clear-all',
-      templates: {
-          link: '<i class="fa fa-eraser"></i> Clear all filters'
-      },
-      cssClasses: {
-          root: 'btn btn-block btn-default'
-      },
-      autoHideContainer: true
-  })
-);
+////search.addWidget(
+////  instantsearch.widgets.rangeSlider({
+////      container: '#dates',
+////      attributeName: 'Publication',
+////      templates: {
+////          header: '<div class="facet-title">Publication</div class="facet-title">'
+////      },
+////      tooltips: {
+////          format: getPublicationDate
+////      },
+////      pips: false,
+////      collapsible: true
+////  })
+////);
 
-search.start();
+//function getPublicationDate(rawValue) {
+//    var offset = (((rawValue / 60) / 60) / 24);
+//    var date = new Date("1970-01-01");
+//    var utcoffset = parseInt(date.getUTCOffset()) / 100;
+//    date = date.addDays(offset).addHours(-utcoffset);
+//    return date.toString("MMM dd hh:mm") + " GMT";
+//};
+////search.addWidget(
+////  instantsearch.widgets.priceRanges({
+////    container: '#dates',
+////    attributeName: 'Publication',
+////    cssClasses: {
+////      list: 'nav nav-list',
+////      count: 'badge pull-right',
+////      active: 'active'
+////    },
+////    templates: {
+////      header: '<div class="facet-title">Prices</div class="facet-title">'
+////    }
+////  })
+////);
+
+////search.addWidget(
+////  instantsearch.widgets.sortBySelector({
+////    container: '#sort-by-selector',
+////    indices: [
+////      { name: 'test_post', label: 'Publication' }
+////    ],
+////    label:'sort by'
+////  })
+////);
+
+//search.addWidget(
+//  instantsearch.widgets.clearAll({
+//      container: '#clear-all',
+//      templates: {
+//          link: '<i class="fa fa-eraser"></i> Clear all filters'
+//      },
+//      cssClasses: {
+//          root: 'btn btn-block btn-default'
+//      },
+//      autoHideContainer: true
+//  })
+//);
+
+//search.start();

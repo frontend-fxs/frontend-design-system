@@ -1,0 +1,62 @@
+﻿<script id="textovercustomimage_default" type="x-tmpl-mustache">
+    <div fxs_sf_widget class="fxs_wideWidget_pre" fxs_name="textOverCustomImage">
+        <article class="fxs_sexy_banner">
+            <div class="fxs_sexy_bannerText">
+                {{#name}}
+                    <span class="fxs_helperLabel_title">{{Name}}</span>
+                {{/name}}
+                <header>
+                    {{#Sponsored}}
+                    <span class="fxs_mutedContent_label">
+                        {{SponsoredContent}}
+                        <i class="fa fa-question-circle"></i>
+                    </span>
+                    {{/Sponsored}}
+                    <h3 class="fxs_entryHeadline">
+                        {{#TextUrl}}
+                        <a href="{{TextUrl}}">
+                            {{/TextUrl}}
+                                {{Title}}
+                            {{#TextUrl}}
+                        </a>
+                        {{/TextUrl}}
+                    </h3>
+                    {{#AuthorUrl}}
+                    <address class="fxs_entry_metaInfo">
+                        <span class="fxs_article_author">
+                            {{#HasAuthor}}{{ByDisplay}}{{/HasAuthor}}
+                            <a href="{{AuthorUrl}}">{{Author}}</a>
+                        </span>
+                    </address>
+                    {{/AuthorUrl}}
+                </header>
+                <div class="fxs_entryPlain_txt">
+                    <p>{{Summary}}</p>
+                </div>
+            </div>
+            <figure class="fxs_sexy_bannerImg">
+                <img class="lazyload" data-src="{{ImageUrl}}" alt="fxstreet" />
+            </figure>
+        </article>
+    </div>
+    {{> seo}}
+</script>
+<div id="textovercustomimage_default.seo">
+    <script type="application/ld+json">
+        {
+        "@context": "http://schema.org",
+        "@type": "NewsArticle",
+        "name": "{{Name}}",
+        "headline": "{{Name}}",
+        "description": "{{Summary}}",
+        "image": "{{{ImageUrl}}}",
+        "url" : "{{{TextUrl}}}",
+        "author":
+        {
+        "@type":"Person",
+        "name":"{{Author}}",
+        "url": "{{{AuthorUrl}}}"
+        }
+        }
+    </script>
+</div>

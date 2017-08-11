@@ -1,0 +1,52 @@
+﻿<script id="sidebar_list_ratesandcharts" type="x-tmpl-mustache">
+
+        <li class="fxs_listView_item fxs_listView_item_high fxs_show_item_detail {{#IsActive}}listView_item_active{{/IsActive}}" id="{{Value.Id}}">
+            <div fxs-it-id="{{Value.Id}}" class="fxs_widget_price fxs_widget_price_listView" fxs-ratedata-widget>
+                <span class="fxs_asset_label_block">
+                    <abbr class="fxs_asset_label" title="{{Value.Description}}">
+                        <a href="{{{Value.SEO.FullUrl}}}" onclick="return false;">{{Value.Title}}</a>
+                    </abbr>
+                </span>
+
+                {{#Value.PriceStatics.DataAvailable}}
+                <div class="fxs_widget_price_value">
+                    <span class="fxs_price_change_bg {{Value.PriceStatics.ChangeTendencyClass}}">
+                        <span class="fxs_price_bidask">
+                            {{Value.PriceStatics.BidAsk}}
+                            <strong class="fxs_price_big_figure">{{Value.PriceStatics.BidBigFigure}}</strong>
+                            <sup>{{Value.PriceStatics.BidSmallFigure}}</sup>                    /
+                            <strong class="fxs_price_big_figure">{{Value.PriceStatics.AskBigFigure}}</strong>
+                            <sup>{{Value.PriceStatics.AskSmallFigure}}</sup>
+                        </span>
+                    </span>
+                    <small class="fxs_price_ohl">
+                        {{#Value.PriceStatics.Open}}
+                        <span>{{Translations.Open}} {{Value.PriceStatics.Open}}</span>
+                        {{/Value.PriceStatics.Open}}
+                        {{#Value.PriceStatics.High}}
+                        <span>{{Translations.High}} {{Value.PriceStatics.High}}</span>
+                        {{/Value.PriceStatics.High}}
+                        {{#Value.PriceStatics.Low}}
+                        <span>{{Translations.Low}} {{Value.PriceStatics.Low}}</span>
+                        {{/Value.PriceStatics.Low}}
+                    </small>
+                </div>
+                {{/Value.PriceStatics.DataAvailable}}
+                {{^Value.PriceStatics.DataAvailable}}
+                <div class="fxs_preload_modules">
+                </div>
+                {{/Value.PriceStatics.DataAvailable}}
+            </div>
+        </li>
+
+     {{>seo}}
+</script>
+<div id="sidebar_list_ratesandcharts.seo">
+    <script type="application/ld+json">
+        {
+        "@context": "http://schema.org",
+        "@type": "WebPage",
+        "relatedLink" : "{{{Value.SEO.FullUrl}}}"
+        }
+    </script>
+</div>

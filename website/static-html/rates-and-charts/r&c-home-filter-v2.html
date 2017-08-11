@@ -144,8 +144,7 @@
             <div class="fxs_pages_container">
 
                 <div class="fxs_content" id="fxs_content">
-                    <!-- Topics subnav -->
-                    
+                    <!-- Topics subnav -->                
                     <nav class="fxs_content_subnav">
                         <a id="showLeft" class="fxs_toggleList" title=""><i class="fa fa-chevron-left"></i> All News</a>
                         <div class="fxs_topics_nav">
@@ -157,8 +156,6 @@
                             </ul>
                         </div>
                     </nav>
-                    <!-- /Topics subnav -->
-
                     <!-- /Topics subnav -->
                     <div id="notificationExample" class="fxs_global_alert fxs_alert_info alert alert-dismissible fade in" role="alert">
                         <button type="button" class="fxs_close close" data-dismiss="alert" aria-label="Close">
@@ -778,7 +775,7 @@
                         </div>
                         <!-- ///////////////////////////  end filter and results /////////////////////////// -->
 
-                        <nav class="fxs_listViewRail">
+                        <nav id="fxs_test_scroll" class="fxs_listViewRail">
                             <ol class="fxs_listView_blockWrapper">
                                 <li class="fxs_listView_item fxs_listView_item_high">
                                     <div class="fxs_widget_price fxs_widget_price_listView price_down">
@@ -1374,6 +1371,18 @@
             $('.fxs_listView_blockWrapper').removeClass('fxs_blur_effect');
             $('.fxs_asset_label_filter').toggleText('CUSTOMIZE ASSETS','ASSETS');
         });
+
+        //var body = document.getElementsByTagName('body')[0],
+        //sidebar = document.getElementById('fxs_test_scroll');
+
+        //// sidebar overflow hide
+        //sidebar.onmouseover = function () {
+        //    body.style.overflow = 'hidden';
+        //}
+
+        //sidebar.onmouseout = function () {
+        //    body.style.overflow = 'auto';
+        //}
 
         </script>
 

@@ -41,7 +41,7 @@
   // /new rules for vertical behaviour //
 }
 
-.fxs_pivotPoints_list_item { padding: floor(@half_base_spacer); }
+.fxs_pivotPoints_list_item { padding: floor(@half_base_spacer) - 3px; }
 
 .fxs_resistance_points {
   .fxs_widget_custom_bold { color: @success_clr; }
@@ -58,15 +58,6 @@
 }
   
 .fxs_widget_pivotPoints {
-  &.fxs_widget_pivotPoints_cag{
-    padding-top:3.5rem;
-    .fxs_label{
-      font-weight: bold;
-    }
-    .fxs_pivotPoints_list_item{
-      padding-bottom: 1rem;
-    }
-  }
   &.fxs_widget_big {
     @media (min-width: @screen-l) {
       .fxs_pivotPoints_list_item { padding: 1rem; }

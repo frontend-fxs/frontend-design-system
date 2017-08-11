@@ -1,0 +1,34 @@
+﻿<script id="highlightedanalysisitem_medium" type="x-tmpl-mustache">
+    <div fxs_sf_widget class="fxs_entryFeatured" fxs_name="highlightedAnalysisMedium">
+        <article class="fxs_entryFeatured_med">
+            <div class="fxs_entryFeatured_img">
+                <a href="{{Value.SEO.FullUrl}}" title="{{Value.Title}}"><img class="lazyload" data-src="{{Value.Image.Url_Medium}}" alt="{{Value.Image.Caption}}" /></a>
+            </div>
+            <header>
+                <h3 class="fxs_entryHeadline">
+                    <a href="{{Value.SEO.FullUrl}}" title="{{Value.Title}}">{{Value.Title}}</a>
+                </h3>
+                <address class="fxs_contributorBox fxs_contributorBox_small">
+                    <div class="fxs_avatar_circleImage_s">
+                        <a href="{{Value.Author.Url}}" title="{{Value.Author.Name}}" rel="nofollow">
+                            <img class="lazyload" data-src="{{Value.Author.ImageResponse.Url_Nano}}" alt="{{Value.Author.Name}}" width="35" height="35">
+                        </a>
+                    </div>
+                    <span class="fxs_article_author">
+                        <a href="{{Value.Author.Url}}" title="{{Value.Author.Name}}" rel="nofollow">
+                            <strong>{{Value.Author.Name}}</strong>
+                        </a>
+                        <span class="fxs_author_description">
+                            {{Value.Author.Position}} <a href="{{Value.Company.Url}}" rel="nofollow" class="fxs_mutedLink" target="_blank">{{Value.Company.Name}}</a>
+                        </span>
+                    </span>
+                </address>
+            </header>
+            <div class="fxs_entryExcerpt">
+                <p>
+                    {{Value.Summary}}
+                </p>
+            </div>
+        </article>
+    </div>
+</script>

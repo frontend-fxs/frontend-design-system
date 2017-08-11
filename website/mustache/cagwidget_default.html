@@ -1,0 +1,136 @@
+﻿<script id="cagwidget_default" type="x-tmpl-mustache">
+    <!-- widget start here -->
+    <section class="fxs_widget_summary">
+        <div class="fxs_row fxs_cag_col fxs_clearfix">
+            <div class="fxs_flex_col">
+                <div class="fxs_chart_cag_cont">
+                    <div id="fxs_ratedata_{{ContentId}}">
+                    </div>
+                </div>
+
+                <div class="fxs_container_chart_cag">
+                    <div id="fxs_chart_{{ContentId}}" class="fxs_widget_default fxs_widget_chart_graph fxs_clearfix">
+                    </div>
+                </div>
+                <div class="fxs_cag_tabs_container fxs_clearfix">
+                    <div class="fxs_tabs_col">
+                        {{^Sentiment}}
+                        N/A
+                        {{/Sentiment}}
+                        <div class="fxs_widget_divider_module">
+                            <div class="fxs_indexes_tabpanel fxs_indexes_cag tab-content">
+                                <ul class="fxs_tabs_nav">
+                                    {{#Sentiment}}
+                                    <li class="{{Class}}"><a data-toggle="tab" href="#{{Id}}">{{Type}}</a></li>
+                                    {{/Sentiment}}
+                                </ul>
+                                {{#Sentiment}}
+                                <div role="tabpanel" id="{{Id}}" class="tab-pane fade in {{Class}}">
+                                    <div class="fxs_indexes_cag_item">
+                                        <span class="fxs_label">{{Translations.TrendIndex}} <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{Translations.TrendIndexTooltip}}"></i></span>
+
+                                        <span class="fxs_index_value {{TrendIndex_class}}">{{TrendIndex}}</span>
+                                    </div>
+                                    <div class="fxs_indexes_cag_item">
+                                        <span class="fxs_label">{{Translations.OBOSIndex}} <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{Translations.OBOSIndexTooltip}}"></i></span>
+
+                                        <span class="fxs_index_value {{Obos_Class}}">{{Obos}}</span>
+                                    </div>
+                                    <div class="fxs_indexes_cag_item">
+                                        <span class="fxs_label">{{Translations.VolatilityIndex}} <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{Translations.VolatilityIndexTooltip}}"></i></span>
+
+                                        <span class="fxs_index_value {{Volatility_Class}}">{{Volatility}}</span>
+                                    </div>
+                                </div>
+                                {{/Sentiment}}
+                            </div>
+                            <footer class="fxs_widget_footer">
+                                <small><time>{{Translations.UpdatedAt}} {{Date}} GMT</time></small>
+                            </footer>
+                        </div>
+                    </div>
+                    <div class="fxs_forecast_col fxs_hidden_xs">
+                        <div class="forecast_avg_result fxs_forecast_avg_cag">
+                            <div class="fxs_forecast_avg_cag_content">
+                                <span class="fxs_label">{{Translations.ForecastBias}} <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{Translations.ForecastBiasTooltip}}"></i></span>
+                                {{^ForecastBias}}
+                                N/A
+                                {{/ForecastBias}}
+                                <span class="fxs_index_value fxs_dBlock {{ForecastBiasClass}}">{{ForecastBias}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fxs_flex_ad_col">
+                <div class="fxs_widget_pivotPoints fxs_widget_pivotPoints_cag fxs_widget_mini">
+                    <span class="fxs_label">{{Translations.Keylevels}}</span>
+
+                    {{^PivotPoints}}
+                    N/A
+                    {{/PivotPoints}}
+                    {{#PivotPoints}}
+                    <div class="fxs_widget_divider_module fxs_swipeContent_slider">
+                        <ol class="fxs_pivotPoints_list fxs_pivotPoint_newlist">
+                            <li class="fxs_resistance_points">
+                                <ol class="fxs_pivotPoints_list">
+                                    <li class="fxs_pivotPoints_list_item">
+                                        <span class="fxs_widget_custom_bold">
+                                            <abbr title="Resistance 3">R3</abbr>
+                                        </span>
+                                        <span>{{PivotPoints.R3}}</span>
+                                    </li>
+                                    <li class="fxs_pivotPoints_list_item">
+                                        <span class="fxs_widget_custom_bold">
+                                            <abbr title="Resistance 2">R2</abbr>
+                                        </span>
+                                        <span>{{PivotPoints.R2}}</span>
+                                    </li>
+                                    <li class="fxs_pivotPoints_list_item">
+                                        <span class="fxs_widget_custom_bold">
+                                            <abbr title="Resistance 1">R1</abbr>
+                                        </span>
+                                        <span>{{PivotPoints.R1}}</span>
+                                    </li>
+                                </ol>
+                            </li>
+                            <li class="fxs_pivotPoints_list_item fxs_pivot">
+                                <span class="fxs_widget_custom_bold">
+                                    <abbr title="Pivot point">PP</abbr>
+                                </span>
+                                <span>{{PivotPoints.PP}}</span>
+                            </li>
+                            <li class="fxs_support_points">
+                                <ol class="fxs_pivotPoints_list">
+                                    <li class="fxs_pivotPoints_list_item">
+                                        <span class="fxs_widget_custom_bold">
+                                            <abbr title="Support 1">S1</abbr>
+                                        </span>
+                                        <span>{{PivotPoints.S1}}</span>
+                                    </li>
+                                    <li class="fxs_pivotPoints_list_item">
+                                        <span class="fxs_widget_custom_bold">
+                                            <abbr title="Support 2">S2</abbr>
+                                        </span>
+                                        <span>{{PivotPoints.S2}}</span>
+                                    </li>
+                                    <li class="fxs_pivotPoints_list_item">
+                                        <span class="fxs_widget_custom_bold">
+                                            <abbr title="Support 3">S3</abbr>
+                                        </span>
+                                        <span>{{PivotPoints.S3}}</span>
+                                    </li>
+                                </ol>
+                            </li>
+                        </ol>
+                    </div>
+                    {{/PivotPoints}}
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    </div>
+</script>
+

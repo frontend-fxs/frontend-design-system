@@ -2,15 +2,14 @@
     FXStreetWidgets.Widget.LoaderHeatMap = function () {
         var options = {
             WidgetName: "heatmap",
-            EndPoint: "heatmap/study/",
-            EndPointTranslation: "heatmap/localization/",
-            DefaultHost: "http://markettools.api.fxstreet.com/",
+            EndPointV2: "api/v2/heatmap/study/",
+            EndPointTranslationV2: "api/v2/cultures/{culture}/heatmap/",
+            DefaultHost: "https://markettools.fxstreet.com/",
             Mustaches:
                 {
                     "heatmap": ""
                 },
-            Css: "heatmap",
-            DefaultVersion: "v1"
+            DefaultVersion: "v2"
         };
 
         var parent = FXStreetWidgets.Widget.LoaderBase(options),
@@ -25,7 +24,7 @@
                     AssetIds: jHeatMap.attr("fxs_assets"),
                     FormatUrl: jHeatMap.attr("fxs_format_url")
                 };
-                
+
                 if (!FXStreetWidgets.Util.isUndefined(initJson.AssetIds)) {
                     var validAssets = true;
                     initJson.AssetIds.split(',').forEach(function (asset) {

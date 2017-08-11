@@ -1,0 +1,191 @@
+﻿<script id="live_event_default" type="x-tmpl-mustache">
+    <section class="fxs_live_event_module">
+        <div class="fxs_background_video">
+            <video class="fxs_placeholder_video fxs_onAir_item" autoplay="" loop="" muted="" width="100%">
+                <source src="{{BackgroundVideoSrc}}" type="video/mp4">
+            </video>
+        </div>
+        <footer class="fxs_live_event_module_summary">
+            <div class="fxs_event_summary_data">
+                <ul class="fxs_plainInlined_list">
+                    <li>
+                        <span class="fxs_label fxs_not_onAir_item fxs_next_item">
+                            {{#Event.UpNext}}
+                            {{Translations.UpNext}}
+                            {{/Event.UpNext}}
+                        </span>
+                        <span class="fxs_label fxs_label_error fxs_onAir_item">{{Translations.OnAir}}</span>
+                        <span class="fxs_label fxs_label_error fxs_passed_item">{{Translations.Passed}}</span>
+                    </li>
+                    <li class="fxs_not_onAir_item">
+                        <span class="fxs_event_time"><i class="fa fa-calendar-o"></i> <time datetime="{{Event.StartDate}}"><strong>{{Event.StartDateDisplay}} | {{Event.StartTimeDisplay}}</strong></time></span>
+                    </li>
+                    <li>
+                        <span class="fxs_event_time"><i class="fa fa-clock-o"></i> <span class="fxs_hidden_xs_iBlock">{{Translations.Duration}}:</span> <time datetime="{{Event.Duration}}">{{Event.DurationDisplay}}</time></span>
+                    </li>
+                </ul>
+            </div>
+            {{#Event.IsSponsored}}
+            <div class="fxs_event_sponsor fxs_fRight">
+                {{#Event.IsSponsored}}
+                <small class="fxs_hidden_xs_iBlock">{{Translations.SponsoredBy}}</small>
+                <div class="fxs_squareImage_s">
+                    <a href="{{Event.SponsorUrl}}">
+                        <img class="lazyload" data-src="{{Event.SponsorImageUrl}}" alt="{{SponsorName}}" height="35" width="35">
+                    </a>
+                </div>
+                {{/Event.IsSponsored}}
+            </div>
+            {{/Event.IsSponsored}}
+        </footer>
+        {{#Event.OnDetailsView}}
+        {{^Event.PremiumView}}
+        <div class="fxs_live_event_cta_content fxs_mediaContainer">
+            <div class="fxs_timer_countdown_block fxs_absolute_center">
+                <div class="fxs_countdown fxs_clearfix">
+                    <span class="fxs_helperLabel_title">{{Translations.StartTitle}}</span>
+                    <div countdown-date="{{Event.StartDateUtc}}" class="fxs_countdown_clock">
+                        <span><span class="fxs_widget_custom_data_lable"></span>{{Translations.Days}}</span>
+                        <span><span class="fxs_widget_custom_data_lable"></span>{{Translations.Hours}}</span>
+                        <span><span class="fxs_widget_custom_data_lable"></span>{{Translations.Minutes}}</span>
+                        <span><span class="fxs_widget_custom_data_lable"></span>{{Translations.Seconds}}</span>
+                    </div>
+                </div>
+                {{#Event.PublicView}}                
+                <button id="fxs_cta_enter_{{Event.Id}}" onclick="window.location = '{{Event.EventUrl}}'" data-toggle="CTA_BUTTON" class="fxs_btn fxs_btn_danger fxs_btn_block fxs_onAir_item">
+                    {{Translations.EnterNow}}
+                </button>
+                <button id="fxs_cta_view_{{Event.Id}}" onclick="window.location = '{{Event.EventUrl}}'" data-toggle="CTA_BUTTON" class="fxs_btn fxs_btn_danger fxs_btn_block fxs_passed_item">
+                    {{Translations.View}}
+                </button>
+                <button id="fxs_cta_subscribe_{{Event.Id}}" type="button" class="btn fxs_btn fxs_btn_cta fxs_btn_block fxs_not_onAir_item" data-toggle="tooltip" aria-pressed="false">
+                    <span class="fxs_togglebtn_txt init_txt" data-toggle="tooltip" data-placement="bottom" title="Suscribe">{{Translations.PremiumSubscribe}}</span>
+                    <span class="fxs_togglebtn_txt toggled_txt" data-toggle="tooltip" data-placement="bottom" title="Suscribe ok">{{Translations.PremiumSubscribeMsg}}</span>
+                </button>
+                {{/Event.PublicView}}
+                {{#Event.RegistrationView}}
+                <small>{{Translations.RegistrationRequired}}</small>
+                {{^Event.IsOnAir}}
+                    <button id="fxs_cta_login_{{Event.Id}}" data-toggle="CTA_BUTTON" class="fxs_btn fxs_btn_cta fxs_btn_block fxs_not_onAir_item">
+                        {{Translations.Login}}
+                    </button>
+                {{/Event.IsOnAir}}
+                {{#Event.IsOnAir}}
+                    <button id="fxs_cta_login_{{Event.Id}}" data-toggle="CTA_BUTTON" class="fxs_btn fxs_btn_danger fxs_btn_block fxs_onAir_item">
+                        {{Translations.LoginNow}}
+                    </button>
+                {{/Event.IsOnAir}}
+                {{/Event.RegistrationView}}
+            </div>
+        </div>
+        <footer class="fxs_txt_center fxs_marginBase_bottom fxs_relativePositioning">
+            <small>{{Translations.FootNote}}</small>
+        </footer>
+        {{/Event.PremiumView}}
+        {{#Event.PremiumView}}
+        <div class="fxs_pricing_table_block">
+            <div class="fxs_pricing_table">
+                <span class="fxs_helperLabel_title">{{Translations.PremiumService}}</span>
+                <div id="clock" class="fxs_countdown_clock fxs_skip"></div>
+                <div class="fxs_row">
+                </div>
+            </div>
+            <aside class="fxs_content_panel fxs_txt_center">
+                <p>
+                    <a href="{{Translations.PremiumAlreadyPremiumLink}}">{{Translations.PremiumAlreadyPremium}}</a> {{Translations.PremiumLearnMore}} <a href="{{Translations.PremiumFeaturesLink}}">{{Translations.PremiumFeatures}}</a>
+                </p>
+            </aside>
+        </div>
+        {{/Event.PremiumView}}
+        {{/Event.OnDetailsView}}
+        {{^Event.OnDetailsView}}
+        <article class="fxs_live_event_cta_content">
+            <header class="fxs_sideImage_headline">
+                <!-- Author's image -->
+                <div class="fxs_avatar_circleImage_s">
+                    <a href="{{Event.AuthorUrl}}" title="{{Event.AuthorName}}">
+                        <img class="lazyload" data-src="{{Event.AuthorImageUrl}}" alt="{{Event.AuthorName}}" height="35" width="35">
+                    </a>
+                </div>
+                <!-- /Author's image -->
+
+                <div class="fxs_floatingMedia_textBody">
+                    <!-- Event title -->
+                    <h2 class="fxs_entryHeadline" rel="author">
+                        <a href="{{Event.DetailsUrl}}">{{Event.Title}}</a>
+                    </h2>
+                    <!-- /Event title -->
+                    <!-- Event author -->
+                    <address class="fxs_entry_metaInfo">
+                        <span class="fxs_article_author">{{Translations.By}} <a href="{{Event.AuthorUrl}}">{{Event.AuthorName}}</a></span>
+                    </address>
+                    {{#Event.IsPremium}}
+                    <span class="fxs_label fxs_label_featured fxs_liveEvent_v2">{{Translations.Premium}}</span>
+                    {{/Event.IsPremium}}
+                    <!-- /Event author -->
+                </div>
+            </header>
+            {{^Event.PremiumView}}
+            <div class="fxs_main_cta_block">
+                <div class="fxs_timer_countdown_block">
+                    <div class="fxs_countdown fxs_clearfix">
+                        <span class="fxs_helperLabel_title">{{Translations.StartTitle}}</span>
+                        <div countdown-date="{{Event.StartDateUtc}}" class="fxs_countdown_clock">
+                            <span><span class="fxs_widget_custom_data_lable"></span>{{Translations.Days}}</span>
+                            <span><span class="fxs_widget_custom_data_lable"></span>{{Translations.Hours}}</span>
+                            <span><span class="fxs_widget_custom_data_lable"></span>{{Translations.Minutes}}</span>
+                            <span><span class="fxs_widget_custom_data_lable"></span>{{Translations.Seconds}}</span>
+                        </div>
+                    </div>
+                    {{#Event.PublicView}}
+                    {{^Event.IsOnAir}}
+                    <button id="fxs_cta_enter_{{Event.Id}}" onclick="window.location = '{{Event.DetailsUrl}}'" data-toggle="CTA_BUTTON" class="fxs_btn fxs_btn_cta fxs_btn_block fxs_not_onAir_item fxs_next_item">
+                        {{Translations.MoreInfo}}
+                    </button>
+                    {{/Event.IsOnAir}}
+                    {{#Event.IsOnAir}}
+                    <button id="fxs_cta_enter_{{Event.Id}}" onclick="window.location = '{{Event.EventUrl}}'" data-toggle="CTA_BUTTON" class="fxs_btn fxs_btn_danger fxs_btn_block fxs_onAir_item">
+                        {{Translations.EnterNow}}
+                    </button>
+                    {{/Event.IsOnAir}}
+                    <button id="fxs_cta_view_{{Event.Id}}" onclick="window.location = '{{Event.EventUrl}}'" data-toggle="CTA_BUTTON" class="fxs_btn fxs_btn_danger fxs_btn_block fxs_passed_item">
+                        {{Translations.View}}
+                    </button>
+                    {{/Event.PublicView}}
+                    {{#Event.RegistrationView}}
+                    <small>{{Translations.RegistrationRequired}}</small>
+                    {{^Event.IsOnAir}}
+                    <button id="fxs_cta_login_{{Event.Id}}" data-toggle="CTA_BUTTON" class="fxs_btn fxs_btn_cta fxs_btn_block fxs_not_onAir_item">
+                        {{Translations.Login}}
+                    </button>
+                    {{/Event.IsOnAir}}
+                    {{#Event.IsOnAir}}
+                    <button id="fxs_cta_login_{{Event.Id}}" data-toggle="CTA_BUTTON" class="fxs_btn fxs_btn_danger fxs_btn_block fxs_onAir_item">
+                        {{Translations.LoginNow}}
+                    </button>
+                    {{/Event.IsOnAir}}
+                    {{/Event.RegistrationView}}
+                </div>
+            </div>
+            {{/Event.PremiumView}}
+        </article>
+        <footer class="fxs_txt_center fxs_marginBase_bottom fxs_relativePositioning">
+            <small>{{Translations.FootNote}}</small>
+        </footer>
+        {{#Event.PremiumView}}
+        <div class="fxs_pricing_table_block">
+            <div class="fxs_pricing_table">
+                <span class="fxs_helperLabel_title">{{Translations.PremiumService}}</span>
+                <div id="clock" class="fxs_countdown_clock fxs_skip"></div>
+                <div class="fxs_row"></div>
+            </div>
+            <aside class="fxs_content_panel fxs_txt_center">
+                <p>
+                    <a href="{{Translations.PremiumAlreadyPremiumLink}}">{{Translations.PremiumAlreadyPremium}}</a> {{Translations.PremiumLearnMore}} <a href="{{Translations.PremiumFeaturesLink}}">{{Translations.PremiumFeatures}}</a>
+                </p>
+            </aside>
+        </div>
+        {{/Event.PremiumView}}
+        {{/Event.OnDetailsView}}
+    </section>
+</script>

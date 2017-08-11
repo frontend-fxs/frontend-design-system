@@ -3,7 +3,6 @@
         var parent = FXStreetWidgets.Widget.Base(loaderBase),
             _this = FXStreetWidgets.Util.extendObject(parent);
 
-        _this.Container = null;
         _this.AssetId = "";
         _this.WidgetId = null;
         _this.Seo = false;
@@ -37,7 +36,7 @@
 
         _this.renderHtml = function () {
             var studies = _this.data.Values;
-            
+
             $.each(studies, function (index, value) {
                 value.TrendClass = _this.TrendCssClasess[value.Trend];
                 value.ObOsClass = _this.ObOsCssClasess[value.ObOs];
@@ -53,6 +52,8 @@
                 Translations: _this.loaderBase.config.Translations,
                 Seo: _this.Seo
             };
+
+            jsonData = _this.setDatesToJson(jsonData, studies[0].Date);
 
             var rendered = FXStreetWidgets.Util.renderByHtmlTemplate(_this.loaderBase.config.Mustaches[_this.MustacheKey], jsonData);
             _this.Container.html(rendered);

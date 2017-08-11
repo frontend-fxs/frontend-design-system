@@ -1,0 +1,27 @@
+﻿<script id="sidebar_list_analysisitem" type="x-tmpl-mustache">
+    <li class="fxs_listView_item {{#IsActive}}listView_item_active{{/IsActive}}" id="{{Value.Id}}">
+        <article fxs-it-id="{{Value.Id}}" class="fxs_clearfix">
+            <figure class="fxs_listView_squareImage fxs_avatar_circleImage">
+                <img class="lazyload" data-src="{{Value.Author.ImageResponse.Url_XtraSmall}}" alt="{{Value.Author.Name}}">
+            </figure>
+            <div class="fxs_floatingMedia_textBody">
+                <div class="fxs_headline_tiny fxs_headline_muted">
+                    <a href="{{{Value.SEO.FullUrl}}}" class="fxs_show_item_detail" onclick="return false;">{{Value.Title}}</a>
+                </div>
+                <address class="fxs_entry_metaInfo">
+                    {{Value.Author.Name}} | <time pubdate="" datetime="{{Value.PublicationDate}}">{{Value.PublicationDateDisplay}}</time>
+                </address>
+                {{>seo}}
+            </div>
+        </article>
+    </li>
+</script>
+<div id="sidebar_list_analysisitem.seo">
+    <script type="application/ld+json">
+        {
+        "@context": "http://schema.org",
+        "@type": "WebPage",
+        "relatedLink" : "{{{Value.SEO.FullUrl}}}"
+        }
+    </script>
+</div>

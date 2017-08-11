@@ -1,0 +1,171 @@
+﻿<script id="ratesandchartsdetails_default" type="x-tmpl-mustache">
+    <div class="fxs_leaderboard fxs_leaderboard_small">
+        <div id="fxs_leaderboard_ad_{{Value.Id}}" class="fxs_ad"></div>
+    </div>
+    <section fxs-it-id="{{Value.Id}}" fxs_it_url="{{Value.Url}}">
+        <hr class="fxs_divider_wide_clean">
+        <header class="fxs_sectionTitle fxs_sectionTitle_clean">
+            <h1 class="fxs_sectionTitle_header">{{Value.Title}} {{Value.TypeDescription}}</h1>
+            <div id="fxs_socialmedia_bar_header_{{Value.Id}}"></div>
+        </header>
+        {{#Value.Header}}
+        <div class="fxs_row">
+            <div class="fxs_col fxs_col_100" id="fxs_optional_header_{{Value.Id}}">
+                {{{Value.Header}}}
+            </div>
+        </div>
+        {{/Value.Header}}
+        {{^Value.Studies.HasPriceSentimentOrPivotPointOrForecast}}
+        <hr class="fxs_divider_wide_clean">
+        <div class="fxs_paddingBase_top"></div>
+        <div class="fxs_row">
+            <div class="fxs_col fxs_col_100" id="fxs_ratedata_{{Value.Id}}" >
+                <div fxs-ratedata-widget></div>
+            </div>
+            <div id="fxs_chartdata_default_{{Value.Id}}"></div>        
+        </div>       
+        {{/Value.Studies.HasPriceSentimentOrPivotPointOrForecast}}
+        {{#Value.Studies.HasPriceSentimentOrPivotPointOrForecast}}
+        <div class="fxs_divider_wide"></div>
+        <div class="fxs_row">
+            <div class="fxs_col fxs_col_100">
+                <div id="fxs_cag_widget_{{Value.Id}}"></div>                
+            </div>
+            <div class="fxs_clearfix"></div>
+        </div>
+        {{/Value.Studies.HasPriceSentimentOrPivotPointOrForecast}}  
+        {{#Value.Studies.HasCtp}}
+        <div class="fxs_row">         
+            <hr class="fxs_divider_second" />
+            <div class="fxs_flex_col">
+                <h3 class="fxs_subtitle">
+                    {{Translations.TradingPositionsTitle}} <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="right" title="{{Translations.TradingPositionsDescription}}" data-original-title="{{Translations.TradingPositionsDescription}}"></i>
+                </h3>
+                <div fxs_widget
+                     fxs_name="ctp"
+                     fxs_asset="{{Value.AssetId}}"
+                     fxs_class_size="fxs_widget_default"
+                     fxs_fullreport_url="{{Value.CtpUrl}}"
+                     fxs_version="v1">
+                </div>
+            </div>
+            <div class="fxs_flex_col fxs_flex_ad_col">
+                <div id="fxs_ad_{{Value.Id}}" class="fxs_article_ad"></div>
+            </div>
+        </div>
+        {{/Value.Studies.HasCtp}}
+        {{#Value.Studies.HasCOT}}
+        <div class="fxs_row">
+            <hr class="fxs_divider_second">
+            <div class="fxs_col fxs_col_100">
+                <h3 class="fxs_subtitle">
+                    {{Translations.CotTitle}} <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="right" title="{{Translations.CotDescription}}" data-original-title="{{Translations.CotDescription}}"></i>
+                </h3>
+                <div fxs_widget
+                     fxs_name="cotpositioning"
+                     fxs_asset="{{Value.AssetId}}"
+                     fxs_class_size="fxs_widget_mini"
+                     fxs_hide_fullreport
+                     fxs_version="v1">
+                </div>
+            </div>
+        </div>
+        {{/Value.Studies.HasCOT}}
+        {{#Value.Studies.HasCorrelation}}
+        <div class="fxs_row">
+            <hr class="fxs_divider_second">
+            <div class="fxs_flex_col fxs_flex_ad_col">
+                <div id="fxs_ad_2_{{Value.Id}}" class="fxs_article_ad"></div>
+            </div>
+            <div class="fxs_flex_col">
+                <div class="fxs_row">
+                    <div class="fxs_col fxs_col_100">
+                        <h3 class="fxs_subtitle">
+                            {{Translations.CorrelationChartTitle}} <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="right" title="{{Translations.CorrelationChartDescription}}" data-original-title="{{Translations.CorrelationChartDescription}}"></i>
+                        </h3>
+                        <div fxs_widget
+                             fxs_name="correlation"
+                             fxs_numofcorrelations="3"
+                             fxs_asset="{{Value.AssetId}}"
+                             fxs_hide_fullreport
+                             fxs_version="v1">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="fxs_clearfix"></div>
+        </div>
+        {{/Value.Studies.HasCorrelation}}
+        {{#Value.Studies.HasBpi}}
+        <div class="fxs_row">
+            <hr class="fxs_divider_second">
+            <div class="fxs_col fxs_col_100">
+                <h3 class="fxs_subtitle">
+                    {{Translations.BPITitle}} <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="right" title="{{Translations.BPIDescription}}" data-original-title="{{Translations.BPIDescription}}"></i>
+                </h3>
+                <div fxs_widget
+                     fxs_name="bpi"
+                     fxs_currencies="{{Value.Studies.BpiKeys}}"
+                     fxs_hide_fullreport
+                     fxs_version="v1">
+                </div>
+            </div>
+        </div>
+        {{/Value.Studies.HasBpi}}        
+        {{#Value.Studies.HasForecast}}
+        <div class="fxs_row">
+            <hr class="fxs_divider_second">
+            <div class="fxs_col fxs_col_100 fxs_marginBase_top">
+                <h3 class="fxs_subtitle">
+                    {{Translations.ForecastPollTitle}} <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="right" title="{{Translations.ForecastPollDescription}}" data-original-title="{{Translations.ForecastPollDescription}}" aria-describedby="tooltip383978"></i>
+                </h3>
+                <div class="fxs_widget_summary">
+                    <div fxs_widget=""
+                         fxs_name="forecast"
+                         fxs_pair="{{Value.AssetId}}"
+                         fxs_fullreport_url="{{Value.ForecastUrl}}"
+                         fxs_class fxs_class_size="fxs_widget_big">
+
+                    </div>
+                </div>
+
+                <div class="fxs_widget_summary">
+                    <div fxs_widget
+                         fxs_name="forecastcontributors"
+                         fxs_allow_comments="true"
+                         fxs_asset="{{Value.AssetId}}">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/Value.Studies.HasForecast}}
+
+        {{#Value.Footer}}
+        <div class="fxs_row">
+            <div class="fxs_col fxs_col_100" id="fxs_optional_footer_{{Value.Id}}">
+                {{{Value.Footer}}}
+            </div>
+        </div>
+        {{/Value.Footer}}
+
+        <div class="fxs_row">
+            <hr class="fxs_divider_wide">
+            <div class="fxs_col fxs_col_50">
+                <h2 class="fxs_headline_medium">{{Translations.RelatedNewsTitle}}</h2>
+                <div id="fxs_related_news_{{Value.Id}}"></div>
+            </div>
+            <div class="fxs_col fxs_col_50">
+                <h2 class="fxs_headline_medium">{{Translations.RelatedAnalysisTitle}}</h2>
+                <div id="fxs_related_analysis_{{Value.Id}}"></div>
+            </div>
+        </div>
+        <hr class="fxs_divider_wide">
+        <div class="fxs_row">
+            <div class="fxs_col fxs_col_100">
+                <h3 class="fxs_subtitle">{{Translations.PreferedBrokers}}</h3>
+                <div id="fxs_brokerspreads_{{Value.Id}}"> </div>
+            </div>
+        </div>
+    </section>
+</script>
