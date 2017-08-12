@@ -1,0 +1,45 @@
+﻿<script id="ratesandcharts_listView" type="x-tmpl-mustache">
+    <div fxs-it-id="{{Value.Id}}" class="fxs_widget_price fxs_widget_price_listView {{RateData.Study.PriceStatics.PriceClass}}" fxs-ratedata-widget>
+        <span class="fxs_asset_label_block">
+            <abbr class="fxs_asset_label" title="{{Value.Description}}">
+                <a href="{{{Value.SEO.FullUrl}}}" onclick="return false;">{{Value.Title}}</a>
+            </abbr>
+            {{#RateData}}
+            <span class="fxs_price_change">
+                <span class="fxs_change_pips">{{RateData.Study.PriceStatics.Change}}</span>
+                <span class="fxs_change_percent">{{RateData.Study.PriceStatics.ChangePercentDisplay}}</span>
+            </span>
+            {{/RateData}}
+        </span>
+
+        {{#RateData}}
+        <div class="fxs_widget_price_value">
+            <span class="fxs_price_change_bg {{RateData.Study.PriceStatics.ChangeTendencyClass}}">
+                <span class="fxs_price_bidask">
+                    {{RateData.Study.PriceStatics.BidAsk}}
+                    <strong class="fxs_price_big_figure">{{RateData.Study.PriceStatics.BidBigFigure}}</strong>
+                    <sup>{{RateData.Study.PriceStatics.BidSmallFigure}}</sup>
+                    /
+                    <strong class="fxs_price_big_figure">{{RateData.Study.PriceStatics.AskBigFigure}}</strong>
+                    <sup>{{RateData.Study.PriceStatics.AskSmallFigure}}</sup>
+                </span>
+            </span>
+            <small class="fxs_price_ohl">
+                {{#RateData.Study.PriceStatics.Open}}
+                <span>{{Translations.Open}} {{RateData.Study.PriceStatics.Open}}</span>
+                {{/RateData.Study.PriceStatics.Open}}
+                {{#RateData.Study.PriceStatics.High}}
+                <span>{{Translations.High}} {{RateData.Study.PriceStatics.High}}</span>
+                {{/RateData.Study.PriceStatics.High}}
+                {{#RateData.Study.PriceStatics.Low}}
+                <span>{{Translations.Low}} {{RateData.Study.PriceStatics.Low}}</span>
+                {{/RateData.Study.PriceStatics.Low}}
+            </small>
+        </div>
+        {{/RateData}}
+        {{^RateData}}
+        <div class="fxs_preload_modules">
+        </div>
+        {{/RateData}}
+    </div>
+</script>

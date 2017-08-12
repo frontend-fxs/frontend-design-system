@@ -113,14 +113,43 @@
 }
 
 // table prices
-
-// container
+// custom navigation in rates and charts widget
+.fxs_filterResults_bg{
+  background-color: @lightest_clr;
+}
+.fxs_navFilter_bg{
+  //background-color:@light_1_clr;
+  padding:5px;
+  border-bottom: 1px solid @light_4_clr;
+  .fxs_helperLabel_title{
+      color:@dark_4_clr;
+      padding-top:5px;
+      padding-left:5px;
+  }
+  .fxs_btn_light{
+      font-weight:400;
+  }
+}
+.fxs_filter_nav_label{
+    float:left;
+}
+.fxs_filter_nav_buttons{
+    float:right;
+}
+.fxs_price_first{
+   font-family:@txt_fontfamily!important;
+   font:normal;
+   font-style:normal;
+}
+// containeer
 .fxs_filter_wrapper{
-  background-color: #fff; min-height: 200px;
+  background-color: #fff;
 }
 .fxs_table_prices {
-  tr:nth-child(even) {background-color: @light_5_clr}
-  tbody tr td { vertical-align: top; }
+  tr:nth-child(even) {
+      //background-color: @light_5_clr
+  }
+  tbody tr td { vertical-align: top; width:140px; }
   >tbody, >thead, >tfoot {
     >tr >td, >tr >th {
       &:first-child {
@@ -128,7 +157,7 @@
         //width: @base_module_size*4;
       }
       &:last-child {
-        display: none;
+        //display: none;
         width: auto;
       }
     }
@@ -148,7 +177,7 @@
       >tbody, >thead, >tfoot {
         >tr >td, >tr >th {
           &:last-child {
-            display: table-cell;
+           // display: table-cell;
           }
           &:first-child {
             padding-left: 0;
@@ -179,7 +208,40 @@
   }
 
   &.fxs_widget_big{
+      // this was added because breaks the th behaviour in tables
+     tr:after, tr:before{
+         content:none;
+     }
+     thead tr th:nth-last-child(-n+3) {
+        display:none;
+        @media(min-width:@screen-m){
+            display:table-cell;
+        }
+     }
+     tbody tr td:nth-last-child(-n+3) {
+        display:none;
+        @media(min-width:@screen-m){
+            display:table-cell;
+        }
+     }
+    .fxs_table_prices_header{
+        @media(min-width:@screen-l){
+            display:table-row;
+        }
+        th {
+            &:first-child {
+                text-align:left!important;
+            }
+        }   
+    }
+    .fxs_price_change{
+        font-size:@txt_size_xsmall - 2px;
+        @media(min-width:@screen-l) {
+            font-size:@txt_size_xsmall;
+        }
+    }
     .fxs_price_ohl{
+      font-size:@txt_size_xsmall - 2px;
       span{
         margin-left: 0.1em;
         padding-left: 0.1em;
@@ -200,7 +262,30 @@
       }
     }
   }
+  // //////////////////////////////// TABLE DEFAULT STYLES ///////////////////////////////
   &.fxs_widget_default{
+      // table prices
+      tr:after, tr:before{
+          content:none;
+      }
+      tbody tr td:nth-last-child(-n+3) {
+        display:none;
+        @media(min-width:@screen-hd){
+            display:table-cell;
+        }
+     }
+     thead tr th:nth-last-child(-n+3) {
+        display:none;
+        @media(min-width:@screen-hd){
+            display:table-cell;
+        }
+     }
+     th {
+        &:first-child {
+            text-align:left!important;
+        }
+     }   
+    
     @media(max-width:@screen-m){
       .fxs_asset_label { font-size: @txt_size_xsmall; }
     }

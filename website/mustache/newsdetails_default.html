@@ -1,0 +1,117 @@
+﻿<script id="newsdetails_default" type="x-tmpl-mustache">
+    <div class="fxs_leaderboard fxs_leaderboard_small">
+        <div id="fxs_leaderboard_ad_{{Value.Id}}" class="fxs_ad"></div>
+    </div>
+    <hr class="fxs_divider_wide">
+    <section fxs-it-id="{{Value.Id}}" fxs_it_url="{{Value.Url}}">
+        <article class="fxs_article">
+            <header class="fxs_article_header">
+                <aside class="fxs_entry_metaInfo">
+                    <a class="fxs_entry_sectionlink" href="{{Value.ItemTypeUrl}}">{{Translations.NewsItemTypeDisplay}}</a> | <time pubdate="" datetime="{{Value.PublicationDate}}">{{Value.PublicationDateDisplay}}</time>
+                </aside>
+                <h1 class="fxs_headline_large">{{Value.Title}}</h1>
+                {{#Value.Author.Name}}
+                <address class="fxs_entry_metaInfo">
+                    {{Translations.ByDisplay}} <a href="{{Value.Author.Url}}" rel="nofollow">{{Value.Author.Name}}</a>
+                </address>
+                {{/Value.Author.Name}}
+                <div id="fxs_socialmedia_bar_{{Value.Id}}"></div>                
+            </header>
+            <div class="fxs_row sticky-holder">
+                <div class="fxs_flex_col">
+                    <div class="fxs_article_body">
+                        <div class="fxs_article_content">
+                            {{{Value.Content}}}
+                        </div>
+                    </div>
+                </div>
+                <div class="fxs_flex_col fxs_flex_ad_col sticky">
+                   <div id="fxs_article_ad_{{Value.Id}}" class="fxs_article_ad"></div>
+                </div>
+            </div>
+            <!-- Disclaimer in post! -->
+            <div class="fxs_disclaimer_block">
+                <p>
+                    {{{Value.Company.DisclaimerHtml}}}
+                </p>
+            </div>
+            <!-- /Disclaimer in post! -->
+            <div id="fxs_cag_widget_{{Value.Id}}"></div>
+            <footer class="fxs_article_tags">
+                <div class="fxs_helperLabel_title">{{Translations.RelatedTopicsDisplay}}</div>
+                <ul>
+                    {{#Value.Categories}}
+                    {{#FullUrl}}
+                    <li><a href="{{FullUrl}}" title="{{Name}}" class="fxs_tag">{{Name}}</a></li>
+                    {{/FullUrl}}
+                    {{^FullUrl}}
+                    <li>{{Name}}</li>
+                    {{/FullUrl}}
+                    {{/Value.Categories}}
+                </ul>
+            </footer>
+        </article>
+        <div id="fxs_article_related_{{Value.Id}}"></div>
+        {{>seo}}        
+    </section>
+    <hr class="fxs_divider_wide">
+</script>
+<div id="newsdetails_default.seo">
+    <script type="application/ld+json">
+        {
+        "@context": "http://schema.org",
+        "@type": "ShareAction",
+        "object":
+        {
+        "@type": "CreativeWork",
+        "name": "{{Value.Title}}",
+        "url": "{{{Value.SEO.FullUrl}}}"
+        }
+        }
+    </script>
+    <script type="application/ld+json">
+        {
+            "@context": "http://schema.org",
+            "@type": "NewsArticle",
+            "headline": "{{{Value.Title}}}",
+            "name": "{{{Value.SEO.MetaTitle}}}",
+            "keywords": "{{#Value.Categories}}{{Name}},{{/Value.Categories}}",
+            "datePublished" : "{{{Value.PublicationDate}}}",
+            "dateModified":  "{{{Value.PublicationDate}}}",
+            "mainEntityOfPage" : "{{{Value.SEO.FullUrl}}}",
+            "url" : "{{{Value.SEO.FullUrl}}}",
+            "articleBody" : "{{{Value.ContentPlainText}}}",
+            "wordCount": "{{Value.WordCount}}",
+            "author": {
+                "@type":"Person",
+                "name":"{{Value.Author.Name}}",
+                "url": "{{{Value.HostUrl}}}{{{Value.Author.Url}}}",
+                "worksfor": {
+                    "@type": "Organization",
+                    "name": "{{Value.Company.Name}}",
+                    "url": "{{{Value.HostUrl}}}{{{Value.Company.Url}}}"
+                }
+            },
+            "publisher": {
+                "@type": "Organization",
+                "name": "{{Value.Company.Name}}",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "{{{Value.Company.ImageResponse.Url_Small}}}",
+                    "width": 600,
+                    "height": 60
+                }
+            },
+            "image": {
+                "@type": "ImageObject",
+                "name":"{{Value.Image.Title}}",
+                "description":"{{Value.Image.Title}}",
+                "caption": "{{Value.Image.Caption}}",
+                "genre": "banc-imatges/externa",
+                "url": "{{#Value.Image.Url_Medium}}{{{.}}}{{/Value.Image.Url_Medium}}{{^Value.Image.Url_Medium}}{{{Value.SEO.DefaultImageUrl}}}{{/Value.Image.Url_Medium}}",
+                "height": 1280,
+                "width": 857
+            }
+        }
+    </script>
+</div>

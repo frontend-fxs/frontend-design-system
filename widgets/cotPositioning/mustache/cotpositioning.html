@@ -1,0 +1,61 @@
+﻿<section class="fxs_widget_summary">
+    <div class="fxs_widget_cot fxs_widget_big">
+        <div class="fxs_widget_divider_module">
+            <ul class="fxs_list_table fxs_list_table_item_split_widget">
+                <li class="fxs_list_table_item">
+                    <div class="fxs_dTable">
+                        <span class="fxs_label">{{Translations.NonCommercialTitle}}</span>
+                    </div>
+                    <div class="fxs_widget_cot_box">
+                        <strong class="fxs_widget_custom_data_lable">{{Study.NonCommercialFirstPrettyValue}}</strong>
+                        <small class="fxs_index_date">
+                            <time datetime="{{Study.NonCommercialFirstDate}}">{{Study.NonCommercialFirstPrettyDate}}</time>
+                        </small>
+                    </div>
+
+                    <div class="fxs_widget_cot_box fxs_widget_cot_graph">
+                        <div id="non_commercial" class="c3"></div>
+                    </div>
+                    <div class="fxs_widget_cot_box">
+                        <strong class="fxs_widget_custom_data_lable">{{Study.NonCommercialLastPrettyValue}}</strong>
+                        <small class="fxs_index_date">
+                            <time datetime="{{Study.NonCommercialLastDate}}">{{Translations.Last}}</time>
+                        </small>
+                    </div>
+                </li>
+
+
+                <li class="fxs_list_table_item">
+                    <div class="fxs_dTable">
+                        <span class="fxs_label">{{Translations.CommercialTitle}}</span>
+                    </div>
+
+                    <div class="fxs_widget_cot_box">
+                        <strong class="fxs_widget_custom_data_lable">{{Study.CommercialFirstPrettyValue}}</strong>
+                        <small class="fxs_index_date">
+                            <time datetime="{{Study.CommercialFirstDate}}">{{Study.CommercialFirstPrettyDate}}</time>
+                        </small>
+                    </div>
+                    <div class="fxs_widget_cot_box fxs_widget_cot_graph">
+                        <div id="commercial" class="c3"></div>
+                    </div>
+                    <div class="fxs_widget_cot_box">
+                        <strong class="fxs_widget_custom_data_lable">{{Study.CommercialLastPrettyValue}}</strong>
+                        <small class="fxs_index_date">
+                            <time datetime="{{Study.CommercialLastDate}}">{{Translations.Last}}</time>
+                        </small>
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+
+        <!-- widget footer -->
+        <footer class="fxs_widget_footer">
+            <small><time datetime="{{Study.LastUpdatedDate}}">{{Translations.Updated}} {{Study.LastUpdatedHour}} GMT</time></small>
+            <a class="fxs_btn fxs_btn_line fxs_btn_small" href="{{FullReportUrl}}" title="{{Translations.SeeFullStudy}}">{{Translations.SeeFullStudy}} <i class="fa fa-angle-double-right"></i></a>
+        </footer>
+    </div>
+    <!-- /widget footer -->
+</section>
+          

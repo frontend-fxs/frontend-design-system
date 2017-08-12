@@ -1,0 +1,31 @@
+﻿
+<script id="menu_mobile" type="x-tmpl-mustache">
+    <nav class="fxs_nav_menu fxs_main_nav" role="navigation">     
+        <ul class="fxs_nav_menu_mobile">
+            {{#SectionEntries}}
+            <li fxs-section-entry>
+                <a id="{{Id}}" href="{{Url}}" class="fxs_nav_menu_main_items">{{Text}}</a>
+                {{#HasSubSectionEntries}}
+                <div class="fxs_nav_itemsContainer fxs_hideElements">
+                    <div class="fxs_navBg">
+                        <div class="fxs_subNav_rates">
+                            {{#SubSectionEntries}}
+                            <div class="fxs_navItemsBox">
+                                <span class="fxs_headline_from_nano_to_tiny">{{Text}}</span>
+
+                                <ul class="fxs_subNav_col_{{ColumnCount}} fxs_list_unstyled">
+                                    {{#ItemEntries}}
+                                    <li><i class="fa fa-angle-right" aria-hidden="true"></i> <a href="{{Url}}" {{#NoFollow}} rel="nofollow" {{/NoFollow}}>{{Text}}</a></li>
+                                    {{/ItemEntries}}
+                                </ul>
+                            </div>
+                            {{/SubSectionEntries}}
+                        </div>
+                    </div>
+                </div>
+                {{/HasSubSectionEntries}}
+            </li>
+            {{/SectionEntries}}
+        </ul>
+    </nav>
+</script>

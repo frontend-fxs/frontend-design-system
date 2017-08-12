@@ -1,0 +1,60 @@
+﻿<section class="fxs_widget_summary">
+    <div class="fxs_swipeContent_slider">
+        <table class="fxs_table fxs_tableHover fxs_ctp_latest">
+            <thead>
+                <tr>
+                    <th>{{Translations.Asset}}</th>
+                    <th>{{Translations.Order}}</th>
+                    <th>{{Translations.Entry}}</th>
+                    <th>{{Translations.SL}}</th>
+                    <th>{{Translations.TP}}</th>
+                    <th><span class="fxs_skip">{{Translations.MoreInfo}}</span></th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#Entries}}
+                <tr onclick="window.location = '{{FullReportUrl}}'" class="fxs_ctp_latest_assetValues fxs_ctp_latest_contributor">
+                    <td>
+                        <address class="fxs_contributorBox fxs_contributorBox_nano">
+                            <span class="fxs_article_author">
+                                <strong>{{Asset.Name}}</strong>
+                            </span>
+                        </address>
+                        
+                        <a href="{{Entry.ReportUrl}}" title="{{Entry.Author.Name}}" class="fxs_dBlock">
+                            {{Entry.Author.Name}}
+                        </a>
+                    </td>
+                    <td>
+                        <span class="fxs_txt_success fxs_ctpTable_order {{Entry.OrderDirectionClass}}"><a href="/">{{Entry.OrderDirection}} {{Entry.OrderType}}</a></span>
+                    </td>
+                    <td>{{Entry.EntryTypeCode}} {{Entry.Entry}}</td>
+                    <td>{{Entry.StopLoss}}</td>
+                    <td>{{Entry.TakeProfit1}}</td>
+                    <td>
+                        <a href="{{FullReportUrl}}" class="fxs_btn_icon" title="{{Translations.ReadCompleteReport}}"><i class="fa fa-angle-double-right"></i><span class="fxs_skip">{{Translations.ReadCompleteReport}}</span></a>
+                    </td>
+                    <script type="application/ld+json">
+                        <!--TODO define SEO-->
+                    </script>
+                </tr>
+                <!--<tr class="fxs_ctp_latest_contributor">
+                    <td colspan="6">
+                        <a href="{{Entry.ReportUrl}}" title="{{Entry.Author.Name}}">
+                            {{Entry.Author.Name}}
+                        </a>
+                    </td>
+                </tr>-->
+                {{/Entries}}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td class="fxs_widget_footer" colspan="6">
+                        <small><time datetime="{{LastUpdatedDate}}">{{Translations.Updated}} {{LastUpdatedHour}} GMT</time></small>
+                        <a class="fxs_btn fxs_btn_line fxs_btn_small" href="{{FullStudyUrl}}">{{Translations.MorePositions}}<i class="fa fa-angle-double-right"></i></a>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</section>

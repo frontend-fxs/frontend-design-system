@@ -1,0 +1,23 @@
+﻿<script id="ratesandcharts_mini" type="x-tmpl-mustache">
+    <div class="fxs_widget_divider_module">
+        <div fxs-it-id="{{Value.Id}}" class="fxs_widget_price fxs_widget_mini {{RateData.Study.PriceStatics.PriceClass}}" fxs-ratedata-widget>
+            <abbr class="fxs_asset_label" title="{{Value.Description}}">
+                <a href="{{{Value.SEO.FullUrl}}}">{{Value.Title}}</a>
+            </abbr>
+            {{#RateData}}
+            <div class="fxs_widget_price_value">
+                <span class="fxs_price_bidask">
+                    <span class="fxs_price_change_bg {{RateData.Study.PriceStatics.ChangeTendencyClass}}">
+                        {{RateData.Study.PriceStatics.BidAsk}}
+                        <strong class="fxs_price_big_figure">{{RateData.Study.PriceStatics.BidBigFigure}}</strong>
+                        <sup>{{RateData.Study.PriceStatics.BidSmallFigure}}</sup>
+                        /
+                        <strong class="fxs_price_big_figure">{{RateData.Study.PriceStatics.AskBigFigure}}</strong>
+                        <sup>{{RateData.Study.PriceStatics.AskSmallFigure}}</sup>
+                    </span>
+               </span>
+            </div>
+            {{/RateData}}
+        </div>
+    </div>
+</script>

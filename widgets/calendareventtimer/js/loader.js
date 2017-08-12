@@ -9,7 +9,29 @@
                 {
                     "calendareventtimer": ""
                 },
-            CustomJs: ["jquery.countdown.min.js"]
+            CustomJs: [
+                { 
+                    Js: "jquery.countdown.min.js", 
+                    CustomLoadedDelegate : function(){
+                        return $ !== undefined && $.fn.countdown !== undefined;
+                    }
+                }
+            ],
+            SharedJs: [
+                { 
+                    Container: "http-push/", 
+                    Js: "jquery.signalR-2.2.0.min.js", 
+                    CustomLoadedDelegate : function(){
+                        return $ !== undefined && $.signalR !== undefined; 
+                    }
+                },
+                { 
+                    Container: "http-push/", 
+                    Js: "fxspush.js",
+                    CustomLoadedDelegate : function(){
+                            return window.FXStreetPush !== undefined; 
+                    }
+                }]
         };
 
         var parent = FXStreetWidgets.Widget.LoaderBase(options),
@@ -25,6 +47,7 @@
                     OtherEventsIds: jCalendarEventTimer.attr("fxs_other_events_ids"),
                     HoursToShowNextevent: jCalendarEventTimer.attr("fxs_hours_to_show_next_event"),
                     TimeZoneName: jCalendarEventTimer.attr("fxs_time_zone"),
+                    CustomURL: jCalendarEventTimer.attr("fxs_custom_url"),
                     WidgetId: FXStreetWidgets.Util.guid(),
                     Seo: FXStreetWidgets.Util.isUndefined(jCalendarEventTimer.attr("fxs_seo")) ? false : true
                 };

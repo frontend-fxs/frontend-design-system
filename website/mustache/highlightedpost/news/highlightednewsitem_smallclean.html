@@ -1,0 +1,23 @@
+﻿<script id="highlightednewsitem_smallclean" type="x-tmpl-mustache">
+    <div fxs_sf_widget class="fxs_entryFeatured" fxs_name="highlightedNewsSmall">
+        <article class="fxs_entryFeatured_reduced">
+            <header>
+                <h3 class="fxs_entryHeadline">
+                    <a href="{{Value.SEO.FullUrl}}" title="{{Value.Title}}">{{Value.Title}}</a>
+                </h3>
+                <address class="fxs_entry_metaInfo">
+                    <span class="fxs_article_author">
+                        {{Translations.ByLabel}}
+                        <a href="{{Value.Author.Url}}" rel="nofollow" title="{{Value.Author.Name}}">{{Value.Author.Name}}</a>
+                    </span> |
+                    <time pubdate="" datetime="">{{Value.PublicationDateDisplay}}</time>
+                </address>
+            </header>
+            <div class="fxs_entryExcerpt">
+                <p>
+                    {{Value.Summary}}
+                </p>
+            </div>
+        </article>
+    </div>
+</script>

@@ -1,0 +1,55 @@
+﻿<script id="subscribe_tab" type="x-tmpl-mustache">
+    <form id="newsletters_{{ContainerId}}" class="fxs_suscribeForm">
+        <ul class="fxs_list_unstyled fxs_list_block">
+            {{#Newsletters}}
+            {{^Default}}
+            <li>
+                <label>
+                    <div class="fxs_custom_label fxs_">{{Name}}</div>
+                    <input type="checkbox" name="newsletters" value="{{Id}}" {{#Subscribed}} checked {{/Subscribed}} >
+                </label>
+                <p class="fxs_article_author">
+                    <span class="fxs_author_description">
+                        {{{Description}}}
+                    </span>
+                </p>
+            </li>
+            {{/Default}}
+            {{/Newsletters}}
+        </ul>
+        <div class="fxs_marginBase_top"></div>
+        <div class="fxs_subscribeForm_group">
+            <input id="inputMail_{{ContainerId}}" type="email" class="fxs_textInput" placeholder="{{EmailPlaceholderText}}">
+            <div class="fxs_btn_group">
+                <div id="recaptcha_{{ContainerId}}" class="fxs_hideElements"></div>
+                <button id="submit_{{ContainerId}}" class="fxs_btn fxs_btn_cta">{{SubscribeButtonText}}</button>
+            </div>
+        </div>
+        <div id="successMessageDiv_{{ContainerId}}" class="fxs_contextual_alert fxs_alert_success alert alert-dismissible fade in" role="alert" hidden>
+            <button type="button" class="fxs_close close" data-dismiss="alert" aria-label="Close">
+                <i class="fa fa-close"></i>
+                <span class="fxs_skip">Close alert</span>
+            </button>
+            <span class="fxs_alertLabel">{{CongratsAlertLabel}}</span>
+            <p class="fxs_alertText">{{CongratsAlertText}}</p>
+        </div>
+
+        <div id="errorMessageDiv_{{ContainerId}}" class="fxs_contextual_alert fxs_alert_error alert alert-dismissible fade in" role="alert" hidden>
+            <button type="button" class="fxs_close close" data-dismiss="alert" aria-label="Close">
+                <i class="fa fa-close"></i>
+                <span class="fxs_skip">Close alert</span>
+            </button>
+            <span class="fxs_alertLabel">{{ErrorAlertLabel}}</span>
+            <p class="fxs_alertText">{{ErrorAlertText}}</p>
+        </div>
+
+        <div id="errorCaptchaMessageDiv_{{ContainerId}}" class="fxs_contextual_alert fxs_alert_error alert alert-dismissible fade in" role="alert" hidden>
+            <button type="button" class="fxs_close close" data-dismiss="alert" aria-label="Close">
+                <i class="fa fa-close"></i>
+                <span class="fxs_skip">Close alert</span>
+            </button>
+            <span class="fxs_alertLabel">{{ErrorAlertLabel}}</span>
+            <p class="fxs_alertText">{{ErrorCaptchaAlertText}}</p>
+        </div>
+    </form>
+</script>

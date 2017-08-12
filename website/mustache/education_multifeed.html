@@ -1,0 +1,106 @@
+﻿<script id="education_multifeed" type="x-tmpl-mustache">
+    <div fxs_sf_widget class="fxs_entryFeatured">
+        {{#HighlightedFirstItem}}
+        <article class="{{SizeClassName}}">
+            {{#WithImage}}
+            <div class="fxs_entryFeatured_img">
+                <a href="{{HighlightedItem.SEO.FullUrl}}" title="{{HighlightedItem.Title}}"><img class="lazyload" data-src="{{HighlightedItem.Image.Url_Medium}}"/></a>
+            </div>
+            {{/WithImage}}
+            <header>
+                <h2 class="fxs_entryHeadline">
+                    <a href="{{HighlightedItem.SEO.FullUrl}}" title="{{HighlightedItem.Title}}">{{HighlightedItem.Title}}</a>
+                </h2>
+                <address class="fxs_contributorBox fxs_contributorBox_medium">
+                    <div class="fxs_avatar_circleImage_s">
+                        <a href="{{HighlightedItem.Author.Url}}" rel="nofollow" title="{{HighlightedItem.Author.Name}}">
+                            <img class="lazyload" data-src="{{HighlightedItem.Author.ImageResponse.Url_Nano}}" alt="{{HighlightedItem.Author.Name}}" width="35" height="35">
+                        </a>
+                    </div>
+                    <span class="fxs_article_author">
+                        <a href="{{HighlightedItem.Author.Url}}" rel="nofollow" title="{{HighlightedItem.Author.Name}}">
+                            <strong>{{HighlightedItem.Author.Name}}</strong>
+                        </a>
+                        <span class="fxs_author_description">
+                            {{HighlightedItem.Author.Position}} <a href="{{HighlightedItem.Company.Url}}" class="fxs_mutedLink" target="_blank">{{HighlightedItem.Company.Name}}</a>
+                        </span>
+                    </span>
+                </address>
+            </header>
+            {{>seohighlighted}}
+        </article>
+        {{/HighlightedFirstItem}}
+    </div>
+    {{>items}}
+</script>
+
+<div id="education_multifeed.items">
+    <aside class="fxs_entriesList">
+        <ol>
+            {{#Items}}
+            <li>
+                <article>
+                    {{#Sponsored}}
+                    <span class="fxs_mutedContent_label">{{Translations.SponsoredContentLabel}} <i class="fa fa-external-link"></i></span>
+                    {{/Sponsored}}
+                    <h3 class="fxs_entryHeadline">
+                        <a href="{{{SEO.FullUrl}}}" title="{{Title}}">{{Title}}</a>
+                    </h3>
+                    <address class="fxs_entry_metaInfo">
+                        <span class="fxs_article_author">
+                            {{Translations.ByLabel}} <a href="{{Author.Url}}" rel="nofollow">{{Author.Name}}</a>
+                        </span> | <time pubdate datetime="">{{PublicationDateDisplay}}</time>
+                    </address>
+                </article>
+                {{>seo}}
+            </li>
+            {{/Items}}
+        </ol>
+    </aside>
+</div>
+
+<div id="education_multifeed.seohighlighted">
+    <script type="application/ld+json">
+        {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "name": "{{{HighlightedItem.Title}}}",
+        "headline": "{{{HighlightedItem.Title}}}",
+        "datePublished": "{{HighlightedItem.PublicationDate}}"
+        "url" : "{{{HighlightedItem.SEO.FullUrl}}}",
+        "author": {
+        "@type":"Person",
+        "name":"{{HighlightedItem.Author.Name}}",
+        "url": "{{{HighlightedItem.Author.AuthorUrl}}}",
+        "worksfor": {
+        "@type": "Organization",
+        "name": "{{HighlightedItem.Company.Name}}",
+        "url": "{{{HighlightedItem.Company.UrlSEO}}}"
+        }
+        }
+        }
+    </script>
+</div>
+
+<div id="education_multifeed.seo">
+    <script type="application/ld+json">
+        {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "name": "{{{Title}}}",
+        "headline": "{{{Title}}}",
+        "datePublished": "{{PublicationDate}}"
+        "url" : "{{{SEO.FullUrl}}}",
+        "author": {
+        "@type":"Person",
+        "name":"{{Author.Name}}",
+        "url": "{{{Author.AuthorUrl}}}",
+        "worksfor": {
+        "@type": "Organization",
+        "name": "{{Company.Name}}",
+        "url": "{{{Company.UrlSEO}}}"
+        }
+        }
+        }
+    </script>
+</div>

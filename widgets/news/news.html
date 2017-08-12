@@ -19,8 +19,23 @@
             <section class="fxs_detail">
                 <div class="fxs_row">
                     <div class="fxs_widget_summary">
-                        <div class="fxs_widget_news">
-                            <div class="fxs_widget_news_sidenav" id="fxs_open_sidebar">
+                        <div class="fxs_widget_news fxs_third_content widget_news">
+                            <header class="fxs_widget_header_title_dark">
+                                <div class="fxs_helperLabel_title">News</div>
+                                <small class="fxs_power">Powered by <a href="https://fxstreet.com">Fxstreet</a></small>
+                            </header>
+                            <div class="fxs_alert fxs_alert_info alert alert-dismissible fade in" role="alert">
+                                <button type="button" class="fxs_close close" data-dismiss="alert" aria-label="Close">
+                                    <i class="fa fa-close"></i>
+                                    <span class="fxs_skip">Close alert</span>
+                                </button>
+
+                                <a href="#" class="news_update">see 1 new update</a>
+                            </div>
+                            <div class="fxs_progress">
+                                <div class="fxs_indeterminate"></div>
+                            </div>
+                            <div class="fxs_widget_news_sidenav fxs_hide_sidebar" id="fxs_open_sidebar">
                                 <header class="fxs_widget_header_title_light">
                                     <span><a href="#" class="fxs_widget_news_clear" type="submit">Clear all filters</a></span>
                                     <span><a href="javascript:;" class="fxs_widget_news_close_filter fxs_absolutePositioning"><i class="fa fa-times" aria-hidden="true"></i></a></span>
@@ -29,95 +44,79 @@
                                     <div class="fxs_widget_news_categories">
                                         <h3 class="fxs_subtitle">Categories</h3>
                                         <div>
-                                            <a href="javascript:void(0);" class="fxs_widget_news_item">
-                                                <input type="checkbox" class="" value="News">News
-                                            </a>
+                                            
+                                            <input type="checkbox" class="" value="News">
+                                            <label class="fxs_widget_news_item">
+                                                News
+                                            </label>
                                         </div>
 
                                         <div>
-                                            <a href="javascript:void(0);" class="fxs_widget_news_item">
-                                                <input type="checkbox" class="" value="Analysis">Analysis  
-                                            </a>
+                                            <input type="checkbox" class="" value="Analysis">  
+                                            <label class="fxs_widget_news_item">Analysis</label>
                                         </div>
 
                                         <div>
-                                            <a href="javascript:void(0);" class="fxs_widget_news_item">
-                                                <input type="checkbox" class="" value="Video">Video
-                                            </a>
+                                            <input type="checkbox" class="" value="Video">
+                                            <label class="fxs_widget_news_item">Video</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" class="" value="Education">
+                                            <label class="fxs_widget_news_item">
+                                                Education
+                                            </label>
                                         </div>
 
                                         <div>
-                                            <a href="javascript:void(0);" class="fxs_widget_news_item">
-                                                <input type="checkbox" class="" value="Education">Education
-                                            </a>
+                                            <input type="checkbox" class="" value="Premium Video">
+                                            <label class="fxs_widget_news_item">
+                                                Premium Video
+                                            </label>
                                         </div>
 
                                         <div>
-                                            <a href="javascript:void(0);" class="fxs_widget_news_item">
-                                                <input type="checkbox" class="" value="Premium Video">Premium Video
-                                            </a>
+                                            <input type="checkbox" class="" value="Tool">
+                                            <label class="fxs_widget_news_item">
+                                                Tool
+                                            </label>
                                         </div>
 
                                         <div>
-                                            <a href="javascript:void(0);" class="fxs_widget_news_item">
-                                                <input type="checkbox" class="" value="Tool">Tool
-                                            </a>
-                                        </div>
-
-                                        <div>
-                                            <a href="javascript:void(0);" class="fxs_widget_news_item">
-                                                <input type="checkbox" class="" value="Upcoming Show">Upcoming Show
-                                            </a>
-                                        </div>
-
-                                        <div>
-                                            <a href="javascript:void(0);" class="fxs_widget_news_item">
-                                                <input type="checkbox" class="" value="Premium Upcoming Show">Premium Upcoming Show
-                                            </a>
-                                        </div>
-
-                                        <div>
-                                            <a href="javascript:void(0);" class="fxs_widget_news_item">
-                                                <input type="checkbox" class="" value="Editorial">Editorial
-                                            </a>
-                                        </div>
-
-                                        <div>
-                                            <a href="javascript:void(0);" class="fxs_widget_news_item">
-                                                <input type="checkbox" class="" value="Other">Other
-                                            </a>
+                                            <input type="checkbox" class="" value="Upcoming Show">
+                                            <label class="fxs_widget_news_item">
+                                                Upcoming Show
+                                            </label>
                                         </div>
                                     </div>
                                     <div class="fxs_widget_news_visual fxs_marginBase_top">
                                         <h3 class="fxs_subtitle">Visualization</h3>
                                         <div>
-                                            <a href="javascript:void(0);" class="fxs_widget_news_item">
-                                                <input type="checkbox" class="" value="News">News
-                                                <span>Headline</span>
-                                            </a>
+                                            <input type="radio" name="radione" class="" value="News">
+                                            <label class="fxs_widget_news_item">
+                                                Headline
+                                            </label>
                                         </div>
 
                                         <div>
-                                            <a href="javascript:void(0);" class="fxs_widget_news_item">
-                                                <input type="checkbox" class="" value="Analysis">Analysis
-                                                <span>Headline + tags</span>
-                                            </a>
+                                            <input type="radio" name="radione" class="" value="Analysis">
+                                            <label class="fxs_widget_news_item">
+                                                Analysis
+                                           
+                                            </label>
                                         </div>
 
                                         <div>
-                                            <a href="javascript:void(0);" class="fxs_widget_news_item">
-                                                <input type="checkbox" class="" value="Video">Video
-                                                <span>Complete</span>
-                                            </a>
+                                            <input type="radio" name="radione" class="" value="Viseo">
+                                            <label class="fxs_widget_news_item">
+                                                Video
+                                            </label>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="fxs_widget_news_content">
-                                <header class="fxs_widget_header_title_dark">
-                                    <div class="fxs_helperLabel_title">News</div>
-                                    <small class="fxs_power">Powered by <a href="https://fxstreet.com">Fxstreet</a></small>
-                                </header>
+                                <!--<div class="fxs_preload_widgets"></div>-->
+                              
                                 <div class="fxs_widget_container_gutter">
                                     <div id="showLeft" class="fxs_widget_news_show_filter">
                                         <a href="javascript:;" title=""><i class="fa fa-chevron-left"></i> <span>Show filters</span></a>
@@ -133,17 +132,19 @@
                                                 </div>
                                                 <div class="fxs_floatingMedia_textBody">
                                                     <h4 class="fxs_headline_tiny">
-                                                        <a href="" title="">New record lows for European sovereign yields</a>
+                                                        <a href="#" class="fxs_trigger_content link_invert" title="">New record lows for European sovereign yields</a>
                                                     </h4>
                                                     <address class="fxs_entry_metaInfo">
                                                         <span class="fxs_article_author"><a href="http://www.myspace.com/timbo">Valeria Bednarik</a></span> | <time pubdate="" datetime="2015-09-14 09:25">09:25 UTC</time>
                                                     </address>
                                                     <div class="fxs_entryExcerpt">
-                                                        <p>
+                                                        <p class="fxs_summary">
                                                             The Non-Farm Payroll report, because of its importance to the reserve currency, tends to move all markets. No trader in the world ignores the "NFP" acronym. Some want to avoid it at all costs, others try and trade the high volatility it produces to make some pips.
+                                                        </p>
+                                                        <p class="fxs_full_news">
+                                                            full news
                                                         </p>
                                                         <span class="fxs_label fxs_label_muted">tag</span><span class="fxs_label fxs_label_muted">tag</span><span class="fxs_label fxs_label_muted">tag</span><span class="fxs_label fxs_label_muted">tag</span>
-
                                                     </div>
                                                 </div>
                                             </article>
@@ -157,7 +158,7 @@
                                                 </div>
                                                 <div class="fxs_floatingMedia_textBody">
                                                     <h4 class="fxs_headline_tiny">
-                                                        <a href="" title="">New record lows for European sovereign yields</a>
+                                                        <a href="" title="" class="link_invert">New record lows for European sovereign yields</a>
                                                     </h4>
                                                     <address class="fxs_entry_metaInfo">
                                                         <span class="fxs_article_author"><a href="http://www.myspace.com/timbo">Valeria Bednarik</a></span> | <time pubdate="" datetime="2015-09-14 09:25">09:25 UTC</time>
@@ -174,7 +175,7 @@
                                                 </div>
                                                 <div class="fxs_floatingMedia_textBody">
                                                     <h4 class="fxs_headline_tiny">
-                                                        <a href="" title="">New record lows for European sovereign yields</a>
+                                                        <a href="" title="" class="link_invert">New record lows for European sovereign yields</a>
                                                     </h4>
                                                     <address class="fxs_entry_metaInfo">
                                                         <span class="fxs_article_author"><a href="http://www.myspace.com/timbo">Valeria Bednarik</a></span> | <time pubdate="" datetime="2015-09-14 09:25">09:25 UTC</time>
@@ -191,7 +192,7 @@
                                                 </div>
                                                 <div class="fxs_floatingMedia_textBody">
                                                     <h4 class="fxs_headline_tiny">
-                                                        <a href="" title="">New record lows for European sovereign yields</a>
+                                                        <a href="" title="" class="link_invert">New record lows for European sovereign yields</a>
                                                     </h4>
                                                     <address class="fxs_entry_metaInfo">
                                                         <span class="fxs_article_author"><a href="http://www.myspace.com/timbo">Valeria Bednarik</a></span> | <time pubdate="" datetime="2015-09-14 09:25">09:25 UTC</time>
@@ -208,7 +209,7 @@
                                                 </div>
                                                 <div class="fxs_floatingMedia_textBody">
                                                     <h4 class="fxs_headline_tiny">
-                                                        <a href="" title="">New record lows for European sovereign yields</a>
+                                                        <a href="" title="" class="link_invert">New record lows for European sovereign yields</a>
                                                     </h4>
                                                     <address class="fxs_entry_metaInfo">
                                                         <span class="fxs_article_author"><a href="http://www.myspace.com/timbo">Valeria Bednarik</a></span> | <time pubdate="" datetime="2015-09-14 09:25">09:25 UTC</time>
@@ -225,7 +226,7 @@
                                                 </div>
                                                 <div class="fxs_floatingMedia_textBody">
                                                     <h4 class="fxs_headline_tiny">
-                                                        <a href="" title="">New record lows for European sovereign yields</a>
+                                                        <a href="" title="" class="link_invert">New record lows for European sovereign yields</a>
                                                     </h4>
                                                     <address class="fxs_entry_metaInfo">
                                                         <span class="fxs_article_author"><a href="http://www.myspace.com/timbo">Valeria Bednarik</a></span> | <time pubdate="" datetime="2015-09-14 09:25">09:25 UTC</time>
@@ -247,7 +248,7 @@
                                                 </div>
                                                 <div class="fxs_floatingMedia_textBody">
                                                     <h4 class="fxs_headline_tiny">
-                                                        <a href="" title="">New record lows for European sovereign yields</a>
+                                                        <a href="" title="" class="link_invert">New record lows for European sovereign yields</a>
                                                     </h4>
                                                     <address class="fxs_entry_metaInfo">
                                                         <span class="fxs_article_author"><a href="http://www.myspace.com/timbo">Valeria Bednarik</a></span> | <time pubdate="" datetime="2015-09-14 09:25">09:25 UTC</time>
@@ -264,7 +265,7 @@
                                                 </div>
                                                 <div class="fxs_floatingMedia_textBody">
                                                     <h4 class="fxs_headline_tiny">
-                                                        <a href="" title="">New record lows for European sovereign yields</a>
+                                                        <a href="" title="" class="link_invert">New record lows for European sovereign yields</a>
                                                     </h4>
                                                     <address class="fxs_entry_metaInfo">
                                                         <span class="fxs_article_author"><a href="http://www.myspace.com/timbo">Valeria Bednarik</a></span> | <time pubdate="" datetime="2015-09-14 09:25">09:25 UTC</time>
@@ -281,7 +282,7 @@
                                                 </div>
                                                 <div class="fxs_floatingMedia_textBody">
                                                     <h4 class="fxs_headline_tiny">
-                                                        <a href="" title="">New record lows for European sovereign yields</a>
+                                                        <a href="" title="" class="link_invert">New record lows for European sovereign yields</a>
                                                     </h4>
                                                     <address class="fxs_entry_metaInfo">
                                                         <span class="fxs_article_author"><a href="http://www.myspace.com/timbo">Valeria Bednarik</a></span> | <time pubdate="" datetime="2015-09-14 09:25">09:25 UTC</time>
@@ -298,7 +299,7 @@
                                                 </div>
                                                 <div class="fxs_floatingMedia_textBody">
                                                     <h4 class="fxs_headline_tiny">
-                                                        <a href="" title="">New record lows for European sovereign yields</a>
+                                                        <a href="" title="" class="link_invert">New record lows for European sovereign yields</a>
                                                     </h4>
                                                     <address class="fxs_entry_metaInfo">
                                                         <span class="fxs_article_author"><a href="http://www.myspace.com/timbo">Valeria Bednarik</a></span> | <time pubdate="" datetime="2015-09-14 09:25">09:25 UTC</time>
@@ -306,7 +307,7 @@
                                                 </div>
                                             </article>
                                         </div>
-                                        <button class="fxs_btn fxs_btn_line fxs_btn_block" type="submit">Load more news</button>
+                                        <button class="fxs_btn fxs_btn_line fxs_btn_block" disabled type="submit">Load more news</button>
                                     </div>
                                 </div>
                             </div>
@@ -327,6 +328,14 @@
             $('.fxs_widget_news_close_filter').on('click', function () {
                 $('#fxs_open_sidebar').removeClass('cbp-spmenu-open');
             });
+
+            $(window).load(function () {
+                $('.fxs_full_news').hide();
+            });
+            $('.fxs_trigger_content').click(function () {
+                $('.fxs_summary,.fxs_full_news').toggle();
+            });
+
         </script>    
 
     </body>

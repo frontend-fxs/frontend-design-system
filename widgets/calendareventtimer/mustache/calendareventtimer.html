@@ -5,14 +5,17 @@
     </h3>
     <div class="fxs_event_block fxs_widget_divider_module">
         <h3 class="fxs_subtitle fxs_event_mini_title">
-            <span class="fxs_subtitle_variant">{{Translations.LastRelease}}</span>
+            <span class="fxs_subtitle_variant">
+                {{^Event.ShowNextEvent}}{{Translations.LastRelease}}{{/Event.ShowNextEvent}}
+                {{#Event.ShowNextEvent}}{{Translations.NextRelease}}{{/Event.ShowNextEvent}} 
+            </span>
             <time class="fxs_txt_neutral" pubdate="" datetime="{{Event.EventDateDisplayDate}}">{{Event.EventDateDisplayDate}} </time>
         </h3>
-        <ul class="fxs_event_list fxs_event_list_last fxs_event_list_trigger">
+        <ul class="fxs_event_list fxs_event_list_last fxs_event_list_trigger" onclick="window.open('{{CustomURL}}','_blank');">
             <li class="fxs_event_list_item">
                 {{^Event.ShowNextEvent}}
                 <div class="fxs_event_font fxs_event_actual">                    
-                    <span class="fxs_event_price">{{Event.EventDate.ActualDisplay}}</span>                  
+                    <span class="fxs_event_price {{Event.EventDate.RaisedClass}}">{{Event.EventDate.ActualDisplay}}</span>               
                     <span class="fxs_txt_neutral">{{Translations.Actual}}</span>
                 </div> 
                 {{/Event.ShowNextEvent}}
@@ -28,8 +31,13 @@
                 </div>
             </li>
             <li class="fxs_event_list_item">
-                <div class="fxs_event_font_bis fxs_event_previous">
+                <div class="fxs_event_font fxs_event_consensus">
                     <span class="fxs_event_price">{{Event.EventDate.PreviousDisplay}}</span>
+                    {{#Event.EventDate.RevisedDisplay}}
+                    <i class="fa fa-info-circle fxs_tooltip">
+                        <span class="fxs_tooltiptext fxs_toolip_bottom">{{Event.EventDate.RevisedDisplay}}</span>
+                    </i>
+                    {{/Event.EventDate.RevisedDisplay}}
                     <span class="fxs_txt_neutral">{{Translations.Previous}}</span>
                 </div>
             </li>          
@@ -55,7 +63,7 @@
             <ul class="fxs_event_list">
                 <li class="fxs_event_list_item">
                     <div class="fxs_event_font fxs_event_actual">
-                        <span class="fxs_event_price">{{EventDate.ActualDisplay}}</span> 
+                        <span class="fxs_event_price {{EventDate.RaisedClass}}">{{EventDate.ActualDisplay}}</span> 
                         <span class="fxs_txt_neutral">{{Translations.Actual}}</span>
                     </div>
                 </li>
@@ -66,7 +74,7 @@
                     </div>
                 </li>
                 <li class="fxs_event_list_item">
-                    <div class="fxs_event_font_bis fxs_event_previous">
+                    <div class="fxs_event_font fxs_event_consensus">
                         <span class="fxs_event_price">{{EventDate.PreviousDisplay}}</span>
                         <span class="fxs_txt_neutral">{{Translations.Previous}}</span>
                     </div>

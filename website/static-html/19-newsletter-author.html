@@ -203,54 +203,126 @@
                                 <section class="fxs_detail">
                                     <h1 class="fxs_headline_large">Manage my subscriptions</h1>
                                     <!-- description -->
-                                    <div class="fxs_entryPlain_txt">
+                                    <div class="fxs_entryPlain_txt fxs_marginBase_bottom">
                                         These are the newsletters and authors you are following. If you don't want to receive a newsletter anymore  you just have to leave it unselected. If you want to unfollow an author, click the "Following" button.
                                     </div>
                                     <!-- tabs -->
                                     <ul class="fxs_tabs_nav">
-                                            <li class=""><a subscription-tab="" data-tabselector="#myTab1" href="#" title="Newsletters">Newsletters</a></li>
-                                            <li class="active"><a subscription-tab="" data-tabselector="#myTab2" href="#" title="Following">Following</a></li>
+                                        <li class=""><a subscription-tab="" data-tabselector="#myTab1" href="#" title="Newsletters">Newsletters</a></li>
+                                        <li class="active"><a subscription-tab="" data-tabselector="#myTab2" href="#" title="Following">Following</a></li>
                                     </ul>
                                     <!-- tabs content -->
                                     <div class="tab-content">
-                                        <div subscription-tab-content="" role="tabpanel" id="myTab1" class="fxs_authentication_form_content tab-pane fade in active" style="display: none;">
-                                            <div class="fxs_suscribeForm">
-                                                <ul class="fxs_list_unstyled fxs_custom_newsletter_segments">
-                                                    <li>
-                                                        <label>
-                                                            <div class="fxs_custom_label fxs_">Asian Session Newsletter (Daily)</div>
-                                                            <input type="checkbox" name="newsletters" value="45478a57-cb54-40be-89a8-f982a4ac6bf6" checked="">
-                                                        </label>                            
-                                                    </li>
-                                                    <li>
-                                                        <label>
-                                                            <div class="fxs_custom_label fxs_">European Session Newsletter (Daily)</div>
-                                                            <input type="checkbox" name="newsletters" value="c4a2bad4-566e-4db3-a833-e323e2c751ac" checked="">
-                                                        </label>                            
-                                                    </li>
-                                                    <li>
-                                                        <label>
-                                                            <div class="fxs_custom_label fxs_">American Session Newsletter (Daily)</div>
-                                                            <input type="checkbox" name="newsletters" value="7df67c26-9452-40f0-804d-a1d4beea3e24" checked="">
-                                                        </label>                            
-                                                    </li>
-                                                    <li>
-                                                        <label>
-                                                            <div class="fxs_custom_label fxs_">Special alerts (Timely)</div>
-                                                            <input type="checkbox" name="newsletters" value="a6e2be51-7cb4-49b8-973d-3c12963fcab8" checked="">
-                                                        </label>                            
-                                                    </li>
-                                                    <li>
-                                                        <label>
-                                                            <div class="fxs_custom_label fxs_">Marketing EN</div>
-                                                            <input type="checkbox" name="newsletters" value="aa637dec-154b-49ab-9b6d-28b21d7d799c" checked="">
-                                                        </label>                            
-                                                    </li>
-                                                </ul>
-                                                <div class="fxs_align_center">
-                                                    <!--<a class="fxs_btn fxs_btn_cta fxs_btn_small" role="button">Update</a>-->
-                                                    <button id="newsletters_submit_managesubscription_f88758e4-eed0-4b67-9b67-00fa8c5d74a6" class="fxs_btn fxs_btn_cta">Update</button>
+                                        <div subscription-tab-content="" role="tabpanel" id="myTab1" class="fxs_authentication_form_content tab-pane fade in active" style="display:none;">
+      
+                                                <!-- //////////////////// Widget subscribe  NO WIDE ///////////////////// -->
+                                                <div class="fxs_suscribe no_wide_content fxs_suscribeForm_whiteVersion">
+                                                    <!-- Subscribe Email -->
+                                                    <div class="fxs_entryPlain_txt">
+                                                        These are the newsletters and authors you are following. If you don't want to receive a newsletter anymore  you just have to leave it unselected. If you want to unfollow an author, click the "Following" button.
+                                                    </div>
+
+                                                    <hr class="fxs_divider_third" />
+
+                                                    <form class="fxs_suscribeForm">
+                                                        <ul class="fxs_list_unstyled fxs_list_block">
+                                                            <li>
+                                                                <label class="fxs_get_all">
+                                                                    <div class="fxs_custom_label">Get all updates</div>
+                                                                    <input type="checkbox" />
+                                                                </label>
+                                                            </li>
+                                                            <li>
+                                                                <label>
+                                                                    <div class="fxs_custom_label">Asian Session Newsletter (Daily) </div>
+                                                                    <input type="checkbox" />
+                                                                </label>
+                                                                <p class="fxs_article_author">
+                                                                    <span class="fxs_author_description">
+                                                                        Get the must-read Forex headlines before the market opens in Sidney.
+                                                                        <span class="fxs_dBlock">Weekdays | <a href="#" class="">Preview</a></span>
+                                                                    </span>
+                                                                </p>
+                                                            </li>
+                                                            <li>
+                                                                <label class="fxs_clearfix">
+                                                                    <div class="fxs_custom_label">European Session Newsletter (Daily)</div>
+                                                                    <input type="checkbox" />
+                                                                </label>
+                                                                <p class="fxs_article_author">
+                                                                    <span class="fxs_author_description">
+                                                                        Get the must-read Forex headlines before the market opens in London.
+                                                                        <span class="fxs_dBlock">
+                                                                            Weekdays | <a href="#" class="">Preview</a>
+                                                                        </span>
+                                                                    </span>
+                                                                </p>
+                                                            </li>
+
+                                                            <li>
+                                                                <label>
+                                                                    <div class="fxs_custom_label">American Session Newsletter (Daily)</div>
+                                                                    <input type="checkbox" />
+                                                                </label>
+                                                                <p class="fxs_article_author">
+                                                                    <span class="fxs_author_description">
+                                                                        Get the must-read Forex headlines before the market opens in New York.
+                                                                        <span class="fxs_dBlock">
+                                                                            Weekdays | <a href="#" class="">Preview </a>
+                                                                        </span>
+                                                                    </span>
+                                                                </p>
+                                                            </li>
+                                                            <li>
+                                                                <label>
+                                                                    <div class="fxs_custom_label">The Week Ahead Newsletter (Weekly)</div>
+                                                                    <input type="checkbox" />
+                                                                </label>
+                                                                <p class="fxs_article_author">
+                                                                    <span class="fxs_author_description">
+                                                                        Get prepared for the coming week with the main economic data and hot stories of the Forex market.
+                                                                        <span class="fxs_dBlock">
+                                                                            Sundays | <a href="#" class="">Preview</a>
+                                                                        </span>
+                                                                    </span>
+                                                                </p>
+                                                            </li>
+                                                            <li>
+                                                                <label>
+                                                                    <div class="fxs_custom_label">Special alerts (Timely)</div>
+                                                                    <input type="checkbox" />
+                                                                </label>
+                                                                <p class="fxs_article_author">
+                                                                    <span class="fxs_author_description">
+                                                                        Get notified about our special live coverages, breaking news and FXStreet novelties.
+                                                                        <span class="fxs_dBlock">
+                                                                            Timely  | <a href="#" class="">Preview</a>
+                                                                        </span>
+                                                                    </span>
+                                                                </p>
+                                                            </li>
+                                                        </ul>
+                                                       
+                                                        <div class="fxs_marginBase_top"></div>
+
+                                                        <div class="fxs_subscribeForm_group">
+                                                            <input id="EXAMPLEInputName" type="email" class="fxs_textInput" placeholder="Your Email address" />
+
+                                                            <!--<div id="recaptcha_newsletter" class="fxs_reCaptcha"><div style="width: 304px; height: 78px;"><div><iframe src="https://www.google.com/recaptcha/api2/anchor?k=6Ld0ehoTAAAAAE6lfe6bTWfADbGibOnOWHnrNh69&amp;co=aHR0cDovL3d3dy5meHN0cmVldC5jb206ODA.&amp;hl=es&amp;v=r20170329125654&amp;theme=dark&amp;size=normal&amp;cb=5q3m58bqv6l" title="widget del recaptcha" width="304" height="78" frameborder="0" scrolling="no" name="undefined"></iframe></div><textarea id="g-recaptcha-response" name="g-recaptcha-response" class="g-recaptcha-response" style="width: 250px; height: 40px; border: 1px solid #c1c1c1; margin: 10px 25px; padding: 0px; resize: none;  display: none; "></textarea></div></div>-->
+                                                            <div class="fxs_btn_group">
+                                                                <button id="newsletters_submit_managesubscription_f88758e4-eed0-4b67-9b67-00fa8c5d74a6" class="fxs_btn fxs_btn_cta">Apply</button>
+                                                            </div>
+                                                            
+                                                        </div>
+                                                    </form>
+
+                                                    <div class="fxs_disclaimer_block">
+                                                        <p>Note: All information on this page is subject to change. The use of this website constitutes acceptance of our user agreement. Please read our privacy policy and legal disclaimer.</p>
+                                                    </div>
+                                                    <!-- /Subscribe Email -->
                                                 </div>
+                                                <!-- ////////////////////// /Widget subscribe /////////////////////// -->
+                                                
                                                 <div class="fxs_marginBase_top"></div>
 
                                                 <div id="success_message_managesubscription_f88758e4-eed0-4b67-9b67-00fa8c5d74a6" class="fxs_contextual_alert fxs_alert_success alert alert-dismissible fade in" role="alert" hidden="">
@@ -261,10 +333,10 @@
 
                                                     <p class="fxs_alertText">Your newsletter list has been updated!</p>
                                                 </div>
-                                            </div>
+                                            
                                         </div>
-                                        <div subscription-tab-content="" role="tabpanel" id="myTab2" class="fxs_custom_author_segment fxs_authentication_form_content tab-pane fade in " style="display: block;">
-                                            <div class="fxs_clearfix fxs_marginBase_bottom">
+                                        <div subscription-tab-content="" role="tabpanel" id="myTab2" class="fxs_custom_author_segment fxs_authentication_form_content tab-pane fade in active" style="display: block;">
+                                            <div class="fxs_iBlock fxs_marginBase_bottom fxs_author_subscription_listItem">
                                                 <address class="fxs_contributorBox fxs_contributorBox_medium fxs_border_bottom_second fxs_paddingBase_bottom">
                                                     <div class="fxs_avatar_circleImage_s">
                                                         <a href="dean-malone" title="Dean Malone">
@@ -286,7 +358,7 @@
                                                     </button>
                                                 </address>
                                             </div>
-                                            <div class="fxs_clearfix fxs_marginBase_bottom">
+                                            <div class="fxs_iBlock fxs_marginBase_bottom fxs_author_subscription_listItem">
                                                 <address class="fxs_contributorBox fxs_contributorBox_medium fxs_border_bottom_second fxs_paddingBase_bottom">
                                                     <div class="fxs_avatar_circleImage_s">
                                                         <a href="dr-s-sivaraman" title="Dr. S. Sivaraman">
@@ -308,7 +380,7 @@
                                                     </button>
                                                 </address>
                                             </div>
-                                            <div class="fxs_clearfix fxs_marginBase_bottom">
+                                            <div class="fxs_iBlock fxs_marginBase_bottom fxs_author_subscription_listItem">
                                                 <address class="fxs_contributorBox fxs_contributorBox_medium fxs_border_bottom_second fxs_paddingBase_bottom">
                                                     <div class="fxs_avatar_circleImage_s">
                                                         <a href="gregor-horvat" title="Gregor Horvat">
@@ -330,7 +402,7 @@
                                                     </button>
                                                 </address>
                                             </div>
-                                            <div class="fxs_clearfix fxs_marginBase_bottom">
+                                            <div class="fxs_iBlock fxs_marginBase_bottom fxs_author_subscription_listItem">
                                                 <address class="fxs_contributorBox fxs_contributorBox_medium fxs_border_bottom_second fxs_paddingBase_bottom">
                                                     <div class="fxs_avatar_circleImage_s">
                                                         <a href="simon-smith" title="Simon Smith">
@@ -352,7 +424,7 @@
                                                     </button>
                                                 </address>
                                             </div>
-                                            <div class="fxs_clearfix fxs_marginBase_bottom">
+                                            <div class="fxs_iBlock fxs_marginBase_bottom fxs_author_subscription_listItem">
                                                 <address class="fxs_contributorBox fxs_contributorBox_medium fxs_border_bottom_second fxs_paddingBase_bottom">
                                                     <div class="fxs_avatar_circleImage_s">
                                                         <a href="Brian-Twomey" title="Brian Twomey">
@@ -374,7 +446,7 @@
                                                     </button>
                                                 </address>
                                             </div>
-                                            <div class="fxs_clearfix fxs_marginBase_bottom">
+                                            <div class="fxs_iBlock fxs_marginBase_bottom fxs_author_subscription_listItem">
                                                 <address class="fxs_contributorBox fxs_contributorBox_medium fxs_border_bottom_second fxs_paddingBase_bottom">
                                                     <div class="fxs_avatar_circleImage_s">
                                                         <a href="nicola-delic" title="Nicola Delic">
@@ -396,7 +468,7 @@
                                                     </button>
                                                 </address>
                                             </div>
-                                            <div class="fxs_clearfix fxs_marginBase_bottom">
+                                            <div class="fxs_iBlock fxs_marginBase_bottom fxs_author_subscription_listItem">
                                                 <address class="fxs_contributorBox fxs_contributorBox_medium fxs_border_bottom_second fxs_paddingBase_bottom">
                                                     <div class="fxs_avatar_circleImage_s">
                                                         <a href="valeria-bednarik" title="Valeria Bednarik">
@@ -418,7 +490,7 @@
                                                     </button>
                                                 </address>
                                             </div>
-                                            <div class="fxs_clearfix fxs_marginBase_bottom">
+                                            <div class="fxs_iBlock fxs_marginBase_bottom fxs_author_subscription_listItem">
                                                 <address class="fxs_contributorBox fxs_contributorBox_medium fxs_border_bottom_second fxs_paddingBase_bottom">
                                                     <div class="fxs_avatar_circleImage_s">
                                                         <a href="jesús-ángel-benito" title="Jesús Ángel Benito">
@@ -440,7 +512,7 @@
                                                     </button>
                                                 </address>
                                             </div>
-                                            <div class="fxs_clearfix fxs_marginBase_bottom">
+                                            <div class="fxs_iBlock fxs_marginBase_bottom fxs_author_subscription_listItem">
                                                 <address class="fxs_contributorBox fxs_contributorBox_medium fxs_border_bottom_second fxs_paddingBase_bottom">
                                                     <div class="fxs_avatar_circleImage_s">
                                                         <a href="giuseppe-basile-cmt" title="Giuseppe Basile, CSTA/IFTA">
@@ -462,7 +534,7 @@
                                                     </button>
                                                 </address>
                                             </div>
-                                            <div class="fxs_clearfix fxs_marginBase_bottom">
+                                            <div class="fxs_iBlock fxs_marginBase_bottom fxs_author_subscription_listItem">
                                                 <address class="fxs_contributorBox fxs_contributorBox_medium fxs_border_bottom_second fxs_paddingBase_bottom">
                                                     <div class="fxs_avatar_circleImage_s">
                                                         <a href="james-harte-imc" title="James Harte, IMC">
@@ -484,7 +556,7 @@
                                                     </button>
                                                 </address>
                                             </div>
-                                            <div class="fxs_clearfix fxs_marginBase_bottom">
+                                            <div class="fxs_iBlock fxs_marginBase_bottom fxs_author_subscription_listItem">
                                                 <address class="fxs_contributorBox fxs_contributorBox_medium fxs_border_bottom_second fxs_paddingBase_bottom">
                                                     <div class="fxs_avatar_circleImage_s">
                                                         <a href="gus-farrow" title="Gus Farrow">
@@ -506,7 +578,7 @@
                                                     </button>
                                                 </address>
                                             </div>
-                                            <div class="fxs_clearfix fxs_marginBase_bottom">
+                                            <div class="fxs_iBlock fxs_marginBase_bottom fxs_author_subscription_listItem">
                                                 <address class="fxs_contributorBox fxs_contributorBox_medium fxs_border_bottom_second fxs_paddingBase_bottom">
                                                     <div class="fxs_avatar_circleImage_s">
                                                         <a href="brandon-wendell-cmt" title="Brandon Wendell, CMT">
@@ -528,7 +600,7 @@
                                                     </button>
                                                 </address>
                                             </div>
-                                            <div class="fxs_clearfix fxs_marginBase_bottom">
+                                            <div class="fxs_iBlock fxs_marginBase_bottom fxs_author_subscription_listItem">
                                                 <address class="fxs_contributorBox fxs_contributorBox_medium fxs_border_bottom_second fxs_paddingBase_bottom">
                                                     <div class="fxs_avatar_circleImage_s">
                                                         <a href="haresh-menghani" title="Haresh Menghani">
@@ -550,7 +622,7 @@
                                                     </button>
                                                 </address>
                                             </div>
-                                            <div class="fxs_clearfix fxs_marginBase_bottom">
+                                            <div class="fxs_iBlock fxs_marginBase_bottom fxs_author_subscription_listItem">
                                                 <address class="fxs_contributorBox fxs_contributorBox_medium fxs_border_bottom_second fxs_paddingBase_bottom">
                                                     <div class="fxs_avatar_circleImage_s">
                                                         <a href="omkar-godbole" title="Omkar Godbole">
@@ -571,6 +643,10 @@
                                                         <span class="fxs_togglebtn_txt toggled_txt" data-placement="bottom" title="Following">Following</span>
                                                     </button>
                                                 </address>
+                                            </div>
+                                            <!-- disclaimer -->
+                                            <div class="fxs_disclaimer_block">
+                                                <p>Note: All information on this page is subject to change. The use of this website constitutes acceptance of our user agreement. Please read our privacy policy and legal disclaimer.</p>
                                             </div>
                                         </div>
                                     </div>
