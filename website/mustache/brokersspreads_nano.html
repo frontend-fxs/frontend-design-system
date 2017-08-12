@@ -1,0 +1,19 @@
+﻿<script id="brokersspreads_nano" type="x-tmpl-mustache">
+    <!--<h3 class="fxs_subtitle">
+        {{Translations.Title}}
+    </h3>-->
+    <aside class="fxs_widget_summary">
+        <table class="fxs_table fxs_widget_spreads_table fxs_widget_nano">
+            <tbody>
+                <tr class="{{#NotAllowedInSession}}fxs_widget_broker_disable{{/NotAllowedInSession}}">
+                    {{#Value.Pairs}}
+                    <td fxs_spreadserver="{{Value.SingleMyFxBookSpreadServer}}" fxs_spreadid="{{MyFxBookSpreadId}}" class="fxs_widget_spreads_item">
+                        <span id="brokerSpread-column-name-{{SitefinityUrl}}" class="fxs_label">{{Name}}</span>
+                        <span id="brokerSpread-column-spread-{{SitefinityUrl}}" fxs_content="spreadPrice"></span>
+                    </td>
+                    {{/Value.Pairs}}
+                </tr>
+            </tbody>
+        </table>
+    </aside>
+</script>

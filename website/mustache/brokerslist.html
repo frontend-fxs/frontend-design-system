@@ -1,0 +1,58 @@
+﻿<script id="brokerslist" type="x-tmpl-mustache">
+    <div id="{{ContainerId}}" class="fxs_swipeContent_slider">
+        <table class="fxs_table fxs_tableHover fxs_widget_spreads_table fxs_widget_big fxs_widget_big_v2">
+            <thead>
+                <tr>
+                    <th>{{Translations.Broker}}</th>
+                    <th>&nbsp;</th>
+                    <th>{{Translations.Regulated}}</th>
+                    <th>{{Translations.MinPrice}}</th>
+                    <th>{{Translations.HQ}}</th>
+                    {{#Pairs}}
+                    <th>{{Name}}</th>
+                    {{/Pairs}}
+                    <th>&nbsp;</th>
+                    <th>&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#Brokers}}
+                <tr onclick="window.location = '{{SitefinityUrl}}'" {{#IsPartner}} class="fxs_sponsored_broker_row" {{/IsPartner}}>
+                    <td>
+                        <div class="fxs_squareImage_brokers">
+                            <a href="{{SitefinityUrl}}" onclick="return false;">
+                                <img id="brokerList-column-brand-{{SitefinityUrl}}" src="{{SpreadsImageUrl}}" alt="{{Name}}" width="100" height="35">
+                            </a>
+                        </div>
+                        {{#IsPartner}}<span class="fxs_styledIndicator_label fxs_indicator_broker">{{Translations.SponsorBroker}}</span>{{/IsPartner}}
+                    </td>
+                    <td>
+                        <address class="fxs_contributorBox">
+                            <span class="fxs_article_author">
+                                <a id="brokerList-column-name-{{SitefinityUrl}}" href="{{SitefinityUrl}}" title="{{Name}}" rel="author" onclick="return false;">
+                                    {{Name}}
+                                </a>
+                            </span>
+                        </address>
+                    </td>
+                    <td><span id="brokerList-column-regulated-{{SitefinityUrl}}" class="fxs_widget_spreads_item">{{Regulated}}</span></td>
+                    <td><span id="brokerList-column-MinPrice-{{SitefinityUrl}}" class="fxs_widget_spreads_item">{{MinPrice}}</span></td>
+                    <td><span id="brokerList-column-CountryCode-{{SitefinityUrl}}" class="fxs_widget_spreads_item">{{CountryCode}}</span></td>
+                    {{#Pairs}}
+                    <td fxs_spreadserver="{{MyFxBookSpreadServer}}" fxs_spreadid="{{MyFxBookSpreadId}}">
+                        <span id="brokerList-column-spread-{{Pair}}-{{SitefinityUrl}}" class="fxs_widget_spreads_item" fxs_content="spreadPrice"></span>
+                    </td>
+                    {{/Pairs}}
+                    <td><a id="brokerList-column-liveAccount-{{SitefinityUrl}}" href="{{LiveAccountUrl}}" target="_blank" class="fxs_btn fxs_btn_cta fxs_btn_small" role="button">{{Translations.OpenLiveAccount}}</a></td>
+                    <td>
+                        <a href="{{SitefinityUrl}}" class="fxs_btn_icon" title="{{Translations.ReadCompleteReport}}" onclick="return false;">
+                            <i id="brokerList-column-arrow-{{SitefinityUrl}}" class="fa fa-angle-double-right"></i>
+                            <span id="brokerList-column-report-{{SitefinityUrl}}" class="fxs_skip">{{Translations.ReadCompleteReport}}</span>
+                        </a>
+                    </td>
+                </tr>
+                {{/Brokers}}
+            </tbody>
+        </table>
+    </div>
+</script>

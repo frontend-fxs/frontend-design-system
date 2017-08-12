@@ -1,0 +1,80 @@
+﻿<script id="ratesandcharts_multi_mini" type="x-tmpl-mustache">
+    <section class="fxs_widget_summary">
+       {{#Title}}
+        <div class="fxs_price_filter">
+            <header class="fxs_price_filter_header">
+                <h3 id="{{TitleContainerId}}" class="fxs_subtitle">
+                    {{Title}}
+                </h3>
+                {{#ShowFilter}}
+                <div class="fxs_listView_vers_btn">
+                    <div id="fxs_filter_header_container" class="fxs_filter fxs_filter_price_btn">
+                        <div class="fxs_typeaheadContainer">
+                            <button id="{{FilterJson.AdvancedFilterId}}" type="button" class="fxs_btn_filter fxs_btn_content_toggle btn" data-toggle="collapse" title="Open filter" data-target="#rates-filter-block" aria-controls="rates-filter-block" style="display:block;">
+                                <div class="fxs_togglebtn_txt init_txt">
+                                    <span class="fxs_label_filter">CUSTOM <i class="fa fa-filter" aria-hidden="true"></i></span>
+                                </div>
+                            </button>
+                            <button id="{{FilterJson.CloseAdvancedFilterId}}" type="button" class="fxs_btn_filter fxs_btn_content_toggle btn fxs_dismissQuery" data-toggle="collapse" title="Close" data-target="#rates-filter-block" aria-controls="rates-filter-block" style="display:none;">
+                                <!--<span class="toggled_txt">{{FilterJson.Translations.CloseFilter}}</span>-->
+                                <div class="toggled_txt">{{FilterJson.Translations.CloseFilter}}</div>
+                            </button>
+                            <div class="fxs_typeaheadField fxs_txt_center">
+                                <span class="fxs_helperLabel_title">{{FilterJson.Translations.FilterRatesAndCharts}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{/ShowFilter}}
+            </header>
+            {{#ShowFilter}}
+            <div id="{{FilterJson.FilterSectionId}}" class="fxs_filter_rail fxs_listViewRail_price_filter fxs_listView_vers collapse" aria-expanded="false" style="height: 0px;">
+                <div class="fxs_filterResults_bg fxs_clearfix">
+                    <div class="">
+                        <div class="fxs_filter_new fxs_advanced_filter active" id="{{FilterJson.TypeaheadJsonInitialization.TypeaheadId}}">
+                            <form>
+                                <div class="fxs_typeaheadContainer">
+                                    <label for="{{FilterJson.TypeaheadJsonInitialization.TypeaheadInputTargetId}}" id="{{FilterJson.TypeaheadJsonInitialization.TypeaheadFilterButtonId}}" class="fxs_btn_filter" title="Search in Rates &amp; Charts">
+                                        <i class="fa fa-search"></i>
+                                        <span class="fxs_skip">{{FilterJson.Translations.AddPairsToList}}</span>
+                                    </label>
+                                    <div class="fxs_queryResults">
+                                        <button id="{{FilterJson.TypeaheadJsonInitialization.TypeaheadCancelButtonId}}" type="reset" title="ClearTypeahead" class="fxs_rates_addPair fxs_dismissQuery_disabled"></button>
+                                    </div>
+                                    <div class="fxs_typeaheadField">
+                                        <div class="fxs_typeaheadQuery">
+                                            <input id="{{FilterJson.TypeaheadJsonInitialization.TypeaheadInputTargetId}}" name="typeaheadTarget" type="search" placeholder="Add assets" autocomplete="off">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="fxs_col fxs_col_50">
+                        <div class="fxs_filter_rail_container fxs_filter_price_container">
+                            <form>
+                                <fieldset class="fxs_fieldset">
+                                    <!--<legend>{{FilterJson.Translations.SelectedItems}}</legend>-->
+                                    <ul id="{{FilterJson.SelectedAssetsId}}" class="fxs_list_unstyled fxs_rates_filter_list"></ul>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="fxs_col fxs_col_50">
+                        <div class="fxs_filter_buttons_container">
+                                <button id="{{FilterJson.ApplyFilterId}}" t type="button" class="fxs_btn fxs_btn_default fxs_btn_block fxs_apply_filter_price collapsed" data-toggle="collapse" data-target="#price-filter-block" aria-controls="rates-filter-block" data-remove="filter-active-class" aria-expanded="false">{{FilterJson.Translations.ButtonApply}}</button>
+                                <button id="{{FilterJson.ClearFilterId}}" t type="button" class="fxs_btn fxs_btn_line fxs_btn_block collapsed" data-target="#price-filter-block" aria-controls="rates-filter-block" data-remove="filter-active-class" aria-expanded="false">{{FilterJson.Translations.ButtonClearAll}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{/ShowFilter}}
+        </div>
+        {{/Title}}
+        <div class="fxs_filter_wrapper fxs_clearfix">
+            <table id="fxs_table_prices" class="fxs_table fxs_table_prices fxs_widget_mini fxs_tableHover">
+                <tbody></tbody>
+            </table>
+        </div>  
+    </section>
+</script>

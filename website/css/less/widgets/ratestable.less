@@ -1,0 +1,820 @@
+﻿// Vendor imports
+@import "../vendor/lesshat.less"; // lesshat - LESS Mixins library
+// Application variables & mixins
+@import "../vars.less";
+@import "../mixins.less";
+
+.fxs_ratestable_container {
+    &.new {
+        width: 100%;
+        padding: 0 1rem;
+        position: relative;
+        float: left;
+
+        .fxs_ratestable_filter {
+            float: left;
+            width: 100%;
+            padding: 1rem 0;
+
+            *:not(li,ul) {
+                display: inline-block;
+            }
+
+            .typeahead__cancel-button {
+                display: none;
+            }
+
+            .fxs_hidden_hd {
+                display: inline-block;
+
+
+                @media(min-width:@screen-hd) {
+                    display: none;
+                }
+            }
+
+            .fxs_visible_hd {
+                display: none;
+
+                @media(min-width:1480px) {
+                    display: inline-block;
+                }
+            }
+
+            & > a {
+                float: left;
+            }
+
+            .fxs_btn {
+                &.fxs_btn_cancel {
+                    color: @highlight_clr;
+                    font-weight: 700;
+                    background-color: @lightest_clr;
+
+                    span {
+                        color: @dark_1_clr;
+                        padding-left: .5rem;
+                    }
+                }
+
+
+                .fa {
+                    padding: 0 0 0 10px;
+                }
+            }
+
+            .fxs_fRight {
+                .fxs_visible_hd {
+                    display: none;
+
+                    @media(min-width:1480px) {
+                        display: inline-block;
+                        padding-left: 1rem;
+                    }
+                }
+            }
+        }
+
+        .fxs_filter_wrapper {
+            width: 100%;
+            float: left;
+            position: relative;
+
+            .fxs_table {
+                &.fxs_ratestable {
+                    border: 0;
+                    float: left;
+
+                    thead {
+                        min-width: 100%;
+
+                        tr {
+                            th {
+                                width: auto;
+                                text-align: center;
+                                background-color: @light_4_clr;
+                                border-top: 1px solid @light_3_clr;
+                                border-left: 1px solid @light_3_clr;
+                                border-bottom: 1px solid @light_3_clr;
+                                font-weight: 400;
+                                color: @dark_2_clr;
+                                font-size: @txt_size_nano;
+                                padding: 0;
+                                display: table-cell;
+                                font-style: normal;
+
+                                @media(min-width:@screen-s) {
+                                    padding: .5rem;
+                                    font-size: 13px;
+                                }
+
+                                &:first-child {
+                                    text-align: center !important;
+                                }
+
+                                &:last-child {
+                                    border-right: 1px solid @light_3_clr;
+                                }
+                            }
+                        }
+                    }
+
+                    tbody {
+                        min-width: 100%;
+
+                        tr {
+                            &:nth-child(even) {
+                                background-color: @light_5_clr;
+                            }
+
+                            &.fxs_widget_ratestable {
+                                td {
+                                    width: auto;
+                                    height: 1.9rem;
+
+                                    @media(min-width:@screen-s) {
+                                        height: 2.2rem;
+                                        width: 8%;
+                                    }
+
+                                    border-left: 1px solid @light_3_clr;
+                                    border-top: 1px solid @light_3_clr;
+                                    padding: 4px;
+                                    font-size: @txt_size_nano;
+                                    color: @dark_1_clr;
+                                    vertical-align: middle;
+
+                                    @media(min-width:@screen-s) {
+                                        padding: 0 .5rem;
+                                        font-size: @txt_size_xsmall;
+                                    }
+
+                                    &:nth-last-child(-n+3) {
+                                        display: table-cell;
+                                    }
+
+                                    &:last-child {
+                                        border-right: 1px solid @light_3_clr;
+                                        display: table-cell;
+                                    }
+
+                                    a {
+                                        color: @brand_highlight_clr;
+                                        font-weight: 700;
+                                    }
+
+                                    .fxs_ratestable_change {
+                                        font-size: inherit;
+
+                                        &.fxs_chg_up {
+                                            color: @success_clr;
+                                        }
+
+                                        &.fxs_chg_down {
+                                            color: @error_clr;
+                                        }
+                                    }
+
+                                    .fxs_ratestable_change_bg {
+                                        width: auto;
+                                        padding: 0 3px;
+                                        line-height: 100%;
+
+
+                                        &.price_up {
+                                            color: @lightest_clr;
+                                            background-color: @success_clr;
+                                        }
+
+                                        &.price_down {
+                                            background-color: @error_clr;
+                                            color: @lightest_clr;
+                                        }
+                                    }
+
+
+                                    &.fxs_ratestable_trend {
+                                        text-align: left;
+                                        min-width: 100px;
+
+                                        .fxs_ratestable_slightlybullish,
+                                        .fxs_ratestable_bullish {
+                                            color: @success_clr;
+                                        }
+
+                                        .fxs_ratestable_slightlybearish,
+                                        .fxs_ratestable_bearish {
+                                            color: @error_clr;
+                                        }
+
+                                        .fxs_ratestable_stronglybullish {
+                                            color: @success_clr;
+                                            font-weight: bold;
+                                        }
+
+                                        .fxs_ratestable_stronglybearish {
+                                            color: @error_clr;
+                                            font-weight: bold;
+                                        }
+                                    }
+
+                                    &.fxs_ratestable_obos {
+                                        width: auto;
+                                        overflow: visible;
+                                        text-align: center;
+
+                                        > span {
+                                            padding-left: 16px;
+                                            position: relative;
+                                            float: left;
+
+                                            &::before {
+                                                font: 16px FontAwesome;
+                                                content: "\f0c9";
+                                                box-sizing: border-box;
+                                                width: 16px;
+                                                height: 16px;
+                                                position: absolute;
+                                                left: 0px;
+                                                top: 0;
+                                            }
+
+                                            &.fxs_ratestable_overbought {
+                                                &::before {
+                                                    color: @success_clr;
+                                                }
+                                            }
+
+                                            &.fxs_ratestable_neutral {
+                                                &::before {
+                                                    color: @warning_clr;
+                                                }
+                                            }
+
+                                            &.fxs_ratestable_oversold {
+                                                &::before {
+                                                    color: @error_clr;
+                                                }
+                                            }
+                                        }
+
+                                        .custom_tooltip {
+                                            display: inline-block;
+                                            padding: 0 .5rem;
+                                        }
+                                    }
+
+                                    &.fxs_ratestable_shorcuts {
+                                        text-align: center;
+                                        min-width: 8rem;
+                                        width: 8rem;
+
+                                        @media(min-width:@screen-s) {
+                                            min-width: auto;
+                                            width: auto;
+                                        }
+
+                                        a {
+                                            display: inline-block;
+                                            font-size: 15px;
+                                            float: none;
+
+                                            &:first-child {
+                                                float: left;
+                                                padding-left: 1rem;
+
+                                                @media(min-width:@screen-s) {
+                                                    padding-left: 0;
+                                                }
+                                            }
+
+                                            &:last-child {
+                                                float: right;
+                                                padding-right: 1rem;
+
+                                                @media(min-width:@screen-s) {
+                                                    padding-right: 0;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    &.assets {
+                        width: 90px;
+                        overflow: hidden;
+                        display: inline-block;
+                        position: relative;
+
+                        thead {
+                            width: 90px;
+
+                            tr {
+                                width: 90px;
+
+                                th {
+                                    width: 90px;
+                                }
+                            }
+                        }
+
+                        tbody {
+                            width: 90px;
+
+                            tr {
+                                width: 90px;
+
+                                td {
+                                    width: 90px;
+                                }
+                            }
+                        }
+
+
+                        .fxs_asset_label {
+                            float: left;
+                            font-size: @txt_size_nano;
+                            padding: 0 0 0 13px;
+                            margin: 0;
+                            white-space: nowrap;
+                            width: 75px;
+                            overflow: hidden;
+
+                            @media(min-width:@screen-s) {
+                                font-size: @txt_size_xsmall;
+                            }
+
+                            &:hover {
+                                text-decoration: underline;
+                            }
+
+                            &::before {
+                                position: absolute;
+                                left: 0;
+                                margin: 2px 2px 0 6px;
+                                content: '\f0d8';
+                                font: normal normal normal 14px FontAwesome;
+                                color: @success_clr;
+                            }
+                        }
+
+
+                        .price_down {
+                            .fxs_asset_label {
+                                &::before {
+                                    content: '\f0d7';
+                                    color: @error_clr;
+                                    font: normal normal normal 14px FontAwesome;
+                                }
+                            }
+                        }
+                    }
+
+                    &.fxs_swipeContent_slider {
+                        display: inline-block;
+                        overflow-x: scroll;
+                        width: calc(100% -90px);
+
+                        @media(min-width:@screen-s) {
+                            width: calc(100% -90px);
+                        }
+
+                        padding: 0;
+
+                        ::-webkit-scrollbar {
+                            height: 12px;
+                            display: block;
+                        }
+                    }
+                }
+            }
+        }
+
+        .fxs_ratestable_scrollButtons {
+            width: 100%;
+            height: 3rem;
+            float: left;
+            clear: both;
+            text-align: center;
+            padding: 0;
+
+            a {
+                display: inline-block;
+                width: .5rem;
+                height: .5rem;
+                background-color: @lightest_clr;
+                border: 1px solid @light_2_clr;
+                border-radius: 1rem;
+                cursor: pointer;
+
+                &.active {
+                    background-color: @light_3_clr;
+                }
+            }
+        }
+    }
+
+    .fxs_dropdown {
+        position: absolute;
+        top: 70px;
+        width: 100%;
+        background-color: @lightest_clr;
+        padding: 0 @base_module_size 1rem @base_module_size;
+        border: 1px solid @light_4_clr;
+        z-index: 9999;
+
+
+
+
+        label {
+            float: left;
+            font-size: @txt_size_xsmall;
+            line-height: @txt_size_small;
+            padding-bottom: .5rem;
+            width: 100%;
+            cursor: pointer;
+
+            input {
+                margin: 0;
+                padding: 0;
+                margin-right: 10px;
+            }
+        }
+
+        a {
+            color: @dark_4_clr;
+            font-size: @txt_size_xsmall;
+
+            @media(min-width:@screen-hd) {
+                font-size: @txt_size_small;
+            }
+
+            &:hover {
+                color: @highlight_clr;
+            }
+        }
+
+        &.left {
+            left: 0;
+            max-width: 600px;
+            min-height: 240px;
+
+            @media(min-width:@screen-s) {
+                left: 30px;
+            }
+
+
+
+            main {
+                max-height: 600px;
+                width: 100%;
+            }
+
+            .fxs_scrollable_list {
+                max-height: 200px;
+
+                .fxs_typeaheadGroup-assets {
+                    a {
+                        width: 100%;
+                        height: 100%;
+                        float: left;
+
+                        label {
+                            padding: 0;
+                            line-height: 100%;
+                            width: 100%;
+                            height: 100%;
+                        }
+                    }
+                }
+            }
+        }
+
+        &.right {
+            right: 0;
+            max-width: 500px;
+
+            @media(min-width:@screen-s) {
+                right: 30px;
+            }
+
+
+            main {
+                max-height: calc(100vh -150px);
+            }
+        }
+
+        .fxs_btn_close_dropdown {
+            position: absolute;
+            top: 0;
+            right: 0;
+            margin: 0;
+            padding: 0;
+            line-height: @base_module_size;
+            width: @base_module_size;
+
+            .fa {
+                padding: 0;
+            }
+        }
+
+        .fxs_dropdown_header {
+            width: 100%;
+            float: left;
+
+            h3 {
+                display: inline-block;
+                color: @dark_2_clr;
+                float: left;
+                height: 28px;
+                line-height: 28px;
+                margin-top: 1rem;
+                margin-right: 1.5rem;
+                font-size: @txt_size_xsmall;
+
+                @media(min-width:@screen-s) {
+                    font-size: @txt_size_small;
+                }
+            }
+
+
+            .fxs_search_box {
+                float: left;
+                width: auto;
+                margin-top: 1rem;
+                z-index: 2;
+
+                .fxs_search_input.typeahead__hint {
+                    display: none;
+                    left: 0;
+                    opacity: 0;
+                }
+
+                input[type="search"] {
+                    height: 28px;
+                    max-width: 210px;
+                }
+
+
+                .fxs_typeaheadField {
+                    border: 1px solid @light_2_clr;
+                    display: inline-block;
+                    width: 100%;
+                    float: left;
+                    height: 25px;
+                    margin: 0;
+                    line-height: 25px;
+                    z-index: 2;
+                    margin-top: 0;
+                    position: relative;
+                    overflow: hidden;
+
+                    input[type=search] {
+                        float: left;
+                        line-height: 25px;
+                        height: 25px;
+                    }
+
+
+                    .fa-search {
+                        position: absolute;
+                        left: 7px;
+                        top: 0;
+                        width: 25px;
+                        height: 25px;
+                        line-height: 21px;
+                    }
+                }
+
+                .fxs_typeaheadList {
+                    > li {
+                        &.fxs_typeaheadGroup-assets {
+                            width: 100%;
+                            float: left;
+                            clear: both;
+                            display: block;
+                        }
+                    }
+                }
+
+
+                .fxs_queryResults,
+                .fxs_scrollableContent {
+                    display: none;
+                }
+
+                .fxs_btn {
+                    &.fxs_btn_filter {
+                        height: 28px;
+                        min-height: 28px;
+                        line-height: 28px;
+
+                        &.btn_small {
+                            font-size: @txt_size_nano;
+                            padding: 0 10px;
+
+                            @media(min-width:@screen-st) {
+                                font-size: @txt_defaultsize_px;
+                                padding: 0 15px;
+                            }
+                        }
+
+                        .fa-search {
+                            padding: 0;
+                        }
+                    }
+                }
+
+                .fxs_searchResults {
+                    position: absolute;
+                    top: 28px;
+                    left: 0;
+                    width: 100%;
+                    z-index: 3;
+                    background-color: @lightest_clr;
+                    border: 1px solid @light_2_clr;
+
+                    .fxs_results {
+                        overflow-y: auto;
+                        list-style: none;
+                        text-align: center;
+                        margin: 0;
+                        padding: 1rem 0;
+                        background-color: @lightest_clr;
+                        max-height: 120px;
+
+                        @media(min-width:@screen-st) {
+                            max-height: 160px;
+                        }
+
+
+                        li {
+                            padding-left: 1rem;
+                            width: 100%;
+                            text-align: left;
+                        }
+                    }
+
+                    .fxs_filter_footer {
+                        width: 100%;
+                        text-align: center;
+                        padding: 1px 0;
+                    }
+                }
+            }
+        }
+
+        main {
+            overflow-y: auto;
+            padding-top: 1rem;
+
+            .fxs_col {
+                float: left;
+
+                &.fxs_col_20 {
+                    width: 100%;
+
+                    @media(min-width:@screen-ss) {
+                        width: 50%;
+                    }
+
+                    @media(min-width:@screen-st) {
+                        width: 25%;
+                    }
+
+                    @media(min-width:@screen-hd) {
+                        width: 20%;
+                    }
+                }
+
+                &.fxs_col_25 {
+                    width: 100%;
+
+                    @media(min-width:@screen-ss) {
+                        width: 50%;
+                    }
+
+                    @media(min-width:@screen-st) {
+                        width: 25%;
+                    }
+                }
+            }
+        }
+
+        .fxs_dropdown_footer {
+            text-align: center;
+            width: 100%;
+
+            .fxs_btn_cta {
+                span {
+                    display: inline-block;
+
+                    &.fxs_hidden_m {
+                        display: none;
+
+                        @media(min-width:@screen-s) {
+                            display: inline-block;
+                        }
+                    }
+                }
+            }
+        }
+
+        .fxs_dropdown_overLayer {
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+    }
+}
+
+.fxs_col_50 {
+    .fxs_ratestable_container {
+        &.new {
+            .fxs_filter_wrapper {
+                .fxs_table {
+                    &.fxs_ratestable {
+                        tbody {
+                            tr {
+                                &.fxs_widget_ratestable {
+                                    td {
+                                        &.fxs_ratestable_obos {
+                                            width: auto;
+                                            overflow: visible;
+                                            text-align: center;
+
+                                            > span {
+                                                float: left;
+                                                display: block;
+                                                width: 100%;
+                                                height: 20px;
+
+                                                &::before {
+                                                    left: 50%;
+                                                    transform: translateX(-50%);
+                                                }
+                                            }
+
+                                            .custom_tooltip {
+                                                display: none;
+                                            }
+
+                                            &:hover {
+                                                position: relative;
+
+                                                .custom_tooltip {
+                                                    display: block;
+                                                    z-index: @zindex-tooltip;
+                                                    max-width: @tooltip-max-width;
+                                                    color: @tooltip-color;
+                                                    font-size: @txt_size_nano;
+                                                    background-color: @tooltip-bg;
+                                                    opacity: @tooltip-opacity;
+                                                    position: absolute;
+                                                    top: -8px;
+                                                    left: 20px;
+                                                    width: auto;
+                                                    padding: .5rem;
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    &.fxs_ratestable_shorcuts {
+                                        text-align: center;
+                                        min-width: 8rem;
+                                        width: 8rem;
+
+                                        a {
+                                            display: inline-block;
+                                            font-size: 15px;
+                                            float: none;
+
+                                            &:first-child {
+                                                float: left;
+                                                padding-left: 1rem;
+                                            }
+
+                                            &:last-child {
+                                                float: right;
+                                                padding-right: 1rem;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

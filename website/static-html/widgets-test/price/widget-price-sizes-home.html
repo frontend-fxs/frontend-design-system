@@ -292,6 +292,7 @@
                                                 </div>
                                             </div>
                                         </div>
+
                                         <!-- /modal -->
                                         <!-- rates and charts list result -->
                                         <div class="fxs_table_prices_container">
@@ -306,7 +307,7 @@
                                                                 CUSTOM <i class="fa fa-filter" aria-hidden="true"></i>
                                                             </button>
                                                         </div>
-                                                        <div class="fxs_btn_group">
+                                                        <!--<div class="fxs_btn_group">
                                                             <button type="submit" class="fxs_btn fxs_btn_default fxs_btn_small">Select presets</button>
                                                             <button type="button" class="fxs_btn_icon fxs_btn_default fxs_btn_dd fxs_btn_small" data-toggle="dropdown">
                                                                 <i class="fa fa-caret-down"></i>
@@ -320,22 +321,21 @@
                                                                 <li><a href="#">Nordic Crosses</a></li>
                                                                 <li><a href="#">Eastern Crosses</a></li>
                                                             </ul>
-                                                        </div>
+                                                        </div>-->
                                                     </div>
                                                 </header>
                                             </div>
                                             <table class="fxs_table fxs_table_prices fxs_widget_default fxs_tableHover">
                                                 <tbody>
                                                     <tr class="fxs_table_prices_header">
-                                                        <th></th>
-                                                        <th></th>
-                                                        <th></th>
-                                                        <th></th>
-                                                        <th>Original</th>
+                                                        <th>Asset</th>
+                                                        <th>Bid/Ask</th>
+                                                        <th>Change(%)</th>
+                                                        <th>Open</th>
                                                         <th>High</th>
                                                         <th>Low</th>
                                                     </tr>
-                                                    <tr onclick="todo" class="fxs_widget_price price_up">
+                                                    <tr class="fxs_widget_price price_up">
                                                         <td>
                                                             <abbr class="fxs_asset_label" title="Euro - US Dollar">
                                                                 <a href="/">EUR/USD</a>
@@ -343,8 +343,11 @@
                                                         </td>
                                                         <td style="width:100px">
                                                             <div class="fxs_widget_price_value">
-                                                                <span class="fxs_price_bidask">1.<strong class="fxs_price_big_figure">68</strong><sup></sup>/<strong class="fxs_price_big_figure">32</strong><sup></sup></span>
+                                                                <span class="fxs_price_bidask">
+                                                                    1.<strong class="fxs_price_big_figure">68</strong>
+                                                                    <sup></sup>/<strong class="fxs_price_big_figure">32</strong><sup></sup>
                                                                 </span>
+                                                               
                                                             </div>
                                                         </td>
                                                         <td>
@@ -357,21 +360,27 @@
                                                         </td>
                                                         <td>
                                                             <small class="fxs_price_ohl">
-                                                                <span>1.1872</span>
+                                                                <span>
+                                                                    <i class="fa fxs_price_first fxs_hideElements">O</i> 1.1872
+                                                                </span>
                                                             </small>
                                                         </td>
                                                         <td>
                                                             <small class="fxs_price_ohl">
-                                                                <span>1.1872</span>
+                                                                <span>
+                                                                    <i class="fa fxs_price_first fxs_hideElements">H</i> 1.1872
+                                                                </span>
                                                             </small>
                                                         </td>
                                                         <td>
                                                             <small class="fxs_price_ohl">
-                                                                <span>1.1810</span>
+                                                                <span>
+                                                                    <i class="fa fxs_price_first fxs_hideElements">L</i> 1.1810
+                                                                </span>
                                                             </small>
                                                         </td>
                                                     </tr>
-                                                    <tr onclick="todo" class="fxs_widget_price price_down">
+                                                    <tr class="fxs_widget_price price_down">
                                                         <td>
                                                             <abbr class="fxs_asset_label" title="Euro - US Dollar">
                                                                 <a href="/">EUR/USD</a>
@@ -407,7 +416,7 @@
                                                             </small>
                                                         </td>
                                                     </tr>
-                                                    <tr onclick="todo" class="fxs_widget_price price_down">
+                                                    <tr class="fxs_widget_price price_down">
                                                         <td>
                                                             <abbr class="fxs_asset_label" title="Euro - US Dollar">
                                                                 <a href="/">EUR/USD</a>
@@ -443,7 +452,7 @@
                                                             </small>
                                                         </td>
                                                     </tr>
-                                                    <tr onclick="todo" class="fxs_widget_price price_down">
+                                                    <tr class="fxs_widget_price price_down">
                                                         <td>
                                                             <abbr class="fxs_asset_label" title="Euro - US Dollar">
                                                                 <a href="/">EUR/USD</a>
@@ -479,7 +488,7 @@
                                                             </small>
                                                         </td>
                                                     </tr>
-                                                    <tr onclick="todo" class="fxs_widget_price price_down">
+                                                    <tr class="fxs_widget_price price_down">
                                                         <td>
                                                             <abbr class="fxs_asset_label" title="Euro - US Dollar">
                                                                 <a href="/">EUR/USD</a>
@@ -515,7 +524,7 @@
                                                             </small>
                                                         </td>
                                                     </tr>
-                                                    <tr onclick="todo" class="fxs_widget_price price_down">
+                                                    <tr class="fxs_widget_price price_down">
                                                         <td>
                                                             <abbr class="fxs_asset_label" title="Euro - US Dollar">
                                                                 <a href="/">EUR/USD</a>
@@ -551,7 +560,7 @@
                                                             </small>
                                                         </td>
                                                     </tr>
-                                                    <tr onclick="todo" class="fxs_widget_price price_down">
+                                                    <tr class="fxs_widget_price price_down">
                                                         <td>
                                                             <abbr class="fxs_asset_label" title="Euro - US Dollar">
                                                                 <a href="/">EUR/USD</a>
@@ -587,7 +596,7 @@
                                                             </small>
                                                         </td>
                                                     </tr>
-                                                    <tr onclick="todo" class="fxs_widget_price price_down">
+                                                    <tr class="fxs_widget_price price_down">
                                                         <td>
                                                             <abbr class="fxs_asset_label" title="Euro - US Dollar">
                                                                 <a href="/">EUR/USD</a>
@@ -623,7 +632,7 @@
                                                             </small>
                                                         </td>
                                                     </tr>
-                                                    <tr onclick="todo" class="fxs_widget_price price_down">
+                                                    <tr class="fxs_widget_price price_down">
                                                         <td>
                                                             <abbr class="fxs_asset_label" title="Euro - US Dollar">
                                                                 <a href="/">EUR/USD</a>
@@ -659,7 +668,7 @@
                                                             </small>
                                                         </td>
                                                     </tr>
-                                                    <tr onclick="todo" class="fxs_widget_price price_down">
+                                                    <tr class="fxs_widget_price price_down">
                                                         <td>
                                                             <abbr class="fxs_asset_label" title="Euro - US Dollar">
                                                                 <a href="/">EUR/USD</a>
@@ -695,7 +704,7 @@
                                                             </small>
                                                         </td>
                                                     </tr>
-                                                    <tr onclick="todo" class="fxs_widget_price price_down">
+                                                    <tr class="fxs_widget_price price_down">
                                                         <td>
                                                             <abbr class="fxs_asset_label" title="Euro - US Dollar">
                                                                 <a href="/">EUR/USD</a>
@@ -731,7 +740,7 @@
                                                             </small>
                                                         </td>
                                                     </tr>
-                                                    <tr onclick="todo" class="fxs_widget_price price_down">
+                                                    <tr class="fxs_widget_price price_down">
                                                         <td>
                                                             <abbr class="fxs_asset_label" title="Euro - US Dollar">
                                                                 <a href="/">EUR/USD</a>
@@ -767,7 +776,7 @@
                                                             </small>
                                                         </td>
                                                     </tr>
-                                                    <tr onclick="todo" class="fxs_widget_price price_down">
+                                                    <tr class="fxs_widget_price price_down">
                                                         <td>
                                                             <abbr class="fxs_asset_label" title="Euro - US Dollar">
                                                                 <a href="/">EUR/USD</a>
@@ -803,7 +812,7 @@
                                                             </small>
                                                         </td>
                                                     </tr>
-                                                    <tr onclick="todo" class="fxs_widget_price price_down">
+                                                    <tr class="fxs_widget_price price_down">
                                                         <td>
                                                             <abbr class="fxs_asset_label" title="Euro - US Dollar">
                                                                 <a href="/">EUR/USD</a>
@@ -839,7 +848,7 @@
                                                             </small>
                                                         </td>
                                                     </tr>
-                                                    <tr onclick="todo" class="fxs_widget_price price_down">
+                                                    <tr class="fxs_widget_price price_down">
                                                         <td>
                                                             <abbr class="fxs_asset_label" title="Euro - US Dollar">
                                                                 <a href="/">EUR/USD</a>

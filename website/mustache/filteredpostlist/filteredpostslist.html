@@ -1,0 +1,53 @@
+﻿<script id="filteredpostslist" type="x-tmpl-mustache">
+    {{#Value}}
+    <ul class="fxs_tabs_nav">
+        {{#HasAnalysis}}
+        <li class=""><a data-toggle="tab" href="#Analysis" title="{{Translations.TabAnalysis}}" aria-expanded="false">{{Translations.TabAnalysis}}</a></li>
+        {{/HasAnalysis}}
+        {{#HasNews}}
+        <li class=""><a data-toggle="tab" href="#News" title="{{Translations.TabNews}}" aria-expanded="false">{{Translations.TabNews}}</a></li>
+        {{/HasNews}}
+        {{#HasLiveShows}}
+        <li class=""><a data-toggle="tab" href="#LiveShows" title="{{Translations.TabLiveShows}}" aria-expanded="false">{{Translations.TabLiveShows}}</a></li>
+        {{/HasLiveShows}}
+        {{#HasVideos}}
+        <li class=""><a data-toggle="tab" href="#Videos" title="{{Translations.TabVideos}}" aria-expanded="false">{{Translations.TabVideos}}</a></li>
+        {{/HasVideos}}
+        {{#HasEducation}}
+        <li class=""><a data-toggle="tab" href="#Education" title="{{Translations.TabEducation}}" aria-expanded="false">{{Translations.TabEducation}}</a></li>
+        {{/HasEducation}}
+    </ul>
+    <div class="tab-content">
+        {{#HasAnalysis}}
+        <div id="Analysis" role="tabpanel" class="tab-pane fade">
+            <aside ct="Analysis" />
+            <a href="#" class="fxs_btn fxs_btn_line fxs_btn_block" ct="Analysis">{{Translations.LoadMore}} </a>
+        </div>
+        {{/HasAnalysis}}
+        {{#HasNews}}
+        <div id="News" role="tabpanel" class="tab-pane fade">
+            <aside ct="News" />
+            <a href="#" class="fxs_btn fxs_btn_line fxs_btn_block" ct="News">{{Translations.LoadMore}} </a>
+        </div>
+        {{/HasNews}}
+        {{#HasLiveShows}}
+        <div id="LiveShows" role="tabpanel" class="tab-pane fade">
+            <aside ct="LiveShows" />
+            <a href="#" class="fxs_btn fxs_btn_line fxs_btn_block" ct="LiveShows">{{Translations.LoadMore}} </a>
+        </div>
+        {{/HasLiveShows}}
+        {{#HasVideos}}
+        <div id="Videos" role="tabpanel" class="tab-pane fade">
+            <aside ct="Videos" />
+            <a href="#" class="fxs_btn fxs_btn_line fxs_btn_block" ct="Videos">{{Translations.LoadMore}} </a>
+        </div>
+        {{/HasVideos}}
+        {{#HasEducation}}
+        <div id="Education" role="tabpanel" class="tab-pane fade">
+            <aside ct="Education" />
+            <a href="#" class="fxs_btn fxs_btn_line fxs_btn_block" ct="Education">{{Translations.LoadMore}} </a>
+        </div>
+        {{/HasEducation}}
+    </div>
+    {{/Value}}
+</script>

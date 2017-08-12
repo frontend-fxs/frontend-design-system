@@ -3,7 +3,6 @@
         var parent = FXStreetWidgets.Widget.Base(loaderBase),
             _this = FXStreetWidgets.Util.extendObject(parent);
 
-        _this.Container = null;
         _this.WidgetId = null;
         _this.AssetIds = "";
         _this.Seo = false;
@@ -48,10 +47,6 @@
         }
 
         _this.renderHtml = function () {
-            if (_this.data.Values === null || _this.data.Values.length === 0) {
-                return;
-            }
-
             var jsonData = {
                 Studies: _this.getStudies(_this.data.Values),
                 Translations: _this.loaderBase.config.Translations,

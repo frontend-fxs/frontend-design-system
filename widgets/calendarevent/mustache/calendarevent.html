@@ -1,0 +1,89 @@
+﻿<div class="fxs_widget_event">
+    <div class="fxs_widget_divider_module">
+        <h3 class="fxs_subtitle">
+            {{Event.Name}} <span class="fxs_subtitle_variant">{{Event.CountryName}}</span>
+        </h3>
+        <div class="fxs_event_block">
+            <ul class="fxs_event_list fxs_event_header">
+                <li class="fxs_event_list_item">
+                    <span class="fxs_event_font">
+                        <i class="tags-flag-custom i-{{Event.CountryCode}}"></i><strong>{{Event.CountryName}}</strong>
+                    </span>
+                </li>
+            </ul>
+        </div>
+        <div class="fxs_event_block">
+            <h3 class="fxs_subtitle fxs_event_mini_title">
+                <span class="fxs_subtitle_variant">{{Translations.LastRelease}}</span>
+                <time class="fxs_txt_neutral" pubdate="" datetime="{{Event.LastEventDateDateDisplay}}">{{Event.LastEventDateDateDisplay}} GMT</time>
+            </h3>
+            <ul class="fxs_event_list">
+                <li class="fxs_event_list_item fxs_event_big_title">
+                    <h3 class="fxs_subtitle">
+                        <span class="fxs_subtitle_variant">{{Translations.LastRelease}}</span>
+                        <time class="fxs_txt_neutral" pubdate="" datetime="{{Event.LastEventDateDateDisplay}}">{{Event.LastEventDateDateDisplay}} GMT</time>
+                    </h3>
+                </li>
+                <li class="fxs_event_list_item">
+                    <span class="fxs_event_font fxs_event_actual">
+                        {{Event.Actual}}{{Event.Symbol}}
+                    </span>
+                    <span class="fxs_txt_neutral">{{Translations.Actual}}</span>
+                </li>
+                <li class="fxs_event_list_item">
+                    <span class="fxs_event_font fxs_event_consensus">
+                        {{Event.Consensus}}{{Event.Symbol}}
+                    </span>
+                    <span class="fxs_txt_neutral">{{Translations.Consensus}}</span>
+                </li>
+                <li class="fxs_event_list_item">
+                    <span class="fxs_event_font_bis fxs_event_previous">
+                        {{Event.Previous}}{{Event.Symbol}}
+                    </span>
+                    <span class="fxs_txt_neutral">{{Translations.Previous}}</span>
+                </li>
+
+            </ul>
+        </div>        
+        {{#NextEventDateDateNotNull}}        
+        <div class="fxs_event_block fxs_event_list_next_release">
+            <h3 class="fxs_subtitle fxs_event_mini_title">
+                <span class="fxs_subtitle_variant">{{Translations.NextRelease}}</span>
+                <time class="fxs_txt_neutral" pubdate="" datetime="{{Event.NextEventDateDateDisplay}}">{{Event.NextEventDateDateDisplay}} GMT</time>
+            </h3>
+            <ul class="fxs_event_list">
+                <li class="fxs_event_list_item fxs_event_big_title">
+                    <h3 class="fxs_subtitle">
+                        <span class="fxs_subtitle_variant">{{Translations.NextRelease}}</span>
+                        <time class="fxs_txt_neutral" pubdate="" datetime="{{Event.NextEventDateDateDisplay}}">{{Event.NextEventDateDateDisplay}} GMT</time>
+                    </h3>
+                </li>
+                <li class="fxs_event_list_item">
+                    <div class="fxs_countdown fxs_clearfix">
+                        <div id="clock_3" class="fxs_countdown_clock"></div>
+                    </div>
+                </li>
+                <li class="fxs_event_list_item">
+                    <span class="fxs_event_font fxs_event_consensus">
+                        -
+                    </span>
+                    <span class="fxs_txt_neutral">{{Translations.Consensus}}</span>
+                </li>
+                <li class="fxs_event_list_item">
+                    <span class="fxs_event_font_bis fxs_event_previous">
+                        {{Event.Actual}}{{Event.Symbol}}
+                    </span>
+                    <span class="fxs_txt_neutral">{{Translations.Previous}}</span>
+                </li>
+            </ul>
+        </div>
+        {{/NextEventDateDateNotNull}}
+    </div>
+
+    {{#Seo}}
+    <script type="application/ld+json">
+        {
+        }
+    </script>
+    {{/Seo}}
+</div>

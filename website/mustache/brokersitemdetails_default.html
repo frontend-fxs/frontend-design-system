@@ -1,0 +1,201 @@
+﻿<script id="brokersitemdetails_default" type="x-tmpl-mustache">
+    <section fxs-it-id="{{Value.Id}}" id="{{Value.Id}}" class="{{#Value.IsPartner}}fxs_sponsored_broker fxs_sponsored_wrapper{{/Value.IsPartner}} {{#Value.NotAllowedInSession}}fxs_broker_country_disable{{/Value.NotAllowedInSession}}">
+        {{#Value.IsPartner}}
+        <div class="fxs_sponsored_broker_title">
+            <span class="fxs_label">{{Translations.SponsoredBroker}}</span>
+        </div>
+        {{/Value.IsPartner}}
+        <article class="fxs_row">
+            {{#Value.NotAllowedInSession}}
+            <!-- display this message if the broker is not available -->
+            <div class="fxs_contextual_alert fxs_alert_warning alert alert-dismissible fade in" role="alert">
+                <span class="fxs_alertLabel">{{Translations.Sorry}}</span>
+                <p class="fxs_alertText">{{Translations.BrokerNotAvailable}}</p>
+            </div>
+            <!-- /display this message if the broker is not available -->
+            {{/Value.NotAllowedInSession}}
+            <div class="fxs_flex_col">
+                <header class="fxs_contributorBox_header">
+                    <!-- Broker's image -->
+                    <div class="fxs_squareImage fxs_squareImage_s">
+                        <a href="{{Value.DetailsUrl}}" target="_blank" title="{{Value.Title}}">
+                            <img class="lazyload" data-src="{{Value.ImageUrl}}" alt="{{Value.Title}}" width="35" height="35">
+                        </a>
+                    </div>
+                    <!-- /Broker's image -->
+                    <!-- Broker's name -->
+                    <h2 class="fxs_floatingMedia_textBody fxs_headline_medium" rel="author">
+                        <a href="{{Value.DetailsUrl}}" title="{{Value.Title}}">{{Value.Title}}</a>
+                        {{#Value.IsPartner}}
+                        <span class="fxs_label fxs_label_featured fxs_marginHalf_bottom">{{Translations.GoldPartner}}</span>
+                        {{/Value.IsPartner}}
+                    </h2>
+                    <!-- /Broker's name -->
+                    <!-- Broker's meta info -->
+                    <footer class="fxs_floatingMedia_textBody fxs_author_description">
+                        <ul class="fxs_list_unstyled">
+                            <li>
+                                <span class="fxs_boldAntialised_style">{{Translations.Regulated}}:</span>
+                                {{Value.RegulatedCommaSeparated}}
+                            </li>
+                            <li>
+                                <span class="fxs_boldAntialised_style">{{Translations.Foundation}}:</span> {{Value.Foundation}}
+                            </li>
+                            <li>
+                                <i class="fa fa-map-marker"></i> {{Value.Street}}
+                            </li>
+                        </ul>
+                    </footer>
+                    <!-- /Broker's meta info -->
+                </header>
+            </div>
+            <aside class="fxs_flex_col fxs_flex_ad_col fxs_flex_ad_col_fRight fxs_marginBase_bottom">
+                <!-- visible in big screens -->
+                <h3 class="fxs_subtitle fxs_hidden_s">
+                    {{Translations.LiveSpreads}}
+                </h3>
+                <!-- Widget spreads nano -->
+                <div id="fxs-spreads-{{Value.Id}}"></div>
+                <!-- /Widget spreads nano -->
+                <div class="fxs_clearfix">
+                    <a href="{{Value.LiveAccountUrl}}" target="_blank" class="fxs_btn fxs_btn_cta fxs_btn_block">{{Translations.OpenLiveAccount}}</a>
+                    {{#Value.HasFreeDemo}}
+                    <div class="fxs_sidebar_divider"><span>{{Translations.Or}}</span></div>
+                    <a href="{{Value.FreeDemoUrl}}" target="_blank" class="fxs_btn fxs_btn_line fxs_btn_block">{{Translations.StartFreeDemo}}</a>
+                    {{/Value.HasFreeDemo}}
+                </div>
+            </aside>
+            <div class="fxs_flex_col fxs_hidden_xs fxs_marginHalf_bottom">
+                <ul class="fxs_list_table fxs_list_table_summary fxs_entryPlain_txt_small">
+                    <li class="fxs_list_table_item">
+                        <dl class="fxs_inlined_definition_list">
+                            <dt>{{Translations.Leverage}}</dt>
+                            <dd>{{Value.LeverageDisplay}}</dd>
+                        </dl>
+                    </li>
+                    <li class="fxs_list_table_item">
+                        <dl class="fxs_inlined_definition_list">
+                            <dt>{{Translations.Instruments}}</dt>
+                            <dd>
+                                <ul class="fxs_subnavInlined_list fxs_txt_normal fxs_add_separator">
+                                    {{#Value.Instruments}}
+                                    <li>
+                                        {{.}}
+                                    </li>
+                                    {{/Value.Instruments}}
+                                </ul>
+                            </dd>
+                        </dl>
+                    </li>
+                    <li class="fxs_list_table_item">
+                        <dl class="fxs_inlined_definition_list">
+                            <dt>{{Translations.Platforms}}</dt>
+                            <dd>
+                                <ul class="fxs_subnavInlined_list fxs_txt_normal fxs_add_separator">
+                                    {{#Value.Platforms}}
+                                    <li>
+                                        {{Title}}
+                                    </li>
+                                    {{/Value.Platforms}}
+                                </ul>
+                            </dd>
+                        </dl>
+                    </li>
+                    {{#Value.HasComission}}
+                    <li class="fxs_list_table_item">
+                        <dl class="fxs_inlined_definition_list">
+                            <dt>{{Translations.Comissions}} </dt>
+                            <dd>
+                                <p>{{{Value.ComissionDescription}}}</p>
+                            </dd>
+                        </dl>
+                    </li>
+                    {{/Value.HasComission}}
+                    <li class="fxs_list_table_item">
+                        <a href="{{Value.DetailsUrl}}" class="fxs_mutedLink fxs_fRight">{{Translations.MoreDetails}} <i class="fa fa-angle-double-right"></i></a>
+                    </li>
+                </ul>
+            </div>
+            <!-- / visible in big screens -->
+        </article>
+        {{#Value.MainPromotion}}
+        <div class="fxs_contextual_alert fxs_alert_info {{#Value.IsPartner}} fxs_bonus_broker {{/Value.IsPartner}}">
+            <!--<span class="fxs_alertLabel">Promotions</span>-->
+            <p class="fxs_alertText">
+                <a href="{{Link}}" target="_blank">{{Title}}</a>
+            </p>
+        </div>
+        {{/Value.MainPromotion}}
+        <footer class="fxs_broker_contact_footer">
+            <button class="fxs_btn fxs_btn_content_toggle_collapse collapsed" type="button" data-toggle="collapse" data-target="#contact-form-{{Value.Id}}" aria-controls="example-contact-form">
+                <i class="fa fa-phone init_txt"></i> {{Translations.CallMe}} <i class="fa fa-times-circle toggled_txt"></i>
+            </button>
+
+            <!-- Contact form -->
+            <form id="contact-form-{{Value.Id}}" class="fxs_inlineForm_group collapse">
+                <div class="fxs_formGroup fxs_contact_broker_slide fxs_first_slide">
+                    <label for="fullname-{{Value.Id}}" class="fxs_skip">{{Translations.CallMeFormFullName}}</label>
+                    <input id="fullname-{{Value.Id}}" type="text" class="fxs_textInput fxs_nameInput" placeholder="{{Translations.CallMeFormFullNamePlaceholder}}" tabindex="1">
+                    <button type="button" class="fxs_btn_icon fxs_btn_functional" data-toggle="fxs_second_slide">
+                        <i class="fa fa-chevron-right"></i>
+                        <span class="fxs_skip">{{Translations.CallMeFormNext}}</span>
+                    </button>
+                </div>
+                <div class="fxs_formGroup fxs_contact_broker_slide fxs_second_slide">
+                    <select id="select-{{Value.Id}}" class="fxs_select">
+                        {{#Countries}}
+                        <option value="{{PhoneCode}}">{{Title}}</option>
+                        {{/Countries}}
+                    </select>
+
+                    <div class="fxs_formGroup">
+                        <span id="phone-code-{{Value.Id}}" class="fxs_formGroup__addon"></span>
+
+                        <label title="phone" for="phone-{{Value.Id}}" class="fxs_skip">
+                            {{Translations.CallMeFormPhone}}
+                        </label>
+                        <input id="phone-{{Value.Id}}" type="tel" class="fxs_textInput" placeholder="{{Translations.CallMeFormPhoneNumberPlaceholder}}">
+                    </div>
+                    <div id="recaptcha-{{Value.Id}}" class="fxs_hideElements"></div>
+                    <button type="button" class="fxs_btn fxs_btn_cta fxs_block_xs_to_inline_s_btn" disabled>{{Translations.CallMe}}</button>
+                </div>
+                <div id="error-{{Value.Id}}" class="fxs_contextual_alert fxs_alert_error">
+                    <span class="fxs_alertLabel">{{Translations.CallMeFormOpps}}</span>
+                    <p class="fxs_alertText"></p>
+                </div>
+                <div id="success-{{Value.Id}}" class="fxs_feedback_contact_msg">
+                    <!-- fade in -->
+                    <span class="fxs_txt_success">{{Translations.CallMeFormSuccesMessage}}</span>
+                </div>
+            </form>
+            <!-- /Contact form -->
+            <!-- Contact links -->
+            <ul class="fxs_subnavInlined_list">
+                <li><i class="fa fa-phone"></i> <strong>{{Value.ContactInformation.Telephone}}</strong></li>
+                <li><a href="{{Value.ContactInformation.WebsiteUrl}}" target="_blank" class="fxs_mutedLink"><i class="fa fa-link"></i> {{Translations.WebSite}}</a></li>
+                <li><a href="mailto:{{Value.ContactInformation.Email}}"  class="fxs_mutedLink"><i class="fa fa-envelope-o"></i> {{Translations.Email}}</a></li>
+                <li><a href="{{Value.ContactInformation.FaqUrl}}" target="_blank" class="fxs_mutedLink"><i class="fa fa-external-link"></i> {{Translations.Faq}}</a></li>
+                <li><a href="{{Value.ContactInformation.CustomerServiceUrl}}" target="_blank" class="fxs_mutedLink"><i class="fa fa-external-link"></i> {{Translations.CustomerService}}</a></li>
+            </ul>
+            <!-- /Contact links -->
+        </footer>
+        {{> seo}}
+    </section>
+</script>
+
+<div id="brokersitemdetails_default.seo">
+    <script type="application/ld+json">
+        {
+        "@context": "http://schema.org",
+        "@type": "Corporation",
+        "name": "{{Value.Title}}",
+        "description": "{{Value.Title}} is a {{Value.BusinessNatureCommaSeparated}} regulated by {{Value.RegulatedCommaSeparated}} based on {{Value.Street}} and founded on {{Value.Foundation}}.", 
+        "telephone": "{{Value.Telephone}}",
+        "mainEntityOfPage" : "{{{Value.SEO.FullUrl}}}",
+        "url": "{{{Value.SEO.FullUrl}}}",
+        "address": "{{Value.Street}}",
+        "email": "{{Value.Email}}",
+        "logo": "{{Value.ImageUrl}}"
+        }
+    </script>
+</div>

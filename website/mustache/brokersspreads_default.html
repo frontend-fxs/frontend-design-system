@@ -1,0 +1,63 @@
+﻿<script id="brokersspreads_default" type="x-tmpl-mustache">
+    <!--<h3 class="fxs_subtitle">
+    {{Translations.Title}} <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="right" title="{{Translations.Description}}" data-original-title="{{Translations.Description}}"></i>
+    </h3>-->
+    <section class="fxs_widget_summary">
+        <table class="fxs_table fxs_tableHover fxs_widget_spreads_table fxs_widget_default">
+            <thead>
+                <tr>
+                    <th><span class="fxs_hidden_xs">{{Translations.Broker}}</span></th>
+                    <th>&nbsp;</th>
+                    {{#Value.Pairs}}
+                    <th>{{Name}}</th>
+                    {{/Value.Pairs}}
+                    <th>&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#Value.Brokers}}
+                <tr class="{{#NotAllowedInSession}}fxs_widget_broker_disable{{/NotAllowedInSession}}">
+                    <td>
+                        <div class="fxs_squareImage_brokers">
+                            <a target="_blank" href="{{^NotAllowedInSession}}{{WebsiteUrl}}{{/NotAllowedInSession}}" {{#NotAllowedInSession}} onclick="return false;" {{/NotAllowedInSession}}>
+                                <img id="brokerSpread-column-name-{{SitefinityUrl}}" src="{{SpreadsImageUrl}}" alt="{{Name}}" width="100" height="35">
+                            </a>
+                        </div>
+                    </td>
+                    <td>
+                        <address class="fxs_contributorBox">
+                            <span class="fxs_article_author">
+                                <a id="brokerSpread-column-image-{{SitefinityUrl}}" target="_blank" href="{{^NotAllowedInSession}}{{WebsiteUrl}}{{/NotAllowedInSession}}" title="{{Name}}" rel="author" {{#NotAllowedInSession}} onclick="return false;" {{/NotAllowedInSession}}>
+                                    {{Name}}
+                                </a>
+                            </span>
+                        </address>
+                    </td>
+                    {{#Value.Pairs}}
+                    <td fxs_spreadserver="{{MyFxBookSpreadServer}}" fxs_spreadid="{{MyFxBookSpreadId}}">
+                        <a target="_blank" href="{{^NotAllowedInSession}}{{WebsiteUrl}}{{/NotAllowedInSession}}" class="fxs_spread_link">
+                            <span id="brokerSpread-column-spread-{{SitefinityUrl}}" class="fxs_widget_spreads_item" fxs_content="spreadPrice"></span>
+                        </a>
+                    </td>
+                    {{/Value.Pairs}}
+                    <td>
+                        <a href="{{^NotAllowedInSession}}{{SitefinityUrl}}{{/NotAllowedInSession}}" class="fxs_btn_icon" title="{{Translations.ReadCompleteReport}}" {{#NotAllowedInSession}} onclick="return false;" {{/NotAllowedInSession}}>
+                            <i id="brokerSpread-column-arrow-{{SitefinityUrl}}" class="fa fa-angle-double-right"></i>
+                            <span id="brokerSpread-column-report-{{SitefinityUrl}}" class="fxs_skip">{{Translations.ReadCompleteReport}}</span>
+                        </a>
+                    </td>
+                </tr>
+                {{/Value.Brokers}}
+            </tbody>
+            {{#Value.ShowAllSpreadsButton}}
+            <tfoot>
+                <tr>
+                    <td class="fxs_widget_footer" colspan="{{ColumnsNumber}}">
+                        <a href="{{Value.SitefinitySpreadsPageUrl}}" class="fxs_btn fxs_btn_line fxs_btn_small">{{Translations.CompareAllSpreads}} <i class="fa fa-angle-double-right"></i></a>
+                    </td>
+                </tr>
+            </tfoot>
+            {{/Value.ShowAllSpreadsButton}}
+        </table>
+    </section>
+</script>

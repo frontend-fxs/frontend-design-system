@@ -1,0 +1,37 @@
+﻿<script id="relatedpostsbycategories_default" type="x-tmpl-mustache">
+    <aside class="fxs_relatedContent_holder">
+        <ul class="fxs_swipeContent_slider">
+            {{#RelatedPosts}}
+            <li class="fxs_relatedContentSlot_x3_cols" onclick="window.location = '{{{PostUrl}}}'">
+                <div class="fxs_relatedItem">
+                    <article>
+                        <div class="fxs_entryFeatured_img">
+                            <img class="lazyload" data-src="{{ImageUrl}}" />
+                            {{#VideoFormatedDuration}}
+                            <span class="fxs_miniLabel_video">
+                                <i class="fa fa-play"></i> <span>{{VideoFormatedDuration}}</span>
+                            </span>
+                            {{/VideoFormatedDuration}}
+                        </div>
+                        <h3 class="fxs_entryHeadline">
+                            <a href="{{{PostUrl}}}" onclick="return false;">{{PostTitle}}</a>
+                        </h3>
+                    </article>
+                </div>
+            </li>
+            {{>seo}}
+            {{/RelatedPosts}}
+        </ul>
+    </aside>
+</script>
+<div id="relatedpostsbycategories_default.seo">
+    <script type="application/ld+json">
+        {
+        "@context": "http://schema.org",
+        "@type": "NewsArticle",
+        "headline": "{{PostTitle}}",
+        "name": "{{PostTitle}}",
+        "url" : "{{{PostUrl}}}"
+        }
+    </script>
+</div>

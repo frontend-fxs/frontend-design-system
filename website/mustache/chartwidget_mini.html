@@ -1,0 +1,43 @@
+﻿<script id="chartwidget_mini" type="x-tmpl-mustache">
+    <section class="fxs_widget_summary" id="{{Value.ContainerId}}">
+        <div class="fxs_widget_chart">
+            <div class="fxs_relativePositioning fxs_cover_vs">
+                <div id="{{Value.ChartId}}" class="fxs_widget_mini fxs_widget_chart_graph" {{#Value.CustomChartHigh}} style="height:{{Value.CustomChartHigh}}px!important" {{/Value.CustomChartHigh}}></div>                
+                
+                {{#Value.DisplayBigChartUrl}}
+                    <div class="fxs_fullreport_chart fxs_fullreport_chart_mini">
+                        <a href="{{Value.BigChartUrl}}" class="fxs_btn fxs_btn_default fxs_btn_small" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{Translations.SeeFullChart}}">
+                            <i class="fa fa-expand"></i>
+                        </a>
+                    </div>                
+                    <a href="{{Value.BigChartUrl}}" class="fxs_chart_cover">
+                        {{^Value.EnableZoomOnChart}}
+                        <div class="fxs_chart_curtain"></div>
+                        {{/Value.EnableZoomOnChart}}
+                    </a>
+                {{/Value.DisplayBigChartUrl}}             
+                
+                {{^Value.DisplayBigChartUrl}}                
+                    {{^Value.TouchAvailable}}                                               
+
+                        {{#Value.ExternalUrl}}
+                        <a href="{{Value.ExternalUrl}}" class="fxs_chart_cover">
+                            {{^Value.EnableZoomOnChart}}
+                            <div class="fxs_chart_curtain"></div>
+                            {{/Value.EnableZoomOnChart}}
+                        </a>
+                        {{/Value.ExternalUrl}}   
+
+                        {{^Value.ExternalUrl}}
+                            {{^Value.EnableZoomOnChart}}
+                            <div class="fxs_chart_curtain"></div>
+                            {{/Value.EnableZoomOnChart}}
+                        {{/Value.ExternalUrl}}
+
+                    {{/Value.TouchAvailable}}
+                {{/Value.DisplayBigChartUrl}}
+                                
+            </div>
+       </div>
+    </section>
+</script>

@@ -1,0 +1,36 @@
+﻿<script id="sidebar_list_videoitem" type="x-tmpl-mustache">
+    <li class="fxs_listView_item fxs_isVideo_content {{#IsActive}}listView_item_active{{/IsActive}}" id="{{Value.Id}}">
+        <article fxs-it-id="{{Value.Id}}" class="fxs_clearfix">
+            <figure class="fxs_listView_squareImage">
+                <img class="lazyload" data-src="{{Value.Image.Url_XtraSmall}}" alt="{{Value.Image.Caption}}">
+                <span class="fxs_miniLabel_video">
+                    <i class="fa fa-play"></i> <span>{{Value.Video.FormatedDuration}}</span>
+                </span>
+            </figure>
+            <div class="fxs_floatingMedia_textBody">
+                {{#Value.Sponsored}}
+                <span class="fxs_mutedContent_label">{{Translations.SponsoredVideo}}<i class="fa fa-external-link" data-toggle="tooltip" data-placement="bottom" title=""></i></span>
+                {{/Value.Sponsored}}
+                <div class="fxs_headline_tiny fxs_headline_muted">
+                    <a href="{{{Value.SEO.FullUrl}}}" class="fxs_show_item_detail" onclick="return false;">{{Value.Title}}</a>
+                </div>
+                <address class="fxs_entry_metaInfo">
+                    {{Value.Author.Name}} | <time pubdate="" datetime="{{Value.PublicationDate}}">{{Value.PublicationDateDisplay}}</time>
+                </address>
+                {{#Value.Video.IsPremium}}
+                <span class="fxs_label fxs_label_featured">{{Translations.PremiumVideo}}</span>
+                {{/Value.Video.IsPremium}}
+            </div>
+        </article>
+    </li>
+    {{>seo}}
+</script>
+<div id="sidebar_list_videoitem">
+    <script type="application/ld+json">
+        {
+        "@context": "http://schema.org",
+        "@type": "WebPage",
+        "relatedLink" : "{{{Value.SEO.FullUrl}}}"
+        }
+    </script>
+</div> 

@@ -29,6 +29,9 @@
     a{
       color: @dark_4_clr;
       text-decoration: none!important;
+      &:hover{
+          text-decoration:none;
+      }
     }
   }
 
@@ -39,6 +42,8 @@
     height: @base_module_size;
     line-height: @base_module_size;
 		text-align: center;
+        color:@dark_4_clr;
+        font-weight:400;
     &.fxs_widget_spreads_item_lower {
       background-color: fade(@success_clr, 25%);
       color: lighten(@success_clr, 10%);
@@ -52,7 +57,7 @@
 
   &.fxs_widget_mini, &.fxs_widget_default, &.fxs_widget_big {
     // default spreads table rules
-    .fxs_spread_link{
+    .fxs_spread_link a{
         color: @dark_4_clr;
         text-decoration: none!important;
         font-weight: normal;

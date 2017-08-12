@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -48,7 +48,7 @@
                     <ul class="fxs_dropdownList">
                         <li class="fxs_dropdownHeader">Follow us on</li>
                         <li>
-                            <a href="http://about.fxstreet.com/blog/" target="_blank"><i class="fa fa-fxstreetblog fxs_marginHalf_right"></i> FXStreet Blog</a>
+                            <a href="http://about.fxstreet.com/blog/" target="_blank"><i class="fa fa-commenting-o fxs_marginHalf_right"></i> FXStreet Blog</a>
                         </li>
                         <li>
                             <a href="https://www.youtube.com/user/fxstreetcom/" target="_blank"><i class="fa fa-youtube-play fxs_marginHalf_right"></i> Youtube channel</a>
@@ -166,23 +166,21 @@
         </div>
         <!-- /Sidebar left -->
         
-    
+        <!-- Topics subnav -->
+        <nav class="fxs_content_subnav">
+            <a id="showLeft" class="fxs_toggleList" title=""><i class="fa fa-chevron-left"></i> All News</a>
+            <div class="fxs_topics_nav fxs_topics_nav_custom">
+                <span class="fxs_label">Popular topics</span>
+                <ul class="fxs_subnavInlined_list">
+                    <li><a href="#">EUR/USD News</a></li>
+                    <li><a href="#">Fundamental news</a></li>
+                    <li><a href="#">Economic indicators</a></li>
+                </ul>
+            </div>
+        </nav>
+        <!-- /Topics subnav -->
 
         <div class="fxs_content" id="fxs_content">
-
-            <!-- Topics subnav -->
-            <nav class="fxs_content_subnav">
-                <a id="showLeft" class="fxs_toggleList" title=""><i class="fa fa-chevron-left"></i> All News</a>
-                <div class="fxs_topics_nav fxs_topics_nav_custom">
-                    <span class="fxs_label">Popular topics</span>
-                    <ul class="fxs_subnavInlined_list">
-                        <li><a href="#">EUR/USD News</a></li>
-                        <li><a href="#">Fundamental news</a></li>
-                        <li><a href="#">Economic indicators</a></li>
-                    </ul>
-                </div>
-            </nav>
-            <!-- /Topics subnav -->
 
             <div id="notificationExample" class="fxs_global_alert fxs_alert_info alert alert-dismissible fade in" role="alert">
                 <button type="button" class="fxs_close close" data-dismiss="alert" aria-label="Close">
@@ -488,7 +486,7 @@
                 <!-- Typeahead -->
                 <div class="fxs_filter_new active fxs_filter_modified">
                     <form>
-                        <div class="fxs_typeaheadContainer fxs_typeheadContainer_custom">
+                        <div class="fxs_typeaheadContainer">
                             <label for="q" class="fxs_btn_filter" title="Search in news">
                                 <i class="fa fa-search"></i>
                                 <span class="fxs_skip">Search in news</span>
@@ -511,9 +509,9 @@
 
             </header>
             <nav class="fxs_listViewRail fxs_listViewRail_modified">
-                <!--<a href="#" class="fxs_listView_newItemsAlert">
+                <a href="#" class="fxs_listView_newItemsAlert">
                     See 2 New Updates
-                </a>-->
+                </a>
                 <ol class="fxs_listView_blockWrapper">
                     <li class="fxs_listView_item">
                         <article class="fxs_clearfix">
@@ -998,7 +996,7 @@
     <!-- Bootstrap -->
     <script src="../js/bootstrap.min.js"></script>
 
-    <script src="../js/classie.js"></script>
+    
     <script src="../js/jquery.typeahead.min.js"></script>
     <script src="../js/site.js"></script>
 

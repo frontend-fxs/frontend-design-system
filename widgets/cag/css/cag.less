@@ -12,6 +12,7 @@
 	    border-top:0;
 	    padding-top: 2rem;
 	    position: relative;
+        padding-left:10px;
 	    .fxs_forecast_avg_cag_content{
 	      padding-top: 21px; 
 	      .fxs_widget_custom_bold{
@@ -23,18 +24,33 @@
 	    }
   	}
 }
+.fxs_forecast_col{
+    width: 100%;
+    float: left;
+    @media(min-width:@screen-s){
+    width: 80px;
+    }
+}
+.fxs_tabs_col{
+    float: left;
+    //width:100%;
+    //.calc(width, ~'100% - 80px');
+}
 // price
-.fxs_widget_price {
-	&.fxs_widget_price_header {
-	    &.fxs_widget_price_header_cag{
-	      border-bottom: 1px solid @light_4_clr;
-	      margin-left:0;
-	      margin-right:0;
-	      padding-left:0;
-	      padding-right: 0;
-	      margin-bottom: 0.7rem;
+.fxs_chart_cag_cont{
+    .fxs_widget_price {
+	    &.fxs_widget_price_header {
+	        &.fxs_widget_price_header_cag{
+	          border-bottom: 1px solid @light_4_clr;
+	          margin-left:0;
+	          margin-right:0;
+	          padding-left:0;
+	          padding-right: 0;
+	          margin-bottom: 0.7rem;
+              padding-bottom:1rem;
+	        }
 	    }
-	}
+    }
 }
 
 // sentiment
@@ -50,15 +66,21 @@
 	  	}
 	}
 }
-// pivot points
+// pivot pointss
 .fxs_widget_pivotPoints {
 	&.fxs_widget_pivotPoints_cag{
-    padding-top:3.5rem;
-    .fxs_label{
-      font-weight: bold;
+        padding-top:0;
+        @media(min-width:@screen-s){
+            padding-top:3.7rem;
+        }
+        .fxs_pivot{
+            background-color:transparent;
+        }
+        .fxs_label{
+          font-weight: bold;
+        }
+        .fxs_pivotPoints_list_item{
+          padding-bottom: 1rem;
+        }
     }
-    .fxs_pivotPoints_list_item{
-      padding-bottom: 1rem;
-    }
-  }
 }

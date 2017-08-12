@@ -1,0 +1,19 @@
+﻿<script id="dynamicalert_href" type="x-tmpl-mustache">
+    <div fxs_sf_widget class="fxs_alert fxs_alert_{{CssSuffix}}" fxs_name="dynamicAlert">
+        <span class="fxs_alertLabel">{{Title}}</span>
+        <a href="#" class="fxs_close"><i class="fa fa-close"></i></a>
+        <p class="fxs_alertText"><a href="{{Url}}">{{Summary}}</a></p>
+    </div>
+    {{>seo}}
+</script>
+<div id="dynamicalert_href.seo">
+    <script type="application/ld+json">
+        {
+        "@context": "http://schema.org/",
+        "@type": "SiteNavigationElement",
+        "name": "Dynamic Alert",
+        "alternativeHeadline": "{{Title}}",
+        "url": "{{{Url}}}"
+        }
+    </script>
+</div>

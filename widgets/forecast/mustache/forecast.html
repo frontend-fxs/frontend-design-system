@@ -1,0 +1,43 @@
+﻿<!-- Forecast widget -->
+<section class="fxs_widget_summary">
+    <div class="fxs_forecast_widget">
+        <ul class="fxs_tabs_nav">
+            <li class="active"><a data-toggle="tab" href="#forecast_1w">1 {{Translations.Week}}</a></li>
+            <li><a data-toggle="tab" href="#forecast_1m">1 {{Translations.Month}}</a></li>
+            <li><a data-toggle="tab" href="#forecast_1q">1 {{Translations.Quarter}}</a></li>
+        </ul>
+        <div class="fxs_widget_divider_module tab-content">
+            <div role="tabpanel" id="forecast_1w" class="forecast_timeframe_slot tab-pane fade in active"></div>
+            <div role="tabpanel" id="forecast_1m" class="forecast_timeframe_slot tab-pane fade"></div>
+            <div role="tabpanel" id="forecast_1q" class="forecast_timeframe_slot tab-pane fade"></div>
+        </div>
+
+        <!-- widget footer -->
+        <footer class="fxs_widget_footer">
+           <small><time datetime="{{LastUpdatedDate}}">{{Translations.Updated}} {{LastUpdatedHour}} GMT</time></small>
+            <a class="fxs_btn fxs_btn_line fxs_btn_small" href="{{FullReportUrl}}">{{Translations.SeeFullStudy}}<i class="fa fa-angle-double-right"></i></a>
+        </footer>
+        <!-- /widget footer -->
+    </div>
+    <!-- /Forecast widget -->
+</section>
+{{#Seo}}
+<script type="application/ld+json">
+
+    {
+    "@type": "Review",
+    <!--"datePublished": "{{LastUpdatedDate}}",-->
+    "description": "Latest {{{Asset.Name}}}  Forecast incluiding near, middle and long term predictions.",
+    "name": "{{{Asset.Name}}} Trading Position",
+    "reviewBody": {
+    "@type": "Text",
+    "value": "1 week: {{Statics.Week.PriceAverage}} Bias {{Statics.Week.Bias}}, 1 month: {{Statics.Month.PriceAverage}} Bias {{Statics.Month.Bias}} 1 quarter: {{Statics.Quarter.PriceAverage}} Bias {{Statics.Quarter.Bias}}" },
+    "itemReviewed": {
+    "@type": "Thing",
+    "Name": "{{{Asset.Name}}}",
+    "sameAs": "https://en.wikipedia.org/wiki/Currency_pair",
+    "url": "{{{Study.PairUrl}}}"
+    }
+    }
+</script>
+{{/Seo}}

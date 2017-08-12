@@ -1,0 +1,33 @@
+﻿<div class="fxs_swipeContent_slider">
+    <table class="fxs_table">
+        <thead>
+            <tr>
+                <th>{{Translations.CentralBanks}}</th>
+                <th>{{Translations.CurrentInterestRate}}</th>
+                <th>{{Translations.NextMeeting}}</th>
+                <th>{{Translations.LastChange}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#InterestRates}}
+            <tr>
+                <th scope="row">{{CentralBankName}}</th>
+                <td>{{InterestRateValue}} %</td>
+                <td>{{NextMeeting}} GMT</td>
+                <td>{{LastMeeting}} GMT</td>
+            </tr>
+            {{/InterestRates}}
+        </tbody>
+    </table>
+    <div class="fxs_align_right fxs_marginBase_top">
+        <a href="{{ButtonUrl}}" class="fxs_btn fxs_btn_line fxs_btn_small">{{Translations.InterestRatesButtonText}}<i class="fa fa-angle-double-right"></i></a>
+    </div>
+    <hr class="fxs_divider_third" />
+
+    {{#Seo}}
+    <script type="application/ld+json">
+        {
+        }
+    </script>
+    {{/Seo}}
+</div>

@@ -1,0 +1,254 @@
+﻿<script id="videoItemdetails_default" type="x-tmpl-mustache">
+    <hr class="fxs_divider_wide">
+    <div class="fxs_leaderboard fxs_leaderboard_small">
+        <div id="fxs_leaderboard_ad_{{Value.Id}}" class="fxs_ad"></div>
+    </div>
+    <hr class="fxs_divider_wide">
+    <section fxs-it-id="{{Value.Id}}" fxs_it_url="{{Value.Url}}">
+        <article class="fxs_article">
+            <div id="fxs_alert_author_follow" class="fxs_contextual_alert fxs_alert_success alert alert-dismissible fade in fxs_hideElements" role="alert">
+                <button type="button" class="fxs_close close" onclick="$('#fxs_alert_author_follow').addClass('fxs_hideElements')" aria-label="Close">
+                    <i class="fa fa-close"></i>
+                    <span class="fxs_skip">Close alert</span>
+                </button>
+                <span class="fxs_alertLabel">{{Translations.AuthorFollowingAlertLabel}}</span>
+                <p class="fxs_alertText">{{Translations.AuthorFollowingAlertText}}</p>
+            </div>
+
+            <div id="fxs_alert_author_unfollow" class="fxs_contextual_alert fxs_alert_error alert alert-dismissible fade in fxs_hideElements" role="alert">
+                <button type="button" class="fxs_close close" onclick="$('#fxs_alert_author_unfollow').addClass('fxs_hideElements')" aria-label="Close">
+                    <i class="fa fa-close"></i>
+                    <span class="fxs_skip">Close alert</span>
+                </button>
+                <span class="fxs_alertLabel">{{Translations.AuthorUnFollowingAlertLabel}}</span>
+                <p class="fxs_alertText">{{Translations.AuthorUnFollowingAlertText}}</p>
+            </div>
+            <header class="fxs_article_header">
+                <aside class="fxs_entry_metaInfo">
+                    {{#Value.Video.IsPremium}}
+                    <a class="fxs_entry_sectionlink" href="#"><span class="fxs_label fxs_label_featured">{{Translations.PremiumVideo}}</span></a> |
+                    {{/Value.Video.IsPremium}}
+                    <a class="fxs_entry_sectionlink" href="{{Value.ItemTypeUrl}}">{{Translations.VideosTitle}}</a> | <time pubdate="" datetime="{{Value.PublicationDate}}">{{Value.PublicationDateDisplay}}</time>
+                </aside>
+                <h1 class="fxs_headline_large">{{Value.Title}}</h1>
+                <address class="fxs_contributorBox fxs_contributorBox_big">
+                    <div class="fxs_avatar_circleImage_s">
+                        <a href="{{{Value.Author.Url}}}" rel="nofollow" title="{{Value.Author.Name}}">
+                            <img class="lazyload" data-src="{{{Value.Author.ImageResponse.Url_XtraSmall}}}" alt="{{Value.Author.Name}}" width="35" height="35">
+                        </a>
+                    </div>
+                    <span class="fxs_article_author">
+                        <a href="{{{Value.Author.Url}}}" title="{{Value.Author.Name}}" rel="nofollow">
+                            <strong>{{Value.Author.Name}}</strong>
+                        </a>
+                        <span class="fxs_author_description">
+                            {{Value.Author.Position}} <a href="{{{Value.Company.Url}}}" rel="nofollow" class="fxs_mutedLink">{{Value.Company.Name}}</a>
+                        </span>
+                        <button id="fxs_cta_authorfollow_{{Value.Id}}" type="button" class="fxs_btn fxs_btn_line fxs_btn_small btn" aria-pressed="false">
+                            <span class="fxs_togglebtn_txt init_txt" data-placement="bottom" title="Follow autor's updates">{{Translations.AuthorFollowButton}}</span>
+                            <span class="fxs_togglebtn_txt toggled_txt" data-placement="bottom" title="Stop following autor's updates">{{Translations.AuthorFollowingButton}}</span>
+                        </button>
+                    </span>
+                    {{> seo}}
+                </address>
+                <div id="fxs_socialmedia_bar_{{Value.Id}}"></div>
+            </header>
+            <section class="fxs_live_event_module">
+
+                <footer class="fxs_live_event_module_summary">
+                    <div class="fxs_event_summary_data">
+                        <ul class="fxs_plainInlined_list">
+                            <li>
+                                <span class="fxs_event_time"><i class="fa fa-clock-o"></i> <span class="fxs_hidden_xs_iBlock">{{Translations.Duration}}:</span> <time datetime="PT45M">{{Value.Video.FormatedDuration}}</time></span>
+                            </li>
+                        </ul>
+                    </div>
+                    {{#Value.Sponsored}}
+                    <div class="fxs_event_sponsor fxs_fRight">
+                        <small class="fxs_hidden_xs_iBlock">{{Translations.SponsoredBy}}</small>
+                        <div class="fxs_squareImage_s">
+                            <a href="{{{Value.Video.SponsorUrl}}}">
+                                <img class="lazyload" data-src="{{{Value.Video.SponsorImageUrl}}}" alt="{{Value.Video.SponsorTitle}}" width="35" height="35">
+                            </a>
+                        </div>
+                    </div>
+                    {{/Value.Sponsored}}
+                </footer>
+                {{#Value.Video.PublicView}}
+                    {{#Value.Video.RegistrationRequired}}
+                    <div id="fxs_live_video_show_{{Value.Id}}">
+                        <div class="fxs_live_event_cta_content fxs_mediaContainer">
+                            <div class="fxs_timer_countdown_block fxs_absolute_center">
+                                <button id="fxs_cta_show_video_{{Value.Id}}" data-toggle="" class="fxs_btn fxs_btn_cta fxs_btn_block fxs_not_onAir_item">
+                                    {{Translations.ShowVideo}}
+                                </button>
+                            </div>
+                        </div>
+                        <footer class="fxs_txt_center fxs_marginBase_bottom fxs_relativePositioning">
+                            <small>{{Translations.AcceptThirdPartyText}}</small>
+                        </footer>
+                    </div>
+                    {{/Value.Video.RegistrationRequired}}
+                    <div id="fxs_live_video_container_{{Value.Id}}" class="fxs_mediaContainer fxs_video_post_container {{#Value.Video.RegistrationRequired}}fxs_hideElements{{/Value.Video.RegistrationRequired}}">
+                        <!-- Embed Youtube -->
+                        <iframe class="fxs_media_item" src="{{{Value.Video.VideoEmbedUrl}}}?enablejsapi=1" allowfullscreen="" frameborder="0" width="1280" height="720"></iframe>
+                        <!-- /Embed Youtube -->
+                    </div>
+                {{/Value.Video.PublicView}}
+                {{#Value.Video.RegistrationView}}
+                <div class="fxs_live_event_cta_content fxs_mediaContainer">
+                    <div class="fxs_timer_countdown_block fxs_absolute_center">
+                        <small>{{Translations.RegistrationNeededDescription}}</small>
+                        <button id="fxs_cta_register_{{Value.Id}}" data-toggle="" class="fxs_btn fxs_btn_cta fxs_btn_block fxs_not_onAir_item">
+                            {{Translations.RegistrationRequired}}
+                        </button>
+                    </div>
+                </div>
+                {{/Value.Video.RegistrationView}}
+                {{#Value.Video.PremiumView}}
+                <div class="fxs_pricing_table_block">
+                    <div class="fxs_pricing_table">
+                        <span class="fxs_helperLabel_title">{{Translations.PremiumService}}</span>
+                        <div id="clock" class="fxs_countdown_clock fxs_skip"></div>
+
+                        <div class="fxs_row">
+                            <div class="fxs_col fxs_col_33">
+                                <div class="fxs_pricing_table_item fxs_marginBase_bottom">
+                                    <div class="fxs_pricing_table_price fxs_clearfix">
+                                        <span class="fxs_headline_from_tiny_to_medium">{{Translations.Premium1Month}}</span>
+                                        <span class="fxs_pricing_table_value">{{Value.Video.Subscription.OneMonth.Price}}{{Translations.Euro}}</span>
+                                    </div>
+                                    <form action="{{Value.Video.Subscription.PaypalUrl}}" method="post" target="_top">
+                                        <input type="hidden" name="cmd" value="_s-xclick">
+                                        <input type="hidden" name="rm" value="2">
+                                        <input type="hidden" name="hosted_button_id" value="{{Value.Video.Subscription.OneMonth.PaypalButtonId}}">
+                                        <input type="hidden" name="notify_url" value="{{Value.Video.Subscription.NotifyUrl}}">
+                                        <input type="hidden" name="cancel_return" value="{{Value.Video.Subscription.CancelReturnUrl}}">
+                                        <input type="hidden" name="return" value="{{Value.Video.Subscription.ReturnUrl}}">
+                                        <input type="hidden" name="custom" value="{{Value.Video.Subscription.OneMonth.Custom}}">
+                                        <input type="hidden" name="lc" value="en_US">
+                                        <button type="submit" class="fxs_btn fxs_btn_cta fxs_btn_block">{{Translations.PremiumSubscribe}}</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="fxs_col fxs_col_33">
+                                <div class="fxs_pricing_table_item fxs_marginBase_bottom">
+                                    <div class="fxs_pricing_table_price fxs_clearfix">
+                                        <span class="fxs_headline_from_tiny_to_medium">{{Translations.Premium3Months}}</span>
+                                        <span class="fxs_pricing_table_value">{{Value.Video.Subscription.ThreeMonth.Price}}{{Translations.Euro}}</span>
+                                        <span class="fxs_label">{{Translations.PremiumSave}} {{Value.Video.Subscription.ThreeMonth.Saved}}{{Translations.Euro}}</span>
+                                    </div>
+                                    <form action="{{Value.Video.Subscription.PaypalUrl}}" method="post" target="_top">
+                                        <input type="hidden" name="cmd" value="_s-xclick">
+                                        <input type="hidden" name="rm" value="2">
+                                        <input type="hidden" name="hosted_button_id" value="{{Value.Video.Subscription.ThreeMonth.PaypalButtonId}}">
+                                        <input type="hidden" name="notify_url" value="{{Value.Video.Subscription.NotifyUrl}}">
+                                        <input type="hidden" name="cancel_return" value="{{Value.Video.Subscription.CancelReturnUrl}}">
+                                        <input type="hidden" name="return" value="{{Value.Video.Subscription.ReturnUrl}}">
+                                        <input type="hidden" name="custom" value="{{Value.Video.Subscription.ThreeMonth.Custom}}">
+                                        <input type="hidden" name="lc" value="en_US">
+                                        <button type="submit" class="fxs_btn fxs_btn_cta fxs_btn_block">{{Translations.PremiumSubscribe}}</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="fxs_col fxs_col_33">
+                                <div class="fxs_pricing_table_item fxs_pricing_featured_offer fxs_marginBase_bottom">
+                                    <div class="fxs_pricing_table_price fxs_clearfix">
+                                        <span class="fxs_pricing_table_subtitle">{{Translations.PremiumBestDeal}}</span>
+                                        <span class="fxs_headline_from_tiny_to_medium">{{Translations.Premium12Months}}</span>
+                                        <span class="fxs_pricing_table_value">{{Value.Video.Subscription.TwelfthMonth.Price}}{{Translations.Euro}}</span>
+                                        <span class="fxs_label">{{Translations.PremiumSave}} {{Value.Video.Subscription.TwelfthMonth.Saved}}{{Translations.Euro}}</span>
+                                    </div>
+                                    <form action="{{Value.Video.Subscription.PaypalUrl}}" method="post" target="_top">
+                                        <input type="hidden" name="cmd" value="_s-xclick">
+                                        <input type="hidden" name="rm" value="2">
+                                        <input type="hidden" name="hosted_button_id" value="{{Value.Video.Subscription.TwelfthMonth.PaypalButtonId}}">
+                                        <input type="hidden" name="notify_url" value="{{Value.Video.Subscription.NotifyUrl}}">
+                                        <input type="hidden" name="cancel_return" value="{{Value.Video.Subscription.CancelReturnUrl}}">
+                                        <input type="hidden" name="return" value="{{Value.Video.Subscription.ReturnUrl}}">
+                                        <input type="hidden" name="custom" value="{{Value.Video.Subscription.TwelfthMonth.Custom}}">
+                                        <input type="hidden" name="lc" value="en_US">
+                                        <button type="submit" class="fxs_btn fxs_btn_cta fxs_btn_block">{{Translations.PremiumSubscribe}}</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <aside class="fxs_content_panel fxs_txt_center">
+                        <p>
+                            <a href="{{Translations.PremiumAlreadyPremiumLink}}">{{Translations.PremiumAlreadyPremium}}</a> {{Translations.PremiumLearnMore}} <a href="{{Translations.PremiumFeaturesLink}}">{{Translations.PremiumFeatures}}</a>
+                        </p>
+                    </aside>
+                </div>
+                {{/Value.Video.PremiumView}}
+            </section>
+            <div class="fxs_article_body">
+                <div id="fxs_article_ad_{{Value.Id}}" class="fxs_article_ad"></div>
+                <h2>{{Translations.Summary}}</h2>
+                {{{Value.Content}}}
+            </div>
+            <footer class="fxs_article_tags">
+                <h4 class="fxs_helperLabel_title">{{Translations.RelatedTopicsDisplay}}</h4>
+                <ul>
+                    {{#Value.Categories}}
+                    {{#FullUrl}}
+                    <li><a href="{{FullUrl}}" title="{{Name}}" class="fxs_tag">{{Name}}</a></li>
+                    {{/FullUrl}}
+                    {{^FullUrl}}
+                    <li>{{Name}}</li>
+                    {{/FullUrl}}
+                    {{/Value.Categories}}
+                </ul>
+            </footer>
+        </article>
+        <div id="fxs_article_related_{{Value.Id}}"></div>
+
+        {{> seo2}}
+    </section>
+</script>
+<div id="videoItemdetails_default.seo">
+    <script type="application/ld+json">
+        {
+        "@context": "http://schema.org",
+        "@type": "ShareAction",
+        "object":
+        {
+        "@type": "CreativeWork",
+        "name": "{{{Value.Title}}}",
+        "url": "{{{Value.SEO.FullUrl}}}"
+        }
+        }
+    </script>
+</div>
+
+<div id="videoItemdetails_default.seo2">
+    <script type="application/ld+json">
+        {
+        "@context": "http://schema.org",
+        "@type": "VideoObject",
+        "headline": "{{{Value.Title}}}",
+        "name": "{{{Value.SEO.MetaTitle}}}",
+        "description": "{{Value.SEO.MetaDescription}}",
+        "keywords": "{{Value.SEO.keywords}}",
+        "UploadDate" : "{{{Value.PublicationDate}}}",
+        "Duration" : "{{Value.Video.FormatedDuration}}",
+        "mainEntityOfPage" : "{{{Value.SEO.FullUrl}}}",
+        "embedUrl" : "{{{Value.Video.VideoEmbedUrl}}}",
+        "about" : "{{Value.SEO.MetaDescription}}",
+        "thumbnailUrl": "{{{Value.Image.Url_XtraSmall}}}",
+        "author":
+        {
+        "@type":"Person",
+        "name":"{{Value.Author.Name}}",
+        "url": "{{{Value.Author.Url}}}",
+        "worksfor":
+        {
+        "@type": "Organization",
+        "name": "{{Value.Company.Name}}",
+        "url": "{{{Value.Company.Url}}}"
+        }
+        }
+        }
+    </script>
+</div>
