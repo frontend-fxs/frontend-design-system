@@ -613,6 +613,8 @@
 
                 updateActiveButton(mainViewButton);
             }
+
+            setShowMoreButtonText(_this.Translations.ShowMore);
         }
 
 

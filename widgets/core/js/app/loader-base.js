@@ -17,6 +17,7 @@
         _this.initWidgets = FXStreetWidgets.Widget.LoaderBase.prototype.initWidgets;
         _this.log = FXStreetWidgets.Widget.LoaderBase.prototype.log;
         _this.chartLibrariesAreLoaded = FXStreetWidgets.Widget.LoaderBase.prototype.chartLibrariesAreLoaded;
+        _this.getDefaultHost = FXStreetWidgets.Widget.LoaderBase.prototype.getDefaultHost;
 
         _this.mustachesCount = 0;
         _this.mustachesLoadedCount = 0;
@@ -135,17 +136,29 @@
         var sharedJs = this.getSharedJs();
 
         this.config = {
+            WidgetType: this.options.WidgetType,
             WidgetName: this.options.WidgetName,
             Culture: FXStreetWidgets.Configuration.getCulture(),
             EndPoint: this.getEndPoint(host, version),
             EndPointTranslation: this.getEndPointTranslation(host, version),
-            DefaultHost: this.options.DefaultHost,
+            DefaultHost: this.getDefaultHost(this.options),
             CustomJs: customJs,
             SharedJs: sharedJs,
             Mustaches: this.options.Mustaches,
             Translations: {}
         };
     };
+
+    FXStreetWidgets.Widget.LoaderBase.prototype.getDefaultHost = function (options) {
+        var hosts = FXStreetWidgets.Configuration.getHosts();
+        if(!hosts) return options.DefaultHost;
+
+        var defaultHost = hosts[options.WidgetType];
+        
+        var result = defaultHost || options.DefaultHost;        
+        return result;
+    };
+
     FXStreetWidgets.Widget.LoaderBase.prototype.getContainer = function () {
         var container = $("div[fxs_widget][fxs_name='" + this.options.WidgetName + "']").first();
         return container;
@@ -153,7 +166,7 @@
     FXStreetWidgets.Widget.LoaderBase.prototype.getHost = function (container) {
         container = container || this.getContainer();
         var host = container.attr("fxs_host");
-        host = FXStreetWidgets.Util.isUndefined(host) ? this.options.DefaultHost : host;
+        host = FXStreetWidgets.Util.isUndefined(host) ? this.getDefaultHost(this.options) : host;
         return host;
     };
     FXStreetWidgets.Widget.LoaderBase.prototype.getVersion = function (container) {
@@ -187,7 +200,6 @@
         return result;
     };
     FXStreetWidgets.Widget.LoaderBase.prototype.getEndPoint = function (host, version) {
-        debugger;
         var result;
         if (this.options.EndPointV2) {
             var formattedEndpoint = getFormattedEndpoint(this.options.EndPointV2, version);
@@ -198,7 +210,6 @@
         return result;
     };
     FXStreetWidgets.Widget.LoaderBase.prototype.getEndPointTranslation = function (host, version) {
-        debugger;
         var result;
         if (this.options.EndPointTranslationV2) {
             var formattedEndpoint = getFormattedEndpoint(this.options.EndPointTranslationV2, version);

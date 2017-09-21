@@ -6,6 +6,7 @@
             Logging: false,
             UseMin: true,
             ServerName: "https://staticcontent.fxstreet.com/",
+            AuthorizationUrl: "https://authorization.fxstreet.com/token",
             StaticContentQueryStringRefresh: "?t=2017081013",
             Culture: "en-US",
             StaticContentName: "widgets/",
@@ -14,11 +15,11 @@
             JsCores: ["moment.min.js", "bootstrap.min.js"],
             CssCores: ["fxswidget.min.css"],
             FontAwesome: ["font-awesome", "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css"],
-            FontGoogle: ["googleapis.com/css", "https://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,700,300italic,400italic,500italic"]
+            FontGoogle: ["googleapis.com/css", "https://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,700,300italic,400italic,500italic"]            
         };
 
         _this.init = function () {
-            _this.loadCustomConfig();
+            _this.loadCustomConfig();            
         };
 
         _this.loadCustomConfig = function () {
@@ -29,6 +30,13 @@
                     }
                 }
             };
+        };
+
+        _this.getHosts = function () {
+            if (typeof fxs_widget_hosts_config === "undefined") return null;
+
+            var result = fxs_widget_hosts_config;
+            return result;
         };
 
         _this.getCoreJsUrl = function (jsName) {

@@ -1,0 +1,14 @@
+.fxs_ctp_latest tbody tr td {
+  white-space: nowrap;
+}
+.fxs_ctp_latest tbody tr td.fxs_asset {
+  text-align: center;
+}
+.fxs_ctp_latest tbody tr td span,
+.fxs_ctp_latest tbody tr td a {
+  white-space: nowrap;
+}
+.fxs_ctp_latest tbody tr td span.fxs_author,
+.fxs_ctp_latest tbody tr td a.fxs_author {
+  color: #E4871B;
+}

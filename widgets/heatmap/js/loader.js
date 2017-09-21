@@ -1,6 +1,7 @@
 ﻿(function ($) {
     FXStreetWidgets.Widget.LoaderHeatMap = function () {
         var options = {
+            WidgetType: "MarketTools",
             WidgetName: "heatmap",
             EndPointV2: "api/v2/heatmap/study/",
             EndPointTranslationV2: "api/v2/cultures/{culture}/heatmap/",

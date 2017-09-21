@@ -53,9 +53,7 @@
             _this.setVars();
             render();
 
-            getPivotPoints();
-            getSentiment();
-            getForecast();
+            callMarketTools();
         };
 
         _this.setVars = function () {
@@ -67,11 +65,24 @@
             _this.JsonData.Translations = _this.Translations;
         };
 
+        var callMarketTools = function () {
+            var auth = FXStreet.Class.Patterns.Singleton.Authorization.Instance();
+
+            auth.getTokenPromise()
+                .then(function (token) {
+                    getPivotPoints(token);
+                    getSentiment(token);
+                    getForecast(token);
+                }, function (error) {
+                  render();
+            });
+        };
+
         var render = function () {
             FXStreet.Util.loadHtmlTemplate(_this.HtmlTemplateFile()).done(function (template) {
                 var rendered = FXStreet.Util.renderByHtmlTemplate(template, _this.JsonData);
                 _this.Container.html(rendered);
-                if (pivotPointsCalled || sentimentCalled || forecastCalled) {
+                if (pivotPointsCalled && sentimentCalled && forecastCalled) {
                     loadWidgets();
                 }
 
@@ -84,22 +95,33 @@
             initRate();
         }
 
-        var getPivotPoints = function () {
-            $.get(_this.MarketToolsWebApiBaseUrl + "/v1/" + FXStreet.Resource.CultureName + "/pivotPoints/study/" + _this.Asset)
-                .then(function (data) {
+        var getPivotPoints = function (token) {
+            var url = _this.MarketToolsWebApiBaseUrl + "/v1/" + FXStreet.Resource.CultureName + "/pivotPoints/study/" + _this.Asset;
+            return $.ajax({
+                type: "GET",
+                url: url,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", token.token_type + ' ' + token.access_token);
+                }
+            }).then(function (data) {
                     pivotPointsCalled = true;
                     setPivotPointsToJson(data);
                     render();
-                },
-                function () {
+                }, function () {
                     pivotPointsCalled = true;
                     render();
                 });
         };
 
-        var getSentiment = function () {
-            return $.get(_this.MarketToolsWebApiBaseUrl + "/v1/" + FXStreet.Resource.CultureName + "/sentiment/study/" + _this.Asset)
-                .then(function (data) {
+        var getSentiment = function (token) {
+            var url = _this.MarketToolsWebApiBaseUrl + "/v1/" + FXStreet.Resource.CultureName + "/sentiment/study/" + _this.Asset;
+            return $.ajax({
+                type: "GET",
+                url: url,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", token.token_type + ' ' + token.access_token);
+                }
+            }).then(function (data) {
                     sentimentCalled = true;
                     setSentimentsToJson(data);
                     render();
@@ -110,9 +132,15 @@
                   });
         };
 
-        var getForecast = function () {
-            return $.get(_this.MarketToolsWebApiBaseUrl + "/v1/" + FXStreet.Resource.CultureName + "/forecast/study/?assetids=" + _this.Asset)
-                  .then(function (data) {
+        var getForecast = function (token) {
+            var url = _this.MarketToolsWebApiBaseUrl + "/v1/" + FXStreet.Resource.CultureName + "/forecast/study/?assetids=" + _this.Asset;
+            return $.ajax({
+                type: "GET",
+                url: url,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", token.token_type + ' ' + token.access_token);
+                }
+            }).then(function (data) {
                       forecastCalled = true;
                       setForecastToJson(data);
                       render();
@@ -124,43 +152,47 @@
         }
 
         var initChart = function () {
-            var jsonChart = {
-                'PairName': _this.PairName,
-                'PriceProviderCode': _this.PriceProviderCode,
-                'WidgetType': 'fxs_widget_cag',
-                'ContainerId': 'fxs_chart_' + _this.ContentId,
-                'BigChartUrl': _this.BigChartUrl.toLowerCase(),
-                'DisplayRSI': false,
-                'DisplaySMA': false,
-                'DisplayBigChartUrl': false,
-                'TouchAvailable': false,
-                'ExternalUrl': _this.BigChartUrl.toLowerCase()
-            };
+            if(!_this.SingleChartManagerObj){
+                _this.SingleChartManagerObj = new FXStreet.Class.SingleChartManager();
 
-            _this.SingleChartManagerObj = new FXStreet.Class.SingleChartManager();
-            _this.SingleChartManagerObj.init(jsonChart);
+                var jsonChart = {
+                    'PairName': _this.PairName,
+                    'PriceProviderCode': _this.PriceProviderCode,
+                    'WidgetType': 'fxs_widget_cag',
+                    'ContainerId': 'fxs_chart_' + _this.ContentId,
+                    'BigChartUrl': _this.BigChartUrl.toLowerCase(),
+                    'DisplayRSI': false,
+                    'DisplaySMA': false,
+                    'DisplayBigChartUrl': false,
+                    'TouchAvailable': false,
+                    'ExternalUrl': _this.BigChartUrl.toLowerCase()
+                };
+                _this.SingleChartManagerObj.init(jsonChart);
+            } 
         }
 
         var initRate = function () {
+            if(!_this.RateManagerObj){
+                _this.RateManagerObj = new FXStreet.Class.SingleRateManager();
+               
+                var jsonRate = {};
+                jsonRate.Value = {
+                    'AssetId': _this.Asset,
+                    'Title': _this.PairName,
+                    'PriceProviderCode': _this.PriceProviderCode,
+                    'DecimalPlaces': _this.DecimalPlaces,
+                    'SEO': { 'FullUrl': _this.AssetUrl }
+                };
+                jsonRate.Translations = _this.Translations;
 
-            var jsonRate = {};
-            jsonRate.Value = {
-                'AssetId': _this.Asset,
-                'Title': _this.PairName,
-                'PriceProviderCode': _this.PriceProviderCode,
-                'DecimalPlaces': _this.DecimalPlaces,
-                'SEO': { 'FullUrl': _this.AssetUrl }
-            };
-            jsonRate.Translations = _this.Translations;
-
-            _this.RateManagerObj = new FXStreet.Class.SingleRateManager();
-            _this.RateManagerObj.init({
-                "ContainerId": 'fxs_ratedata_' + _this.ContentId,
-                "Data": jsonRate,
-                "HtmlTemplateFile": 'ratesandcharts_header.html',
-                "RenderAtInit": true,
-                "MustSubscribeAtInit": true
-            });
+                _this.RateManagerObj.init({
+                    "ContainerId": 'fxs_ratedata_' + _this.ContentId,
+                    "Data": jsonRate,
+                    "HtmlTemplateFile": 'ratesandcharts_header.html',
+                    "RenderAtInit": true,
+                    "MustSubscribeAtInit": true
+                });
+            }
         };
 
 

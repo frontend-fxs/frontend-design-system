@@ -1,8 +1,9 @@
 ﻿(function ($) {
     FXStreetWidgets.Widget.LoaderForecastContributors = function () {
         var options = {
+            WidgetType: "MarketTools",
             WidgetName: "forecastcontributors",
-            EndPointV2: "api/v2/forecast/study/",
+            EndPointV2: "api/v2/forecast/{culture}/study/",
             EndPointTranslationV2: "api/v2/cultures/{culture}/forecast/",
             DefaultHost: "https://markettools.fxstreet.com/",
             Mustaches: { "forecastcontributors": "" },

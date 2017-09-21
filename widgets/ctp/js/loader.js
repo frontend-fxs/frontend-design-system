@@ -1,10 +1,11 @@
 ﻿(function ($) {
     FXStreetWidgets.Widget.LoaderCtp = function () {
         var options = {
+            WidgetType: "MarketTools",
             WidgetName: "ctp",
-            EndPointV2: "api/v2/ctp/study/",
+            EndPointV2: "api/v2/ctp/{culture}/study/",
             EndPointTranslationV2: "api/v2/cultures/{culture}/ctp/",
-            DefaultHost: "https://markettools.fxstreet.com/",
+            DefaultHost: "https://markettools.fxstreet.com/",            
             Mustaches:
                 {
                     "ctp": ""

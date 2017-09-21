@@ -1,6 +1,6 @@
 $( document ).ready(function() {
 	// sticky
     $('.sticky').fixTo('.sticky-holder', {
-        top: 130
+        top: 55
     });
 });

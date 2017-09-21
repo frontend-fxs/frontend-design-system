@@ -1,6 +1,7 @@
 ﻿(function ($) {
     FXStreetWidgets.Widget.LoaderCalendarInterestRates = function () {
         var options = {
+            WidgetType: "Calendar",
             WidgetName: "calendarinterestrates",
             EndPoint: "interest-rates/central-banks",
             EndPointTranslation: "interest-rates/localization/",

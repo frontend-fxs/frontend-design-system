@@ -1,8 +1,9 @@
 ﻿(function ($) {
     FXStreetWidgets.Widget.LoaderCtpContributors = function () {
         var options = {
+            WidgetType: "MarketTools",
             WidgetName: "ctpcontributors",
-            EndPointV2: "api/v2/ctp/study/",
+            EndPointV2: "api/v2/ctp/{culture}/study/",
             EndPointTranslationV2: "api/v2/cultures/{culture}/ctp/",
             DefaultHost: "https://markettools.fxstreet.com/",
             Mustaches:

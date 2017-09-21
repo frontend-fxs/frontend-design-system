@@ -26,14 +26,49 @@
         return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
     };
 
+    var tokenPromise;
+    var token;
+    var getTokenByDomain = function(){
+        if(tokenPromise)
+            return tokenPromise;
+        if(token){
+            return FXStreetWidgets.$.when(token);
+        }
+        else {
+            tokenPromise = FXStreetWidgets.$.ajax({
+                type: "POST",
+                url: FXStreetWidgets.Configuration.config.AuthorizationUrl,
+                contentType: "application/x-www-form-urlencoded",
+                dataType: "json",
+                data: {
+                    grant_type: "domain",
+                    client_id: "client_id"
+                }
+            }).then(function(data){
+                token = data;
+                tokenPromise = null;
+                return token;
+            }, function(error){
+                tokenPromise = null;
+            });
+            return tokenPromise;
+        }
+    };
+
     FXStreetWidgets.Util.ajaxJsonGetter = function (url, data) {
-        return FXStreetWidgets.$.ajax({
-            type: "GET",
-            url: url,
-            data: data,
-            contentType: "application/json; charset=utf-8",
-            dataType: "json"
+        var result = getTokenByDomain().then(function(token){
+            return FXStreetWidgets.$.ajax({
+                type: "GET",
+                url: url,
+                data: data,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader ("Authorization", token.token_type + ' ' + token.access_token);
+                }
+            });
         });
+        return result;
     };
 
     FXStreetWidgets.Util.renderByHtmlTemplate = function (htmlTemplate, jsonData) {

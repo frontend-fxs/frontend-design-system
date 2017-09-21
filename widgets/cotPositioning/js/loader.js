@@ -1,6 +1,7 @@
 ﻿(function ($) {
     FXStreetWidgets.Widget.LoaderCot = function () {
         var options = {
+            WidgetType: "MarketTools",
             WidgetName: "cotpositioning",
             EndPointV2: "api/v2/cot/netpositioning/",
             EndPointTranslationV2: "api/v2/cultures/{culture}/cot/",

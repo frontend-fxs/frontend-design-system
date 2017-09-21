@@ -4,6 +4,7 @@
 // Application variables & mixins
 @import "../../../website/css/less/vars.less";
 @import "../../../website/css/less/mixins.less";
+@import "../../../website/css/less/utilities.less";
 
 ////////////////////////////////////////////////
 //////////// Widget Gauge module //////////////
@@ -117,7 +118,7 @@
   }
 }
 
-// CTP Table 
+// CTP Table
 .fxs_ctp_table {
   tbody, thead, tfoot {
     >tr >td, >tr >th {
@@ -148,7 +149,7 @@
 .fxs_widget_bars {
   &.c3 {
     path, line { stroke: @lightest_clr; }
-  } 
+  }
 }
 .fxs_ctp_widget_multi {
   .c3-axis-x { display: none; }

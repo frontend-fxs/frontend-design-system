@@ -1,7 +1,7 @@
 ﻿<script id="ratestable_data" type="x-tmpl-mustache">
     <div class="clearfix"></div>
     <div class="fxs_filter_wrapper fxs_clearfix">
-        <table id="fxs_{{ContainerId}}_assets" class="fxs_table fxs_ratestable assets fxs_widget_big">
+        <table id="fxs_{{ContainerId}}_assets" class="fxs_table fxs_ratestable assets fxs_widget_big fxs_table_striped">
             <thead>
                 <tr class="fxs_ratestable_header" data-original-title="" title="">
                     <th>
@@ -23,7 +23,7 @@
                 {{/Assets}}
             </tbody>
         </table>
-        <table id="fxs_data_table_{{ContainerId}}" class="fxs_table fxs_ratestable fxs_widget_big fxs_swipeContent_slider">
+        <table id="fxs_data_table_{{ContainerId}}" class="fxs_table fxs_ratestable fxs_widget_big fxs_swipeContent_slider fxs_table_striped">
             <thead>
                 <tr class="fxs_ratestable_header" data-original-title="" title="">
                     <th>
@@ -45,10 +45,10 @@
                         {{Translations.HeaderOpen}}
                     </th>
                     <th>
-                        {{Translations.HeaderDayLow}}
+                        {{Translations.HeaderDayHigh}}
                     </th>
                     <th>
-                        {{Translations.HeaderDayHigh}}
+                        {{Translations.HeaderDayLow}}
                     </th>
                     <th>
                         {{Translations.HeaderTrend}}
@@ -67,54 +67,58 @@
             <tbody>
                 {{#Assets}}
                 <tr class="fxs_widget_ratestable">
-                    <td>
+                    <td class="fxs_ratestable_number">
                         <span id="fxs_{{ContainerId}}_data_{{ProviderCode}}_Last">
                             {{Last}}
                         </span>
                     </td>
-                    <td>
+                    <td class="fxs_ratestable_number">
                         <span id="fxs_{{ContainerId}}_data_{{ProviderCode}}_Bid">
                             {{Bid}}
                         </span>
                     </td>
-                    <td>
+                    <td class="fxs_ratestable_number">
                         <span id="fxs_{{ContainerId}}_data_{{ProviderCode}}_Ask">
                             {{Ask}}
                         </span>
                     </td>
-                    <td>
+                    <td class="fxs_ratestable_number">
                         <span id="fxs_{{ContainerId}}_data_{{ProviderCode}}_Change">
                             {{Change}}
                         </span>
                     </td>
-                    <td>
+                    <td class="fxs_ratestable_number">
                         <span id="fxs_{{ContainerId}}_data_{{ProviderCode}}_ChangePercentWithSymbol">
                             {{ChangePercent}}
                         </span>
                     </td>
-                    <td>
+                    <td class="fxs_ratestable_number">
                         <span id="fxs_{{ContainerId}}_data_{{ProviderCode}}_Open">
                             {{Open}}
                         </span>
                     </td>
-                    <td>
+                    <td class="fxs_ratestable_number">
                         <span id="fxs_{{ContainerId}}_data_{{ProviderCode}}_Low">
                             {{DayLow}}
                         </span>
                     </td>
-                    <td>
+                    <td class="fxs_ratestable_number">
                         <span id="fxs_{{ContainerId}}_data_{{ProviderCode}}_High">
                             {{DayHigh}}
                         </span>
                     </td>
                     <td class="fxs_ratestable_trend">
                         <span id="fxs_{{ContainerId}}_data_{{ProviderCode}}_Trend" class="fxs_ratestable_{{TrendClass}}">
-                            {{Trend}}
+                            <span class="custom_tooltip">
+                                {{Trend}}
+                            </span>
                         </span>
                     </td>
                     <td class="fxs_ratestable_obos">
                         <span id="fxs_{{ContainerId}}_data_{{ProviderCode}}_ObOs" class="fxs_ratestable_{{ObOsClass}}">
-                            <span class="custom_tooltip">{{ObOs}}</span>
+                            <span class="custom_tooltip">
+                                {{ObOs}}
+                            </span>
                         </span>
                     </td>
                     <td class="fxs_ratestable_volatility">
@@ -125,10 +129,6 @@
                     <td class="fxs_ratestable_shorcuts">
                         <a href="{{Translations.ChartInteractiveUrl}}{{AssetUri}}" title="chart">
                             <i class="fa fa-line-chart" aria-hidden="true"></i>
-                        </a>
-                        <a href="{{Translations.RatesAndChartsUrl}}{{AssetUri}}" title="asset">
-                            <i class="fa fa-usd" aria-hidden="true">
-                            </i>
                         </a>
                         <a href="{{Translations.NewsUrl}}{{AssetUri}}" title="news">
                             <i class="fa fa-file-text-o" aria-hidden="true">

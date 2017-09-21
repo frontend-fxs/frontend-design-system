@@ -1,22 +1,22 @@
 ﻿<script id="ratestablemenu_menu" type="x-tmpl-mustache">
     <div class="fxs_fRight">
-        <button id="fxs_menu_mylist_{{ContainerId}}" class="fxs_btn fxs_btn_table_filter fxs_btn_xsmall">{{Translations.MyList}}</button>
-        <button id="fxs_menu_main_view_{{ContainerId}}" class="fxs_btn fxs_btn_table_filter fxs_btn_xsmall active">{{Translations.MainView}}</button>
-        <div class="fxs_visible_hd">
+        <button id="fxs_menu_show_more_dropdown_button_{{ContainerId}}" class="fxs_btn fxs_btn_table_filter fxs_btn_xsmall  fxs_fRight">{{Translations.ShowMore}}<i class="fa fa-caret-down" aria-hidden="true"></i></button>
+        <div class="fxs_presets_outer">
             {{#MenuItems}}
-                {{#IsDefault}}
-                    <button id="{{Id}}_default" class="fxs_btn fxs_btn_table_filter fxs_btn_xsmall">{{Title}}</button>
-                {{/IsDefault}}
+            {{#IsDefault}}
+            <button id="{{Id}}_default" class="fxs_btn fxs_btn_table_filter fxs_btn_xsmall">{{Title}}</button>
+            {{/IsDefault}}
             {{/MenuItems}}
         </div>
-        <button id="fxs_menu_show_more_dropdown_button_{{ContainerId}}" class="fxs_btn fxs_btn_table_filter fxs_btn_xsmall">{{Translations.ShowMore}}<i class="fa fa-caret-down" aria-hidden="true"></i></button>
+        <button id="fxs_menu_main_view_{{ContainerId}}" class="fxs_btn fxs_btn_table_filter fxs_btn_xsmall active">{{Translations.MainView}}</button>
+        <button id="fxs_menu_mylist_{{ContainerId}}" class="fxs_btn fxs_btn_table_filter fxs_btn_xsmall">{{Translations.MyList}}</button>
     </div>
     <div id="fxs_menu_show_more_dropdown_{{ContainerId}}" class="fxs_hideElements fxs_dropdown right">
         <button id="fxs_menu_show_more_dropdown_close_button_{{ContainerId}}" class="fxs_btn fxs_btn_close_dropdown"><i class="fa fa-times"></i></button>
         <main>
             {{#MenuItems}}
                 {{#IsDefault}}
-                <div class="fxs_hidden_hd fxs_col fxs_col_20">
+                <div class="fxs_presets_inner fxs_col fxs_col_20">
                     <p id="{{Id}}" ><a href="javascript:;">{{Title}}</a></p>
                 </div>
                 {{/IsDefault}}

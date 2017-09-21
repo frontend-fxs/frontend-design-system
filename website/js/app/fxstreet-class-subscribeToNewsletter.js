@@ -5,7 +5,7 @@
 
         _this.Email = "";
         _this.CountryCode = "";
-        _this.FollowingClass = "";    
+        _this.FollowingClass = "";
         _this.NewsletterFollow = [];
         _this.NewsletterUnfollow = [];
 
@@ -54,11 +54,12 @@
         _this.SaveSubscribedNewslettersCookie = null;
         _this.Recaptcha = null;
 
+        var hideDropdownClass = "";
 
         _this.init = function (json) {
             _this.setSettingsByObject(json);
             _this.setVars();
-            _this.htmlRender(json);   
+            _this.htmlRender(json);
         };
 
         _this.setVars = function () {
@@ -66,9 +67,15 @@
                 _this.WidgetType = 'fxs_widget_default';
             };
             _this.Container = FXStreet.Util.getjQueryObjectById(_this.ContainerId);
-            _this.HtmlTemplateFile = getTemplateName(_this.WidgetType) ;
+            _this.HtmlTemplateFile = getTemplateName(_this.WidgetType);
             _this.DefaultNewslettersIds = getDefaultNewslettersIds();
             setInitialCheckedNewsletters();
+
+            if (_this.WidgetType === 'fxs_widget_light') {
+                hideDropdownClass = 'fxs_hideElements';
+            } else {
+                hideDropdownClass = 'fxs_dBlock';
+            }
         };
 
         var getTemplateName = function (widgetType) {
@@ -77,6 +84,7 @@
                 'fxs_widget_default': 'subscribe_default.html',
                 'fxs_widget_big': 'subscribe_big.html',
                 'fxs_widget_tab': 'subscribe_tab.html',
+                'fxs_widget_light': 'subscribe_light.html'
             };
             return templates[widgetType];
         }
@@ -85,7 +93,7 @@
             var subscribedNewsletters = $.grep(_this.Newsletters, function (newsletter) {
                 return newsletter.Subscribed;
             });
-            if (subscribedNewsletters.length === 0 && !_this.Email ) {
+            if (subscribedNewsletters.length === 0 && !_this.Email) {
                 $.each(_this.Newsletters, function () {
                     this.Subscribed = true;
                 });
@@ -105,9 +113,10 @@
             _this.CheckboxGetAll.on('change', _this.selectAll);
             _this.CheckboxItems.on('change', _this.unSelectAll);
             if (_this.DropdownButton) {
-                _this.DropdownButton.on('click', function () {
-                    _this.DropDownNewsletters.toggleClass('fxs_dBlock');
-                })
+                _this.DropdownButton.on('click',
+                    function () {
+                        _this.DropDownNewsletters.toggleClass(hideDropdownClass);
+                    });
             }
         };
 
@@ -134,7 +143,7 @@
             _this.ErrorMessageDiv = _this.Container.find('#errorMessageDiv_' + _this.ContainerId);
             _this.ErrorCaptchaMessageDiv = _this.Container.find('#errorCaptchaMessageDiv_' + _this.ContainerId);
 
-            if ($('#dropdownNewsletters_'+_this.ContainerId).length >0) {
+            if ($('#dropdownNewsletters_' + _this.ContainerId).length > 0) {
                 _this.DropDownNewsletters = FXStreet.Util.getjQueryObjectById('dropdownNewsletters_' + _this.ContainerId);
                 _this.DropdownButton = FXStreet.Util.getjQueryObjectById('dropdownButton_' + _this.ContainerId);
             }
@@ -185,10 +194,16 @@
         };
 
         _this.Submit = function (e) {
-            if (_this.DropdownButton) {
-                _this.DropdownButton.click();
+            if (_this.DropDownNewsletters) {
+                if (_this.WidgetType === 'fxs_widget_light') {
+                    _this.DropDownNewsletters.addClass(hideDropdownClass);
+                } else {
+                    _this.DropDownNewsletters.removeClass(hideDropdownClass);
+                }
             }
-            _this.Recaptcha.Execute();
+            if (preSubmit()) {
+                _this.Recaptcha.Execute();
+            }
             return false;
         }
 
@@ -197,29 +212,36 @@
                 _this.NewsletterSubscriber.SendToEventHub();
                 postSubscribe();
             }
+            _this.Recaptcha.Reset();
         }
 
-        var preSubscribe = function () {
+        var preSubmit = function () {
             $(_this.SuccessMessageDiv).hide();
             $(_this.ErrorMessageDiv).hide();
             $(_this.ErrorCaptchaMessageDiv).hide();
 
-            if (!_this.Recaptcha.GetResponse()) {
-                $(_this.ErrorCaptchaMessageDiv).show();
-                return false;
-            }          
 
             if (_this.TextBox.valid()) {
                 _this.Email = _this.TextBox.val();
-                checkNewslettersBeforeSend();
-                _this.NewsletterSubscriber.NewsletterFollow = _this.NewsletterFollow;
-                _this.NewsletterSubscriber.NewsletterUnfollow = _this.NewsletterUnfollow;
-                _this.NewsletterSubscriber.Email = _this.Email;
                 return true;
             } else {
                 $(_this.ErrorMessageDiv).show();
                 return false;
             }
+        };
+
+        var preSubscribe = function () {
+            if (!_this.Recaptcha.GetResponse()) {
+                $(_this.ErrorCaptchaMessageDiv).show();
+                return false;
+            }
+
+            checkNewslettersBeforeSend();
+            _this.NewsletterSubscriber.NewsletterFollow = _this.NewsletterFollow;
+            _this.NewsletterSubscriber.NewsletterUnfollow = _this.NewsletterUnfollow;
+            _this.NewsletterSubscriber.Email = _this.Email;
+
+            return preSubmit();
         };
 
         var postSubscribe = function () {
@@ -255,7 +277,7 @@
 
         var saveSubscribedNewslettersCookie = function () {
             var cookieManager = FXStreet.Class.Patterns.Singleton.FxsCookiesManager.Instance();
-            cookieManager.UpdateCookie(FXStreet.Util.FxsCookie.SubscribedNewsletters, JSON.stringify(_this.SelectedNewsletters), 20 * 365);
+            cookieManager.UpdateCookie(FXStreet.Util.FxsCookie.SubscribedNewsletters, JSON.stringify(_this.NewsletterFollow), 20 * 365);
         }
 
 

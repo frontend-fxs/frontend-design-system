@@ -936,6 +936,10 @@
                 _this.Chart.setOption("toolbar.comparisons", _this.Symbols);
                 _this.Chart.setOption("toolbar.dateRanges", FXStreet.Util.ChartWidgetConfig.toolbar.dateRanges);
                 _this.Chart.setOption("toolbar.file", FXStreet.Util.ChartWidgetConfig.toolbar.file);
+                var backgroundImageOpt = FXStreet.Util.ChartWidgetConfig.getBackgroundImage();
+                if(backgroundImageOpt){
+                    _this.Chart.setOption("main.background.image", backgroundImageOpt);
+                }
                 _this.Chart.addSettingListener("data.period", _this.periodChanged);
             }
         };
@@ -958,6 +962,51 @@
             }
             _this.Chart.addEventListener("eventClicked", _this.CustomExtensions.OnEventClicked);
             _this.Chart.addTemporaryEventListener('display', _this.display);
+            _this.Chart.addEventListener("symbolRequested", _this.symbolRequested);
+        };
+
+        _this.symbolRequested = function (e) {
+            if (console)
+                console.log(e);
+
+            var auth = FXStreet.Class.Patterns.Singleton.Authorization.Instance();
+            auth.getTokenPromise()
+                .then(function (token) {
+                    var timeZone = _this.Chart.getOption("data.timeZone");
+                    var url = FXStreet.Resource.TeletraderPriceProviderUrl
+                        + "?request=HISTORY" + ' ' + e.symbolId + ' ' + e.period + ' ' + e.numberOfBars + ' ' + e.dateRange
+                        + '&dataLoader=ttws&timeZone=' + timeZone;
+
+                    $.ajax({
+                        type: "GET",
+                        url: url,
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader("Authorization", token.token_type + ' ' + token.access_token);
+                        }
+                    }).done(function (historicData) {
+                        var candles = [];
+                        var candleSplit = historicData.split('\n');
+                        for (var i = 1; i < candleSplit.length - 1; i++) {
+                            const barParts = candleSplit[i].split(';');
+                            const isTickFormat = barParts.length < 5;
+                            const dt = barParts[0].split('-');
+
+                            var candle = {
+                                dateTime: new Date(dt[0], dt[1] - 1, dt[2], dt[3], dt[4], dt[5] || 0, dt[6] || 0),
+                                open: parseFloat(barParts[1]),
+                                high: parseFloat(barParts[isTickFormat ? 1 : 2]),
+                                low: parseFloat(barParts[isTickFormat ? 1 : 3]),
+                                close: parseFloat(barParts[isTickFormat ? 1 : 4]),
+                                volume: parseFloat(barParts[isTickFormat ? 2 : 5]),
+                                openInterest: parseInt(barParts[6])
+                            };
+                            candles.push(candle);
+                        }
+                        e.setHistory({
+                            data: candles
+                        });
+                    });
+                });
         };
 
         _this.display = function () {
@@ -1299,7 +1348,7 @@
                     _this.chartServiceInit();
                     clearInterval(interval);
                 }
-            }, 1000);
+            }, 2500);
         };
 
         _this.display = function (display) {
@@ -1316,11 +1365,23 @@
         return _this;
     };
     FXStreet.Util.ChartWidgetConfig = {
+        getBackgroundImage: function(){
+            var result;
+            if(FXStreet.Resource.StaticContentImage){
+                result = { 
+                    filename: FXStreet.Resource.StaticContentImage + "icons/logo_watermark_FXS.png", 
+                    alpha: 0.5, 
+                    valign: 'bottom', 
+                    paddingLeft: 15, 
+                    align: 'left', 
+                    paddingBottom: 15
+                }
+            }
+            return result;
+        },
         WidgetOptions: {
             fxs_widget_default: {
                 "global.locale": "en",
-                "data.sourceUrl": FXStreet.Resource.TeletraderPriceProviderUrl,
-                "data.pushServerUrl": FXStreet.Resource.DataProviderUrl,
                 "data.period": 'INTRADAY 60',
                 "data.numberOfBars": 200,
                 "grid.show": true,
@@ -1344,13 +1405,10 @@
                 'data.emptySpaceRight': false,
                 'data.dynamicHistoryLoading': false,
                 'dialogs.limitingElementId': '',
-                "markers.eventTypes": ["news", "calendarEvents"],
-                "main.background.image": { filename: FXStreet.Resource.StaticContentImage + "icons/logo_watermark_FXS.png", alpha: 0.5, valign: 'bottom', paddingLeft: 15, align: 'left', paddingBottom: 15 }
+                "markers.eventTypes": ["news", "calendarEvents"]
             },
             fxs_widget_big: {
                 "global.locale": "en",
-                "data.sourceUrl": FXStreet.Resource.TeletraderPriceProviderUrl,
-                "data.pushServerUrl": FXStreet.Resource.DataProviderUrl,
                 "data.period": 'INTRADAY 60',
                 "data.numberOfBars": 200,
                 "grid.show": true,
@@ -1378,8 +1436,6 @@
             },
             fxs_widget_mini: {
                 "global.locale": "en",
-                "data.sourceUrl": FXStreet.Resource.TeletraderPriceProviderUrl,
-                "data.pushServerUrl": FXStreet.Resource.DataProviderUrl,
                 "data.period": 'INTRADAY 60',
                 "data.numberOfBars": 200,
                 "grid.show": true,
@@ -1405,8 +1461,6 @@
             },
             fxs_widget_full: {
                 "global.locale": "en",
-                "data.sourceUrl": FXStreet.Resource.TeletraderPriceProviderUrl,
-                "data.pushServerUrl": FXStreet.Resource.DataProviderUrl,
                 "data.period": 'INTRADAY 15',
                 "data.dateRange": '6m',
                 "grid.show": true,
@@ -1433,13 +1487,10 @@
                 "markers.load": true,
                 "markers.eventTypes": ["news", "calendarEvents"],
                 'data.extendedTimeRegion': 5,
-                'data.emptySpaceRight': true,
-                "main.background.image": { filename: FXStreet.Resource.StaticContentImage + "icons/logo_watermark_FXS.png", alpha: 0.5, valign: 'bottom', paddingLeft: 15, align: 'left', paddingBottom: 15 }
+                'data.emptySpaceRight': true
             },
             fxs_widget_bigToolbar: {
                 "global.locale": "en",
-                "data.sourceUrl": FXStreet.Resource.TeletraderPriceProviderUrl,
-                "data.pushServerUrl": FXStreet.Resource.DataProviderUrl,
                 "data.period": 'INTRADAY 15',
                 "data.dateRange": '6m',
                 "grid.show": true,
@@ -1466,13 +1517,10 @@
                 "markers.load": true,
                 "markers.eventTypes": ["news", "calendarEvents"],
                 'data.extendedTimeRegion': 5,
-                'data.emptySpaceRight': true,
-                "main.background.image": { filename: FXStreet.Resource.StaticContentImage + "icons/logo_watermark_FXS.png", alpha: 0.5, valign: 'bottom', paddingLeft: 15, align: 'left', paddingBottom: 15 }
+                'data.emptySpaceRight': true
             },
             fxs_widget_cag: {
                 "global.locale": "en",
-                "data.sourceUrl": FXStreet.Resource.TeletraderPriceProviderUrl,
-                "data.pushServerUrl": FXStreet.Resource.DataProviderUrl,
                 "data.period": 'INTRADAY 15',
                 "data.numberOfBars": 50,
                 "grid.show": true,

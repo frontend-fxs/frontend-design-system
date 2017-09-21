@@ -1,6 +1,7 @@
 ﻿(function ($) {
     FXStreetWidgets.Widget.LoaderCorrelation = function () {
         var options = {
+            WidgetType: "MarketTools",
             WidgetName: "correlation",
             EndPointV2: "api/v2/correlation/study/",
             EndPointTranslationV2: "api/v2/cultures/{culture}/correlation/",

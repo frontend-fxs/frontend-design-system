@@ -18,7 +18,6 @@
             _this.Container = FXStreet.Util.getjQueryObjectById(_this.ContainerId);
         };
 
-
         _this.htmlRender = function (jsonData) {
             if (_this.RecaptchaInitialized === false) {
                 _this.CaptchaId = grecaptcha.render(_this.ContainerId,

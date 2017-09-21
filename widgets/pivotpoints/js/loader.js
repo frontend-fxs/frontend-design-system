@@ -1,6 +1,7 @@
 ﻿(function ($) {
     FXStreetWidgets.Widget.LoaderPivotPoints = function () {
         var options = {
+            WidgetType: "MarketTools",
             WidgetName: "pivotpoints",
             EndPointV2: "api/v2/pivotpoints/study/",
             EndPointTranslationV2: "api/v2/cultures/{culture}/PivotPointsSupportsResistance/",

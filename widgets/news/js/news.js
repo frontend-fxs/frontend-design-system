@@ -49,7 +49,6 @@
                     _this.handleJsonInvalidData();
                     return;
                 }
-
                 _this.data = data;
                 if (_this.loaderBase.isReady()) {
                     _this.log("start renderHtml for: " + _this.loaderBase.config.WidgetName);
@@ -63,10 +62,10 @@
                         }
                     }, _this.intervalTimeToWaitForReady);
                 }
-            })
-            .error(function () {
-                _this.handleJsonInvalidData();
             });
+            //.fail(function () {
+            //    _this.handleJsonInvalidData();
+            //});
     };
     FXStreetWidgets.Widget.Base.prototype.setDatesToJson = function (json, dateResponse) {
         var date = FXStreetWidgets.Util.formatDate(dateResponse);
@@ -112,6 +111,7 @@
         _this.initWidgets = FXStreetWidgets.Widget.LoaderBase.prototype.initWidgets;
         _this.log = FXStreetWidgets.Widget.LoaderBase.prototype.log;
         _this.chartLibrariesAreLoaded = FXStreetWidgets.Widget.LoaderBase.prototype.chartLibrariesAreLoaded;
+        _this.getDefaultHost = FXStreetWidgets.Widget.LoaderBase.prototype.getDefaultHost;
 
         _this.mustachesCount = 0;
         _this.mustachesLoadedCount = 0;
@@ -230,17 +230,29 @@
         var sharedJs = this.getSharedJs();
 
         this.config = {
+            WidgetType: this.options.WidgetType,
             WidgetName: this.options.WidgetName,
             Culture: FXStreetWidgets.Configuration.getCulture(),
             EndPoint: this.getEndPoint(host, version),
             EndPointTranslation: this.getEndPointTranslation(host, version),
-            DefaultHost: this.options.DefaultHost,
+            DefaultHost: this.getDefaultHost(this.options),
             CustomJs: customJs,
             SharedJs: sharedJs,
             Mustaches: this.options.Mustaches,
             Translations: {}
         };
     };
+
+    FXStreetWidgets.Widget.LoaderBase.prototype.getDefaultHost = function (options) {
+        var hosts = FXStreetWidgets.Configuration.getHosts();
+        if(!hosts) return options.DefaultHost;
+
+        var defaultHost = hosts[options.WidgetType];
+        
+        var result = defaultHost || options.DefaultHost;        
+        return result;
+    };
+
     FXStreetWidgets.Widget.LoaderBase.prototype.getContainer = function () {
         var container = $("div[fxs_widget][fxs_name='" + this.options.WidgetName + "']").first();
         return container;
@@ -248,7 +260,7 @@
     FXStreetWidgets.Widget.LoaderBase.prototype.getHost = function (container) {
         container = container || this.getContainer();
         var host = container.attr("fxs_host");
-        host = FXStreetWidgets.Util.isUndefined(host) ? this.options.DefaultHost : host;
+        host = FXStreetWidgets.Util.isUndefined(host) ? this.getDefaultHost(this.options) : host;
         return host;
     };
     FXStreetWidgets.Widget.LoaderBase.prototype.getVersion = function (container) {
@@ -282,7 +294,6 @@
         return result;
     };
     FXStreetWidgets.Widget.LoaderBase.prototype.getEndPoint = function (host, version) {
-        debugger;
         var result;
         if (this.options.EndPointV2) {
             var formattedEndpoint = getFormattedEndpoint(this.options.EndPointV2, version);
@@ -293,7 +304,6 @@
         return result;
     };
     FXStreetWidgets.Widget.LoaderBase.prototype.getEndPointTranslation = function (host, version) {
-        debugger;
         var result;
         if (this.options.EndPointTranslationV2) {
             var formattedEndpoint = getFormattedEndpoint(this.options.EndPointTranslationV2, version);
@@ -430,7 +440,7 @@
                     var url = _this.buildEndPointUrlFromParams(_this.loaderBase.config.EndPoint, _this.Tags);
                     _this.loadDataFromUrl(url);
                 })
-                .error(function () {
+                .fail(function () {
                     _this.handleJsonInvalidData();
                 });
         };
@@ -646,7 +656,7 @@
                         _this.initFilter();
                     }
                 })
-               .error(function () {
+               .fail(function () {
                    _this.handleJsonInvalidData();
                });
             }
@@ -704,7 +714,7 @@
                         _this.LoadMoreObj.attr(_this.DisableElementAttr, true).html(_this.NoMoreContentText);
                     }
                 })
-                .error(function () {
+                .fail(function () {
                     _this.handleJsonInvalidData();
                 });
         };
@@ -751,7 +761,7 @@
 
                         _this.hideObj(_this.PreLoadObj);
                     })
-                    .error(function () {
+                    .fail(function () {
                         _this.handleJsonInvalidData();
                     });
             }
@@ -835,6 +845,7 @@
 (function ($) {
     FXStreetWidgets.Widget.LoaderNews = function () {
         var options = {
+            WidgetType: "Post",
             WidgetName: "news",
             EndPoint: "post/{filter}/{productfeature}/{tags}/{page}/{take}",
             EndPointTags: "tag/filter/{tags}",
@@ -916,7 +927,7 @@
             var version = _this.getVersion(container);
             var culture = FXStreetWidgets.Configuration.getCulture();
 
-            var endPoint = host + version + culture + "/" + options.EndPointTags;
+            var endPoint = host + version + "/" + culture + "/" + options.EndPointTags;
             return endPoint;
         };
 
@@ -926,7 +937,7 @@
             var version = _this.getVersion(container);
             var culture = FXStreetWidgets.Configuration.getCulture();
 
-            var endPoint = host + version + culture + "/" + options.EndPointConfiguration;
+            var endPoint = host + version + "/" + culture + "/" + options.EndPointConfiguration;
             return endPoint;
         };
 

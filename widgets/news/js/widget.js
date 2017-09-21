@@ -100,7 +100,7 @@
                     var url = _this.buildEndPointUrlFromParams(_this.loaderBase.config.EndPoint, _this.Tags);
                     _this.loadDataFromUrl(url);
                 })
-                .error(function () {
+                .fail(function () {
                     _this.handleJsonInvalidData();
                 });
         };
@@ -316,7 +316,7 @@
                         _this.initFilter();
                     }
                 })
-               .error(function () {
+               .fail(function () {
                    _this.handleJsonInvalidData();
                });
             }
@@ -374,7 +374,7 @@
                         _this.LoadMoreObj.attr(_this.DisableElementAttr, true).html(_this.NoMoreContentText);
                     }
                 })
-                .error(function () {
+                .fail(function () {
                     _this.handleJsonInvalidData();
                 });
         };
@@ -421,7 +421,7 @@
 
                         _this.hideObj(_this.PreLoadObj);
                     })
-                    .error(function () {
+                    .fail(function () {
                         _this.handleJsonInvalidData();
                     });
             }

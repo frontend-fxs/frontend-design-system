@@ -103,6 +103,11 @@ TT.Push.prototype.newTokenSuccessCallback = function (token) {
 };
 
 TT.Push.prototype.handshake = function (token) {
+    if (!this._cometd) {
+        this.addMessage("Cometd is not instantiated.");
+        return;
+    }
+
     this.pushurl = this.GetOption("pushurl") == undefined ? this.GetDefaultOption("pushurl") : this.GetOption("pushurl");
     this.symbolsnapshot = this.GetOption("symbolsnapshot") == undefined ? this.GetDefaultOption("symbolsnapshot") : this.GetOption("symbolsnapshot");
     this.pushtype = this.GetOption("pushtype") == undefined ? this.GetDefaultOption("pushtype") : this.GetOption("pushtype");

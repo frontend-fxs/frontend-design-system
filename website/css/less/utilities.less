@@ -6,6 +6,9 @@
 // Transitions & animationss //
 
 // Transitions
+@import "vars.less";
+@import "mixins.less";
+@import "components.less";
 .fxs_transition {
     .transition(all .25s ease-in);
 }
@@ -100,6 +103,9 @@
 
 .fxs_txt_neutral {
     .fxs_txt_color_variants(@light_1_clr);
+}
+.fxs_txt_lightest{
+    .fxs_txt_color_variants(@lightest_clr);
 }
 // muted text
 .fxs_mutedContent_label {
@@ -646,6 +652,42 @@
         display: block;
     }
 }
+.fxs_hidden_m_iBlock {
+    display: none;
+
+    @media (min-width: @screen-l) {
+        display: inline-block;
+    }
+}
+
+.fxs_hidden_l {
+    display: none;
+
+    @media (min-width: @screen-xl) {
+        display: block;
+    }
+}
+.fxs_hidden_l_iBlock {
+    display: none;
+
+    @media (min-width: @screen-xl) {
+        display: inline-block;
+    }
+}
+.fxs_hidden_xl {
+    display: none;
+
+    @media (min-width: @screen-hd) {
+        display: block;
+    }
+}
+.fxs_hidden_xl_iBlock {
+    display: none;
+
+    @media (min-width: @screen-hd) {
+        display: inline-block;
+    }
+}
 
 .fxs_hidden_hd {
     display: block;
@@ -655,22 +697,34 @@
     }
 }
 
-.fxs_hidden_m_iBlock {
-    display: none;
+.fxs_hidden_hd_iBlock {
+    display: inline-block;
 
-    @media (min-width: @screen-l) {
-        display: inline-block;
-    }
-}
-
-// visible in small, hidden in big screens
-.fxs_visible_xs {
-    @media (min-width: @screen-s) {
+    @media (min-width: @screen-hd) {
         display: none;
     }
 }
 
+
+// visible in small, hidden in big screens
+
+.fxs_visible_xs {
+    @media (min-width: @screen-ss) {
+        display: none;
+    }
+}
+
+.fxs_visible_ss {
+    @media (min-width: @screen-s) {
+        display: none;
+    }
+}
 .fxs_visible_s {
+    @media (min-width: @screen-st) {
+        display: none;
+    }
+}
+.fxs_visible_st {
     @media (min-width: @screen-m) {
         display: none;
     }
@@ -681,6 +735,18 @@
         display: none;
     }
 }
+
+.fxs_visible_l {
+    @media (min-width: @screen-xl) {
+        display: none;
+    }
+}
+.fxs_visible_xl{
+    @media (min-width:@screen-hd){
+        display:none;
+    }
+}
+
 
 // Wide content containers
 .fxs_wideContent {
@@ -727,7 +793,7 @@
 
         &::-webkit-scrollbar {
             width: 12px;
-            height: 5px;
+            height: 12px;
             border-radius: 0;
         }
 

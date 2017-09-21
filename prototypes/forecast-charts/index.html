@@ -1,0 +1,426 @@
+﻿<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>
+        FORECAST CHARTS
+    </title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,500,300italic,400italic,500italic,700,700italic" rel="stylesheet" type="text/css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="../../website/css/fxs_screen.min.css">
+    <!--[
+    if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js">
+    </script>
+    <![
+    endif]-->
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+            integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
+    <script src="../../website/js/bootstrap.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.17/c3.min.css"></link>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.17/c3.min.js"></script>
+</head>
+<body class="cbp-spmenu-push">
+    <!-- The wrapper -->
+    <div class="fxs_wrapper fxs_content_wide">
+        <!--FXS CONTENT CLASS STARTS-->
+        <div class="fxs_content">
+            <!--FXS CONTENT ID STARTS-->
+            <div id="fxs_content">
+                <!-- FXS CONTENTVIEW STARTS /Space for Global Alerts & Notifications -->
+                <div class="fxs_contentView">
+                    <!--FXS MAIN DETAIL STARTS-->
+                    <main id="fxs_it_detail" role="main">
+                        <!--FXS HOME STARTS-->
+                        <div fxs_section="" id="fxs_home" class="fxs_detail">
+                            <!--ROW STARTS-->
+                            <div class="fxs_row">
+                                <!--COL 100 STARTS-->
+                                <div class="fxs_col fxs_col_100">
+                                    <!--WIDGET FORECAST-->
+                                    <div id="fxs_forecast_charts"></div>
+                                    <script>
+                                        var data, template, pointer;
+                                        data = {
+                                            'filter': [
+											{
+											    'title': 'overview',
+											    'pointer': '0',
+											    'data': {
+											        'week': {
+											            bindto: '#fxs_week',
+											            color: {
+											                pattern: ['#04AAB2', '#304C70', '#E4871B']
+											            },
+											            point: {
+											                show: true,
+											                r: function (d) {
+											                    return (d.id.search('avg')==0) ? d.value : 1;
+											                }
+											            },
+
+											            tooltip: {
+											                show: true
+											            },
+											            types: {
+											                '1 week': 'line',
+											                '1 month': 'line',
+											                '1 quarter': 'line',
+											                'avg week': 'scatter',
+											                'avg month': 'scatter',
+											                'avg quarter': 'scatter',
+											            },
+
+											            data: {
+											                x: 'x',
+											                xFormat: '%Y%m%dT%H%M',
+											                columns: [
+                                                                ['x', '20130101T1221', '20130102T1321', '20130103T1421', '20130104T1521', '20130105T1621', '20130106T1721'],
+                                                                ['1 week', 1.790, 1.760, 1.850, 1.830, 1.820, 1.790],
+                                                                ['1 month', 1.870, 1.800, 1.820, 1.870, 1.810, 1.760],
+                                                                ['1 quarter', 1.800, 1.830, 1.760, 1.850, 1.800, 1.700],
+                                                                ['avg week', 3, 4, 3, 2, 1, 2],
+                                                                ['avg month', 20, 30, 40, 30, 20, 10],
+                                                                ['avg quarter', 2, 1, 2, 1, 5, 1],
+
+											                ],
+											                axes: {
+											                    data1: 'y2',
+											                    data2: 'y2'
+											                }
+											            },
+											            axis: {
+											                x: {
+											                    type: 'timeseries',
+											                    tick: {
+											                        format: '%H:%M'
+											                    }
+											                },
+											                y: {
+											                    show: false
+											                },
+											                y2: {
+											                    show: true
+											                }
+											            },
+											            legend: {
+											                hide: ['avg week', 'avg month', 'avg quarter', ]
+											            }
+											        },
+											        'month': {
+											            bindto: '#fxs_month',
+											            data: {
+											                xs: {
+											                    IBM: 'ibm_x',
+											                    Microsoft: 'microsoft_x',
+											                },
+
+											                columns: [
+                                                                ["ibm_x", 3.5, 3.0, 3.2, 3.1, 3.6, 3.9, 3.4, 3.4, 2.9, 3.1, 3.7, 3.4, 3.0, 3.0, 4.0, 4.4, 3.9, 3.5, 3.8, 3.8, 3.4, 3.7, 3.6, 3.3, 3.4, 3.0, 3.4, 3.5, 3.4, 3.2, 3.1, 3.4, 4.1, 4.2, 3.1, 3.2, 3.5, 3.6, 3.0, 3.4, 3.5, 2.3, 3.2, 3.5, 3.8, 3.0, 3.8, 3.2, 3.7, 3.3],
+                                                                ["microsoft_x", 3.2, 3.2, 3.1, 2.3, 2.8, 2.8, 3.3, 2.4, 2.9, 2.7, 2.0, 3.0, 2.2, 2.9, 2.9, 3.1, 3.0, 2.7, 2.2, 2.5, 3.2, 2.8, 2.5, 2.8, 2.9, 3.0, 2.8, 3.0, 2.9, 2.6, 2.4, 2.4, 2.7, 2.7, 3.0, 3.4, 3.1, 2.3, 3.0, 2.5, 2.6, 3.0, 2.6, 2.3, 2.7, 3.0, 2.9, 2.9, 2.5, 2.8],
+                                                                ["IBM", 0.2, 0.2, 0.2, 0.2, 0.2, 0.4, 0.3, 0.2, 0.2, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.4, 0.4, 0.3, 0.3, 0.3, 0.2, 0.4, 0.2, 0.5, 0.2, 0.2, 0.4, 0.2, 0.2, 0.2, 0.2, 0.4, 0.1, 0.2, 0.2, 0.2, 0.2, 0.1, 0.2, 0.2, 0.3, 0.3, 0.2, 0.6, 0.4, 0.3, 0.2, 0.2, 0.2, 0.2],
+                                                                ["Microsoft", 1.4, 1.5, 1.5, 1.3, 1.5, 1.3, 1.6, 1.0, 1.3, 1.4, 1.0, 1.5, 1.0, 1.4, 1.3, 1.4, 1.5, 1.0, 1.5, 1.1, 1.8, 1.3, 1.5, 1.2, 1.3, 1.4, 1.4, 1.7, 1.5, 1.0, 1.1, 1.0, 1.2, 1.6, 1.5, 1.6, 1.5, 1.3, 1.3, 1.3, 1.2, 1.4, 1.2, 1.0, 1.3, 1.2, 1.3, 1.3, 1.1, 1.3],
+											                ],
+											                type: 'scatter'
+											            },
+											            color: {
+											                pattern: ['#4C7A9F', '#E25459']
+											            },
+											            point: {
+											                r: function (d) {
+											                    return (d.x + d.value) * 5;
+											                }
+											            }
+											        },
+											        'quarter': {
+											            bindto: '#fxs_quarter',
+											            data: {
+											                xs: {
+											                    IBM: 'ibm_x',
+											                    Microsoft: 'microsoft_x',
+											                },
+
+											                columns: [
+                                                                ["ibm_x", 3.5, 3.0, 3.2, 3.1, 3.6, 3.9, 3.4, 3.4, 2.9, 3.1, 3.7, 3.4, 3.0, 3.0, 4.0, 4.4, 3.9, 3.5, 3.8, 3.8, 3.4, 3.7, 3.6, 3.3, 3.4, 3.0, 3.4, 3.5, 3.4, 3.2, 3.1, 3.4, 4.1, 4.2, 3.1, 3.2, 3.5, 3.6, 3.0, 3.4, 3.5, 2.3, 3.2, 3.5, 3.8, 3.0, 3.8, 3.2, 3.7, 3.3],
+                                                                ["microsoft_x", 3.2, 3.2, 3.1, 2.3, 2.8, 2.8, 3.3, 2.4, 2.9, 2.7, 2.0, 3.0, 2.2, 2.9, 2.9, 3.1, 3.0, 2.7, 2.2, 2.5, 3.2, 2.8, 2.5, 2.8, 2.9, 3.0, 2.8, 3.0, 2.9, 2.6, 2.4, 2.4, 2.7, 2.7, 3.0, 3.4, 3.1, 2.3, 3.0, 2.5, 2.6, 3.0, 2.6, 2.3, 2.7, 3.0, 2.9, 2.9, 2.5, 2.8],
+                                                                ["IBM", 0.2, 0.2, 0.2, 0.2, 0.2, 0.4, 0.3, 0.2, 0.2, 0.1, 0.2, 0.2, 0.1, 0.1, 0.2, 0.4, 0.4, 0.3, 0.3, 0.3, 0.2, 0.4, 0.2, 0.5, 0.2, 0.2, 0.4, 0.2, 0.2, 0.2, 0.2, 0.4, 0.1, 0.2, 0.2, 0.2, 0.2, 0.1, 0.2, 0.2, 0.3, 0.3, 0.2, 0.6, 0.4, 0.3, 0.2, 0.2, 0.2, 0.2],
+                                                                ["Microsoft", 1.4, 1.5, 1.5, 1.3, 1.5, 1.3, 1.6, 1.0, 1.3, 1.4, 1.0, 1.5, 1.0, 1.4, 1.3, 1.4, 1.5, 1.0, 1.5, 1.1, 1.8, 1.3, 1.5, 1.2, 1.3, 1.4, 1.4, 1.7, 1.5, 1.0, 1.1, 1.0, 1.2, 1.6, 1.5, 1.6, 1.5, 1.3, 1.3, 1.3, 1.2, 1.4, 1.2, 1.0, 1.3, 1.2, 1.3, 1.3, 1.1, 1.3],
+											                ],
+											                type: 'scatter'
+											            },
+											            color: {
+											                pattern: ['#4C7A9F', '#E25459']
+											            },
+											            point: {
+											                r: function (d) {
+											                    return (d.x + d.value) * 5;
+											                }
+											            }
+											        }
+											    }
+											},
+                                        {
+                                            'title': 'bias',
+                                            'pointer': '1',
+                                            'data': {
+                                                'week': {
+                                                    bindto: '#fxs_week',
+                                                    data: {
+                                                        columns: [
+                                                        ['data1', 30, 200, 100, 400, 150, 250],
+                                                        ['data2', 50, 20, 10, 40, 15, 25]
+                                                        ]
+                                                    }
+                                                },
+                                                'month': {
+                                                    bindto: '#fxs_month',
+                                                    data: {
+                                                        columns: [
+                                                        ['data1', 30, 200, 100, 400, 150, 250],
+                                                        ['data2', 50, 20, 10, 40, 15, 25]
+                                                        ]
+                                                    }
+                                                },
+                                                'quarter': {
+                                                    bindto: '#fxs_quarter',
+                                                    data: {
+                                                        columns: [
+                                                        ['data1', 30, 200, 100, 400, 150, 250],
+                                                        ['data2', 50, 20, 10, 40, 15, 25]
+                                                        ]
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        {
+                                            'title': 'averages',
+                                            'pointer': '2',
+                                            'data': {
+                                                'week': {
+                                                    bindto: '#fxs_week',
+                                                    data: {
+                                                        columns: [
+                                                        ['data1', 30, 200, 100, 400, 150, 250],
+                                                        ['data2', 50, 20, 10, 40, 15, 25]
+                                                        ]
+                                                    }
+                                                },
+                                                'month': {
+                                                    bindto: '#fxs_month',
+                                                    data: {
+                                                        columns: [
+                                                        ['data1', 30, 200, 100, 400, 150, 250],
+                                                        ['data2', 50, 20, 10, 40, 15, 25]
+                                                        ]
+                                                    }
+                                                },
+                                                'quarter': {
+                                                    bindto: '#fxs_quarter',
+                                                    data: {
+                                                        columns: [
+                                                        ['data1', 30, 200, 100, 400, 150, 250],
+                                                        ['data2', 50, 20, 10, 40, 15, 25]
+                                                        ]
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        {
+                                            'title': 'shifted price',
+                                            'pointer': '3',
+                                            'data': {
+                                                'week': {
+                                                    bindto: '#fxs_week',
+                                                    data: {
+                                                        columns: [
+                                                        ['data1', 30, 200, 100, 400, 150, 250],
+                                                        ['data2', 50, 20, 10, 40, 15, 25]
+                                                        ]
+                                                    }
+                                                },
+                                                'month': {
+                                                    bindto: '#fxs_month',
+                                                    data: {
+                                                        columns: [
+                                                        ['data1', 30, 200, 100, 400, 150, 250],
+                                                        ['data2', 50, 20, 10, 40, 15, 25]
+                                                        ]
+                                                    }
+                                                },
+                                                'quarter': {
+                                                    bindto: '#fxs_quarter',
+                                                    data: {
+                                                        columns: [
+                                                        ['data1', 30, 200, 100, 400, 150, 250],
+                                                        ['data2', 50, 20, 10, 40, 15, 25]
+                                                        ]
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        {
+                                            'title': 'price change',
+                                            'pointer': '4',
+                                            'data': {
+                                                'week': {
+                                                    bindto: '#fxs_week',
+                                                    data: {
+                                                        columns: [
+                                                        ['data1', 30, 200, 100, 400, 150, 250],
+                                                        ['data2', 50, 20, 10, 40, 15, 25]
+                                                        ]
+                                                    }
+                                                },
+                                                'month': {
+                                                    bindto: '#fxs_month',
+                                                    data: {
+                                                        columns: [
+                                                        ['data1', 30, 200, 100, 400, 150, 250],
+                                                        ['data2', 50, 20, 10, 40, 15, 25]
+                                                        ]
+                                                    }
+                                                },
+                                                'quarter': {
+                                                    bindto: '#fxs_quarter',
+                                                    data: {
+                                                        columns: [
+                                                        ['data1', 30, 200, 100, 400, 150, 250],
+                                                        ['data2', 50, 20, 10, 40, 15, 25]
+                                                        ]
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        {
+                                            'title': 'smooth average',
+                                            'pointer': '5',
+                                            'data': {
+                                                'week': {
+                                                    bindto: '#fxs_week',
+                                                    data: {
+                                                        columns: [
+                                                        ['data1', 30, 200, 100, 400, 150, 250],
+                                                        ['data2', 50, 20, 10, 40, 15, 25]
+                                                        ]
+                                                    }
+                                                },
+                                                'month': {
+                                                    bindto: '#fxs_month',
+                                                    data: {
+                                                        columns: [
+                                                        ['data1', 30, 200, 100, 400, 150, 250],
+                                                        ['data2', 50, 20, 10, 40, 15, 25]
+                                                        ]
+                                                    }
+                                                },
+                                                'quarter': {
+                                                    bindto: '#fxs_quarter',
+                                                    data: {
+                                                        columns: [
+                                                        ['data1', 30, 200, 100, 400, 150, 250],
+                                                        ['data2', 50, 20, 10, 40, 15, 25]
+                                                        ]
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        {
+                                            'title': 'min/max',
+                                            'pointer': '6',
+                                            'data': {
+                                                'week': {
+                                                    bindto: '#fxs_week',
+                                                    data: {
+                                                        columns: [
+                                                        ['data1', 30, 200, 100, 400, 150, 250],
+                                                        ['data2', 50, 20, 10, 40, 15, 25]
+                                                        ]
+                                                    }
+                                                },
+                                                'month': {
+                                                    bindto: '#fxs_month',
+                                                    data: {
+                                                        columns: [
+                                                        ['data1', 30, 200, 100, 400, 150, 250],
+                                                        ['data2', 50, 20, 10, 40, 15, 25]
+                                                        ]
+                                                    }
+                                                },
+                                                'quarter': {
+                                                    bindto: '#fxs_quarter',
+                                                    data: {
+                                                        columns: [
+                                                        ['data1', 30, 200, 100, 400, 150, 250],
+                                                        ['data2', 50, 20, 10, 40, 15, 25]
+                                                        ]
+                                                    }
+                                                }
+                                            }
+                                        }
+                                            ]
+                                        };
+                                        //Files:
+                                        var mustachesForecastUrl = "../../widgets/forecast-charts/mustache/";
+                                        var filterMustacheUrl = mustachesForecastUrl + "forecast_charts_filter.html";
+                                        var baseMustacheUrl = mustachesForecastUrl + "forecast_charts.html";
+                                        var dataMustacheUrl = mustachesForecastUrl + "forecast_charts_data.html";
+                                        //ContainerIds
+                                        var fxsForecastChartContainerId = "#fxs_forecast_charts";
+                                        var fxsForecastFilterContainerId = "#fxs_forecast_charts_filter";
+                                        var fxsForecastDataContainerId = "#fxs_forecast_charts_data";
+                                        var fxs
+                                        var loadBase = function () {
+                                            renderHtml(baseMustacheUrl, fxsForecastChartContainerId, data, loadFilter);
+                                        }
+                                        var loadFilter = function () {
+                                            renderHtml(filterMustacheUrl, fxsForecastFilterContainerId, data, initFirstDefault);
+                                        }
+                                        var initFirstDefault = function () {
+                                            var firstButton = getFirstButton();
+                                            firstButton.addClass('active');
+                                            generateChart(data.filter[
+                                        		0].data);
+                                        }
+                                        var getFirstButton = function () {
+                                            var result = $('#fxs_forecast_charts_filter button:first-child');
+                                            return result;
+                                        }
+                                        var renderHtml = function (mustacheUrl, containerId, data, callback) {
+                                            $.get(mustacheUrl, function (templates) {
+                                                template = $(templates).filter(containerId).html();
+                                                $(containerId).html(Mustache.render(template, data));
+                                            }).done(callback);
+                                        }
+                                        loadBase();
+                                        // Onclick on button filter generate selected charts
+                                        $(document).on('click',
+                                        	'.fxs_forecast_charts_filter button',
+                                        	function () {
+                                        	    $('.fxs_forecast_charts_filter button').removeClass('active');
+                                        	    $(this).addClass('active');
+                                        	    pointer = parseInt($(this).data('pointer'));
+                                        	    console.log(pointer);
+                                        	    generateChart(data.filter[
+                                        			pointer].data);
+                                        	});
+                                        var generateChart = function (data) {
+                                            var week = c3.generate(data.week);
+                                            var month = c3.generate(data.month);
+                                            var quarter = c3.generate(data.quarter);
+                                        }
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

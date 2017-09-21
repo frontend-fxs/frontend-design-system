@@ -34,14 +34,49 @@
         return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
     };
 
+    var tokenPromise;
+    var token;
+    var getTokenByDomain = function(){
+        if(tokenPromise)
+            return tokenPromise;
+        if(token){
+            return FXStreetWidgets.$.when(token);
+        }
+        else {
+            tokenPromise = FXStreetWidgets.$.ajax({
+                type: "POST",
+                url: FXStreetWidgets.Configuration.config.AuthorizationUrl,
+                contentType: "application/x-www-form-urlencoded",
+                dataType: "json",
+                data: {
+                    grant_type: "domain",
+                    client_id: "client_id"
+                }
+            }).then(function(data){
+                token = data;
+                tokenPromise = null;
+                return token;
+            }, function(error){
+                tokenPromise = null;
+            });
+            return tokenPromise;
+        }
+    };
+
     FXStreetWidgets.Util.ajaxJsonGetter = function (url, data) {
-        return FXStreetWidgets.$.ajax({
-            type: "GET",
-            url: url,
-            data: data,
-            contentType: "application/json; charset=utf-8",
-            dataType: "json"
+        var result = getTokenByDomain().then(function(token){
+            return FXStreetWidgets.$.ajax({
+                type: "GET",
+                url: url,
+                data: data,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader ("Authorization", token.token_type + ' ' + token.access_token);
+                }
+            });
         });
+        return result;
     };
 
     FXStreetWidgets.Util.renderByHtmlTemplate = function (htmlTemplate, jsonData) {
@@ -322,6 +357,7 @@
             Logging: false,
             UseMin: true,
             ServerName: "https://staticcontent.fxstreet.com/",
+            AuthorizationUrl: "https://authorization.fxstreet.com/token",
             StaticContentQueryStringRefresh: "?t=2017081013",
             Culture: "en-US",
             StaticContentName: "widgets/",
@@ -330,11 +366,11 @@
             JsCores: ["moment.min.js", "bootstrap.min.js"],
             CssCores: ["fxswidget.min.css"],
             FontAwesome: ["font-awesome", "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css"],
-            FontGoogle: ["googleapis.com/css", "https://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,700,300italic,400italic,500italic"]
+            FontGoogle: ["googleapis.com/css", "https://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,700,300italic,400italic,500italic"]            
         };
 
         _this.init = function () {
-            _this.loadCustomConfig();
+            _this.loadCustomConfig();            
         };
 
         _this.loadCustomConfig = function () {
@@ -345,6 +381,13 @@
                     }
                 }
             };
+        };
+
+        _this.getHosts = function () {
+            if (typeof fxs_widget_hosts_config === "undefined") return null;
+
+            var result = fxs_widget_hosts_config;
+            return result;
         };
 
         _this.getCoreJsUrl = function (jsName) {
