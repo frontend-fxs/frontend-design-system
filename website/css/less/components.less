@@ -7,13 +7,10 @@
 ///////////////////// NAVIGATIONSs ////////////////////////
 @import "vars.less"; // Application variables
 @import "mixins.less"; // Application variables
+@import "utilities.less";
 // items nav list (2nd level navigations)
-
-
-
 .fxs_items_list_nav {
     .fxs_list_nav(@txt_size_small, @light_3_clr, 0.72rem 1rem);
-
     .fxs_menuList_header {
         .fxs_stiled_text_variants(block; @light_1_clr; @txt_size_xsmall);
         padding: 1.38rem 1rem 0.75rem;
@@ -21,12 +18,10 @@
 }
 // Tabs navigation (overall nav options)
 .fxs_tabs_nav {
-    .fxs_tab_item(1px solid @light_3_clr; @dark_4_clr; @light_3_clr; @base_module_size);
+    .fxs_tab_item(1px solid @light_3_clr; @dark_4_clr; @light_3_clr; @base_module_size;@txt_size_xsmall);
     white-space: nowrap;
-
-
     .fxs_pageSidebar & {
-        .fxs_tab_item(1px solid @dark_4_clr; @light_2_clr; @dark_4_clr; @main_header_height);
+        .fxs_tab_item(1px solid @dark_4_clr; @light_2_clr; @dark_4_clr; @main_header_height;@txt_size_xsmall);
     }
 }
 // SECTION & SUBSECTION TITLES
@@ -769,7 +764,7 @@
     position: relative;
     max-width: 1033px;
     width: 100%;
-    margin-top: 5px;
+    margin-top: 9px;
 
     .fxs_btn_filter {
         font-size: 1rem;
@@ -783,9 +778,9 @@
     padding: 5px 2rem 5px 2rem !important;
     border: 1px solid #e4e4e4;
     box-sizing: border-box;
-    -webkit-appearance: none;
+    /*-webkit-appearance: none;
     -moz-appearance: none;
-    appearance: none;
+    appearance: none;*/
     height: 25px;
     padding-bottom: 0;
     padding-top: 0;
@@ -914,14 +909,15 @@
         &:hover {
             background-color: @light_4_clr;
         }
-
-        .fxs_search_module_item {
-            padding-left: @txt_defaultsize_rem * 2;
-            padding-right: @txt_defaultsize_rem * 2;
-            padding-top: 0.5rem;
-        }
     }
 }
+
+.fxs_search_module_item {
+    padding-left: @txt_defaultsize_rem * 2;
+    padding-right: @txt_defaultsize_rem * 2;
+    padding-top: 0.5rem;
+}
+
 
 .fxs_search_list_item {
     margin: 0;
@@ -1300,10 +1296,6 @@
                 }
             }
         }
-    }
-
-    .cbp-spmenu-push-toleft &, .cbp-spmenu-push-toright & {
-        display: none;
     }
 }
 
@@ -1945,75 +1937,7 @@
     }
 }
 
-/////////////////////////////////////////////////////
-//////// TABLES FOR CONTENT AND WIDGETS ////////////
-
-.fxs_table {
-    width: 100%;
-    max-width: 100%;
-    font-size: @txt_size_small;
-    line-height: @txt_lineheight_small;
-
-    > tbody, > thead, > tfoot {
-        > tr > td, > tr > th {
-            padding: 2px;
-            border-bottom: 1px solid @light_4_clr;
-        }
-    }
-
-        > thead > tr > th {
-            vertical-align: bottom;
-        }
-
-        > thead > tr > th, > tbody > tr > th {
-            .fxs_stiled_text_variants(table-cell; @light_1_clr; @txt_size_xsmall);
-            text-align: left;
-        }
-
-    tbody tr td, tbody tr th {
-        text-align: left;
-        vertical-align: middle;
-        white-space: normal;
-    }
-
-    caption {
-        font-size: @txt_size_small;
-        color: @light_1_clr;
-        padding: @half_base_spacer 0;
-        text-align: left;
-    }
-}
-
-.fxs_tableHover {
-    tbody {
-        > tr > td:last-child {
-            width: @base_module_size;
-            text-align: center;
-
-            .fxs_btn_icon {
-                color: @light_2_clr;
-            }
-        }
-
-        &:hover {
-            > tr {
-                //.opacity(.7);
-                &:hover {
-                    &:extend(.fxs_transition);
-                    //.opacity(1);
-                    background-color: @light_5_clr;
-                    cursor: pointer;
-
-                    .fxs_btn_icon {
-                        color: @dark_4_clr;
-                        padding-left: @half_base_spacer;
-                    }
-                }
-            }
-        }
-    }
-}
-
+@import "components/table.less";
 
 // LOADERS & FEEDBACK
 .fxs_feedbackLoading_msg {
@@ -2065,14 +1989,13 @@
 ////////////////// general clock ///////////////////
 .fxs_site_clock {
     display: inline-block;
-    padding-left: 0.4rem;
-    padding-right: 0.4rem;
+    padding: 0;
 
     a {
         color: @light_3_clr;
         font-size: @txt_defaultsize_rem;
         float: left;
-        width: @txt_defaultsize_rem*2;
+        width: 45px;
         text-align: center;
 
         @media(min-width:@screen-m) {
@@ -2083,8 +2006,17 @@
             color: @lightest_clr;
         }
 
-        @media(min-width:@screen-s) {
-            //font-size: @txt_defaultsize_rem;
+        .fa-search,
+        .fa-clock-o {
+            font-size: 1.5rem;
+            line-height: 45px;
+            width: 45px;
+
+            @media(min-width:@screen-m) {
+                font-size: inherit;
+                line-height: inherit;
+                width: inherit;
+            }
         }
     }
 }
@@ -2102,6 +2034,7 @@
     li {
         margin-left: 0;
         margin-right: 0;
+        position: relative;
 
         @media(min-width: @screen-m ) {
             margin-left: 5px;
@@ -3063,10 +2996,6 @@
 
     @media(min-width:@screen-l) {
         right: 1rem;
-    }
-
-    .cbp-spmenu-push-toleft & {
-        display: none;
     }
 }
 

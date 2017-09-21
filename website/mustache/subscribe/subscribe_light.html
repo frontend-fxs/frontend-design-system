@@ -1,0 +1,33 @@
+﻿<script id="subscribe_light" type="x-tmpl-mustache">
+    <form id="{{ContainerId}}" action="" method="get">
+        <div class="fxs_suscribe fxs_subscribe_light">
+            <div class="fxs_subscribe_envelope">
+            </div>
+            <div class="fxs_title_benefits_wrapper">
+                <label for="inputMail_{{ContainerId}}" class="fxs_suscribeText fxs_subscribe_title"> {{{SubscriptionText}}} </label>
+                <div class="fxs_benefits">
+                    {{#SubscriptionBenefits}}
+                    <div class="fxs_benefit"><i class="fa fa-check" aria-hidden="true"></i> {{.}}</div>
+                    {{/SubscriptionBenefits}}
+                </div>
+            </div>
+            <div class="fxs_subscribeForm_group">
+                <input id="inputMail_{{ContainerId}}" type="email" required="" class="fxs_textInput" placeholder="{{{Translations.SubscribeToNewsletterInputPlaceholder}}}">
+                <div class="fxs_btn_group ">
+                    <button id="submit_{{ContainerId}}" class="fxs_btn fxs_btn_cta">{{Translations.SubscribeButtonText}}</button>
+                    <button type="button" id="dropdownButton_{{ContainerId}}" class="fxs_btn_icon fxs_btn_cta fxs_btn_dd fxs_dropdownList_active"><i class="fa fa-caret-down"></i><span class="fxs_skip">{{Translations.MoreOptionsButtonText}}</span></button>
+                    <ul id="dropdownNewsletters_{{ContainerId}}" class="fxs_hideElements fxs_list_unstyled fxs_dropdownList_notwide">
+                        {{#Newsletters}}
+                            {{^Default}}
+                                <li> <label> <input type="checkbox" name="newsletters" value="{{Id}}" {{#Subscribed}} checked {{/Subscribed}}> {{Name}} </label> </li>
+                            {{/Default}}
+                        {{/Newsletters}}
+                    </ul>
+                    <div id="recaptcha_{{ContainerId}}" class="fxs_hideElements"></div>
+                </div>
+                <p id="errorMessageDiv_{{ContainerId}}" style="display:none"><span class="fxs_txt_danger"> <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{{Translations.SubscribeToNewsletter_EmailNotValidMessage}}}</span></p>
+                <p id="successMessageDiv_{{ContainerId}}" style="display:none"><span class="fxs_alertText fxs_txt_success"> <i class="fa fa-check" aria-hidden="true"></i> {{{Translations.SubscribeToNewsletter_SuccessMessage}}}</span></p>
+            </div>
+        </div>
+    </form>
+</script>

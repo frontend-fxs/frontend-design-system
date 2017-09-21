@@ -97,13 +97,6 @@
                 _this.ResponsiveDesignObj.whenWindowResizesToMobile(_this.ResizeToMobile);
                 _this.ResponsiveDesignObj.whenWindowResizesToTablet(_this.ResizeToMobile);
                 _this.ResponsiveDesignObj.whenWindowResizesToDesktop(_this.ResizeToDesktop);
-                _this.ResponsiveDesignObj.whenWindowIncreaseToSize(_this.DesignTeamIncreaseLimit, designTeamLimit);
-                _this.ResponsiveDesignObj.whenWindowDecreaseToSize(_this.DesignTeamReduceLimit, designTeamLimit);
-
-                _this.removeSwipe();
-                if (!_this.ResponsiveDesignObj.IsDesktop()) {
-                    _this.setSwipe();
-                }
             }
         };
 
@@ -136,49 +129,20 @@
                 var stickyManager = FXStreet.Class.Patterns.Singleton.StickyManager.Instance();
                 stickyManager.setSticky();
             }
-        }
-
-        _this.SidebarLeft_ShowButton_Click = function () {
-            _this.SidebarLeft_ShowButton.toggleClass('active');
-            _this.Body.toggleClass('cbp-spmenu-push-toright');
-            _this.Body.removeClass('fxs_push_timezone');
-            _this.SidebarLeft_Container.toggleClass('cbp-spmenu-open');
-            _this.SidebarLeft_Container.toggleClass('cbp-spmenu-open');
         };
 
         _this.ResizeToMobile = function () {
             _this.setTouch();
-            _this.removeSwipe();
-            _this.setSwipe();
         };
 
         _this.ResizeToDesktop = function () {
             if (typeof _this.removeTouch === "function") {
                 _this.removeTouch();
             }
-            if (typeof _this.removeSwip === "function") {
-                _this.removeSwip();
-            }
-        };
-
-        _this.DesignTeamReduceLimit = function () {
-            _this.resetMenu();
-            _this.removeSwipe();
-        };
-
-        _this.DesignTeamIncreaseLimit = function () {
-            _this.resetMenu();
-            _this.removeSwipe();
         };
 
         _this.disableAll = function () {
             _this.SidebarLeft_ShowButton.toggleClass('disable');
-        };
-
-        _this.resetMenu = function () {
-            _this.Body.removeClass('cbp-spmenu-push-toright');
-            _this.Body.removeClass('cbp-spmenu-push-toleft');
-            _this.SidebarLeft_Container.removeClass('cbp-spmenu-open');
         };
 
         _this.setTouch = function () {
@@ -189,16 +153,10 @@
             _this.Body.removeClass('fxs_touch');
         };
 
-        _this.removeSwipe = function () {
-            _this.SidebarLeft_Container.off('swipeleft');
-        };
-
-        _this.setSwipe = function () {
-            _this.SidebarLeft_Container.on('swipeleft', _this.SidebarLeft_ShowButton_Click);
-        };
-
         return _this;
     };
+
+
     FXStreet.Class.TemplateList = function () {
         var parent = FXStreet.Class.TemplateBase(),
           _this = FXStreet.Util.extendObject(parent);

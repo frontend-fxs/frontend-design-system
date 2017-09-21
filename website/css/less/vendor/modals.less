@@ -1,3 +1,5 @@
+@import "../utilities.less";
+
 //
 // Modals
 // --------------------------------------------------
@@ -79,7 +81,7 @@
 .modal-header {
   padding: @modal-title-padding;
   border-bottom: 1px solid @modal-header-border-color;
-  &:extend(.clearfix all);
+  &:extend(.fxs_clearfix all);
 }
 // Close icon
 .modal-header .close {
@@ -104,7 +106,7 @@
   padding: @modal-inner-padding;
   text-align: right; // right align buttons
   border-top: 1px solid @modal-footer-border-color;
-  &:extend(.clearfix all); // clear it in case folks use .pull-* classes on buttons
+  &:extend(.fxs_clearfix all); // clear it in case folks use .pull-* classes on buttons
 
   // Properly space out buttons
   .btn + .btn {

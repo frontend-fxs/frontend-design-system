@@ -1,0 +1,1029 @@
+body {
+	padding:0; 
+	margin:0
+}
+.TSChart .tt_copyrightSign {
+	right:10px;
+	left:auto;
+	z-index:1000
+}
+.tt_copyrightTooltip > div {
+	right:-5px;
+	left:auto;
+}
+.TSChart .tt_chartContainer {
+	background-color: transparent;
+	border:none !important
+}
+#chart1 {
+	/*width: 97%; */
+	padding: 5px;
+	/*height:65%;*/
+}
+.TSChart .tt_dataInfo > tr > td
+{
+    background-color: rgba(0,39,72,0.7);
+	line-height:1.5;
+	font-weight:normal;
+	font-size:100%
+}
+.TSChart .tt_dataInfo > tr > td.tt_dataInfoHeader
+{
+    background-color: rgba(0,39,72,0.8);
+}
+.TSChart .tt_panelDiv {
+    padding: 5px;
+}
+.TSChart .tt_symbolTitle > div {
+	background-color: rgba(0, 39, 72, 0.7);
+    line-height: 45px;
+	height:45px;
+	width:45px;
+    padding: 0 15px;
+}
+.TSChart .tt_symbolTitle > .tt_infoHeader {
+	display:none;
+}
+.TSChart .tt_symbolTitle:hover > div {
+    background-color: rgba(0,39,72,0.8);
+}
+.TSChart .tt_symbolTitle > div > span.tt_symbolColor {
+	margin: 0 15px 0 -15px;
+	padding:0 2px
+}
+.TSChart .tt_symbolTitle > div:nth-child(2), .TSChart .tt_symbolTitle > div:nth-of-type(2n) {
+	background: url(img/mobile/close.png) no-repeat center center rgba(0, 39, 72, 0.7);
+}
+.TSChart .tt_symbolTitle:hover > div:nth-child(2), .TSChart .tt_symbolTitle:hover > div:nth-of-type(2n) {
+	background-color: rgba(0, 39, 72, 0.8);
+}
+.TSChart .tt_symbolTitle > div.tt_symbol_reload {
+	background: url(img/mobile/reload.png) no-repeat center center rgba(0, 39, 72, 0.7);
+}
+.TSChart .tt_symbolTitle {
+    margin:5px;
+}
+.TSChart .tt_XcrossHairLabel {
+    background: url(img/mobile/crosshair-labels.png) no-repeat center top;
+    padding: 6px 6px 2px 6px;
+    margin-top: 1px;
+}
+.TSChart .tt_YcrossHairLabel {
+	white-space:nowrap;
+	background:rgba(0, 39, 72, 0.6)
+}
+.TSChart .tt_YcrossHairLabel:before {
+	border-right-color: rgba(0, 39, 72, 0.6)
+}
+.TSChart .tt_lastLabel {
+	white-space:nowrap;
+}
+.tt_axisLabel {
+    font: 12px Arial, Helvetica, sans-serif;
+}
+
+/* main bottom navigation */
+.chart_nav {
+	width: 100%; 
+	padding:0; 
+	margin:0; 
+	color:white;
+	position:fixed;
+	bottom:0;
+	left:0;
+	font-family: Arial, Helvetica, sans-serif;
+	z-index:100
+}
+.chart_nav ul {
+	padding:0;
+	margin:0;
+	white-space:nowrap
+}
+.chart_nav li {
+	float:left;
+	list-style:none;
+	font-size:130%;
+	font-weight:bold;
+	border-right:1px solid #062e49;
+	border-left:1px solid #407292;
+	line-height:45px;
+	text-align: center;
+    /*width: 8.9%;*/
+	width:8.1%;
+	cursor:pointer;
+	display: inline-block;
+	height:45px;
+	background: -moz-linear-gradient(top,  #16608c 0%, #08385b 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#16608c), color-stop(100%,#08385b)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #16608c 0%,#08385b 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #16608c 0%,#08385b 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #16608c 0%,#08385b 100%); /* IE10+ */
+	background: linear-gradient(top,  #16608c 0%,#08385b 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#16608c', endColorstr='#08385b',GradientType=0 ); /* IE6-9 */
+}
+.chart_nav li:first-child  {
+	border-left:none;
+}
+.chart_nav li.tt_history {
+	display:inline-block
+}
+.chart_nav li.chart_settings {
+	border:none;
+	/*width:8.5%;*/
+	width:8.9%;
+	position:absolute;
+	right:0;
+	bottom:0
+}
+.chart_nav li.active, .chart_nav li.chart_settings, .chart_nav, .chart_nav li.chart_settings:hover {
+	background: -moz-linear-gradient(top,  #2390c6 0%, #0c5689 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#2390c6), color-stop(100%,#0c5689)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #2390c6 0%,#0c5689 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #2390c6 0%,#0c5689 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #2390c6 0%,#0c5689 100%); /* IE10+ */
+	background: linear-gradient(top,  #2390c6 0%,#0c5689 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2390c6', endColorstr='#0c5689',GradientType=0 ); /* IE6-9 */
+}
+.chart_nav li span {
+	height:45px;
+	min-width:40px;
+	display:block;
+	margin:0 auto;
+}
+.chart_nav li.chart_settings span {
+	background: url(img/mobile/settings30x30.png) no-repeat center center transparent; 
+}
+.chart_nav li.tt_history span {
+	background: url(img/mobile/history.png) no-repeat center center transparent; 
+}
+.chart_nav li.chart_settings:hover span {
+	opacity:0.7;
+}
+/* END of main bottom navigation */
+/* Settings submenu */
+.chart_settings_submenu {
+	position:fixed;
+	bottom:45px;
+	left:0;
+	width: 100%; 
+	padding:0; 
+	margin:0; 
+	color:white;
+	font-family: Arial, Helvetica, sans-serif;
+	z-index:1001
+} 
+.chart_settings_submenu table {
+	width:100%;
+	text-align:center;
+	height:100%;
+}
+.chart_settings_submenu td {
+	font-size:110%;
+	background-color: rgba(0, 39, 72, 0.85);
+	border-right:1px solid #fff;
+	border-bottom:1px solid #fff;
+}
+.chart_settings_submenu tr.options td, .chart_settings_submenu tr.options td.tt_selected {
+	height:55px;
+	background-color: rgba(0, 39, 72, 0.85);
+	border-right:1px solid #72889a;
+	border-bottom:1px solid #72889a;
+	cursor:pointer;
+	width:11%;
+}
+.chart_settings_submenu tr.options td.last  {
+	border-right:1px solid #fff;
+}
+.chart_settings_submenu td:last-child, .chart_settings_submenu tr.options td.last:last-child  {
+	border-right:none;
+}
+.chart_settings_submenu td[value='volume'] {
+	background: url(img/mobile/volume.png) no-repeat center center;
+}
+.chart_settings_submenu td[value='linear'] {
+	background: url(img/mobile/price.png) no-repeat center center;
+}
+.chart_settings_submenu td[value='%'] {
+	background: url(img/mobile/procent.png) no-repeat center center;
+}
+.chart_settings_submenu td[value='log'] {
+	background: url(img/mobile/log.png) no-repeat center center;
+}
+.chart_settings_submenu td[value='ohlc'] {
+	background: url(img/mobile/ohlc.png) no-repeat center center;
+}
+.chart_settings_submenu td[value='hlc'] {
+	background: url(img/mobile/hlc.png) no-repeat center center;
+}
+.chart_settings_submenu td[value='candle'] {
+	background: url(img/mobile/candle.png) no-repeat center center;
+}
+.chart_settings_submenu td[value='line'] {
+	background: url(img/mobile/line.png) no-repeat center center;
+}
+.chart_settings_submenu td[value='mountain'] {
+	background: url(img/mobile/mountain.png) no-repeat center center;
+}
+.chart_settings_submenu td[value='point'] {
+	background: url(img/mobile/point.png) no-repeat center center;
+}
+.chart_settings_submenu td[value='stepstair'] {
+	background: url(img/mobile/step-stair.png) no-repeat center center;
+}
+.chart_settings_submenu td[value='equivolume'] {
+	background: url(img/mobile/equivolume.png) no-repeat center center;
+}
+.chart_settings_submenu td[value='heikinashi'] {
+	background: url(img/mobile/heikinashi.png) no-repeat center center;
+}
+.chart_settings_submenu td[value='drawing'] {
+	background: url(img/mobile/DrawingTools.png) no-repeat center center;
+}
+.chart_settings_submenu tr.options td.tt_selected, .chart_settings_submenu tr.options td:hover {
+	background-color: rgba(0, 39, 72, 1);
+}
+.chart_settings_submenu tr:last-child td {
+	height:32px;
+}
+.SelectedTool td {
+	height:6px;
+	border:none;
+	background-color:transparent;
+}
+.SelectedTool td.tt_selected {
+	background:url(img/mobile/selected_tool.png) no-repeat center 0;
+	cursor:pointer;
+}
+.chart_settings_submenu tr:first-child > td  {
+	background:none;
+}
+#Indicators table, #Symbols table{
+	margin:0 auto;
+	width:97%
+}
+#Indicators td, #Symbols td   {
+	background-color: rgba(0, 39, 72, 0.95);
+	font-size:80%;
+	cursor:pointer;
+	padding:0 10px;
+	height:48px;
+	line-height:normal;
+	width:100px;
+	white-space:normal
+}
+#Indicators tr:last-child td, #Symbols tr:last-child td {
+	border-bottom:none
+}
+#Indicators, #Symbols {
+ 	border:none;
+    position:absolute;
+	bottom:145px;
+	width:100%
+}
+#Indicators td:hover, #Symbols td:hover {
+	background-color: rgba(0, 39, 72, 1);
+}
+#AddIndicator.tt_selected, #AddCompare.tt_selected, #AddIndicator:hover, #AddCompare:hover   {
+	background-color: rgba(0, 39, 72, 0.95);
+}
+#AddIndicator, #AddCompare {
+	width:50%;
+	cursor:pointer;
+	height:48px;
+}
+#AddIndicator span, #AddCompare span {
+	display:inline-block;
+	height: 11px;
+    width: 6px;
+	background: url(img/mobile/arrow.png) no-repeat right center;
+	margin-left: 8px;
+}
+.chart_settings_submenu > table > tbody > tr:first-child > td{
+	border:none
+}
+.drawingToolDiv {
+	position:absolute;
+	top:30px;
+	padding-bottom: 6px;
+	right:3px;
+	visibility: hidden;
+	/*width:90px;*/
+	z-index:1000
+}
+.drawingTool {
+	background-color: rgba(0, 39, 72, 0.9);
+	margin:0;
+	width:90px;
+	list-style:none;
+	padding:0;
+	z-index:5000;
+}
+.drawingTool li {
+	border-top:1px solid #fff;
+	height:60px
+}
+.drawingTool li.delete { 
+	background: url(img/mobile/DrawingTool_delete.png) no-repeat center center;
+}
+.drawingTool li.text { 
+	background: url(img/mobile/DrawingTool_text.png) no-repeat center center;
+}
+.drawingTool li.trendChannel { 
+	background: url(img/mobile/DrawingTool_lineChannel.png) no-repeat center center;
+}
+.drawingTool li.horizontalLine { 
+	background: url(img/mobile/DrawingTool_horizLine.png) no-repeat center center;
+}
+.drawingTool li.Line { 
+	background: url(img/mobile/DrawingTool_line.png) no-repeat center center;
+}
+.drawingTool li.select { 
+	background: url(img/mobile/DrawingTool_select.png) no-repeat center center;
+}
+#DrawingToolsArrow {
+	background:url(img/mobile/DrawingToolsArrow.png) no-repeat center center rgba(0, 39, 72, 0.85);
+	cursor:pointer
+}
+.drawingTool li:hover, #DrawingToolsArrow:hover {
+	background-color: rgba(0, 39, 72, 1);
+}
+.drawingToolHeader {
+	background:url(img/mobile/move.png) no-repeat 1px center rgba(0, 39, 72, 1);
+	height: 44px;
+	width: 90px;
+	z-index: 150;
+	cursor:move
+}
+.drawingToolHeader span {
+	background:url(img/mobile/close.png) no-repeat scroll center center rgba(0, 39, 72, 0.65);
+	height:44px;
+	width:44px;
+	float:right;
+	cursor:pointer
+}
+/* END of Settings submenu*/
+
+/* Dialog */
+.tt_font-weight, .tt_font-style, .tt_text-decoration, .tt_font-size {
+	height: 60px;
+	width: 60px;
+	margin: 0 4px;
+	background: url(img/mobile/font-style.png) no-repeat center -1px;
+}
+.tt_font-style {
+	background-position: center -89px;
+}
+.tt_text-decoration {
+	background-position: center -163px;
+}
+.tt_font-size {
+	background-position: center -262px;
+}
+.tt_font-size[data-value='1'] {
+	background-position: center -350px;
+}
+.TSChart .tt_popUp {
+	background-color: rgba(0, 39, 72, 0.85);
+	width:auto;
+	left: 230px;
+	/*top:10px;*/
+}
+.TSChart .tt_popUp h1 {
+	background:url(img/mobile/move.png) no-repeat 1px center rgba(0, 39, 72, 0);
+	padding: 0 100px 0 22px;
+	line-height:44px;
+	height:44px;
+	font-weight:normal
+}
+.TSChart .tt_drawingToolsDialog h1 {
+	padding-right:100px	
+}
+.TSChart .tt_popUp .tt_close, .TSChart .tt_popUp .tt_ok, .TSChart .tt_popUp .tt_remove {
+	width:44px;
+	height:44px;
+	background:url(img/mobile/close.png) no-repeat center center rgba(0, 39, 72, 0.65);
+}
+.TSChart .tt_popUp .tt_ok {
+	background:url(img/mobile/ok.png) no-repeat center center rgba(0, 39, 72, 0.65);
+	right:45px;
+}
+.TSChart .tt_popUp .tt_close:hover, .TSChart .tt_popUp .tt_ok:hover, .TSChart .tt_popUp .tt_remove:hover {
+	background-color: rgba(0, 39, 72, 1)
+}
+.TSChart .tt_popUp .tt_remove {
+	right:45px;	
+	background:url(img/mobile/trash.png) no-repeat center center rgba(0, 39, 72, 0.65);	
+}
+.TSChart .tt_popUp .tt_chartTypes ul {
+	padding:0;
+	margin:0
+}
+.TSChart .tt_popUp .tt_chartTypes li {
+	list-style:none;
+	width:80px;
+	height:70px;
+	border:1px solid white;
+	margin:0;
+	float:left;
+	border-right:none;
+	border-top:none;
+	cursor:pointer
+}
+.TSChart .tt_popUp .tt_chartTypes li:first-child {
+	border-left:none;
+}
+.TSChart .tt_popUp .tt_chartTypes li[data-value='ohlc'] {
+	background: url(img/mobile/ohlc.png) no-repeat center center;
+}
+.TSChart .tt_popUp .tt_chartTypes li[data-value='hlc'] {
+	background: url(img/mobile/hlc.png) no-repeat center center;
+}
+.TSChart .tt_popUp .tt_chartTypes li[data-value='candle'] {
+	background: url(img/mobile/candle.png) no-repeat center center;
+}
+.TSChart .tt_popUp .tt_chartTypes li[data-value='line'] {
+	background: url(img/mobile/line.png) no-repeat center center;
+}
+.TSChart .tt_popUp .tt_chartTypes li[data-value='mountain'] {
+	background: url(img/mobile/mountain.png) no-repeat center center;
+}
+.TSChart .tt_popUp .tt_chartTypes li[data-value='area'] {
+	background: url(img/mobile/area.png) no-repeat center center;
+}
+.TSChart .tt_popUp .tt_chartTypes li[data-value='column'] {
+	background: url(img/mobile/bars.png) no-repeat center center;
+}
+.TSChart .tt_popUp .tt_chartTypes li[data-value='point'] {
+	background: url(img/mobile/point.png) no-repeat center center;
+}
+.TSChart .tt_popUp .tt_chartTypes li[data-value='stepstair'] {
+	background: url(img/mobile/step-stair.png) no-repeat center center;
+}
+.TSChart .tt_popUp .tt_chartTypes li[data-value='equivolume'] {
+	background: url(img/mobile/equivolume.png) no-repeat center center;
+}
+.TSChart .tt_popUp .tt_chartTypes li[data-value='heikinashi'] {
+	background: url(img/mobile/heikinashi.png) no-repeat center center;
+}
+.TSChart .tt_popUp .tt_chartTypes li[data-value='dash'] {
+	background: url(img/mobile/dash.png) no-repeat center center;
+}
+.TSChart .tt_popUp .tt_chartTypes li.tt_selected, .TSChart .tt_popUp .tt_chartTypes li.tt_selected:hover, .TSChart .tt_popUp .tt_plotTypes > span.tt_selected, .TSChart .tt_popUp .tt_barColorBase > span.tt_selected {
+	background-color: rgba(0, 39, 72, 1);
+}
+.TSChart .tt_popUp .tt_setColor {
+	display:inline-block;
+}
+.TSChart .tt_popUp .tt_setColor input, .TSChart .tt_popUp .tt_chartTypes input {
+	padding:0;
+	margin:20px 15px;
+	float:none;
+	width:60px;
+	height:60px;
+	text-indent:-100px;
+	cursor:pointer;
+	background-image:none;
+	font-size:0
+}
+.TSChart .tt_popUp .tt_chartTypes input {
+	width:60px;
+	height: 50px;
+	margin:-4px 10px 10px;
+}
+.TSChart .tt_popUp .tt_setColor > input {
+	background-image:url(img/mobile/setColor-arrow-big.png)!important;
+	background-position:right bottom
+}
+.TSChart .tt_popUp div {
+	/*height: auto;*/
+    padding: 0;
+}
+.TSChart .tt_popUp .tt_setColor div {
+	height:auto;
+	margin:-15px 0 15px 0
+}
+.TSChart .tt_popUp .tt_chartTypes div {
+	border-bottom:1px solid white;
+	line-height:44px;
+}
+.TSChart .tt_popUp .tt_chartTypes ul li div {
+	border:none
+}
+.TSChart .tt_popUp .tt_tabs li {
+	line-height:44px;
+	width:161px
+}
+.TSChart .tt_popUp .tt_tabs li.tt_selected, .TSChart .tt_popUp .tt_tabs li.tt_selected:hover, .TSChart .tt_popUp .tt_tabs li:hover {
+	background-color: rgba(0, 39, 72, 1);
+}
+.TSChart .tt_popUp .tt_parameters {
+	padding:20px 90px 0 15px ;
+	position:relative
+}
+.TSChart .tt_popUp .tt_baseSelection {
+    padding-right:15px !important
+}
+.TSChart .tt_popUp .tt_parameters:last-child {
+	padding-bottom:20px 	
+}
+.TSChart .tt_popUp .tt_parameters input {
+	margin:0 0 0 15px;
+	width:36px;
+	height:40px	;
+	padding:0 7px;
+	float:none;
+}
+.TSChart .tt_popUp .tt_baseSelection > input.tt_on_off {
+	margin:0;
+}
+.TSChart .tt_popUp .tt_parameters > input.tt_on_off {
+	width:52px
+}
+.TSChart .tt_popUp .tt_parameters label {
+    /*line-height: 40px;*/
+	width:140px;
+}
+.TSChart .tt_popUp .tt_tabs li:hover, .TSChart .tt_popUp .tt2_chartTypes li:hover, .TSChart .tt_popUp .tt_plotTypes > span:hover, .TSChart .tt_popUp .tt_barColorBase > span:hover {
+	background-color: rgba(0, 39, 72, 0.85);	
+}
+.TSChart .tt_popUp .tt_validator {
+    font-size: 240%;
+	position: absolute;
+    right: 70px;
+	top:25px
+}
+.TSChart .tt_popUp .tt_plotTypes > span {
+	line-height:44px;
+	width:107px
+}
+.TSChart .tt_popUp .tt_barColorBase > span {
+	line-height:44px;
+	width:151px
+}
+.TSChart .tt_colorPicker {
+    background-color: rgba(0, 39, 72, 0.8);
+	height:205px;
+	width:300px;
+}
+.TSChart .tt_colorPicker > div {
+	width:300px!important	
+}
+.TSChart .tt_colorPicker > .tt_colorPickerSet {
+	height:135px;
+	width:auto!important	
+}
+.tt_colorPicker > div > div {
+	height:155px	
+}
+.TSChart .tt_colorPickerSet td {
+    height: 40px;
+    width: 40px;
+}
+.TSChart .tt_colorPickerSet td.tt_selected {
+	width:36px;
+	height:36px
+}
+.TSChart .tt_colorPickerButton {
+    background-color: rgba(0, 39, 72, 1) !important;
+	height:40px !important;
+}
+.TSChart .tt_colorPickerButton > span {
+	font: 18px sans-serif;
+	background: url(img/mobile/cancel.png) no-repeat scroll center center;
+	height:40px;
+	width:40px;
+	line-height:40px
+}
+.TSChart .tt_colorPickerButton:last-child {
+	padding: 0 15px 0 28px!important	
+}
+.TSChart .tt_colorPickerButton:nth-child(2) > span {
+	background: url(img/mobile/ok.png) no-repeat scroll center center;
+}
+.TSChart .tt_colorPickerButton:last-child > span {
+	background-image:none;
+	width:auto	
+}
+.TSChart .tt_colorPickerButton:last-child  {
+	background: url(img/mobile/arrow.png) no-repeat scroll 12px center;
+}
+.ttColorPickerHS
+{
+	background-image: url(img/hs.png);
+	width: 235px;
+	height: 131px;
+}
+.ttColorPickerHV
+{
+	background-image: url(img/hv.png);
+	width: 235px;
+	height: 131px;
+}
+.TSChart .tt_popUp span.tt_down, .TSChart .tt_popUp span.tt_up {
+	background: url(img/mobile/down.png) no-repeat center 16px transparent; 
+	width: 44px; 
+	height: 44px; 
+	position: absolute; 
+	right: 0; 
+	top: 90px;
+	cursor:pointer;
+	border-left:1px solid white
+}
+.TSChart .tt_popUp span.tt_down:hover, .TSChart .tt_popUp span.tt_up:hover {
+	background-color:rgba(0, 39, 72, 0.85);
+}
+.TSChart .tt_popUp span.tt_up {
+	background: url(img/mobile/up.png) no-repeat center 16px transparent; 
+	right: 45px; 
+}
+.TSChart .tt_popUp h1, .TSChart .tt_popUp .tt_tabs li, .TSChart .tt_popUp .tt_parameters input, .TSChart .tt_popUp .tt_parameters label, .TSChart .tt_popUp .tt_chartTypes div, .TSChart .tt_popUp .tt_setColor div, .TSChart .tt_symbolTitle > div, .TSChart .tt_popUp .tt_plotTypes > span, .TSChart .tt_popUp .tt_dialog_groupName, .TSChart .tt_popUp .tt_barColorBase > span {
+	font-size:160%	
+}
+.TSChart .tt_popUp .tt_dialog_width, .TSChart .tt_popUp .tt_dialog_lineWidth, .TSChart .tt_dialog_lineStyle {
+	background: url(img/mobile/line-weight.png) no-repeat center 12px;
+	width: 60px;
+    height: 60px;
+	margin:0px 5px;
+}
+.TSChart .tt_popUp .tt_dialog_width:nth-child(2), .TSChart .tt_popUp .tt_dialog_lineWidth:nth-child(2) {
+	background-position: center -49px;
+}
+.TSChart .tt_popUp .tt_dialog_width:nth-child(3), .TSChart .tt_popUp .tt_dialog_lineWidth:nth-child(3) {
+	background-position: center -113px;
+}
+.TSChart .tt_popUp .tt_dialogGroup_lineWidth {
+    margin: 20px 0px 0 0;
+}
+.TSChart .tt_popUp .tt_dialog_lineUnbounded > div {
+	height:	60px;
+	width:60px;
+	margin: 0 15px 0 5px;
+}
+.TSChart .tt_dialog_lineUnbounded > div[data-value='1'] {
+	background: url(img/mobile/line-unbound.png) no-repeat center 13px;
+}
+.TSChart .tt_dialog_lineUnbounded > div[data-value='2'] {
+	background: url(img/mobile/line-unbound.png) no-repeat center -34px;
+}
+.TSChart .tt_dialog_lineStyle {
+	background: url(img/mobile/line-style.png) no-repeat center 7px;
+}
+.TSChart .tt_popUp .tt_dialog_lineStyle:nth-child(2) {
+	background-position: center -53px;
+}
+.TSChart .tt_textInput {
+	margin:15px;
+	width:190px;
+	font-size:16px;
+}
+.TSChart .tt_textDrawingTool {
+	font-size:16px; /*!important;*/
+}
+/* END of Dialog */
+.TSChart .tt_historyClose {
+	background-position: center -88px
+}
+/* Calendar */
+.TSChart .tt_datePicker, .TSChart .tt_monthPicker, .TSChart .tt_yearPicker {
+    background-color: rgba(0, 39, 72, 0.9)
+}
+.TSChart .tt_datePicker
+{
+	font-size:14px;
+}
+.TSChart .tt_datePicker > table {
+	padding:10px 7px 10px 7px
+}
+.TSChart .tt_datePicker > div {
+	line-height:40px;
+}
+.TSChart .tt_datePicker td
+{
+	padding:6px 8px
+}
+.TSChart .tt_datePicker-prev, .tt_datePicker-next
+{
+	width:50px;
+}
+.TSChart .tt_datePicker > table.tt_monthPicker
+{
+	padding:7px;
+}
+.TSChart .tt_datePicker > table.tt_yearPicker td {
+    padding: 9px 13px;
+}
+.TSChart .tt_historyDateLabel, .TSChart .tt_historyClose, .TSChart .tt_history_selectAll, .TSChart .tt_historyTimeLabel {
+    background-color: rgba(0, 39, 72, 0.7);
+    padding: 5px 10px;
+	font-size:13px;
+}
+.TSChart .tt_historyTimeLabel {
+	padding-left:5px	
+}
+.TSChart .tt_historyDateLabel.tt_intraday {
+	padding-right:5px	
+}
+.TSChart .tt_historyDateLabel:hover, .TSChart .tt_historyClose:hover, .TSChart .tt_history_selectAll:hover, .TSChart .tt_historyTimeLabel:hover {
+	background-color: rgba(0, 39, 72, 0.8);
+}
+.TSChart .tt_historyDiv > .tt_selected {
+	background-color: rgba(0, 39, 72, 0.9);
+}
+.TSChart .tt_history_selectAll {
+	background-position: center -208px
+}
+.TSChart .tt_timePicker {
+	background-color: rgba(0, 39, 72, 0.8);
+	padding:20px
+}
+.TSChart .tt_timePicker input {
+	font-size:18px;
+    padding: 9px 12px;
+    width: 20px;
+	margin:8px 0
+}
+.TSChart .tt_timePicker_arrowUp, .TSChart .tt_timePicker_arrowDown {
+	width:44px;
+	height:38px;
+	background-color:rgba(0, 39, 72, 0.9);
+	background-position: center -402px
+}
+.TSChart .tt_timePicker_arrowDown {
+	background-position: center -441px
+}
+.TSChart .tt_timePicker span {
+	font-size:18px;
+	width:14px
+}
+/* END of Calendar */
+
+.TSChart .tt_popUp .tt_barColoringBase > span {
+	width:151px;
+	font-size:160%;
+	line-height:40px
+}
+
+/*------------------- CSS for iPhone -----------------------*/
+@media only screen and (max-device-width: 667px) {
+.chart_nav li.tt_history {
+	display:none
+}
+#tick {
+	border-left:none
+}
+.chart_nav li {
+	line-height:30px;
+	height:30px;
+	font-size:90%;
+	width:8.7%
+}
+.chart_nav li.chart_settings, .chart_nav li.chart_settings span {
+	height:30px;
+}
+.chart_nav li.chart_settings span {
+	background-image:url(img/mobile/settings20x20.png)
+}
+.chart_settings_submenu {
+    bottom: 30px;
+}
+.TSChart .tt_popUp h1, .TSChart .tt_popUp .tt_tabs li, .TSChart .tt_popUp .tt_parameters input, .TSChart .tt_popUp .tt_parameters label, .TSChart .tt_popUp .tt_chartTypes div, .TSChart .tt_popUp .tt_setColor div, .TSChart .tt_symbolTitle > div, .TSChart .tt_popUp .tt_plotTypes > span, .TSChart .tt_popUp .tt_dialog_groupName, .TSChart .tt_popUp .tt_barColorBase > span  {
+	font-size:120%;
+}
+.chart_settings_submenu td {
+	font-size:80%
+}
+.chart_settings_submenu tr.options td, .chart_settings_submenu tr.options td.tt_selected  {
+	height:40px;
+}
+.chart_settings_submenu tr:last-child td {
+	height:20px;
+}
+#AddIndicator, #AddCompare, #Indicators td, #Symbols td {
+	height:30px
+}
+.chart_settings_submenu td {
+    background-size:70% !important
+}
+#AddIndicator span, #AddCompare span {
+	height:9px;
+	width:5px	
+}
+#DrawingToolsArrow {
+	 background-size:30% !important	
+}
+.SelectedTool td {
+	background-size:10%!important
+}
+.drawingTool {
+	width:50px;	
+}
+.drawingTool li {
+	height:35px;
+	background-size:60%!important	
+}
+.drawingToolHeader {
+	width:50px;
+	height:30px;
+}
+.drawingToolHeader span {
+	background-size:50% !important;
+	height:30px;
+	width:30px
+}
+.TSChart .tt_symbolTitle > div {
+	height:30px;
+	line-height:30px;
+	width:30px;
+	padding:0 10px
+}
+.TSChart .tt_symbolTitle > div > span.tt_symbolColor {
+	margin:0 10px 0 -10px;
+	padding:0 1px
+}
+.TSChart .tt_popUp h1 {
+	padding:0 28px 0 20px
+}
+.TSChart .tt_popUp h1, .TSChart .tt_popUp .tt_chartTypes div, .TSChart .tt_popUp .tt_tabs li {
+    height: 30px;
+    line-height: 30px;
+}
+.TSChart .tt_popUp .tt_close, .TSChart .tt_popUp .tt_ok,  .TSChart .tt_popUp .tt_remove, .TSChart .tt_popUp span.tt_down, .TSChart .tt_popUp span.tt_up {
+	 height: 30px;
+	 width:30px;
+}
+.TSChart .tt_popUp span.tt_down, .TSChart .tt_popUp span.tt_up {
+	 background-size:50%
+}
+.TSChart .tt_popUp .tt_ok, .TSChart .tt_popUp .tt_remove, .TSChart .tt_popUp span.tt_up  {
+	right:31px;
+}
+.TSChart .tt_popUp span.tt_down, .TSChart .tt_popUp span.tt_up {
+	top:62px;
+	background-position: center 11px;
+}
+.TSChart .tt_popUp .tt_tabs li {
+	 width:117px
+}
+.TSChart .tt_popUp .tt_chartTypes li {
+	height: 50px;
+	width:58px;
+	background-size:60%!important
+}
+.TSChart .tt_popUp .tt_setColor input, .TSChart .tt_popUp .tt_chartTypes input {
+	height: 50px;
+	width:50px;
+	margin: 15px 10px;
+}
+.TSChart .tt_popUp .tt_parameters input {
+    height: 30px;
+    width: 25px;
+	margin-left:10px
+}
+.TSChart .tt_popUp .tt_parameters {
+    padding: 15px 60px 0 15px;
+}
+.TSChart .tt_popUp .tt_parameters label {
+	width:95px	
+}
+.TSChart .tt_popUp .tt_parameters > input.tt_on_off {
+	width:40px	
+}
+.TSChart .tt_popUp {
+	width:235px
+}
+.TSChart .tt_popUp .tt_validator {
+	top:17px;
+	right:45px;
+	font-size:180%
+}
+.TSChart .tt_popUp .tt_dialogGroup_lineWidth {
+    margin: 0px 0px 15px 0;
+}
+.TSChart .tt_textInput {
+	font-size:13px	
+}
+.TSChart .tt_popUp .tt_setColor div {
+	margin-top:-12px	
+}
+.TSChart .tt_popUp .tt_barColoringBase > span {
+	font-size:120%;
+	line-height:30px
+}
+#Indicators, #Symbols {
+	bottom:100px	
+}
+}
+/*------------------------- iPhone portrait ---------------------------*/
+@media only screen and (max-device-width: 568px) and (orientation: portrait) {
+.chart_nav li {
+	width:16%
+}
+.chart_nav li.no-left-border {
+	clear:left;
+	border-left:none	
+}
+.chart_nav li.chart_settings {
+	width:17%;
+	height:60px
+}
+.chart_nav li.chart_settings span {
+	background-size:auto;
+	height:60px	
+}
+.chart_settings_submenu {
+	bottom:60px	
+}
+}
+@media only screen and (max-device-width : 736px) and (orientation : landscape) and (-webkit-min-device-pixel-ratio : 3) { 
+	.chart_settings_submenu td {
+    	background-size:50% !important
+	}
+}
+@media only screen and (min-device-width: 414px) and (max-device-width: 736px) and (orientation : portrait) { 
+    //iPhone 6+ Portrait
+}
+
+/*----------------------- END CSS for iPhone ---------------------------*/
+@media only screen and (min-device-width: 768px) {
+#chart1 {
+	padding:10px
+}
+}
+/*------------------------- CSS for iPad ------------------------------*/
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+.TSChart .tt_symbolTitle > div {
+	line-height: 35px;
+	height:35px;
+	width:35px;
+	padding:0 10px
+}
+.TSChart .tt_symbolTitle > div > span.tt_symbolColor {
+	margin: 0 10px 0 -10px	
+}
+.ttColorPickerHS
+{
+	background-image: url(img/hs.png);
+	width: 235px;
+	height: 131px;
+}
+.ttColorPickerHV
+{
+	background-image: url(img/hv.png);
+	width: 235px;
+	height: 131px;
+}
+.TSChart .tt_popUp .tt_validator {
+	top:27px;
+	font-size:200%;
+}
+.TSChart .tt_popUp .tt_parameters input {
+    width: 38px;
+}
+}
+
+/*------------------------- END CSS for iPad ---------------------------*/
+
+/*-------------------------- CSS for iPad3 ----------------------------*/ 
+@media all and (min-device-width: 768px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: landscape) {
+.ttColorPickerHS
+{
+	background-image: url(img/hs.png);
+	width: 235px;
+	height: 131px;
+}
+.ttColorPickerHV
+{
+	background-image: url(img/hv.png);
+	width: 235px;
+	height: 131px;
+}
+}
+/*------------------------ END CSS for iPad3 --------------------------*/ 
+
+/*------------------------- CSS for highres ---------------------------*/
+@media only screen and (min-device-width: 800px) {
+.tt_text-decoration {
+	background-position: center -178px	
+}
+}
+/*------------------------- END CSS for highres ---------------------------*/
+
+/*------------------------- CSS for Acer tablet ---------------------------*/
+@media only screen and (device-width: 1280px) and (device-height: 800px){
+#chart1 {
+	height:50%;
+}
+
+.chart_nav {
+    bottom: -1px;
+}
+}
+@media only screen and (device-width: 800px) and (device-height: 1280px){
+#chart1 {
+	height:85%
+}
+#tick {
+	border-left:none	
+}
+}
+/*----------------------- END CSS for Acer tablet -------------------------*/

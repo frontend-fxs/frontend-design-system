@@ -1,6 +1,7 @@
 ﻿(function ($) {
     FXStreetWidgets.Widget.LoaderCalendarEvent = function () {
         var options = {
+            WidgetType: "Calendar",
             WidgetName: "calendarevent",
             EndPoint: "event/",
             EndPointTranslation: "event/localization/",

@@ -16,7 +16,7 @@
         _this.MouseOverClass = "fxs_item_active";
         _this.ActiveMenuEntryClass = "active";
         _this.SectionSelector = "[fxs-section-entry]";
-        _this.DesktopMatchSize = "(min-width: 780px)";
+        _this.DesktopMatchSize = "(min-width: 1024px)";
         _this.MenuBarSelector = "#fxs_nav_position";
         _this.LogoSelector = "#fxs_logo_reduced";
         _this.HeaderSelector = ".fxs_header";
@@ -64,10 +64,8 @@
             _this.HorizontalMenu.toggleClass(_this.HideElementClass, !horizontalVisible);
             if (!horizontalVisible) {
                 _this.mobileMenuEvents();
-            }
-            else {
+            } else {
                 _this.MobileMenuActions(false);
-                _this.setMouseEvents();
                 _this.loadScrollEvents();
             }
         };
@@ -119,11 +117,13 @@
             var result = $(item).parents(_this.SectionSelector);
             return result;
         };
+
         _this.loadScrollEvents = function() {
             $(window).scroll(function() {
                 _this.scrollActions();
             });
         };
+
         _this.scrollActions = function () {
             var desktop = window.matchMedia(_this.DesktopMatchSize);
             var menuBar = $(_this.MenuBarSelector);
@@ -131,46 +131,50 @@
             var header = $(_this.HeaderSelector);
             var body = $("body");
             var wallpaper = $('.fxs_wallpaper_wrap');
-            if (desktop.matches) {
+            var listView = $('.fxs_listView');
 
+            if (desktop.matches) {
                 if ($(window).scrollTop() > 80) {
                     body.addClass(_this.HeaderScrolledClass);
                     menuBar.addClass(_this.PositionFixedClass);
-                    wallpaper.removeClass(_this.HeaderScrolledClass);
-                } else if ($(window).scrollTop() > 1) {
-                    wallpaper.addClass(_this.HeaderScrolledClass);
-                }else{
+                    wallpaper.css({ 'top': '47px' });
+                    listView.css({ 'top': '47px' });
+                } else {
                     menuBar.removeClass(_this.PositionFixedClass);
                     body.removeClass(_this.HeaderScrolledClass);
-                    wallpaper.removeClass(_this.HeaderScrolledClass);
+                    wallpaper.css({ 'top': (121 - $(window).scrollTop()) + 'px' });
+                    listView.css({ 'top': (121 - $(window).scrollTop()) + 'px' });
                 }
             } else {
                 header.css("position", "fixed");
                 logoCustom.addClass(_this.HideElementClass);
-
             };
         };
+
         _this.mobileMenuEvents = function () {
             $(_this.MobileMenuButtonSelector).off("click").on("click", function () {
                 var visible = $(_this.MobileMenuContainerSelector).hasClass(_this.MobileMenuBlockClass);
                 _this.MobileMenuActions(!visible);
             });
         };
+
         _this.MobileMenuActions = function (open) {
             var container = $(_this.MobileMenuContainerSelector);
             var icon = $(_this.MobileMenuButtonSelector).find("i");
             var body = $("body");
+
             if (open) {
                 container.addClass(_this.MobileMenuBlockClass);
                 icon.removeClass(_this.MobileMenuOpenClass).addClass(_this.MobileMenuCloseClass);
                 $(body).addClass(_this.MobileMenuPushToRight);
-            }
-            else {
+            } else {
                 container.removeClass(_this.MobileMenuBlockClass);
                 icon.removeClass(_this.MobileMenuCloseClass).addClass(_this.MobileMenuOpenClass);
                 $(body).removeClass(_this.MobileMenuPushToRight);
             }
         };
+
         return _this;
     };
+
 }());

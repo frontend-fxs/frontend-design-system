@@ -13,19 +13,22 @@
         _this.ContainerId = '';
         _this.MySuscriptionsUrl = '';
 
-        const logoutButtonId = 'logout';
-        const signupButtonId = 'signup';
-        const loginButtonId = 'login';
-        const userOptionsButtonId = 'user-option-button';
-        const userOptionsId = 'fxs_user_options';
-        const logoutUrl = FXStreet.Resource.FxsApiRoutes["LogoutUrl"];
-        const usermenu_HtmlTemplateFile = 'usermenu.html';
+        var logoutButtonId = 'logout';
+        var signupButtonId = 'signup';
+        var loginButtonId = 'login';
+        var userOptionsButtonId = 'user-option-button';
+        var userShowButtonId = 'user-show-button';
+        var userOptionsId = 'fxs_user_options';
+        var userShowId = 'fxs_user_access';
+        var logoutUrl = FXStreet.Resource.FxsApiRoutes["LogoutUrl"];
+        var usermenu_HtmlTemplateFile = 'usermenu.html';
 
 
         var logoutButton = null;
         var signupButton = null;
         var loginButton = null;
         var userOptionsContainer = null;
+        var userShowContainer = null;
         var container = null;
 
         _this.init = function (json) {
@@ -53,15 +56,7 @@
                 logoutButton = FXStreet.Util.getjQueryObjectById(logoutButtonId);
                 logoutButton.click(logoutButtonClick);
 
-                userOptionsContainer = FXStreet.Util.getjQueryObjectById(userOptionsId);
-
-                var userOptionsButton = FXStreet.Util.getjQueryObjectById(userOptionsButtonId);
-                userOptionsButton.click(function () {
-                    userOptionsContainer.toggleClass("fxs_hideElements");
-                });
-                userOptionsContainer.find(".fa-times").click(function () {
-                    userOptionsContainer.toggleClass("fxs_hideElements");
-                });
+                initUserOptions();
             }
             else {
                 signupButton = FXStreet.Util.getjQueryObjectById(signupButtonId);
@@ -69,7 +64,33 @@
 
                 signupButton.click(_this.Signup);
                 loginButton.click(_this.Login);
+
+                initUserShow();
             }
+        }
+
+        var initUserOptions = function () {
+            userOptionsContainer = FXStreet.Util.getjQueryObjectById(userOptionsId);
+
+            var userOptionsButton = FXStreet.Util.getjQueryObjectById(userOptionsButtonId);
+
+            userOptionsButton.click(function () {
+                userOptionsContainer.toggleClass("fxs_hideElements");
+            });
+
+            userOptionsContainer.find(".fa-times").click(function () {
+                userOptionsContainer.toggleClass("fxs_hideElements");
+            });
+        }
+
+        var initUserShow = function () {
+            userShowContainer = FXStreet.Util.getjQueryObjectById(userShowId);
+
+            var userShowButton = FXStreet.Util.getjQueryObjectById(userShowButtonId);
+            userShowButton.click(function () {
+                userShowContainer.toggleClass("fxs_hidden_s");
+            });
+
         }
 
         var logoutButtonClick = function () {
@@ -119,7 +140,7 @@
         };
 
         _this.containerClick = function () {
-           
+
         };
 
         _this.updateClock = function () {
@@ -137,7 +158,7 @@
             if (_this.TimeZoneIsFromUserDevice === true) {
                 date = moment();
             } else {
-                var hourToSet = moment.utc().hour() + _this.HoursUtcOffset;       
+                var hourToSet = moment.utc().hour() + _this.HoursUtcOffset;
                 var minutesToAdd = 60 * (hourToSet % 1);
                 date = moment.utc().hour(hourToSet).add(minutesToAdd, "minutes");
             }
@@ -187,7 +208,7 @@
             });
         };
 
-        _this.setVars = function () {      
+        _this.setVars = function () {
             container = FXStreet.Util.getjQueryObjectById(_this.ContainerId);
         };
 
@@ -264,7 +285,7 @@
             this.TimeZone = function () {
                 return _timeZone;
             };
-           
+
             this.GetTTTimeZoneValue = function () {
                 var result = 'Etc/GMT';
                 var timezone = this.TimeZone();

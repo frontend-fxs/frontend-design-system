@@ -1,6 +1,7 @@
 ﻿(function ($) {
     FXStreetWidgets.Widget.LoaderSentiment = function () {
         var options = {
+            WidgetType: "MarketTools",
             WidgetName: "sentiment",
             EndPointV2: "api/v2/sentiment/study/",
             EndPointTranslationV2: "api/v2/cultures/{culture}/sentiment/",

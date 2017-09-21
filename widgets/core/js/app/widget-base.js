@@ -49,7 +49,6 @@
                     _this.handleJsonInvalidData();
                     return;
                 }
-
                 _this.data = data;
                 if (_this.loaderBase.isReady()) {
                     _this.log("start renderHtml for: " + _this.loaderBase.config.WidgetName);
@@ -63,10 +62,10 @@
                         }
                     }, _this.intervalTimeToWaitForReady);
                 }
-            })
-            .error(function () {
-                _this.handleJsonInvalidData();
             });
+            //.fail(function () {
+            //    _this.handleJsonInvalidData();
+            //});
     };
     FXStreetWidgets.Widget.Base.prototype.setDatesToJson = function (json, dateResponse) {
         var date = FXStreetWidgets.Util.formatDate(dateResponse);

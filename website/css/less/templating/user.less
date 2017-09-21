@@ -1,0 +1,357 @@
+﻿@import "../vars.less";
+@import "../mixins.less";
+
+.fxs_user_access {
+    float: right;
+    position: absolute;
+    bottom: -40px;
+    background-color: @corp_clr;
+    right: 0;
+    padding: .5rem;
+
+    @media(min-width:1024px) {
+        display: inline-block;
+        position: relative;
+        background-color: transparent;
+        bottom: 0;
+        margin-right: 0.5rem;
+        padding: 0;
+    }
+
+    a {
+        display: inline-block;
+        padding: 0 1rem 0 1rem;
+        font-weight: 400;
+    }
+
+    .fxs_user_login_btn {
+        font-size: @txt_size_small;
+        height: 42px;
+        line-height: 42px;
+        color: @light_5_clr;
+        text-decoration: underline;
+    }
+}
+
+.fxs_header_scrolled {
+    .fxs_detail_user {
+        padding-top: @main_headercookies_height;
+    }
+}
+
+.fxs_detail_user {
+    min-height: 100vh;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+
+    @media(min-width:@screen-s) {
+        min-height: 100vh; /* For 100% screen height */
+    }
+
+    .fxs_user_component_wrapper {
+        padding-top: 10%;
+
+        @media(min-width:@screen-m) {
+            padding-top: 3%;
+        }
+
+        .fxs_user_form {
+            margin: 0 auto;
+        }
+    }
+
+    legend {
+        font-size: @txt_size_xxlarge;
+        line-height: 2rem;
+        font-style: normal;
+        color: @dark_4_clr;
+        text-transform: none;
+        margin-bottom: 1rem;
+    }
+
+    .fxs_fields_inline {
+        .fxs_formGroup {
+            width: 156px;
+            display: inline-block;
+        }
+
+            .fxs_formGroup:first-child {
+                margin-right: 0.5rem;
+            }
+
+        .fxs_select {
+            width: 100px;
+            margin-right: 0.5rem;
+            display: inline-block;
+        }
+
+        .fxs_auth_code {
+            width: calc(100% -115px);
+            display: inline-block;
+        }
+    }
+
+    .fxs_info_signup_bg {
+        width: 100%;
+        background-color: #DDDEDF;
+        height: 300px;
+        position: absolute;
+        top: 15%;
+        /*margin-left:-1.5rem;
+        margin-right:-1.5rem;*/
+        display: none;
+
+        @media(min-width:@screen-s) {
+            display: block;
+        }
+    }
+    // info wrapper
+    .fxs_signup_container {
+        .fxs_signup_info {
+            padding: 10rem 0 0 2rem;
+
+            @media(min-width:1300px) {
+                padding: 11rem 0 0 6rem;
+            }
+
+            .fxs_list_unstyled {
+                margin-top: 2rem;
+
+                .fa {
+                    padding-right: 5px;
+                    color: @highlight_clr;
+                }
+
+                strong {
+                    padding-right: 5px;
+                }
+
+                li {
+                    margin-bottom: 1rem;
+                }
+            }
+
+            display: none;
+
+            @media(min-width:@screen-s) {
+                display: block;
+            }
+        }
+
+        .fxs_signup_content {
+            padding-top: 3%;
+
+            @media(min-width:@screen-m) {
+                padding-top: 0%;
+            }
+
+            .fxs_formGroup {
+                label {
+                    font-size: @txt_size_xsmall;
+                }
+            }
+
+            .fa-check {
+                color: @success_clr;
+            }
+
+            .fxs_user_msg_congrats {
+                .calc(width, ~'100% - 75px');
+                display: inline-block;
+                margin-left: 1rem;
+                color: @success_clr;
+                padding-bottom: 3rem;
+            }
+        }
+    }
+
+    .fxs_user_form, .fxs_confirm_signup {
+        padding: 2rem;
+        border: 1px solid @light_3_clr;
+        width: 100%;
+
+        @media(min-width:@screen-s) {
+            min-width: 320px;
+            max-width: 500px;
+        }
+
+        background-color: @lightest_clr;
+
+        .fxs_fieldset {
+            border-bottom: 0;
+        }
+
+        .fxs_checkboxGroup {
+            font-weight: 400;
+        }
+
+        .fxs_formGroup {
+            position: relative;
+            //padding-bottom:0.5rem;
+            label {
+                font-size: @txt_size_small;
+            }
+
+            .fa-eye, .fa-fw {
+                position: absolute;
+                right: 1rem;
+                top: 2.3rem;
+            }
+
+            .fa-eye {
+                &.active {
+                    color: @light_1_clr;
+                }
+            }
+
+            .fxs_group_link {
+                position: absolute;
+                right: 0;
+                color: @dark_4_clr;
+                font-size: @txt_size_xsmall;
+                text-decoration: underline;
+                font-weight: 400;
+
+                &.fxs_group_link_signup {
+                    color: @highlight_clr;
+                    font-weight: 700;
+                    font-size: @txt_size_small;
+                    top: 1.5rem;
+
+                    @media(min-width:420px) {
+                        top: 0;
+                    }
+                }
+            }
+
+            .fxs_checkboxGroup {
+                small {
+                    a {
+                        color: @light_1_clr;
+                        text-decoration: underline;
+                    }
+                }
+            }
+
+            ::-webkit-input-placeholder {
+                color: @light_2_clr;
+                font-size: @txt_size_xsmall;
+                opacity: 1;
+            }
+
+            ::-moz-placeholder {
+                color: @light_1_clr;
+                font-size: @txt_size_xsmall;
+                opacity: 1;
+            }
+
+            :-ms-input-placeholder {
+                color: @light_1_clr;
+                font-size: @txt_size_xsmall;
+                opacity: 1;
+            }
+
+            :-moz-placeholder {
+                color: @light_1_clr;
+                font-size: @txt_size_xsmall;
+                opacity: 1;
+            }
+        }
+
+        .fxs_user_field_error {
+            .fxs_hideElements {
+                display: block !important;
+
+                .fa {
+                    padding-right: 10px;
+                }
+            }
+
+            input {
+                border: 1px solid @error_clr;
+            }
+
+            span {
+                color: @error_clr;
+            }
+        }
+    }
+
+    .fxs_confirm_signup {
+        padding: 4rem;
+
+        .fxs_headline_from_tiny_to_small {
+            padding: 4.5rem 0 2rem 0;
+
+            .fxs_dBlock {
+                padding-top: 10px;
+            }
+        }
+    }
+    .fxs_user_form {
+        .fxs_formGroup {
+            label {
+                float: left;
+            }
+
+            .fxs_group_link {
+                &.fxs_group_link_signup {
+                    position: relative;
+                    float: left;
+                    margin-left: 1rem;
+                }
+            }
+        }
+    }
+}
+
+.fxs_user_area_content {
+    border-bottom: 1px solid @dark_3_clr;
+    overflow: hidden;
+    padding: 1rem;
+
+    .form_group {
+        float: left;
+        height: @avatar_m;
+
+        label {
+            cursor: pointer;
+            height: @avatar_m;
+            margin: 0 1rem 0 0;
+            position: relative;
+            width: @avatar_m;
+
+            &:hover {
+                .opacity(.75);
+            }
+
+            .custom-file-input {
+                height: 0;
+            }
+
+                .custom-file-input::-webkit-file-upload-button {
+                    visibility: hidden;
+                    width: 0;
+                }
+
+                .custom-file-input::before {
+                    content: "\f030";
+                    font-family: FontAwesome;
+                    left: 0;
+                    bottom: 0;
+                    position: absolute;
+                    color: @lightest_clr;
+                    cursor: pointer;
+                }
+        }
+    }
+
+    .fxs_user_info {
+        color: @lightest_clr;
+
+        .fxs_profile_data {
+            color: @light_2_clr;
+            font-size: @txt_size_small;
+        }
+    }
+}

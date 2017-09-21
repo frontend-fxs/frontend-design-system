@@ -1,0 +1,27 @@
+﻿<div class="fxs_widget_forecast_charts">
+    <div class="fxs_forecast_charts_filter">
+        {{#Filters}}
+        <button id="forecast_charts_filter_{{Selector}}_{{WidgetId}}" data-gtmid="forecast-tab" class="fxs_btn fxs_btn_table_filter fxs_btn_xsmall">{{Title}}</button>
+        {{/Filters}}
+    </div>
+    <div class="fxs_forecast_charts_data">
+        <div class="fxs_clearfix fxs_marginBase_bottom">
+            <div class="fxs_forecast_charts_tabs">
+                <ul class="fxs_tabs_nav">
+                    <li class="active"><a data-toggle="tab" data-gtmid="forecast-timeframe" href="#fxs_week_{{WidgetId}}" title="My tab" aria-expanded="false">1 {{Translations.Week}}</a></li>
+                    <li class=""><a data-toggle="tab" data-gtmid="forecast-timeframe" href="#fxs_month_{{WidgetId}}" title="My tab" aria-expanded="false">1 {{Translations.Month}}</a></li>
+                    <li class=""><a data-toggle="tab" data-gtmid="forecast-timeframe" href="#fxs_quarter_{{WidgetId}}" title="My tab" aria-expanded="true">3 {{Translations.Months}}</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div role="tabpanel" id="fxs_week_{{WidgetId}}" class="fxs_authentication_form_content tab-pane fade active in">
+                    </div>
+                    <div role="tabpanel" id="fxs_month_{{WidgetId}}" class="fxs_authentication_form_content tab-pane fade">
+                    </div>
+                    <div role="tabpanel" id="fxs_quarter_{{WidgetId}}" class="fxs_authentication_form_content tab-pane fade">
+                    </div>
+                </div>
+            </div>
+            <div id="fxs_forecast_charts_overview_{{WidgetId}}" class="fxs_forecast_charts_overview"></div>
+        </div>
+    </div>
+</div>

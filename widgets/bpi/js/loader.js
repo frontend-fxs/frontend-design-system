@@ -1,6 +1,7 @@
 ﻿(function ($) {
     FXStreetWidgets.Widget.LoaderBpi = function () {
         var options = {
+            WidgetType: "MarketTools",
             WidgetName: "bpi",
             EndPointV2: "api/v2/bpi/study/",
             EndPointTranslationV2: "api/v2/cultures/{culture}/bpi/",

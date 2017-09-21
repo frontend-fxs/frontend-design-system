@@ -289,8 +289,8 @@
                         </span>
 
                         <button id="fxs_cta_authorfollow_{{Value.Id}}" type="button" class="fxs_btn fxs_btn_line fxs_btn_small btn" aria-pressed="false">
-                            <span class="fxs_togglebtn_txt init_txt" data-placement="bottom" title="Follow autor's updates"><i class="fa fa-envelope-o"></i>{{Translations.AuthorFollowButton}}</span>
-                            <span class="fxs_togglebtn_txt toggled_txt" data-placement="bottom" title="Stop following autor's updates"><i class="fa fa-envelope-o"></i>{{Translations.AuthorFollowingButton}}</span>
+                            <span class="fxs_togglebtn_txt init_txt" data-placement="bottom" title="Follow autor's updates"><i class="fa fa-envelope-o"></i><span>{{Translations.AuthorFollowButton}}</span></span>
+                            <span class="fxs_togglebtn_txt toggled_txt" data-placement="bottom" title="Stop following autor's updates"><i class="fa fa-envelope-o"></i><span>{{Translations.AuthorFollowingButton}}</span></span>
                         </button>
 
                     </div>
@@ -2180,8 +2180,8 @@
                     </div>
                     <button class="fxs_btn fxs_btn_cta fxs_btn_block" type="submit">{{{Translations.LoginLabel}}}</button>
                     <div class="fxs_formGroup fxs_marginBase_top">
-                        <a class="fxs_group_link fxs_group_link_signup" href="{{{Translations.SignUpHref}}}">{{{Translations.SignUp}}}</a>
                         <label title="sign up option" for="example-signup option">{{{Translations.ImNotFxstreet}}}</label>
+                        <a class="fxs_group_link fxs_group_link_signup" href="{{{Translations.SignUpHref}}}">{{{Translations.SignUp}}}</a>
                     </div>
                 </fieldset>
             </form>
@@ -4240,8 +4240,8 @@
                         </div>
                         <button class="fxs_btn fxs_btn_cta fxs_btn_block" id ="submitButtonId" type="submit">{{{Translations.SignUp_Page_SignUpNow}}}</button>
                         <div class="fxs_formGroup fxs_marginBase_top">
-                            <a class="fxs_group_link fxs_group_link_signup" href="{{{Translations.SignUp_Href_Login}}}">{{{Translations.SignUp_Page_LogIn}}}</a>
                             <label title="sign up option" for="example-signup option">{{{Translations.SignUp_Page_AlreadyAnFxstreet}}}</label>
+                            <a class="fxs_group_link fxs_group_link_signup" href="{{{Translations.SignUp_Href_Login}}}">{{{Translations.SignUp_Page_LogIn}}}</a>
                         </div>
                         <div class="fxs_contextual_alert" id="responseSignup" style="display: none"></div>
                     </fieldset>
@@ -4383,182 +4383,7 @@
         "name": "{{Title}}",
         "about": "{{{Summary}}}"
         }
-    </script></div><script id=subscribe_default type=x-tmpl-mustache>
-    <form id="{{ContainerId}}" action="" method="get">
-        <div class="fxs_suscribe no_wide_content">
-
-            <div class="fxs_suscribeForm">
-                <div class="fxs_clearfix">
-                    <label for="inputMail_{{ContainerId}}" class="fxs_suscribeText fxs_subscribe_title">
-                        <span>{{{SubscribeTitle}}}</span>
-                    </label>
-                </div>
-
-                <hr class="fxs_divider_third">
-
-                <ul class="fxs_list_unstyled fxs_dropdownList_items_v2">
-                    {{#Newsletters}}
-                         {{^Default}}
-                            <li><label><input type="checkbox" name="newsletters" value={{Id}} {{#Subscribed}} checked {{/Subscribed}} /> {{Name}}</label></li>
-                         {{/Default}}
-                    {{/Newsletters}}
-                </ul>
-
-                <div class="fxs_marginBase_top"></div>
-
-                <div class="fxs_subscribeForm_group fxs_clearfix">
-                    <div class="fxs_col fxs_col_50">
-                        <label>Type your email address</label>
-                        <input id="inputMail_{{ContainerId}}" type="email" required class="fxs_textInput fxs_newsletter_email" placeholder="{{EmailPlaceholderText}}" />
-                    </div>
-                    <div class="fxs_col fxs_col_50">
-                        <div id="recaptcha_{{ContainerId}}" class="fxs_hideElements" ></div>
-                        <button id="submit_{{ContainerId}}" class="fxs_btn fxs_btn_cta">{{SubscribeButtonText}}</button>
-                    </div>
-                </div>
-
-                <div id="successMessageDiv_{{ContainerId}}" class="fxs_contextual_alert fxs_alert_success alert alert-dismissible fade in" role="alert" hidden>
-                    <button type="button" class="fxs_close close" data-dismiss="alert" aria-label="Close">
-                        <i class="fa fa-close"></i>
-                        <span class="fxs_skip">Close alert</span>
-                    </button>
-                    <span class="fxs_alertLabel">{{CongratsAlertLabel}}</span>
-                    <p class="fxs_alertText">{{CongratsAlertText}}</p>
-                </div>
-
-                <div id="errorMessageDiv_{{ContainerId}}" class="fxs_contextual_alert fxs_alert_error alert alert-dismissible fade in" role="alert" hidden>
-                    <button type="button" class="fxs_close close" data-dismiss="alert" aria-label="Close">
-                        <i class="fa fa-close"></i>
-                        <span class="fxs_skip">Close alert</span>
-                    </button>
-                    <span class="fxs_alertLabel">{{ErrorAlertLabel}}</span>
-                    <p class="fxs_alertText">{{ErrorAlertText}}</p>
-                </div>
-
-                <div id="errorCaptchaMessageDiv_{{ContainerId}}" class="fxs_contextual_alert fxs_alert_error alert alert-dismissible fade in" role="alert" hidden>
-                    <button type="button" class="fxs_close close" data-dismiss="alert" aria-label="Close">
-                        <i class="fa fa-close"></i>
-                        <span class="fxs_skip">Close alert</span>
-                    </button>
-                    <span class="fxs_alertLabel">{{ErrorAlertLabel}}</span>
-                    <p class="fxs_alertText">{{ErrorCaptchaAlertText}}</p>
-                </div>
-            </div>
-        </div>
-    </form>
-</script><script id=subscribe_mini type=x-tmpl-mustache>
-    <form id="{{ContainerId}}" action="" method="get">
-        <div class="fxs_suscribe fxs_subscribe_mini no_wide_content">
-
-            <div class="fxs_clearfix">
-                <label for="inputMail_{{ContainerId}}" class="fxs_suscribeText fxs_subscribe_title">
-                    <span>{{{SubscribeTitle}}}</span>
-                </label>
-            </div>
-
-            <div class="fxs_subscribeForm_group">
-                <input id="inputMail_{{ContainerId}}" type="email" required class="fxs_textInput" placeholder="{{EmailPlaceholderText}}" />              
-                <div class="fxs_btn_group ">
-                    <button id="submit_{{ContainerId}}" class="fxs_btn fxs_btn_cta">{{SubscribeButtonText}}</button>
-                    <button type="button" id="dropdownButton_{{ContainerId}}" class="fxs_btn_icon fxs_btn_cta fxs_btn_dd fxs_dropdownList_active">
-                        <i class="fa fa-caret-down"></i>
-                        <span class="fxs_skip">More options</span>
-                    </button>
-                </div>
-                <ul id="dropdownNewsletters_{{ContainerId}}" class="fxs_list_unstyled fxs_dropdownList_notwide">
-                    {{#Newsletters}}
-                    {{^Default}}
-                    <li><label><input type="checkbox" name="newsletters" value={{Id}} {{#Subscribed}} checked {{/Subscribed}} /> {{Name}}</label></li>
-                    {{/Default}}
-                    {{/Newsletters}}
-                </ul>
-                <div id="recaptcha_{{ContainerId}}" class="fxs_hideElements"></div>
-
-
-                <div id="successMessageDiv_{{ContainerId}}" class="fxs_contextual_alert fxs_alert_success alert alert-dismissible fade in" role="alert" hidden>
-                    <button type="button" class="fxs_close close" data-dismiss="alert" aria-label="Close">
-                        <i class="fa fa-close"></i>
-                        <span class="fxs_skip">Close alert</span>
-                    </button>
-                    <span class="fxs_alertLabel">{{CongratsAlertLabel}}</span>
-                    <p class="fxs_alertText">{{CongratsAlertText}}</p>
-                </div>
-
-                <div id="errorMessageDiv_{{ContainerId}}" class="fxs_contextual_alert fxs_alert_error alert alert-dismissible fade in" role="alert" hidden>
-                    <button type="button" class="fxs_close close" data-dismiss="alert" aria-label="Close">
-                        <i class="fa fa-close"></i>
-                        <span class="fxs_skip">Close alert</span>
-                    </button>
-                    <span class="fxs_alertLabel">{{ErrorAlertLabel}}</span>
-                    <p class="fxs_alertText">{{ErrorAlertText}}</p>
-                </div>
-
-                <div id="errorCaptchaMessageDiv_{{ContainerId}}" class="fxs_contextual_alert fxs_alert_error alert alert-dismissible fade in" role="alert" hidden>
-                    <button type="button" class="fxs_close close" data-dismiss="alert" aria-label="Close">
-                        <i class="fa fa-close"></i>
-                        <span class="fxs_skip">Close alert</span>
-                    </button>
-                    <span class="fxs_alertLabel">{{ErrorAlertLabel}}</span>
-                    <p class="fxs_alertText">{{ErrorCaptchaAlertText}}</p>
-                </div>
-            </div>
-        </div>
-    </form>
-</script><script id=subscribe_tab type=x-tmpl-mustache>
-    <form id="newsletters_{{ContainerId}}" class="fxs_suscribeForm">
-        <ul class="fxs_list_unstyled fxs_list_block">
-            {{#Newsletters}}
-            {{^Default}}
-            <li>
-                <label>
-                    <div class="fxs_custom_label fxs_">{{Name}}</div>
-                    <input type="checkbox" name="newsletters" value="{{Id}}" {{#Subscribed}} checked {{/Subscribed}} >
-                </label>
-                <p class="fxs_article_author">
-                    <span class="fxs_author_description">
-                        {{{Description}}}
-                    </span>
-                </p>
-            </li>
-            {{/Default}}
-            {{/Newsletters}}
-        </ul>
-        <div class="fxs_marginBase_top"></div>
-        <div class="fxs_subscribeForm_group">
-            <input id="inputMail_{{ContainerId}}" type="email" class="fxs_textInput" placeholder="{{EmailPlaceholderText}}">
-            <div class="fxs_btn_group">
-                <div id="recaptcha_{{ContainerId}}" class="fxs_hideElements"></div>
-                <button id="submit_{{ContainerId}}" class="fxs_btn fxs_btn_cta">{{SubscribeButtonText}}</button>
-            </div>
-        </div>
-        <div id="successMessageDiv_{{ContainerId}}" class="fxs_contextual_alert fxs_alert_success alert alert-dismissible fade in" role="alert" hidden>
-            <button type="button" class="fxs_close close" data-dismiss="alert" aria-label="Close">
-                <i class="fa fa-close"></i>
-                <span class="fxs_skip">Close alert</span>
-            </button>
-            <span class="fxs_alertLabel">{{CongratsAlertLabel}}</span>
-            <p class="fxs_alertText">{{CongratsAlertText}}</p>
-        </div>
-
-        <div id="errorMessageDiv_{{ContainerId}}" class="fxs_contextual_alert fxs_alert_error alert alert-dismissible fade in" role="alert" hidden>
-            <button type="button" class="fxs_close close" data-dismiss="alert" aria-label="Close">
-                <i class="fa fa-close"></i>
-                <span class="fxs_skip">Close alert</span>
-            </button>
-            <span class="fxs_alertLabel">{{ErrorAlertLabel}}</span>
-            <p class="fxs_alertText">{{ErrorAlertText}}</p>
-        </div>
-
-        <div id="errorCaptchaMessageDiv_{{ContainerId}}" class="fxs_contextual_alert fxs_alert_error alert alert-dismissible fade in" role="alert" hidden>
-            <button type="button" class="fxs_close close" data-dismiss="alert" aria-label="Close">
-                <i class="fa fa-close"></i>
-                <span class="fxs_skip">Close alert</span>
-            </button>
-            <span class="fxs_alertLabel">{{ErrorAlertLabel}}</span>
-            <p class="fxs_alertText">{{ErrorCaptchaAlertText}}</p>
-        </div>
-    </form>
-</script><script id=textovercustomimage_default type=x-tmpl-mustache>
+    </script></div><script id=textovercustomimage_default type=x-tmpl-mustache>
     <div fxs_sf_widget class="fxs_wideWidget_pre" fxs_name="textOverCustomImage">
         <article class="fxs_sexy_banner">
             <div class="fxs_sexy_bannerText">
@@ -4671,7 +4496,8 @@
     </div>
     {{/UserInfo.IsLogged}}
     {{^UserInfo.IsLogged}}
-    <div class="fxs_user_access fxs_hidden_s">
+    <a id="user-show-button" href="javascript:void(0)"><i class="fa fa-user fxs_visible_s"></i></a>
+    <div class="fxs_user_access fxs_hidden_s" id="fxs_user_access">
         <a id="login" class="fxs_user_login_btn" href="javascript:void(0)">{{LoginLabel}}</a>
         <a id="signup" class="fxs_btn fxs_btn_cta fxs_btn_small" role="button" href="javascript:void(0)">{{SignupLabel}}</a>
     </div>
@@ -6266,7 +6092,7 @@
 </script><script id=ratestable_data type=x-tmpl-mustache>
     <div class="clearfix"></div>
     <div class="fxs_filter_wrapper fxs_clearfix">
-        <table id="fxs_{{ContainerId}}_assets" class="fxs_table fxs_ratestable assets fxs_widget_big">
+        <table id="fxs_{{ContainerId}}_assets" class="fxs_table fxs_ratestable assets fxs_widget_big fxs_table_striped">
             <thead>
                 <tr class="fxs_ratestable_header" data-original-title="" title="">
                     <th>
@@ -6288,7 +6114,7 @@
                 {{/Assets}}
             </tbody>
         </table>
-        <table id="fxs_data_table_{{ContainerId}}" class="fxs_table fxs_ratestable fxs_widget_big fxs_swipeContent_slider">
+        <table id="fxs_data_table_{{ContainerId}}" class="fxs_table fxs_ratestable fxs_widget_big fxs_swipeContent_slider fxs_table_striped">
             <thead>
                 <tr class="fxs_ratestable_header" data-original-title="" title="">
                     <th>
@@ -6310,10 +6136,10 @@
                         {{Translations.HeaderOpen}}
                     </th>
                     <th>
-                        {{Translations.HeaderDayLow}}
+                        {{Translations.HeaderDayHigh}}
                     </th>
                     <th>
-                        {{Translations.HeaderDayHigh}}
+                        {{Translations.HeaderDayLow}}
                     </th>
                     <th>
                         {{Translations.HeaderTrend}}
@@ -6332,54 +6158,58 @@
             <tbody>
                 {{#Assets}}
                 <tr class="fxs_widget_ratestable">
-                    <td>
+                    <td class="fxs_ratestable_number">
                         <span id="fxs_{{ContainerId}}_data_{{ProviderCode}}_Last">
                             {{Last}}
                         </span>
                     </td>
-                    <td>
+                    <td class="fxs_ratestable_number">
                         <span id="fxs_{{ContainerId}}_data_{{ProviderCode}}_Bid">
                             {{Bid}}
                         </span>
                     </td>
-                    <td>
+                    <td class="fxs_ratestable_number">
                         <span id="fxs_{{ContainerId}}_data_{{ProviderCode}}_Ask">
                             {{Ask}}
                         </span>
                     </td>
-                    <td>
+                    <td class="fxs_ratestable_number">
                         <span id="fxs_{{ContainerId}}_data_{{ProviderCode}}_Change">
                             {{Change}}
                         </span>
                     </td>
-                    <td>
+                    <td class="fxs_ratestable_number">
                         <span id="fxs_{{ContainerId}}_data_{{ProviderCode}}_ChangePercentWithSymbol">
                             {{ChangePercent}}
                         </span>
                     </td>
-                    <td>
+                    <td class="fxs_ratestable_number">
                         <span id="fxs_{{ContainerId}}_data_{{ProviderCode}}_Open">
                             {{Open}}
                         </span>
                     </td>
-                    <td>
+                    <td class="fxs_ratestable_number">
                         <span id="fxs_{{ContainerId}}_data_{{ProviderCode}}_Low">
                             {{DayLow}}
                         </span>
                     </td>
-                    <td>
+                    <td class="fxs_ratestable_number">
                         <span id="fxs_{{ContainerId}}_data_{{ProviderCode}}_High">
                             {{DayHigh}}
                         </span>
                     </td>
                     <td class="fxs_ratestable_trend">
                         <span id="fxs_{{ContainerId}}_data_{{ProviderCode}}_Trend" class="fxs_ratestable_{{TrendClass}}">
-                            {{Trend}}
+                            <span class="custom_tooltip">
+                                {{Trend}}
+                            </span>
                         </span>
                     </td>
                     <td class="fxs_ratestable_obos">
                         <span id="fxs_{{ContainerId}}_data_{{ProviderCode}}_ObOs" class="fxs_ratestable_{{ObOsClass}}">
-                            <span class="custom_tooltip">{{ObOs}}</span>
+                            <span class="custom_tooltip">
+                                {{ObOs}}
+                            </span>
                         </span>
                     </td>
                     <td class="fxs_ratestable_volatility">
@@ -6390,10 +6220,6 @@
                     <td class="fxs_ratestable_shorcuts">
                         <a href="{{Translations.ChartInteractiveUrl}}{{AssetUri}}" title="chart">
                             <i class="fa fa-line-chart" aria-hidden="true"></i>
-                        </a>
-                        <a href="{{Translations.RatesAndChartsUrl}}{{AssetUri}}" title="asset">
-                            <i class="fa fa-usd" aria-hidden="true">
-                            </i>
                         </a>
                         <a href="{{Translations.NewsUrl}}{{AssetUri}}" title="news">
                             <i class="fa fa-file-text-o" aria-hidden="true">
@@ -6414,11 +6240,8 @@
     <div class="fxs_ratestable_container new">
         {{#IsActiveHeader}}
         <div class="fxs_ratestable_filter">
-
-            <div id="fxs_header_filter_{{ContainerId}}"></div>
-
-            <div id="fxs_header_menu_{{ContainerId}}" class="fxs_fRight"></div>
-
+            <div id="fxs_header_menu_{{ContainerId}}" class="fxs_header_menu"></div>
+            <div id="fxs_header_filter_{{ContainerId}}" class="fxs_header_filter"></div>
         </div>
         {{/IsActiveHeader}}
         <div id="fxs_data_{{ContainerId}}"></div>
@@ -6446,23 +6269,23 @@
     </div>
 </script><script id=ratestablemenu_menu type=x-tmpl-mustache>
     <div class="fxs_fRight">
-        <button id="fxs_menu_mylist_{{ContainerId}}" class="fxs_btn fxs_btn_table_filter fxs_btn_xsmall">{{Translations.MyList}}</button>
-        <button id="fxs_menu_main_view_{{ContainerId}}" class="fxs_btn fxs_btn_table_filter fxs_btn_xsmall active">{{Translations.MainView}}</button>
-        <div class="fxs_visible_hd">
+        <button id="fxs_menu_show_more_dropdown_button_{{ContainerId}}" class="fxs_btn fxs_btn_table_filter fxs_btn_xsmall  fxs_fRight">{{Translations.ShowMore}}<i class="fa fa-caret-down" aria-hidden="true"></i></button>
+        <div class="fxs_presets_outer">
             {{#MenuItems}}
-                {{#IsDefault}}
-                    <button id="{{Id}}_default" class="fxs_btn fxs_btn_table_filter fxs_btn_xsmall">{{Title}}</button>
-                {{/IsDefault}}
+            {{#IsDefault}}
+            <button id="{{Id}}_default" class="fxs_btn fxs_btn_table_filter fxs_btn_xsmall">{{Title}}</button>
+            {{/IsDefault}}
             {{/MenuItems}}
         </div>
-        <button id="fxs_menu_show_more_dropdown_button_{{ContainerId}}" class="fxs_btn fxs_btn_table_filter fxs_btn_xsmall">{{Translations.ShowMore}}<i class="fa fa-caret-down" aria-hidden="true"></i></button>
+        <button id="fxs_menu_main_view_{{ContainerId}}" class="fxs_btn fxs_btn_table_filter fxs_btn_xsmall active">{{Translations.MainView}}</button>
+        <button id="fxs_menu_mylist_{{ContainerId}}" class="fxs_btn fxs_btn_table_filter fxs_btn_xsmall">{{Translations.MyList}}</button>
     </div>
     <div id="fxs_menu_show_more_dropdown_{{ContainerId}}" class="fxs_hideElements fxs_dropdown right">
         <button id="fxs_menu_show_more_dropdown_close_button_{{ContainerId}}" class="fxs_btn fxs_btn_close_dropdown"><i class="fa fa-times"></i></button>
         <main>
             {{#MenuItems}}
                 {{#IsDefault}}
-                <div class="fxs_hidden_hd fxs_col fxs_col_20">
+                <div class="fxs_presets_inner fxs_col fxs_col_20">
                     <p id="{{Id}}" ><a href="javascript:;">{{Title}}</a></p>
                 </div>
                 {{/IsDefault}}
@@ -6608,4 +6431,211 @@
         <label for="typeaheadTarget" class="fxs_btn_filter" id="fxs_btn_filter" title="Search in rates &amp; charts"> <i class="fa fa-search"></i> <span class="fxs_skip">Add pairs to list</span> </label>
     </div>
     <div id="index-data" class="fxs_col fxs_col_100"></div>
+</script><script id=subscribe_default type=x-tmpl-mustache>
+    <form id="{{ContainerId}}" action="" method="get">
+        <div class="fxs_suscribe no_wide_content">
+
+            <div class="fxs_suscribeForm">
+                <div class="fxs_clearfix">
+                    <label for="inputMail_{{ContainerId}}" class="fxs_suscribeText fxs_subscribe_title">
+                        <span>{{{Translations.SubscribeToNewsletter}}}</span>
+                    </label>
+                </div>
+
+                <hr class="fxs_divider_third">
+
+                <ul class="fxs_list_unstyled fxs_dropdownList_items_v2">
+                    {{#Newsletters}}
+                         {{^Default}}
+                            <li><label><input type="checkbox" name="newsletters" value={{Id}} {{#Subscribed}} checked {{/Subscribed}} /> {{Name}}</label></li>
+                         {{/Default}}
+                    {{/Newsletters}}
+                </ul>
+
+                <div class="fxs_marginBase_top"></div>
+
+                <div class="fxs_subscribeForm_group fxs_clearfix">
+                    <div class="fxs_col fxs_col_50">
+                        <label>Type your email address</label>
+                        <input id="inputMail_{{ContainerId}}" type="email" required class="fxs_textInput fxs_newsletter_email" placeholder="{{Translations.EmailPlaceholderText}}" />
+                    </div>
+                    <div class="fxs_col fxs_col_50">
+                        <div id="recaptcha_{{ContainerId}}" class="fxs_hideElements" ></div>
+                        <button id="submit_{{ContainerId}}" class="fxs_btn fxs_btn_cta">{{Translations.SubscribeButtonText}}</button>
+                    </div>
+                </div>
+
+                <div id="successMessageDiv_{{ContainerId}}" class="fxs_contextual_alert fxs_alert_success alert alert-dismissible fade in" role="alert" hidden>
+                    <button type="button" class="fxs_close close" data-dismiss="alert" aria-label="Close">
+                        <i class="fa fa-close"></i>
+                        <span class="fxs_skip">Close alert</span>
+                    </button>
+                    <span class="fxs_alertLabel">{{Translations.CongratsAlertLabel}}</span>
+                    <p class="fxs_alertText">{{Translations.CongratsAlertText}}</p>
+                </div>
+
+                <div id="errorMessageDiv_{{ContainerId}}" class="fxs_contextual_alert fxs_alert_error alert alert-dismissible fade in" role="alert" hidden>
+                    <button type="button" class="fxs_close close" data-dismiss="alert" aria-label="Close">
+                        <i class="fa fa-close"></i>
+                        <span class="fxs_skip">Close alert</span>
+                    </button>
+                    <span class="fxs_alertLabel">{{Translations.ErrorAlertLabel}}</span>
+                    <p class="fxs_alertText">{{Translations.ErrorAlertText}}</p>
+                </div>
+
+                <div id="errorCaptchaMessageDiv_{{ContainerId}}" class="fxs_contextual_alert fxs_alert_error alert alert-dismissible fade in" role="alert" hidden>
+                    <button type="button" class="fxs_close close" data-dismiss="alert" aria-label="Close">
+                        <i class="fa fa-close"></i>
+                        <span class="fxs_skip">Close alert</span>
+                    </button>
+                    <span class="fxs_alertLabel">{{Translations.ErrorAlertLabel}}</span>
+                    <p class="fxs_alertText">{{Translations.ErrorCaptchaAlertText}}</p>
+                </div>
+            </div>
+        </div>
+    </form>
+</script><script id=subscribe_light type=x-tmpl-mustache>
+    <form id="{{ContainerId}}" action="" method="get">
+        <div class="fxs_suscribe fxs_subscribe_light">
+            <div class="fxs_subscribe_envelope">
+            </div>
+            <div class="fxs_title_benefits_wrapper">
+                <label for="inputMail_{{ContainerId}}" class="fxs_suscribeText fxs_subscribe_title"> {{{SubscriptionText}}} </label>
+                <div class="fxs_benefits">
+                    {{#SubscriptionBenefits}}
+                    <div class="fxs_benefit"><i class="fa fa-check" aria-hidden="true"></i> {{.}}</div>
+                    {{/SubscriptionBenefits}}
+                </div>
+            </div>
+            <div class="fxs_subscribeForm_group">
+                <input id="inputMail_{{ContainerId}}" type="email" required="" class="fxs_textInput" placeholder="{{{Translations.SubscribeToNewsletterInputPlaceholder}}}">
+                <div class="fxs_btn_group ">
+                    <button id="submit_{{ContainerId}}" class="fxs_btn fxs_btn_cta">{{Translations.SubscribeButtonText}}</button>
+                    <button type="button" id="dropdownButton_{{ContainerId}}" class="fxs_btn_icon fxs_btn_cta fxs_btn_dd fxs_dropdownList_active"><i class="fa fa-caret-down"></i><span class="fxs_skip">{{Translations.MoreOptionsButtonText}}</span></button>
+                    <ul id="dropdownNewsletters_{{ContainerId}}" class="fxs_hideElements fxs_list_unstyled fxs_dropdownList_notwide">
+                        {{#Newsletters}}
+                            {{^Default}}
+                                <li> <label> <input type="checkbox" name="newsletters" value="{{Id}}" {{#Subscribed}} checked {{/Subscribed}}> {{Name}} </label> </li>
+                            {{/Default}}
+                        {{/Newsletters}}
+                    </ul>
+                    <div id="recaptcha_{{ContainerId}}" class="fxs_hideElements"></div>
+                </div>
+                <p id="errorMessageDiv_{{ContainerId}}" style="display:none"><span class="fxs_txt_danger"> <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{{Translations.SubscribeToNewsletter_EmailNotValidMessage}}}</span></p>
+                <p id="successMessageDiv_{{ContainerId}}" style="display:none"><span class="fxs_alertText fxs_txt_success"> <i class="fa fa-check" aria-hidden="true"></i> {{{Translations.SubscribeToNewsletter_SuccessMessage}}}</span></p>
+            </div>
+        </div>
+    </form>
+</script><script id=subscribe_mini type=x-tmpl-mustache>
+    <form id="{{ContainerId}}" action="" method="get">
+        <div class="fxs_suscribe fxs_subscribe_mini no_wide_content">
+
+            <div class="fxs_clearfix">
+                <label for="inputMail_{{ContainerId}}" class="fxs_suscribeText fxs_subscribe_title">
+                    <span>{{{Translations.SubscribeToNewsletter}}}</span>
+                </label>
+            </div>
+
+            <div class="fxs_subscribeForm_group">
+                <input id="inputMail_{{ContainerId}}" type="email" required class="fxs_textInput" placeholder="{{Translations.EmailPlaceholderText}}" />              
+                <div class="fxs_btn_group ">
+                    <button id="submit_{{ContainerId}}" class="fxs_btn fxs_btn_cta">{{Translations.SubscribeButtonText}}</button>
+                    <button type="button" id="dropdownButton_{{ContainerId}}" class="fxs_btn_icon fxs_btn_cta fxs_btn_dd fxs_dropdownList_active">
+                        <i class="fa fa-caret-down"></i>
+                        <span class="fxs_skip">More options</span>
+                    </button>
+                </div>
+                <ul id="dropdownNewsletters_{{ContainerId}}" class="fxs_list_unstyled fxs_dropdownList_notwide">
+                    {{#Newsletters}}
+                    {{^Default}}
+                    <li><label><input type="checkbox" name="newsletters" value={{Id}} {{#Subscribed}} checked {{/Subscribed}} /> {{Name}}</label></li>
+                    {{/Default}}
+                    {{/Newsletters}}
+                </ul>
+                <div id="recaptcha_{{ContainerId}}" class="fxs_hideElements"></div>
+
+
+                <div id="successMessageDiv_{{ContainerId}}" class="fxs_contextual_alert fxs_alert_success alert alert-dismissible fade in" role="alert" hidden>
+                    <button type="button" class="fxs_close close" data-dismiss="alert" aria-label="Close">
+                        <i class="fa fa-close"></i>
+                        <span class="fxs_skip">Close alert</span>
+                    </button>
+                    <span class="fxs_alertLabel">{{Translations.CongratsAlertLabel}}</span>
+                    <p class="fxs_alertText">{{Translations.CongratsAlertText}}</p>
+                </div>
+
+                <div id="errorMessageDiv_{{ContainerId}}" class="fxs_contextual_alert fxs_alert_error alert alert-dismissible fade in" role="alert" hidden>
+                    <button type="button" class="fxs_close close" data-dismiss="alert" aria-label="Close">
+                        <i class="fa fa-close"></i>
+                        <span class="fxs_skip">Close alert</span>
+                    </button>
+                    <span class="fxs_alertLabel">{{Translations.ErrorAlertLabel}}</span>
+                    <p class="fxs_alertText">{{Translations.ErrorAlertText}}</p>
+                </div>
+
+                <div id="errorCaptchaMessageDiv_{{ContainerId}}" class="fxs_contextual_alert fxs_alert_error alert alert-dismissible fade in" role="alert" hidden>
+                    <button type="button" class="fxs_close close" data-dismiss="alert" aria-label="Close">
+                        <i class="fa fa-close"></i>
+                        <span class="fxs_skip">Close alert</span>
+                    </button>
+                    <span class="fxs_alertLabel">{{Translations.ErrorAlertLabel}}</span>
+                    <p class="fxs_alertText">{{Translations.ErrorCaptchaAlertText}}</p>
+                </div>
+            </div>
+        </div>
+    </form>
+</script><script id=subscribe_tab type=x-tmpl-mustache>
+    <form id="newsletters_{{ContainerId}}" class="fxs_suscribeForm">
+        <ul class="fxs_list_unstyled fxs_list_block">
+            {{#Newsletters}}
+            {{^Default}}
+            <li>
+                <label>
+                    <div class="fxs_custom_label fxs_">{{Name}}</div>
+                    <input type="checkbox" name="newsletters" value="{{Id}}" {{#Subscribed}} checked {{/Subscribed}} >
+                </label>
+                <p class="fxs_article_author">
+                    <span class="fxs_author_description">
+                        {{{Description}}}
+                    </span>
+                </p>
+            </li>
+            {{/Default}}
+            {{/Newsletters}}
+        </ul>
+        <div class="fxs_marginBase_top"></div>
+        <div class="fxs_subscribeForm_group">
+            <input id="inputMail_{{ContainerId}}" type="email" class="fxs_textInput" placeholder="{{EmailPlaceholderText}}">
+            <div class="fxs_btn_group">
+                <div id="recaptcha_{{ContainerId}}" class="fxs_hideElements"></div>
+                <button id="submit_{{ContainerId}}" class="fxs_btn fxs_btn_cta">{{SubscribeButtonText}}</button>
+            </div>
+        </div>
+        <div id="successMessageDiv_{{ContainerId}}" class="fxs_contextual_alert fxs_alert_success alert alert-dismissible fade in" role="alert" hidden>
+            <button type="button" class="fxs_close close" data-dismiss="alert" aria-label="Close">
+                <i class="fa fa-close"></i>
+                <span class="fxs_skip">Close alert</span>
+            </button>
+            <span class="fxs_alertLabel">{{CongratsAlertLabel}}</span>
+            <p class="fxs_alertText">{{CongratsAlertText}}</p>
+        </div>
+
+        <div id="errorMessageDiv_{{ContainerId}}" class="fxs_contextual_alert fxs_alert_error alert alert-dismissible fade in" role="alert" hidden>
+            <button type="button" class="fxs_close close" data-dismiss="alert" aria-label="Close">
+                <i class="fa fa-close"></i>
+                <span class="fxs_skip">Close alert</span>
+            </button>
+            <span class="fxs_alertLabel">{{ErrorAlertLabel}}</span>
+            <p class="fxs_alertText">{{ErrorAlertText}}</p>
+        </div>
+
+        <div id="errorCaptchaMessageDiv_{{ContainerId}}" class="fxs_contextual_alert fxs_alert_error alert alert-dismissible fade in" role="alert" hidden>
+            <button type="button" class="fxs_close close" data-dismiss="alert" aria-label="Close">
+                <i class="fa fa-close"></i>
+                <span class="fxs_skip">Close alert</span>
+            </button>
+            <span class="fxs_alertLabel">{{ErrorAlertLabel}}</span>
+            <p class="fxs_alertText">{{ErrorCaptchaAlertText}}</p>
+        </div>
+    </form>
 </script>

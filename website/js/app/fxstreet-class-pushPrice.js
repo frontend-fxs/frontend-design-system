@@ -22,11 +22,18 @@
             };
 
             var tokenCallback = function (tokenSuccessCallback) {
-                $.ajax({
-                    type: "GET",
-                    url: securityTokenUrl
-                }).done(function (token) {
-                    tokenSuccessCallback(token.Token);
+                var auth = FXStreet.Class.Patterns.Singleton.Authorization.Instance();
+                auth.getTokenPromise()
+                    .then(function (token) {
+                        $.ajax({
+                            type: "GET",
+                            url: securityTokenUrl,
+                            beforeSend: function (xhr) {
+                                xhr.setRequestHeader("Authorization", token.token_type + ' ' + token.access_token);
+                            }
+                        }).done(function (token) {
+                            tokenSuccessCallback(token.Token);
+                        });
                 });
             };
             

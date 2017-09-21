@@ -137,7 +137,7 @@
                     display: inline-block;
                     float: left;
                     clear: none;
-                    margin-bottom: 1rem;
+                    margin: 0 0 1rem 0;
 
                     @media(min-width:@screen-st) {
                         display: block;
@@ -207,7 +207,7 @@
                 .fxs_textInput {
                     width: 100%;
                     max-width: 100%;
-                    margin-bottom: 1rem;
+                    margin: 0 0 1rem 0;
 
                     @media(min-width:@screen-m) {
                         width: calc(50% -2rem);
@@ -249,7 +249,7 @@
                 .fxs_subscribe_title {
                     clear: none;
                     display: inline-block;
-                    margin-bottom: 1rem;
+                    margin: 0 0 1rem 0;
                     font-size: 1.1rem;
                     line-height: 20px;
                     max-width: 100%;
@@ -296,7 +296,7 @@
                 .fxs_textInput {
                     width: 100%;
                     max-width: 100%;
-                    margin-bottom: 1rem;
+                    margin: 0 0 1rem 0;
                 }
 
                 .fxs_btn_group {
@@ -329,6 +329,8 @@
 
 
             .fxs_title_benefits_wrapper {
+                width: calc(100% -30px);
+                max-width: calc(100% -30px);
 
                 .fxs_subscribe_title {
                     font-size: 1.2rem;
@@ -364,7 +366,7 @@
                 .fxs_textInput {
                     width: 100%;
                     max-width: 100%;
-                    margin-bottom: 1rem;
+                    margin: 0 0 1rem 0;
                 }
 
                 .fxs_btn_group {
@@ -416,8 +418,11 @@
                     clear: none;
 
                     .fxs_benefit {
-                        width: 50%;
-                        max-width: 50%;
+                        @media(min-width:@screen-xl) {
+                            width: 50%;
+                            max-width: 50%;
+                        }
+
                         margin-bottom: .5rem;
                         float: left;
                         display: inline-block;
@@ -434,7 +439,7 @@
                     .fxs_textInput {
                         width: 100%;
                         max-width: 100%;
-                        margin-bottom: 1rem;
+                        margin: 0 0 1rem 0;
 
                         @media(min-width:@screen-m) {
                             width: calc(50% -2rem);
@@ -475,8 +480,8 @@
                 }
 
                 .fxs_title_benefits_wrapper {
-                    max-width: calc(100% -50px);
-                    width: calc(100% -50px);
+                    max-width: calc(100% -51px);
+                    width: calc(100% -51px);
 
                     .fxs_subscribe_title {
                         width: 100%;
@@ -495,7 +500,7 @@
                             width: 100%;
                             max-width: 100%;
 
-                            @media(min-width:@screen-st) {
+                            @media(min-width:@screen-l) {
                                 width: 50%;
                                 max-width: 50%;
                                 margin-bottom: .5rem;
@@ -790,6 +795,19 @@
                         .fxs_btn_group {
                         }
                     }
+                }
+            }
+        }
+    }
+}
+.fxs_col_100{
+    .fxs_col_67{
+        .fxs_suscribe{
+            &.fxs_subscribe_light{
+                .fxs_subscribeForm_group{
+                     .fxs_textInput{
+                         margin:0 0 1rem 0;
+                     }
                 }
             }
         }

@@ -1,3 +1,6 @@
+@import "vars.less";
+@import "../../css/less/vendor/lesshat.less";
+
 ////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////// FXS Mixins ///////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////
@@ -41,7 +44,6 @@
 
         &.disabled, &[disabled], fieldset[disabled] & {
             cursor: auto;
-            .opacity(.65);
         }
 
     .fxs_badge {
@@ -178,11 +180,10 @@
 }
 
 // tabs items
-.fxs_tab_item(@tabs-container-border; @tab-link-color; @tab-link-hover-border; @tab-height) {
+.fxs_tab_item(@tabs-container-border; @tab-link-color; @tab-link-hover-border; @tab-height; @font-size) {
     list-style: none;
     border-bottom: @tabs-container-border;
     height: @tab-height;
-    //margin: 0 0 1rem;
     padding: 0 0.5rem;
     font-size: 5px;
 
@@ -197,11 +198,13 @@
             display: block;
             text-transform: uppercase;
             color: fade(@tab-link-color, 75%);
-            font-size: @txt_size_xsmall;
+            font-size:@font-size;
             text-decoration: none;
             padding: 0 0.63rem;
             line-height: @tab-height;
             height: @tab-height;
+            border: 1px solid @tab-link-hover-border;
+
 
             &:hover {
                 border-bottom: 5px solid @tab-link-hover-border;
@@ -211,6 +214,7 @@
         }
 
         &.active a {
+            border: 1px solid @highlight_clr;
             border-bottom: 5px solid @highlight_clr;
             background-color: transparent;
             color: @highlight_clr;

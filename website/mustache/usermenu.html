@@ -49,7 +49,8 @@
     </div>
     {{/UserInfo.IsLogged}}
     {{^UserInfo.IsLogged}}
-    <div class="fxs_user_access fxs_hidden_s">
+    <a id="user-show-button" href="javascript:void(0)"><i class="fa fa-user fxs_visible_s"></i></a>
+    <div class="fxs_user_access fxs_hidden_s" id="fxs_user_access">
         <a id="login" class="fxs_user_login_btn" href="javascript:void(0)">{{LoginLabel}}</a>
         <a id="signup" class="fxs_btn fxs_btn_cta fxs_btn_small" role="button" href="javascript:void(0)">{{SignupLabel}}</a>
     </div>

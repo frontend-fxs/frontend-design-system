@@ -410,7 +410,10 @@
             }
         });
 
-        _this.getJsonAds = function () { };
+        _this.getJsonAds = function () {
+            var result = [];
+            return result;
+        };
 
         _this.initAuthorFollow = function () {
             var authorData = _this.HtmlTemplateData.Author;
@@ -443,8 +446,10 @@
         parent.HtmlTemplateFile = "newsdetails_default.html";
         parent.RelatedContentUrl = FXStreet.Resource.FxsApiRoutes["NewsItemGetRelated"];
         parent.GetPostByUrlApi = FXStreet.Resource.FxsApiRoutes["NewsItemGetItemByUrl"];
+
+        var parentGetJsonAds = parent.getJsonAds;
         parent.getJsonAds = function () {
-            var result = [];
+            var result = parentGetJsonAds();
             result.push({
                 "ContainerId": "fxs_leaderboard_ad_" + parent.Id,
                 "SlotName": "/7138/FXS30/News",
@@ -477,6 +482,21 @@
                     }
                 ]
             });
+
+            _this.ContainerItem.find('div[fxs_widget_ads]').each(function (i, item) {
+                item.id = FXStreet.Util.guid();
+                result.push({
+                    "ContainerId": item.id,
+                    "SlotName": "/7138/FXS30/News",
+                    "AdvertiseType": "normal",
+                    "RefreshSeconds": 0,
+                    "MobileSize": "[580, 70]",
+                    "TabletSize": "[580, 70]",
+                    "DesktopSize": "[580, 70]",
+                    "DesktopHdSize": "[580, 70]"
+                });
+            });
+
             return result;
         };
 
@@ -497,6 +517,7 @@
                                  'JsCreateEvent': "load",
                                  'JsName': "Cag",
                                  'MarketToolsWebApiBaseUrl': data.MarketToolsWebApiBaseUrl,
+                                 'AuthorizationUrl': data.AuthorizationUrl,
                                  'Asset': data.Asset,
                                  'BigChartUrl': chartUrl,
                                  'ContainerId': "fxs_cag_widget_" + _this.Id,
@@ -530,8 +551,10 @@
         parent.HtmlTemplateFile = "analysisItemdetails_default.html";
         parent.RelatedContentUrl = FXStreet.Resource.FxsApiRoutes["AnalysisItemGetRelated"];
         parent.GetPostByUrlApi = FXStreet.Resource.FxsApiRoutes["AnalysisItemGetItemByUrl"];
+
+        var parentGetJsonAds = parent.getJsonAds;
         parent.getJsonAds = function () {
-            var result = [];
+            var result = parentGetJsonAds();
             result.push({
                 "ContainerId": "fxs_leaderboard_ad_" + parent.Id,
                 "SlotName": "/7138/FXS30/Analysis",
@@ -564,6 +587,21 @@
                     }
                 ]
             });
+
+            _this.ContainerItem.find('div[fxs_widget_ads]').each(function (i, item) {
+                item.id = FXStreet.Util.guid();
+                result.push({
+                    "ContainerId": item.id,
+                    "SlotName": "/7138/FXS30/Analysis",
+                    "AdvertiseType": "normal",
+                    "RefreshSeconds": 0,
+                    "MobileSize": "[580, 70]",
+                    "TabletSize": "[580, 70]",
+                    "DesktopSize": "[580, 70]",
+                    "DesktopHdSize": "[580, 70]"
+                });
+            });
+
             return result;
         };
         return _this;
@@ -585,8 +623,10 @@
         parent.HtmlTemplateFile = "educationItemdetails_default.html";
         parent.RelatedContentUrl = FXStreet.Resource.FxsApiRoutes["EducationItemGetRelated"];
         parent.GetPostByUrlApi = FXStreet.Resource.FxsApiRoutes["EducationItemGetItemByUrl"];
+
+        var parentGetJsonAds = parent.getJsonAds;
         parent.getJsonAds = function () {
-            var result = [];
+            var result = parentGetJsonAds();
             result.push({
                 "ContainerId": "fxs_leaderboard_ad_" + parent.Id,
                 "SlotName": "/7138/FXS30/Education",
@@ -619,6 +659,21 @@
                     }
                 ]
             });
+
+            _this.ContainerItem.find('div[fxs_widget_ads]').each(function (i, item) {
+                item.id = FXStreet.Util.guid();
+                result.push({
+                    "ContainerId": item.id,
+                    "SlotName": "/7138/FXS30/Education",
+                    "AdvertiseType": "normal",
+                    "RefreshSeconds": 0,
+                    "MobileSize": "[580, 70]",
+                    "TabletSize": "[580, 70]",
+                    "DesktopSize": "[580, 70]",
+                    "DesktopHdSize": "[580, 70]"
+                });
+            });
+
             return result;
         };
         return _this;
@@ -798,6 +853,7 @@
                     'JsCreateEvent': "load",
                     'JsName': "Cag",
                     'MarketToolsWebApiBaseUrl': parent.HtmlTemplateData.MarketToolsWebApiBaseUrl,
+                    'AuthorizationUrl': parent.HtmlTemplateData.AuthorizationUrl,
                     'Asset': parent.HtmlTemplateData.Id,
                     'BigChartUrl': chartUrl,
                     'ContainerId': cagContainerId,
@@ -881,8 +937,10 @@
                 dataType: "json"
             });
         }
+
+        var parentGetJsonAds = parent.getJsonAds;
         parent.getJsonAds = function () {
-            var result = [];
+            var result = parentGetJsonAds();
             result.push({
                 "ContainerId": "fxs_leaderboard_ad_" + parent.Id,
                 "SlotName": "/7138/FXS30/Rates_Charts",
@@ -930,16 +988,6 @@
                         'Value': ['horizontal']
                     }
                 ]
-            });
-            result.push({
-                "ContainerId": "fxs_starttrading_ad_" + parent.Id,
-                "SlotName": "/7138/FXS30/Rates_Charts",
-                "AdvertiseType": "normal",
-                "RefreshSeconds": 0,
-                "MobileSize": "[200, 28]",
-                "TabletSize": "[200, 28]",
-                "DesktopSize": "[200, 28]",
-                "DesktopHdSize": "[200, 28]"
             });
             return result;
         };
@@ -1094,8 +1142,9 @@
             }
         };
 
+        var parentGetJsonAds = parent.getJsonAds;
         parent.getJsonAds = function () {
-            var result = [];
+            var result = parentGetJsonAds();
             result.push({
                 "ContainerId": "fxs_leaderboard_ad_" + parent.Id,
                 "SlotName": "/7138/FXS30/LiveVideo",
@@ -1127,6 +1176,20 @@
                         'Value': ['horizontal']
                     }
                 ]
+            });
+
+            _this.ContainerItem.find('div[fxs_widget_ads]').each(function (i, item) {
+                item.id = FXStreet.Util.guid();
+                result.push({
+                    "ContainerId": item.id,
+                    "SlotName": "/7138/FXS30/LiveVideo",
+                    "AdvertiseType": "normal",
+                    "RefreshSeconds": 0,
+                    "MobileSize": "[580, 70]",
+                    "TabletSize": "[580, 70]",
+                    "DesktopSize": "[580, 70]",
+                    "DesktopHdSize": "[580, 70]"
+                });
             });
             return result;
         };

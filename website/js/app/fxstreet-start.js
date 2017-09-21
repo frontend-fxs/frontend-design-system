@@ -36,6 +36,7 @@
     FXStreet.Resource.GenericData = {};
     FXStreet.Resource.TeletraderSecurityUrl = '';
     FXStreet.Resource.TeletraderPriceProviderUrl = '';
+    FXStreet.Resource.AuthorizationUrl = '';
     FXStreet.Resource.PhoneServiceUrl = '';
     FXStreet.Resource.MustacheBundle = '';
     FXStreet.Resource.MachineName = '';

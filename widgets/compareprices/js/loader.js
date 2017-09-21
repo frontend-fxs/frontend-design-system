@@ -1,6 +1,7 @@
 ﻿(function ($) {
     FXStreetWidgets.Widget.LoaderComparePrices = function () {
         var options = {
+            WidgetType: "MarketTools",
             WidgetName: "compareprices",
             EndPoint: "compareprices/study/",
             EndPointTranslation: "compareprices/localization/",

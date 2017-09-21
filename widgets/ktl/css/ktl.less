@@ -1,0 +1,374 @@
+﻿// Vendor imports
+@import "../../../website/css/less/vendor/lesshat.less"; // lesshat - LESS Mixins library
+// Application variables & mixins
+@import "../../../website/css/less/vars.less";
+@import "../../../website/css/less/mixins.less";
+// custom styles
+html {
+    font-size: 100%;
+}
+
+.fxs_widget_ktl {
+    width: 100%;
+    float: left;
+    background-color: @lightest_clr;
+
+    .fxs_use_anchor {
+        line-height: 45px;
+    }
+
+    .fxs_ktl {
+        .fxs_ktl_data {
+            width: calc(100% -4rem);
+            float: left;
+            border: 1px solid @light_5_clr;
+            position: relative;
+
+            &.fxs_ktl_currentPrice {
+                border-bottom: 1px solid @brand_highlight_clr;
+                margin-bottom: 2px;
+
+                &:before {
+                    content: '';
+                    position: absolute;
+                    right: -1px;
+                    bottom: -6px;
+                    display: block;
+                    width: 0;
+                    height: 0;
+                    border-top: 5px solid transparent;
+                    border-bottom: 5px solid transparent;
+                    border-right: 5px solid @brand_highlight_clr;
+                    z-index: 2;
+                }
+            }
+
+            .fxs_ktl_tooltip {
+                position: fixed;
+                background-color: fade(@darkest_clr, 50%);
+                color: @lightest_clr;
+                display: none;
+                z-index: 3;
+                padding: 1rem;
+
+                p {
+                    margin: 0;
+                    padding: 0;
+                    font-size: @txt_size_nano;
+                }
+            }
+
+            &:hover {
+                .fxs_ktl_tooltip {
+                    display: block;
+                }
+            }
+
+            .fxs_ktl_data_fill {
+                float: left;
+                margin-top: -3px;
+                margin-left: -1px;
+                display: block;
+            }
+        }
+
+        .fxs_ktl_label {
+            border-bottom: 1px solid @highlight_clr;
+            float: right;
+            width: 4rem;
+            text-align: right;
+            position: relative;
+
+            .fxs_ktl_label_txt {
+                background-color: @lightest_clr;
+                position: relative;
+                font-size: @txt_size_nano;
+                right: 0;
+                padding-left: 1rem;
+                overflow: overflow;
+            }
+        }
+    }
+
+    .fxs_ktl_fill0 {
+        background-color: lighten(@highlight_clr,35%);
+    }
+
+    .fxs_ktl_fill1 {
+        background-color: lighten(@highlight_clr,30%);
+    }
+
+    .fxs_ktl_fill2 {
+        background-color: lighten(@highlight_clr,25%);
+    }
+
+    .fxs_ktl_fill3 {
+        background-color: lighten(@highlight_clr,20%);
+    }
+
+    .fxs_ktl_fill4 {
+        background-color: lighten(@highlight_clr,15%);
+    }
+
+    .fxs_ktl_fill5 {
+        background-color: lighten(@highlight_clr,10%);
+    }
+
+    .fxs_ktl_fill6 {
+        background-color: lighten(@highlight_clr,5%);
+    }
+
+    .fxs_ktl_fill7 {
+        background-color: @highlight_clr;
+    }
+
+    .fxs_ktl_fill8 {
+        background-color: darken(@highlight_clr,5%);
+    }
+
+    .fxs_ktl_fill9 {
+        background-color: darken(@highlight_clr,10%);
+    }
+
+    .fxs_ktl_fill10 {
+        background-color: darken(@highlight_clr,15%);
+    }
+
+    .fxs_ktl_height {
+        float: left;
+        width: 100%;
+        display: _block;
+
+        &.fxs_ktl_height1 {
+            .fxs_ktl {
+                height: 8px;
+
+                .fxs_ktl_data {
+                    height: 8px;
+
+                    .fxs_ktl_data_fill {
+                        height: 8px;
+                    }
+                }
+
+                .fxs_ktl_label {
+                    height: 8px;
+
+                    .fxs_ktl_label_txt {
+                        height: 8px;
+                    }
+                }
+            }
+        }
+
+        &.fxs_ktl_height2 {
+            .fxs_ktl {
+                height: 12px;
+
+                .fxs_ktl_data {
+                    height: 12px;
+
+                    .fxs_ktl_data_fill {
+                        height: 12px;
+                    }
+                }
+
+                .fxs_ktl_label {
+                    height: 12px;
+
+                    .fxs_ktl_label_txt {
+                        height: 12px;
+                    }
+                }
+            }
+        }
+
+        &.fxs_ktl_height3 {
+            .fxs_ktl {
+                height: 16px;
+
+                .fxs_ktl_data {
+                    height: 16px;
+
+                    .fxs_ktl_data_fill {
+                        height: 16px;
+                    }
+                }
+
+                .fxs_ktl_label {
+                    height: 16px;
+
+                    .fxs_ktl_label_txt {
+                        height: 16px;
+                    }
+                }
+            }
+        }
+
+        &.fxs_ktl_height4 {
+            .fxs_ktl {
+                height: 20px;
+
+                .fxs_ktl_data {
+                    height: 20px;
+
+                    .fxs_ktl_data_fill {
+                        height: 20px;
+                    }
+                }
+
+                .fxs_ktl_label {
+                    height: 20px;
+
+                    .fxs_ktl_label_txt {
+                        height: 20px;
+                    }
+                }
+            }
+        }
+
+        &.fxs_ktl_height5 {
+            .fxs_ktl {
+                height: 24px;
+
+                .fxs_ktl_data {
+                    height: 24px;
+
+                    .fxs_ktl_data_fill {
+                        height: 24px;
+                    }
+                }
+
+                .fxs_ktl_label {
+                    height: 24px;
+
+                    .fxs_ktl_label_txt {
+                        height: 24px;
+                    }
+                }
+            }
+        }
+
+        &.fxs_ktl_height6 {
+            height: 28px;
+
+            .fxs_ktl {
+                height: 28px;
+
+                .fxs_ktl_data {
+                    height: 28px;
+
+                    .fxs_ktl_data_fill {
+                        height: 28px;
+                    }
+                }
+
+                .fxs_ktl_label {
+                    height: 28px;
+
+                    .fxs_ktl_label_txt {
+                        height: 28px;
+                    }
+                }
+            }
+        }
+    }
+
+    .fxs_tabs_nav {
+        list-style: none;
+        border-bottom: 1px solid #DDDEDF;
+        height: 35px;
+        padding: 0 0.5rem;
+        font-size: 5px;
+        white-space: nowrap;
+        background-color: @lightest_clr;
+        float: left;
+
+        li {
+            display: inline-block;
+
+            a {
+                display: block;
+                text-transform: uppercase;
+                color: rgba(73, 73, 79, 0.75);
+                font-size: 0.8rem;
+                text-decoration: none;
+                padding: 0 0.63rem;
+                line-height: 35px;
+                height: 35px;
+                border: 1px solid #DDDEDF;
+
+                &:hover {
+                    border-bottom: 5px solid #DDDEDF;
+                    background-color: transparent;
+                    color: #49494F;
+                }
+            }
+
+            &.active a {
+                border: 1px solid #E4871B;
+                border-bottom: 5px solid #E4871B;
+                background-color: transparent;
+                color: #E4871B;
+
+                &.fxs_nav_main_menu_desktop:hover {
+                    border-bottom: 5px solid #E4871B !important;
+                }
+            }
+        }
+    }
+
+    .fxs_ktl_legend {
+        padding: 1rem 0;
+
+        span {
+            display: inline-block;
+            float: left;
+            line-height: 8px;
+            margin: 0;
+            padding: 0;
+            font-size: @txt_size_nano;
+
+
+            &:first-child {
+                padding-right: 1rem;
+            }
+
+            &:last-child {
+                padding-left: 1rem;
+            }
+
+            &.fxs_ktl_data_fill {
+                width: 10px;
+                height: 10px;
+            }
+        }
+    }
+}
+
+.fxs_col_33 {
+    .fxs_widget_ktl {
+        .fxs_use_anchor {
+            .fxs_hidden_xs {
+                display: none;
+            }
+
+            .fxs_visible_xs {
+                display: block;
+            }
+        }
+        .fxs_ktl_legend {
+            span {
+                &.fxs_ktl_data_fill {
+                    width: 5px;
+                    height: 5px;
+
+                    @media (min-width:@screen-hd) {
+                        width: 10px;
+                        height: 10px;
+                    }
+                }
+            }
+        }
+    }
+}

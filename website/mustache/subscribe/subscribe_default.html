@@ -1,0 +1,64 @@
+﻿<script id="subscribe_default" type="x-tmpl-mustache">
+    <form id="{{ContainerId}}" action="" method="get">
+        <div class="fxs_suscribe no_wide_content">
+
+            <div class="fxs_suscribeForm">
+                <div class="fxs_clearfix">
+                    <label for="inputMail_{{ContainerId}}" class="fxs_suscribeText fxs_subscribe_title">
+                        <span>{{{Translations.SubscribeToNewsletter}}}</span>
+                    </label>
+                </div>
+
+                <hr class="fxs_divider_third">
+
+                <ul class="fxs_list_unstyled fxs_dropdownList_items_v2">
+                    {{#Newsletters}}
+                         {{^Default}}
+                            <li><label><input type="checkbox" name="newsletters" value={{Id}} {{#Subscribed}} checked {{/Subscribed}} /> {{Name}}</label></li>
+                         {{/Default}}
+                    {{/Newsletters}}
+                </ul>
+
+                <div class="fxs_marginBase_top"></div>
+
+                <div class="fxs_subscribeForm_group fxs_clearfix">
+                    <div class="fxs_col fxs_col_50">
+                        <label>Type your email address</label>
+                        <input id="inputMail_{{ContainerId}}" type="email" required class="fxs_textInput fxs_newsletter_email" placeholder="{{Translations.EmailPlaceholderText}}" />
+                    </div>
+                    <div class="fxs_col fxs_col_50">
+                        <div id="recaptcha_{{ContainerId}}" class="fxs_hideElements" ></div>
+                        <button id="submit_{{ContainerId}}" class="fxs_btn fxs_btn_cta">{{Translations.SubscribeButtonText}}</button>
+                    </div>
+                </div>
+
+                <div id="successMessageDiv_{{ContainerId}}" class="fxs_contextual_alert fxs_alert_success alert alert-dismissible fade in" role="alert" hidden>
+                    <button type="button" class="fxs_close close" data-dismiss="alert" aria-label="Close">
+                        <i class="fa fa-close"></i>
+                        <span class="fxs_skip">Close alert</span>
+                    </button>
+                    <span class="fxs_alertLabel">{{Translations.CongratsAlertLabel}}</span>
+                    <p class="fxs_alertText">{{Translations.CongratsAlertText}}</p>
+                </div>
+
+                <div id="errorMessageDiv_{{ContainerId}}" class="fxs_contextual_alert fxs_alert_error alert alert-dismissible fade in" role="alert" hidden>
+                    <button type="button" class="fxs_close close" data-dismiss="alert" aria-label="Close">
+                        <i class="fa fa-close"></i>
+                        <span class="fxs_skip">Close alert</span>
+                    </button>
+                    <span class="fxs_alertLabel">{{Translations.ErrorAlertLabel}}</span>
+                    <p class="fxs_alertText">{{Translations.ErrorAlertText}}</p>
+                </div>
+
+                <div id="errorCaptchaMessageDiv_{{ContainerId}}" class="fxs_contextual_alert fxs_alert_error alert alert-dismissible fade in" role="alert" hidden>
+                    <button type="button" class="fxs_close close" data-dismiss="alert" aria-label="Close">
+                        <i class="fa fa-close"></i>
+                        <span class="fxs_skip">Close alert</span>
+                    </button>
+                    <span class="fxs_alertLabel">{{Translations.ErrorAlertLabel}}</span>
+                    <p class="fxs_alertText">{{Translations.ErrorCaptchaAlertText}}</p>
+                </div>
+            </div>
+        </div>
+    </form>
+</script>

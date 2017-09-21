@@ -1,0 +1,523 @@
+abbr_open:O
+abbr_high:H
+abbr_low:L
+abbr_close:C
+about_button:About
+add_indicator_command:Add Indicator
+add_indicator_title:Add Indicator
+add_tradingLine_command:New trade
+aggregated_volume:Aggregated Volume
+alpha:Alpha
+areaColors:Area
+areaColors0:Upper
+areaColors1:Lower
+background_color:Background color
+bottom_color:Bottom color
+cancel:Cancel
+change_indicator:Change Indicator
+chart_type:Chart Type
+chart_type_area:Area
+chart_type_candle:Candlestick
+chart_type_column:Histogram
+chart_type_dash:Dash
+chart_type_equivolume:Equivolume
+chart_type_heikinashi:Heikin-Ashi
+chart_type_hlc:Bar (HLC)
+chart_type_hloc:Bar (OHLC)
+chart_type_line:Line
+chart_type_mountain:Mountain
+chart_type_point:Points
+chart_type_step:Stair Step
+chart_type_pointandfigure:Point and Figure
+close:Close
+color:Color
+compare:Compare
+comparison_symbol:Add comparison symbol
+data_feed_error:Data feed error
+date_format:MM/dd/yyyy
+date_format_short:MM/dd/yy
+date_range_10Y:10Y
+date_range_1D:1D
+date_range_1M:1M
+date_range_1W:1W
+date_range_1Y:1Y
+date_range_3M:3M
+date_range_3Y:3Y
+date_range_5Y:5Y
+date_range_6M:6M
+date_range_tick:Tick
+date_ranges:Date ranges
+date_time_format:MM/dd/yyyy hh:mm
+date_time_format_short:MM/dd/yy hh:mm
+date_time_sec_format:MM/dd/yyyy hh:mm:ss
+datePicker_previous:Previous
+datePicker_next:Next
+day_names:Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday
+day_names_short:Sun,Mon,Tue,Wed,Thu,Fri,Sat
+day_names_shortest:S,M,T,W,T,F,S
+decimal_separator_from:.
+decimal_separator_to:.
+decrease_font_size:Decrease font size
+dialog_barColorBaseClose:Open/Close
+dialog_barColorBasePreviousClose:Prev.Close/Close
+dialog_classicCandlestick:Classic Candlestick
+dialog_fib_levels:Fib. levels
+dialog_ind_noParams:This indicator doesn't have any parameters
+dialog_parameters:Parameters
+dialog_style:Style
+dialog_chart:Chart
+dialog_template:Template
+dialog_defaultTemplate:Use as Default Template
+dialog_chart_delete_warning:The chart "%s" will be permanently deleted, do you want to proceed?
+dialog_template_delete_warning:The template "%s" will be permanently deleted, do you want to proceed?
+dialog_default_template_delete_warning:The default template will be permanently deleted, do you want to proceed?
+dialog_save:Save
+dialog_load:Load
+dialog_cancel:Cancel
+dialog_delete:Delete
+dialog_name:Name
+equalColor:Equal
+equal_color:Equal color
+event_types:Event types
+events:Events
+export_png:Export to PNG
+fallingColor:Down
+falling_color:Falling color
+field_base:Base
+file_name:Name
+first_day_of_week : 1
+font_style:Font style
+font_weight:Font weight
+fullscreen_button:Fullscreen
+gradient_color:Gradient color
+help_button:Help
+high:High
+increase_font_size:Increase font size
+ind_acceleration_-_deceleration_oscillator:Acceleration - Deceleration Oscillator
+ind_acceleration_bands:Acceleration Bands
+ind_accumulation_distribution_line:Accumulation Distribution Line
+ind_accumulation_distribution_line_short:ADL
+ind_accumulation_swing_index:Accumulation Swing Index
+ind_advance_decline_line:Advance Decline Line
+ind_advance_decline_ratio:Advance Decline Ratio
+ind_alligator:Alligator
+ind_arms_index_trin:Arms Index TRIN
+ind_aroon:Aroon Up/Down
+ind_aroon_oscillator:Aroon Oscillator 
+ind_aroon_oscillator_short:AROO
+ind_aroon_short:AROOUD
+ind_average_directional_index:Average Directional Index
+ind_average_directional_index_rating:Average Directional Index Rating
+ind_average_directional_index_short:ADX
+ind_average_true_range:Average True Range
+ind_average_true_range_short:ATR
+ind_awesome_oscillator:Awesome Oscillator
+ind_awesome_oscillator_short:Awesome Oscillator
+ind_bearish_divergence:Bearish Divergence
+ind_bearish_engulfing:Bearish Engulfing
+ind_bearish_engulfing_short:BearEng
+ind_beta_factor:Beta Factor
+ind_bollinger_band_width:Bollinger Band Width
+ind_bollinger_band_width_short:BBW
+ind_bollinger_bands:Bollinger Bands
+ind_bollinger_bands_short:BOLL
+ind_bollinger_bandwidth:Bollinger BandWidth
+ind_bollinger_pct_b:Bollinger pct_b
+ind_bullish_divergence:Bullish Divergence
+ind_bullish_engulfing:Bullish Engulfing
+ind_bullish_engulfing_short:BullEng
+ind_center_of_gravity_oscillator:Center of Gravity Oscillator
+ind_chaikin_money_flow:Chaikin Money Flow
+ind_chaikin_money_flow_short:CHAIMF
+ind_chaikin_oscillator:Chaikin Oscillator
+ind_chaikin_oscillator_short:CHIAO
+ind_chaikin_volatility:Chaikin Volatility
+ind_chande_momentum_oscillator:Chande Momentum Oscillator
+ind_commodity_channel_index:Commodity Channel Index
+ind_commodity_channel_index_short:CCI
+ind_commodity_channel_index_standard:Commodity Channel Index Standard
+ind_commodity_selection_index:Commodity Selection Index
+ind_coppock_curve:Coppock Curve
+ind_coppock_curve_short:Coppock Curve
+ind_correlation_function:Correlation Function
+ind_covariance_function:Covariance Function
+ind_cumulative_sum:Cumulative Sum
+ind_cumulative_sum_of_last_x_periods:Cumulative Sum of Last x Periods
+ind_cutler_rsi:Cutler RSI
+ind_cutler_rsi_short:RSIC
+ind_cyber_cycle:Cyber Cycle
+ind_demand_index:Demand Index
+ind_detrended_price_oscillator:Detrended Price Oscillator
+ind_directional_movement_index:Directional Movement Index
+ind_directional_movement_index_short:DMI
+ind_directional_movement_minus:Directional Movement Minus
+ind_directional_movement_minus_short:DMI-
+ind_directional_movement_plus:Directional Movement Plus
+ind_directional_movement_plus_short:DMI+
+ind_directional_movement_system:Directional Movement System
+ind_directional_movement_system_short:DMS
+ind_dss_blau:DSS Blau
+ind_dss_bressert:DSS Bressert
+ind_ease_of_movement:Ease Of Movement
+ind_elder_ray_bear_power:Elder Ray Bear Power
+ind_elder_ray_bull_power:Elder Ray Bull Power
+ind_elliott_wave_oscillator:Elliott Wave Oscillator
+ind_elliott_wave_oscillator_short:Elliott Wave Oscillator
+ind_envelopes:Envelopes
+ind_envelopes_short:ENV
+ind_fisher_transform:Fisher Transform
+ind_force_index:Force Index
+ind_full_stochastic_oscillator:Full Stochastic Oscillator 
+ind_full_stochastic_oscillator_short:FUSTO
+ind_gmma:GMMA
+ind_gmma_short:GMMA
+ind_gmma_oscillator:GMMA Oscillator
+ind_gmma_oscillator_short:GMMA Oscillator
+ind_highest_high:Highest High
+ind_highest_high_short:Highest High
+ind_highest_high_of_last_x_periods:Highest High of Last x Periods
+ind_highest_ohlc_of_last_x_periods:Highest OHLC of Last x Periods
+ind_historic_volatility:Historic Volatility
+ind_hpi:HPI
+ind_ichimoku_kinko_hyo:Ichimoku Kinko Hyo
+ind_ichimoku_kinko_hyo_short:ICHI
+ind_inversion:Inversion
+ind_keltner_channels:Keltner Channels
+ind_know_sure_thing:Know Sure Thing
+ind_know_sure_thing_short:Know Sure Thing
+ind_kri:KRI
+ind_laguerre_rsi:Laguerre RSI
+ind_linear_regression:Linear Regression
+ind_lowest_low:Lowest Low
+ind_lowest_low_short:Lowest Low
+ind_lowest_low_of_last_x_periods:Lowest Low of Last x Periods
+ind_lowest_ohlc_of_last_x_periods:Lowest OHLC of Last x Periods
+ind_macd:MACD
+ind_macd_forest:MACD Forest
+ind_macd_forest_short:MACDF
+ind_market_facilitation_index:Market Facilitation Index
+ind_market_thrust:Market Thrust
+ind_mass_index:Mass Index
+ind_mcclellan_oscillator:McClellan Oscillator
+ind_median_price:Median Price
+ind_momentum:Momentum
+ind_momentum_ohlc:Momentum OHLC
+ind_momentum_short:MOM
+ind_money_flow_index:Money Flow Index
+ind_money_flow_index_short:Money Flow Index
+ind_morning_star:Morning Star
+ind_morning_star_short:MS
+ind_moving_average_-_exponential:Moving Average Exponential
+ind_moving_average_-_exponential_ohlc:Moving Average Exponential OHLC
+ind_moving_average_-_exponential_short:EMA
+ind_moving_average_-_rolling:Moving Average Rolling
+ind_moving_average_-_rolling_short:MOVR
+ind_moving_average_-_simple:Moving Average
+ind_moving_average_-_simple_ohlc:Moving Average OHLC
+ind_moving_average_-_simple_short:SMA
+ind_moving_average_-_triple:Moving Average Triple
+ind_moving_average_-_triple_short:MovTrip
+ind_moving_average_-_weighted:Moving Average Weighted
+ind_moving_average_-_weighted_ohlc:Moving Average Weighted OHLC
+ind_moving_average_-_weighted_short:WMA
+ind_moving_average_adaptive_kaufmann:Moving Average Adaptive Kaufmann
+ind_moving_average_centered:Moving Average Centered
+ind_moving_average_convergence_divergence:Moving Average Convergence Divergence
+ind_moving_average_convergence_divergence_short:MACD
+ind_moving_average_displaced:Moving Average Displaced
+ind_moving_average_dual:Moving Average Dual
+ind_moving_average_four:Moving Average Four
+ind_moving_average_fractal_adaptive:Moving Average Fractal Adaptive
+ind_moving_average_hull:Moving Average Hull
+ind_moving_average_momentum:Moving Average Momentum
+ind_moving_average_momentum_short:Moving Average Momentum
+ind_moving_average_oscillator:Moving Average Oscillator
+ind_moving_average_smooth:Moving Average Smooth
+ind_moving_average_triangular:Moving Average Triangular
+ind_moving_average_variable:Moving Average Variable
+ind_moving_average_variable_index_dynamic:Moving Average Variable Index Dynamic
+ind_negative_volume_index:Negative Volume Index
+ind_negative_volume_index_short:NVI
+ind_net_change:Net Change
+ind_notis_percent_v:Notis Percent V
+ind_number_of_bars_of_highest_high:Number of Bars of Highest High
+ind_number_of_bars_of_lowest_low:Number of Bars of Lowest Low
+ind_on_balance_volume:On Balance Volume
+ind_on_balance_volume_short:OBV
+ind_open_interest:Open Interest
+ind_open_interest_short:Open Interest
+ind_oscillator_-_exponential:Oscillator - Exponential
+ind_oscillator_-_rolling:Oscillator - Rolling
+ind_oscillator_-_simple:Oscillator - Simple
+ind_oscillator_-_weighted:Oscillator - Weighted
+ind_overbought_oversold_index:Overbought Oversold Index
+ind_parabolic_stop_and_reversal:Parabolic Stop and Reversal
+ind_parabolic_stop_and_reversal_short:SAR
+ind_pcnt_chng_1_data-cummul:Pcnt Chng 1 Data-Cummul
+ind_pcnt_chng_2_data-cummul:Pcnt Chng 2 Data-Cummul
+ind_pcnt_chng_3_data-cummul:Pcnt Chng 3 Data-Cummul
+ind_pcnt_chng_4_data-cummul:Pcnt Chng 4 Data-Cummul
+ind_percent_change:Percent Change
+ind_performance:Performance
+ind_pivotpoints:PivotPoints
+ind_pivotpoints_3_levels:PivotPoints 3 levels
+ind_polarized_fractal_efficiency_:Polarized Fractal Efficiency 
+ind_positive_volume_index:Positive Volume Index
+ind_positive_volume_index_short:PVI
+ind_price_and_volume_trend:Price And Volume Trend
+ind_price_channel_-_donchian_channel:Price Channel - Donchian Channel
+ind_price_oscillator:Price Oscillator
+ind_price_rate_of_change:Price Rate Of Change
+ind_price_rate_of_change_ohlc:Price Rate Of Change OHLC
+ind_price_rate_of_change_short:ROC
+ind_psychological_line:Psychological Line
+ind_r_squared:R Squared
+ind_rapid_adaptive_variance:Rapid Adaptive Variance
+ind_relative_strength_index:Relative Strength Index
+ind_relative_strength_index_short:RSI
+ind_rsi_levy:RSI Levy
+ind_rsi_levy_short:RSL
+ind_spread_absolute:Spread Absolute
+ind_spread_relative:Spread Relative
+ind_standard_deviation:Standard Deviation
+ind_standard_deviation_short:Std_Dev
+ind_starc_bands:Starc Bands
+ind_stochastic_-_rsi:Stochastic - RSI
+ind_stochastic_fast:Fast Stochastic Oscillator
+ind_stochastic_fast_short:FSOO
+ind_stochastic_momentum:Stochastic Momentum
+ind_stochastic_momentum_short:Stochastic Momentum
+ind_stochastic_rsi:Stochastic RSI
+ind_stochastic_rsi_short:SRSI
+ind_stochastic_slow:Slow Stochastic Oscillator
+ind_stochastic_slow_short:SSTO
+ind_swing_index:Swing Index
+ind_tooltip_bollinger_bands:Bollinger Bands Help Text tooltip
+ind_trend_intensity_index:Trend Intensity Index
+ind_triangular_moving_average:Moving Average Triangular
+ind_triangular_moving_average_short:TRIMA
+ind_trix:TRIX
+ind_trix_short:TRIX
+ind_true_high:True High
+ind_true_low:True Low
+ind_true_range:True Range
+ind_true_range_short:True Range
+ind_true_strength_index:True Strength Index
+ind_true_strength_index_short:True Strength Index
+ind_typical_price_of_symbol:Typical Price Of Symbol
+ind_ulcer_index:Ulcer Index
+ind_ultimate_oscillator:Ultimate Oscillator
+ind_ultimate_oscillator_short:UO
+ind_vegas_tunnel:Vegas Tunnel
+ind_vertical_horizontal_filter:Vertical Horizontal Filter
+ind_vertical_horizontal_filter_short:VHFILT
+ind_volatility:Volatility
+ind_volatility_chaikin:Volatility Chaikin
+ind_volatility_short:VOLA
+ind_volatility_wilders:Volatility Wilders
+ind_volatility_stops:Volatility Stops
+ind_volatility_stops_short:Volatility Stops
+ind_volume:Volume
+ind_volume_accumulation-distribution:Volume Accumulation-Distribution
+ind_volume_accumulation-distribution_short:Volume Acc.-Distribution
+ind_volume_and_open_interest:Volume and Open Interest
+ind_volume_average:Volume Average
+ind_volume_line:Volume Line
+ind_volume_moving_average:Volume Moving Average
+ind_volume_moving_average_short:VMA
+ind_volume_oscillator:Volume Oscillator
+ind_volume_rate_of_change:Volume Rate Of Change
+ind_volume_weighted_ema:Volume Weighted EMA
+ind_vortex_indicator:Vortex Indicator
+ind_vortex_indicator_short:Vortex Indicator
+ind_williams_percent_r:William's %R
+ind_williams_percent_r_short:W%R
+ind_williams_price_accumulation_distribution:Williams Price Accumulation Distribution
+ind_zigzag:ZigZag
+ind_zigzag_short:ZZ
+line:Line
+lineColor:Line
+line_color:Line color
+line_extend:Extend
+line_weight:Line weight
+load_as_template:Load as template
+loading:Loading
+loading_data:Loading data...
+low:Low
+main_panel:Main Panel
+main_symbol:Main symbol
+menu_file:File
+menu_load:Load
+menu_load_template:Load Template
+menu_quick_load:Quick Load
+menu_quick_save:Quick Save
+menu_save:Save
+menu_save_as:Save as
+menu_save_template_as:Save Template
+menu_save_default_template:Save Default Template
+menu_delete_default_template:Delete Default Template
+million_sufix:M
+month:month
+month_names:January,February,March,April,May,June,July,August,September,October,November,December
+month_names_short:Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec
+months:months
+new_panel:New Panel
+no:No
+number_of_records:Number of records
+ok:OK
+open:Open
+panel:Panel
+param:Parameter
+params:Parameters
+period 1 minute:1'
+period_10_hours:600'
+period_10_minutes:10'
+period_11_hours:660'
+period_12_hours:720'
+period_12_minutes:12'
+period_15_minutes:15'
+period_1_hour:60'
+period_1_minute:1'
+period_1_month:1 Month
+period_1_year:1 Year
+period_20_minutes:20'
+period_2_hours:120'
+period_2_minutes:2'
+period_2_years:2 Years
+period_30_minutes:30'
+period_3_hours:180'
+period_3_minutes:3'
+period_3_months:3 Months
+period_3_years:3 Years
+period_4_hours:240'
+period_4_minutes:4'
+period_5_hours:300'
+period_5_minutes:5'
+period_5_years:5 Years
+period_6_hours:360'
+period_6_minutes:6'
+period_6_months:6 Months
+period_7_hours:420'
+period_8_hours:480'
+period_9_hours:540'
+period_daily:Daily
+period_intraday:Intraday
+period_monthly:Monthly
+period_ticks:Tick-by-Tick
+period_type:Period type
+period_weekly:Weekly
+period_yearly:Yearly
+popin_button: Pop In
+popup_button: Pop Out
+popup_overlayInfoContent:You popped out the chart, please use the new window
+popup_overlayInfoHeader:Chart blocked
+preparing_data:Preparing data...
+print_button:Print
+print_svg:Print as SVG
+records:Records
+reload_timeseries_button:Reload
+retry:Retry
+right_to_left:no
+risingColor:Up
+rising_color:Rising color
+save_confirmation:Do you want to save the chart?
+save_confirmation_title:Save chart
+show_crosshair:Show/Hide Crosshair
+show_crosshair_with_last:Show/Hide crosshair with last price
+show_data_info:Show/Hide Data Info
+show_grid:Show/Hide Grid
+show_historic_close:Show/Hide Previous Close
+show_history:Show/Hide History
+show_last:Show/Hide Last Value
+show_min_max:Show/Hide Min/Max
+show_volume:Show/Hide Volume
+style:Style
+text_bold:Bold
+text_decoration:Style
+text_italic:Italic
+text_size:Font size
+text_style:Font style
+text_underline:Underline
+thousand_sufix:T
+thousands_separator_from:, 
+thousands_separator_to:, 
+tool_addText:Text
+tool_andrewsPitchfork:Andrew's Pitchfork
+tool_arrowDown:Arrow Down
+tool_arrowUp:Arrow Up
+tool_delete:Delete
+tool_deleteAll:Delete All
+tool_drawRepeatedly:Draw repeatedly
+tool_edit:Edit
+tool_ellipse:Ellipse
+tool_fibonacciArc:Fibonacci Arc
+tool_fibonacciFan:Fibonacci Fan
+tool_fibonacciRetracements:Fibonacci Retracements
+tool_fibonacciVerticalRetracements:Fibonacci Vertical Retracements
+tool_hand:Select
+tool_horizontalLine:Horizontal line
+tool_line:Line
+tool_lineStyle:Line Style
+tool_lowerLine:LPL
+tool_rectangle:Rectangle
+tool_regressionChannel:Regression Channel
+tool_regressionLine:Regression Line
+tool_trendChannel:Trend Channel
+tool_upperLine:UPL
+top_color:Top color
+type_to_search:Type to search
+value:Value
+volume:Volume
+y_scale_linear:Linear Scale
+y_scale_log:Logarithmic Scale
+y_scale_relative:Percentage Scale
+y_scale_type:Vertical Scale
+year:year
+years:years
+yes:Yes
+zero_point_tool:Set the Zero Point
+zoom_in:Zoom in
+zoom_out:Zoom out
+All:All
+List:List
+ind_hammer:Hammer
+ind_linear_reg:Linear Regression
+ind_linear_reg_short:Linear reg.
+ind_piercing:Piercing
+ind_dark_cloud:Dark cloud
+ind_dark_cloud_short:Dark cl.
+ind_evening_star:Evening star
+ind_shooting_star:Shooting star
+ind_doji:Doji
+ind_moving_average_cross_signal:Moving Average Cross Signal
+ind_macd_cross_signal:MACD Cross Signal
+ind_macd_cross_and_over_zero_signal:MACD Cross and Over Zero Signal
+ind_price_cross_ema_signal:Price Cross EMA Signal
+ind_dmi_signal:DMI Signal
+signal_label_sell:S
+signal_label_buy:B
+boxSize:Box size
+reversalStep:Reversal
+param_validation_invalid_range:invalid range, allowed range is betweeen %s1 and %s2
+param_validation_invalid_ordering:%s1 must be smaller than %s2
+liveSearch_cat_-1:Unknown
+liveSearch_cat_0:Index
+liveSearch_cat_1:Stock
+liveSearch_cat_2:Future Underlying
+liveSearch_cat_3:Option Underlying
+liveSearch_cat_4:Option on Future
+liveSearch_cat_5:Option Call
+liveSearch_cat_6:Option Put
+liveSearch_cat_7:Bond
+liveSearch_cat_8:Currency
+liveSearch_cat_9:Mutual Fund
+liveSearch_cat_10:Option & Future Underl.
+liveSearch_cat_11:Right
+liveSearch_cat_16:Interest Rate
+liveSearch_cat_21:Chain
+liveSearch_cat_97:Convertibles
+liveSearch_cat_98:Warrant
+liveSearch_cat_99:Fund
+liveSearch_cat_102:Future
+liveSearch_cat_200:Fund (Fund Tool)
+liveSearch_cat_201:Certificates

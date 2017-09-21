@@ -42,6 +42,7 @@ return new Za.prototype.init(a,b,c,d,e)}m.Tween=Za,Za.prototype={constructor:Za,
     FXStreet.Resource.GenericData = {};
     FXStreet.Resource.TeletraderSecurityUrl = '';
     FXStreet.Resource.TeletraderPriceProviderUrl = '';
+    FXStreet.Resource.AuthorizationUrl = '';
     FXStreet.Resource.PhoneServiceUrl = '';
     FXStreet.Resource.MustacheBundle = '';
     FXStreet.Resource.MachineName = '';

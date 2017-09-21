@@ -1,6 +1,7 @@
 ﻿(function ($) {
     FXStreetWidgets.Widget.LoaderMarketImpact = function () {
         var options = {
+            WidgetType: "MarketTools",
             WidgetName: "marketimpact",
             EndPointV2: "api/v2/marketImpact/study/",
             EndPointTranslationV2: "api/v2/cultures/{culture}/MarketImpactWidgetI3/",
@@ -32,7 +33,6 @@
 
                 FXStreetWidgets.Util.ajaxJsonGetter(url)
                     .done(function (data) {
-                        debugger;
                         var selectedAssets = data.Values;
 
                         var initJson = {
@@ -46,7 +46,7 @@
                         var widget = new FXStreetWidgets.Widget.MarketImpact(_this);
                         widget.init(initJson);
                     })
-                    .error(function () {
+                    .fail(function () {
                         console.error("fxserror: Couldn't get assets");
                     });
             });

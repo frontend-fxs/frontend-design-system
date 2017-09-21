@@ -19,12 +19,10 @@
         };
 
         _this.setVars = function () {
-            _this.SpreadServer = getValidSpreadsServer();
         };
 
         _this.PollSpreads = function () {
-            if (!_this.SpreadServer.join(',') || _this.SpreadServer.length === 0) {
-                _this.ExecuteDelegate('');
+            if (!_this.SpreadServer.join(',')) {
                 console.warn('The spread brokers has a wrong configuration');
                 return;
             }
@@ -33,21 +31,13 @@
                 type: 'GET',
                 dataType: "jsonp",
                 url: _this.CreateUrl(),
-                success: _this.ExecuteDelegate,
+                success: _this.PollSpreadsSucceed,
                 error: _this.PollSpreadsFailed,
                 complete: _this.PollSpreadsFinally
             });
-
         };
 
-        var getValidSpreadsServer = function () {
-            var result = $.grep(_this.SpreadServer, function (spread) {
-                return spread !== -1;
-            });
-            return result;
-        }
-
-        _this.ExecuteDelegate = function (data) {
+        _this.PollSpreadsSucceed = function (data) {
             if (typeof _this.GetSpreadsDelegated === 'function') {
                 _this.GetSpreadsDelegated(data);
             }

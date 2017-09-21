@@ -1,0 +1,121 @@
+﻿// Vendor imports
+@import "../../../website/css/less/vendor/lesshat.less"; // lesshat - LESS Mixins library
+// Application variables & mixins
+@import "../../../website/css/less/vars.less";
+@import "../../../website/css/less/mixins.less";
+
+.fxs_widget_forecast_charts {
+
+    .fxs_forecast_charts_filter {
+        margin-bottom: 10px;
+    }
+
+    .fa-calendar {
+        float: left;
+        line-height: 2rem;
+        font-size: 1.1rem;
+        padding-right: 1rem;
+        padding-left: 1rem;
+    }
+
+    .fxs_forecast_charts_overview {
+        display: none;
+    }
+
+    .fxs_forecast_charts_tabs {
+        display: block;
+
+        .fxs_tabs_nav {
+            height: 25px;
+
+            li {
+                a {
+                    font-size: @txt_size_nano;
+                    line-height: 21px;
+                    height: 25px;
+                    padding: 0 5px;
+                }
+            }
+        }
+    }
+
+    .c3-line-PriceAverage-Row,
+    .c3-line-quarter-Average-Row,
+    .c3-line-Mean-Row,
+    .c3-line-Median-Row,
+    .c3-line-Mode-Row,
+    .c3-line-Average-Row,
+    .c3-line-LowPrice-Row,
+    .c3-line-HighPrice-Row {
+        stroke-dasharray: 2;
+    }
+
+    .c3-area {
+        opacity: .3;
+    }
+
+    .c3-xgrid, .c3-ygrid {
+        stroke-dasharray: 0;
+    }
+
+    .c3-grid line {
+        stroke: #F3F3F8;
+    }
+
+    .tick text {
+        font-size: 10px;
+    }
+}
+
+.fxs_forecast_charts_container_Overview {
+
+    .c3-line {
+        &.c3-line-month-Average-Row,
+        &.c3-line-week-Average-Row {
+            stroke-dasharray: 2;
+        }
+    }
+
+    .fxs_forecast_charts_overview {
+        display: block;
+    }
+
+    .fxs_forecast_charts_tabs {
+        display: none;
+    }
+}
+
+.c3-tooltip,
+.fxs_tooltip_table {
+    opacity: .9;
+    background-color: #F0F0F1;
+    color: @dark_1_clr;
+
+    th, td {
+        border: 1px solid #a3a3a8;
+        padding: 0 5px;
+        font-size: @txt_size_xsmall;
+        background-color: #F0F0F1;
+        color: @dark_1_clr;
+    }
+
+    .fxs_tooltip_table_price {
+        color: @dark_1_clr;
+    }
+
+    .fxs_tooltip_table_Bearish {
+        color: @error_clr;
+    }
+
+    .fxs_tooltip_table_Bullish {
+        color: @success_clr;
+    }
+
+    .fxs_tooltip_table_Sideways {
+        color: @light_2_clr;
+    }
+
+    .fxs_tooltip_table_analysts {
+        color: @dark_1_clr;
+    }
+}

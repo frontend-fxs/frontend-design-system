@@ -1760,6 +1760,53 @@
     };
 }());
 (function () {
+    FXStreet.Class.Patterns.Singleton.Authorization = (function () {
+        var instance;
+
+        var authorization = function () {
+            var tokenPromise;
+            var token;
+
+            this.getTokenPromise = function () {
+                if (token) {
+                    return $.when(token);
+                }
+                else {
+                    if (!tokenPromise) {
+                        var url = FXStreet.Resource.AuthorizationUrl || "https://authorization.fxstreet.com/token";
+                        tokenPromise = $.ajax({
+                            type: "POST",
+                            url: url,
+                            contentType: "application/x-www-form-urlencoded",
+                            dataType: "json",
+                            data: {
+                                grant_type: "domain",
+                                client_id: "client_id"
+                            }
+                        }).then(function (data) {
+                            token = data;
+                            tokenPromise = null;
+                            return token;
+                        }, function (error) {
+                            tokenPromise = null;
+                        });
+                    }
+                    return tokenPromise;
+                }
+            };
+        };
+
+        return {
+            Instance: function () {
+                if (!instance) {
+                    instance = new authorization();
+                }
+                return instance;
+            }
+        };
+    })();
+}());
+(function () {
     /*
     Name: 
     Base
@@ -2344,9 +2391,7 @@
             _this.setVars();
             render();
 
-            getPivotPoints();
-            getSentiment();
-            getForecast();
+            callMarketTools();
         };
 
         _this.setVars = function () {
@@ -2358,11 +2403,24 @@
             _this.JsonData.Translations = _this.Translations;
         };
 
+        var callMarketTools = function () {
+            var auth = FXStreet.Class.Patterns.Singleton.Authorization.Instance();
+
+            auth.getTokenPromise()
+                .then(function (token) {
+                    getPivotPoints(token);
+                    getSentiment(token);
+                    getForecast(token);
+                }, function (error) {
+                  render();
+            });
+        };
+
         var render = function () {
             FXStreet.Util.loadHtmlTemplate(_this.HtmlTemplateFile()).done(function (template) {
                 var rendered = FXStreet.Util.renderByHtmlTemplate(template, _this.JsonData);
                 _this.Container.html(rendered);
-                if (pivotPointsCalled || sentimentCalled || forecastCalled) {
+                if (pivotPointsCalled && sentimentCalled && forecastCalled) {
                     loadWidgets();
                 }
 
@@ -2375,22 +2433,33 @@
             initRate();
         }
 
-        var getPivotPoints = function () {
-            $.get(_this.MarketToolsWebApiBaseUrl + "/v1/" + FXStreet.Resource.CultureName + "/pivotPoints/study/" + _this.Asset)
-                .then(function (data) {
+        var getPivotPoints = function (token) {
+            var url = _this.MarketToolsWebApiBaseUrl + "/v1/" + FXStreet.Resource.CultureName + "/pivotPoints/study/" + _this.Asset;
+            return $.ajax({
+                type: "GET",
+                url: url,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", token.token_type + ' ' + token.access_token);
+                }
+            }).then(function (data) {
                     pivotPointsCalled = true;
                     setPivotPointsToJson(data);
                     render();
-                },
-                function () {
+                }, function () {
                     pivotPointsCalled = true;
                     render();
                 });
         };
 
-        var getSentiment = function () {
-            return $.get(_this.MarketToolsWebApiBaseUrl + "/v1/" + FXStreet.Resource.CultureName + "/sentiment/study/" + _this.Asset)
-                .then(function (data) {
+        var getSentiment = function (token) {
+            var url = _this.MarketToolsWebApiBaseUrl + "/v1/" + FXStreet.Resource.CultureName + "/sentiment/study/" + _this.Asset;
+            return $.ajax({
+                type: "GET",
+                url: url,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", token.token_type + ' ' + token.access_token);
+                }
+            }).then(function (data) {
                     sentimentCalled = true;
                     setSentimentsToJson(data);
                     render();
@@ -2401,9 +2470,15 @@
                   });
         };
 
-        var getForecast = function () {
-            return $.get(_this.MarketToolsWebApiBaseUrl + "/v1/" + FXStreet.Resource.CultureName + "/forecast/study/?assetids=" + _this.Asset)
-                  .then(function (data) {
+        var getForecast = function (token) {
+            var url = _this.MarketToolsWebApiBaseUrl + "/v1/" + FXStreet.Resource.CultureName + "/forecast/study/?assetids=" + _this.Asset;
+            return $.ajax({
+                type: "GET",
+                url: url,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", token.token_type + ' ' + token.access_token);
+                }
+            }).then(function (data) {
                       forecastCalled = true;
                       setForecastToJson(data);
                       render();
@@ -2415,43 +2490,47 @@
         }
 
         var initChart = function () {
-            var jsonChart = {
-                'PairName': _this.PairName,
-                'PriceProviderCode': _this.PriceProviderCode,
-                'WidgetType': 'fxs_widget_cag',
-                'ContainerId': 'fxs_chart_' + _this.ContentId,
-                'BigChartUrl': _this.BigChartUrl.toLowerCase(),
-                'DisplayRSI': false,
-                'DisplaySMA': false,
-                'DisplayBigChartUrl': false,
-                'TouchAvailable': false,
-                'ExternalUrl': _this.BigChartUrl.toLowerCase()
-            };
+            if(!_this.SingleChartManagerObj){
+                _this.SingleChartManagerObj = new FXStreet.Class.SingleChartManager();
 
-            _this.SingleChartManagerObj = new FXStreet.Class.SingleChartManager();
-            _this.SingleChartManagerObj.init(jsonChart);
+                var jsonChart = {
+                    'PairName': _this.PairName,
+                    'PriceProviderCode': _this.PriceProviderCode,
+                    'WidgetType': 'fxs_widget_cag',
+                    'ContainerId': 'fxs_chart_' + _this.ContentId,
+                    'BigChartUrl': _this.BigChartUrl.toLowerCase(),
+                    'DisplayRSI': false,
+                    'DisplaySMA': false,
+                    'DisplayBigChartUrl': false,
+                    'TouchAvailable': false,
+                    'ExternalUrl': _this.BigChartUrl.toLowerCase()
+                };
+                _this.SingleChartManagerObj.init(jsonChart);
+            } 
         }
 
         var initRate = function () {
+            if(!_this.RateManagerObj){
+                _this.RateManagerObj = new FXStreet.Class.SingleRateManager();
+               
+                var jsonRate = {};
+                jsonRate.Value = {
+                    'AssetId': _this.Asset,
+                    'Title': _this.PairName,
+                    'PriceProviderCode': _this.PriceProviderCode,
+                    'DecimalPlaces': _this.DecimalPlaces,
+                    'SEO': { 'FullUrl': _this.AssetUrl }
+                };
+                jsonRate.Translations = _this.Translations;
 
-            var jsonRate = {};
-            jsonRate.Value = {
-                'AssetId': _this.Asset,
-                'Title': _this.PairName,
-                'PriceProviderCode': _this.PriceProviderCode,
-                'DecimalPlaces': _this.DecimalPlaces,
-                'SEO': { 'FullUrl': _this.AssetUrl }
-            };
-            jsonRate.Translations = _this.Translations;
-
-            _this.RateManagerObj = new FXStreet.Class.SingleRateManager();
-            _this.RateManagerObj.init({
-                "ContainerId": 'fxs_ratedata_' + _this.ContentId,
-                "Data": jsonRate,
-                "HtmlTemplateFile": 'ratesandcharts_header.html',
-                "RenderAtInit": true,
-                "MustSubscribeAtInit": true
-            });
+                _this.RateManagerObj.init({
+                    "ContainerId": 'fxs_ratedata_' + _this.ContentId,
+                    "Data": jsonRate,
+                    "HtmlTemplateFile": 'ratesandcharts_header.html',
+                    "RenderAtInit": true,
+                    "MustSubscribeAtInit": true
+                });
+            }
         };
 
 
@@ -4200,7 +4279,7 @@
         _this.MouseOverClass = "fxs_item_active";
         _this.ActiveMenuEntryClass = "active";
         _this.SectionSelector = "[fxs-section-entry]";
-        _this.DesktopMatchSize = "(min-width: 780px)";
+        _this.DesktopMatchSize = "(min-width: 1024px)";
         _this.MenuBarSelector = "#fxs_nav_position";
         _this.LogoSelector = "#fxs_logo_reduced";
         _this.HeaderSelector = ".fxs_header";
@@ -4248,10 +4327,8 @@
             _this.HorizontalMenu.toggleClass(_this.HideElementClass, !horizontalVisible);
             if (!horizontalVisible) {
                 _this.mobileMenuEvents();
-            }
-            else {
+            } else {
                 _this.MobileMenuActions(false);
-                _this.setMouseEvents();
                 _this.loadScrollEvents();
             }
         };
@@ -4303,11 +4380,13 @@
             var result = $(item).parents(_this.SectionSelector);
             return result;
         };
+
         _this.loadScrollEvents = function() {
             $(window).scroll(function() {
                 _this.scrollActions();
             });
         };
+
         _this.scrollActions = function () {
             var desktop = window.matchMedia(_this.DesktopMatchSize);
             var menuBar = $(_this.MenuBarSelector);
@@ -4315,48 +4394,52 @@
             var header = $(_this.HeaderSelector);
             var body = $("body");
             var wallpaper = $('.fxs_wallpaper_wrap');
-            if (desktop.matches) {
+            var listView = $('.fxs_listView');
 
+            if (desktop.matches) {
                 if ($(window).scrollTop() > 80) {
                     body.addClass(_this.HeaderScrolledClass);
                     menuBar.addClass(_this.PositionFixedClass);
-                    wallpaper.removeClass(_this.HeaderScrolledClass);
-                } else if ($(window).scrollTop() > 1) {
-                    wallpaper.addClass(_this.HeaderScrolledClass);
-                }else{
+                    wallpaper.css({ 'top': '47px' });
+                    listView.css({ 'top': '47px' });
+                } else {
                     menuBar.removeClass(_this.PositionFixedClass);
                     body.removeClass(_this.HeaderScrolledClass);
-                    wallpaper.removeClass(_this.HeaderScrolledClass);
+                    wallpaper.css({ 'top': (121 - $(window).scrollTop()) + 'px' });
+                    listView.css({ 'top': (121 - $(window).scrollTop()) + 'px' });
                 }
             } else {
                 header.css("position", "fixed");
                 logoCustom.addClass(_this.HideElementClass);
-
             };
         };
+
         _this.mobileMenuEvents = function () {
             $(_this.MobileMenuButtonSelector).off("click").on("click", function () {
                 var visible = $(_this.MobileMenuContainerSelector).hasClass(_this.MobileMenuBlockClass);
                 _this.MobileMenuActions(!visible);
             });
         };
+
         _this.MobileMenuActions = function (open) {
             var container = $(_this.MobileMenuContainerSelector);
             var icon = $(_this.MobileMenuButtonSelector).find("i");
             var body = $("body");
+
             if (open) {
                 container.addClass(_this.MobileMenuBlockClass);
                 icon.removeClass(_this.MobileMenuOpenClass).addClass(_this.MobileMenuCloseClass);
                 $(body).addClass(_this.MobileMenuPushToRight);
-            }
-            else {
+            } else {
                 container.removeClass(_this.MobileMenuBlockClass);
                 icon.removeClass(_this.MobileMenuCloseClass).addClass(_this.MobileMenuOpenClass);
                 $(body).removeClass(_this.MobileMenuPushToRight);
             }
         };
+
         return _this;
     };
+
 }());
 (function() {
     FXStreet.Class.Modal = function() {
@@ -4842,12 +4925,10 @@
         };
 
         _this.setVars = function () {
-            _this.SpreadServer = getValidSpreadsServer();
         };
 
         _this.PollSpreads = function () {
-            if (!_this.SpreadServer.join(',') || _this.SpreadServer.length === 0) {
-                _this.ExecuteDelegate('');
+            if (!_this.SpreadServer.join(',')) {
                 console.warn('The spread brokers has a wrong configuration');
                 return;
             }
@@ -4856,21 +4937,13 @@
                 type: 'GET',
                 dataType: "jsonp",
                 url: _this.CreateUrl(),
-                success: _this.ExecuteDelegate,
+                success: _this.PollSpreadsSucceed,
                 error: _this.PollSpreadsFailed,
                 complete: _this.PollSpreadsFinally
             });
-
         };
 
-        var getValidSpreadsServer = function () {
-            var result = $.grep(_this.SpreadServer, function (spread) {
-                return spread !== -1;
-            });
-            return result;
-        }
-
-        _this.ExecuteDelegate = function (data) {
+        _this.PollSpreadsSucceed = function (data) {
             if (typeof _this.GetSpreadsDelegated === 'function') {
                 _this.GetSpreadsDelegated(data);
             }
@@ -5302,11 +5375,18 @@
             };
 
             var tokenCallback = function (tokenSuccessCallback) {
-                $.ajax({
-                    type: "GET",
-                    url: securityTokenUrl
-                }).done(function (token) {
-                    tokenSuccessCallback(token.Token);
+                var auth = FXStreet.Class.Patterns.Singleton.Authorization.Instance();
+                auth.getTokenPromise()
+                    .then(function (token) {
+                        $.ajax({
+                            type: "GET",
+                            url: securityTokenUrl,
+                            beforeSend: function (xhr) {
+                                xhr.setRequestHeader("Authorization", token.token_type + ' ' + token.access_token);
+                            }
+                        }).done(function (token) {
+                            tokenSuccessCallback(token.Token);
+                        });
                 });
             };
             
@@ -6600,6 +6680,10 @@
                 _this.Chart.setOption("toolbar.comparisons", _this.Symbols);
                 _this.Chart.setOption("toolbar.dateRanges", FXStreet.Util.ChartWidgetConfig.toolbar.dateRanges);
                 _this.Chart.setOption("toolbar.file", FXStreet.Util.ChartWidgetConfig.toolbar.file);
+                var backgroundImageOpt = FXStreet.Util.ChartWidgetConfig.getBackgroundImage();
+                if(backgroundImageOpt){
+                    _this.Chart.setOption("main.background.image", backgroundImageOpt);
+                }
                 _this.Chart.addSettingListener("data.period", _this.periodChanged);
             }
         };
@@ -6622,6 +6706,51 @@
             }
             _this.Chart.addEventListener("eventClicked", _this.CustomExtensions.OnEventClicked);
             _this.Chart.addTemporaryEventListener('display', _this.display);
+            _this.Chart.addEventListener("symbolRequested", _this.symbolRequested);
+        };
+
+        _this.symbolRequested = function (e) {
+            if (console)
+                console.log(e);
+
+            var auth = FXStreet.Class.Patterns.Singleton.Authorization.Instance();
+            auth.getTokenPromise()
+                .then(function (token) {
+                    var timeZone = _this.Chart.getOption("data.timeZone");
+                    var url = FXStreet.Resource.TeletraderPriceProviderUrl
+                        + "?request=HISTORY" + ' ' + e.symbolId + ' ' + e.period + ' ' + e.numberOfBars + ' ' + e.dateRange
+                        + '&dataLoader=ttws&timeZone=' + timeZone;
+
+                    $.ajax({
+                        type: "GET",
+                        url: url,
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader("Authorization", token.token_type + ' ' + token.access_token);
+                        }
+                    }).done(function (historicData) {
+                        var candles = [];
+                        var candleSplit = historicData.split('\n');
+                        for (var i = 1; i < candleSplit.length - 1; i++) {
+                            const barParts = candleSplit[i].split(';');
+                            const isTickFormat = barParts.length < 5;
+                            const dt = barParts[0].split('-');
+
+                            var candle = {
+                                dateTime: new Date(dt[0], dt[1] - 1, dt[2], dt[3], dt[4], dt[5] || 0, dt[6] || 0),
+                                open: parseFloat(barParts[1]),
+                                high: parseFloat(barParts[isTickFormat ? 1 : 2]),
+                                low: parseFloat(barParts[isTickFormat ? 1 : 3]),
+                                close: parseFloat(barParts[isTickFormat ? 1 : 4]),
+                                volume: parseFloat(barParts[isTickFormat ? 2 : 5]),
+                                openInterest: parseInt(barParts[6])
+                            };
+                            candles.push(candle);
+                        }
+                        e.setHistory({
+                            data: candles
+                        });
+                    });
+                });
         };
 
         _this.display = function () {
@@ -6963,7 +7092,7 @@
                     _this.chartServiceInit();
                     clearInterval(interval);
                 }
-            }, 1000);
+            }, 2500);
         };
 
         _this.display = function (display) {
@@ -6980,11 +7109,23 @@
         return _this;
     };
     FXStreet.Util.ChartWidgetConfig = {
+        getBackgroundImage: function(){
+            var result;
+            if(FXStreet.Resource.StaticContentImage){
+                result = { 
+                    filename: FXStreet.Resource.StaticContentImage + "icons/logo_watermark_FXS.png", 
+                    alpha: 0.5, 
+                    valign: 'bottom', 
+                    paddingLeft: 15, 
+                    align: 'left', 
+                    paddingBottom: 15
+                }
+            }
+            return result;
+        },
         WidgetOptions: {
             fxs_widget_default: {
                 "global.locale": "en",
-                "data.sourceUrl": FXStreet.Resource.TeletraderPriceProviderUrl,
-                "data.pushServerUrl": FXStreet.Resource.DataProviderUrl,
                 "data.period": 'INTRADAY 60',
                 "data.numberOfBars": 200,
                 "grid.show": true,
@@ -7008,13 +7149,10 @@
                 'data.emptySpaceRight': false,
                 'data.dynamicHistoryLoading': false,
                 'dialogs.limitingElementId': '',
-                "markers.eventTypes": ["news", "calendarEvents"],
-                "main.background.image": { filename: FXStreet.Resource.StaticContentImage + "icons/logo_watermark_FXS.png", alpha: 0.5, valign: 'bottom', paddingLeft: 15, align: 'left', paddingBottom: 15 }
+                "markers.eventTypes": ["news", "calendarEvents"]
             },
             fxs_widget_big: {
                 "global.locale": "en",
-                "data.sourceUrl": FXStreet.Resource.TeletraderPriceProviderUrl,
-                "data.pushServerUrl": FXStreet.Resource.DataProviderUrl,
                 "data.period": 'INTRADAY 60',
                 "data.numberOfBars": 200,
                 "grid.show": true,
@@ -7042,8 +7180,6 @@
             },
             fxs_widget_mini: {
                 "global.locale": "en",
-                "data.sourceUrl": FXStreet.Resource.TeletraderPriceProviderUrl,
-                "data.pushServerUrl": FXStreet.Resource.DataProviderUrl,
                 "data.period": 'INTRADAY 60',
                 "data.numberOfBars": 200,
                 "grid.show": true,
@@ -7069,8 +7205,6 @@
             },
             fxs_widget_full: {
                 "global.locale": "en",
-                "data.sourceUrl": FXStreet.Resource.TeletraderPriceProviderUrl,
-                "data.pushServerUrl": FXStreet.Resource.DataProviderUrl,
                 "data.period": 'INTRADAY 15',
                 "data.dateRange": '6m',
                 "grid.show": true,
@@ -7097,13 +7231,10 @@
                 "markers.load": true,
                 "markers.eventTypes": ["news", "calendarEvents"],
                 'data.extendedTimeRegion': 5,
-                'data.emptySpaceRight': true,
-                "main.background.image": { filename: FXStreet.Resource.StaticContentImage + "icons/logo_watermark_FXS.png", alpha: 0.5, valign: 'bottom', paddingLeft: 15, align: 'left', paddingBottom: 15 }
+                'data.emptySpaceRight': true
             },
             fxs_widget_bigToolbar: {
                 "global.locale": "en",
-                "data.sourceUrl": FXStreet.Resource.TeletraderPriceProviderUrl,
-                "data.pushServerUrl": FXStreet.Resource.DataProviderUrl,
                 "data.period": 'INTRADAY 15',
                 "data.dateRange": '6m',
                 "grid.show": true,
@@ -7130,13 +7261,10 @@
                 "markers.load": true,
                 "markers.eventTypes": ["news", "calendarEvents"],
                 'data.extendedTimeRegion': 5,
-                'data.emptySpaceRight': true,
-                "main.background.image": { filename: FXStreet.Resource.StaticContentImage + "icons/logo_watermark_FXS.png", alpha: 0.5, valign: 'bottom', paddingLeft: 15, align: 'left', paddingBottom: 15 }
+                'data.emptySpaceRight': true
             },
             fxs_widget_cag: {
                 "global.locale": "en",
-                "data.sourceUrl": FXStreet.Resource.TeletraderPriceProviderUrl,
-                "data.pushServerUrl": FXStreet.Resource.DataProviderUrl,
                 "data.period": 'INTRADAY 15',
                 "data.numberOfBars": 50,
                 "grid.show": true,
@@ -8162,6 +8290,8 @@
 
                 updateActiveButton(mainViewButton);
             }
+
+            setShowMoreButtonText(_this.Translations.ShowMore);
         }
 
 
@@ -8628,7 +8758,6 @@
         _this.setVars = function () {
             _this.Container = FXStreet.Util.getjQueryObjectById(_this.ContainerId);
         };
-
 
         _this.htmlRender = function (jsonData) {
             if (_this.RecaptchaInitialized === false) {
@@ -11498,7 +11627,10 @@
             }
         });
 
-        _this.getJsonAds = function () { };
+        _this.getJsonAds = function () {
+            var result = [];
+            return result;
+        };
 
         _this.initAuthorFollow = function () {
             var authorData = _this.HtmlTemplateData.Author;
@@ -11531,8 +11663,10 @@
         parent.HtmlTemplateFile = "newsdetails_default.html";
         parent.RelatedContentUrl = FXStreet.Resource.FxsApiRoutes["NewsItemGetRelated"];
         parent.GetPostByUrlApi = FXStreet.Resource.FxsApiRoutes["NewsItemGetItemByUrl"];
+
+        var parentGetJsonAds = parent.getJsonAds;
         parent.getJsonAds = function () {
-            var result = [];
+            var result = parentGetJsonAds();
             result.push({
                 "ContainerId": "fxs_leaderboard_ad_" + parent.Id,
                 "SlotName": "/7138/FXS30/News",
@@ -11565,6 +11699,21 @@
                     }
                 ]
             });
+
+            _this.ContainerItem.find('div[fxs_widget_ads]').each(function (i, item) {
+                item.id = FXStreet.Util.guid();
+                result.push({
+                    "ContainerId": item.id,
+                    "SlotName": "/7138/FXS30/News",
+                    "AdvertiseType": "normal",
+                    "RefreshSeconds": 0,
+                    "MobileSize": "[580, 70]",
+                    "TabletSize": "[580, 70]",
+                    "DesktopSize": "[580, 70]",
+                    "DesktopHdSize": "[580, 70]"
+                });
+            });
+
             return result;
         };
 
@@ -11585,6 +11734,7 @@
                                  'JsCreateEvent': "load",
                                  'JsName': "Cag",
                                  'MarketToolsWebApiBaseUrl': data.MarketToolsWebApiBaseUrl,
+                                 'AuthorizationUrl': data.AuthorizationUrl,
                                  'Asset': data.Asset,
                                  'BigChartUrl': chartUrl,
                                  'ContainerId': "fxs_cag_widget_" + _this.Id,
@@ -11618,8 +11768,10 @@
         parent.HtmlTemplateFile = "analysisItemdetails_default.html";
         parent.RelatedContentUrl = FXStreet.Resource.FxsApiRoutes["AnalysisItemGetRelated"];
         parent.GetPostByUrlApi = FXStreet.Resource.FxsApiRoutes["AnalysisItemGetItemByUrl"];
+
+        var parentGetJsonAds = parent.getJsonAds;
         parent.getJsonAds = function () {
-            var result = [];
+            var result = parentGetJsonAds();
             result.push({
                 "ContainerId": "fxs_leaderboard_ad_" + parent.Id,
                 "SlotName": "/7138/FXS30/Analysis",
@@ -11652,6 +11804,21 @@
                     }
                 ]
             });
+
+            _this.ContainerItem.find('div[fxs_widget_ads]').each(function (i, item) {
+                item.id = FXStreet.Util.guid();
+                result.push({
+                    "ContainerId": item.id,
+                    "SlotName": "/7138/FXS30/Analysis",
+                    "AdvertiseType": "normal",
+                    "RefreshSeconds": 0,
+                    "MobileSize": "[580, 70]",
+                    "TabletSize": "[580, 70]",
+                    "DesktopSize": "[580, 70]",
+                    "DesktopHdSize": "[580, 70]"
+                });
+            });
+
             return result;
         };
         return _this;
@@ -11673,8 +11840,10 @@
         parent.HtmlTemplateFile = "educationItemdetails_default.html";
         parent.RelatedContentUrl = FXStreet.Resource.FxsApiRoutes["EducationItemGetRelated"];
         parent.GetPostByUrlApi = FXStreet.Resource.FxsApiRoutes["EducationItemGetItemByUrl"];
+
+        var parentGetJsonAds = parent.getJsonAds;
         parent.getJsonAds = function () {
-            var result = [];
+            var result = parentGetJsonAds();
             result.push({
                 "ContainerId": "fxs_leaderboard_ad_" + parent.Id,
                 "SlotName": "/7138/FXS30/Education",
@@ -11707,6 +11876,21 @@
                     }
                 ]
             });
+
+            _this.ContainerItem.find('div[fxs_widget_ads]').each(function (i, item) {
+                item.id = FXStreet.Util.guid();
+                result.push({
+                    "ContainerId": item.id,
+                    "SlotName": "/7138/FXS30/Education",
+                    "AdvertiseType": "normal",
+                    "RefreshSeconds": 0,
+                    "MobileSize": "[580, 70]",
+                    "TabletSize": "[580, 70]",
+                    "DesktopSize": "[580, 70]",
+                    "DesktopHdSize": "[580, 70]"
+                });
+            });
+
             return result;
         };
         return _this;
@@ -11886,6 +12070,7 @@
                     'JsCreateEvent': "load",
                     'JsName': "Cag",
                     'MarketToolsWebApiBaseUrl': parent.HtmlTemplateData.MarketToolsWebApiBaseUrl,
+                    'AuthorizationUrl': parent.HtmlTemplateData.AuthorizationUrl,
                     'Asset': parent.HtmlTemplateData.Id,
                     'BigChartUrl': chartUrl,
                     'ContainerId': cagContainerId,
@@ -11969,8 +12154,10 @@
                 dataType: "json"
             });
         }
+
+        var parentGetJsonAds = parent.getJsonAds;
         parent.getJsonAds = function () {
-            var result = [];
+            var result = parentGetJsonAds();
             result.push({
                 "ContainerId": "fxs_leaderboard_ad_" + parent.Id,
                 "SlotName": "/7138/FXS30/Rates_Charts",
@@ -12018,16 +12205,6 @@
                         'Value': ['horizontal']
                     }
                 ]
-            });
-            result.push({
-                "ContainerId": "fxs_starttrading_ad_" + parent.Id,
-                "SlotName": "/7138/FXS30/Rates_Charts",
-                "AdvertiseType": "normal",
-                "RefreshSeconds": 0,
-                "MobileSize": "[200, 28]",
-                "TabletSize": "[200, 28]",
-                "DesktopSize": "[200, 28]",
-                "DesktopHdSize": "[200, 28]"
             });
             return result;
         };
@@ -12182,8 +12359,9 @@
             }
         };
 
+        var parentGetJsonAds = parent.getJsonAds;
         parent.getJsonAds = function () {
-            var result = [];
+            var result = parentGetJsonAds();
             result.push({
                 "ContainerId": "fxs_leaderboard_ad_" + parent.Id,
                 "SlotName": "/7138/FXS30/LiveVideo",
@@ -12215,6 +12393,20 @@
                         'Value': ['horizontal']
                     }
                 ]
+            });
+
+            _this.ContainerItem.find('div[fxs_widget_ads]').each(function (i, item) {
+                item.id = FXStreet.Util.guid();
+                result.push({
+                    "ContainerId": item.id,
+                    "SlotName": "/7138/FXS30/LiveVideo",
+                    "AdvertiseType": "normal",
+                    "RefreshSeconds": 0,
+                    "MobileSize": "[580, 70]",
+                    "TabletSize": "[580, 70]",
+                    "DesktopSize": "[580, 70]",
+                    "DesktopHdSize": "[580, 70]"
+                });
             });
             return result;
         };
@@ -13766,7 +13958,7 @@
 
         _this.Email = "";
         _this.CountryCode = "";
-        _this.FollowingClass = "";    
+        _this.FollowingClass = "";
         _this.NewsletterFollow = [];
         _this.NewsletterUnfollow = [];
 
@@ -13815,11 +14007,12 @@
         _this.SaveSubscribedNewslettersCookie = null;
         _this.Recaptcha = null;
 
+        var hideDropdownClass = "";
 
         _this.init = function (json) {
             _this.setSettingsByObject(json);
             _this.setVars();
-            _this.htmlRender(json);   
+            _this.htmlRender(json);
         };
 
         _this.setVars = function () {
@@ -13827,9 +14020,15 @@
                 _this.WidgetType = 'fxs_widget_default';
             };
             _this.Container = FXStreet.Util.getjQueryObjectById(_this.ContainerId);
-            _this.HtmlTemplateFile = getTemplateName(_this.WidgetType) ;
+            _this.HtmlTemplateFile = getTemplateName(_this.WidgetType);
             _this.DefaultNewslettersIds = getDefaultNewslettersIds();
             setInitialCheckedNewsletters();
+
+            if (_this.WidgetType === 'fxs_widget_light') {
+                hideDropdownClass = 'fxs_hideElements';
+            } else {
+                hideDropdownClass = 'fxs_dBlock';
+            }
         };
 
         var getTemplateName = function (widgetType) {
@@ -13838,6 +14037,7 @@
                 'fxs_widget_default': 'subscribe_default.html',
                 'fxs_widget_big': 'subscribe_big.html',
                 'fxs_widget_tab': 'subscribe_tab.html',
+                'fxs_widget_light': 'subscribe_light.html'
             };
             return templates[widgetType];
         }
@@ -13846,7 +14046,7 @@
             var subscribedNewsletters = $.grep(_this.Newsletters, function (newsletter) {
                 return newsletter.Subscribed;
             });
-            if (subscribedNewsletters.length === 0 && !_this.Email ) {
+            if (subscribedNewsletters.length === 0 && !_this.Email) {
                 $.each(_this.Newsletters, function () {
                     this.Subscribed = true;
                 });
@@ -13866,9 +14066,10 @@
             _this.CheckboxGetAll.on('change', _this.selectAll);
             _this.CheckboxItems.on('change', _this.unSelectAll);
             if (_this.DropdownButton) {
-                _this.DropdownButton.on('click', function () {
-                    _this.DropDownNewsletters.toggleClass('fxs_dBlock');
-                })
+                _this.DropdownButton.on('click',
+                    function () {
+                        _this.DropDownNewsletters.toggleClass(hideDropdownClass);
+                    });
             }
         };
 
@@ -13895,7 +14096,7 @@
             _this.ErrorMessageDiv = _this.Container.find('#errorMessageDiv_' + _this.ContainerId);
             _this.ErrorCaptchaMessageDiv = _this.Container.find('#errorCaptchaMessageDiv_' + _this.ContainerId);
 
-            if ($('#dropdownNewsletters_'+_this.ContainerId).length >0) {
+            if ($('#dropdownNewsletters_' + _this.ContainerId).length > 0) {
                 _this.DropDownNewsletters = FXStreet.Util.getjQueryObjectById('dropdownNewsletters_' + _this.ContainerId);
                 _this.DropdownButton = FXStreet.Util.getjQueryObjectById('dropdownButton_' + _this.ContainerId);
             }
@@ -13946,10 +14147,16 @@
         };
 
         _this.Submit = function (e) {
-            if (_this.DropdownButton) {
-                _this.DropdownButton.click();
+            if (_this.DropDownNewsletters) {
+                if (_this.WidgetType === 'fxs_widget_light') {
+                    _this.DropDownNewsletters.addClass(hideDropdownClass);
+                } else {
+                    _this.DropDownNewsletters.removeClass(hideDropdownClass);
+                }
             }
-            _this.Recaptcha.Execute();
+            if (preSubmit()) {
+                _this.Recaptcha.Execute();
+            }
             return false;
         }
 
@@ -13958,29 +14165,36 @@
                 _this.NewsletterSubscriber.SendToEventHub();
                 postSubscribe();
             }
+            _this.Recaptcha.Reset();
         }
 
-        var preSubscribe = function () {
+        var preSubmit = function () {
             $(_this.SuccessMessageDiv).hide();
             $(_this.ErrorMessageDiv).hide();
             $(_this.ErrorCaptchaMessageDiv).hide();
 
-            if (!_this.Recaptcha.GetResponse()) {
-                $(_this.ErrorCaptchaMessageDiv).show();
-                return false;
-            }          
 
             if (_this.TextBox.valid()) {
                 _this.Email = _this.TextBox.val();
-                checkNewslettersBeforeSend();
-                _this.NewsletterSubscriber.NewsletterFollow = _this.NewsletterFollow;
-                _this.NewsletterSubscriber.NewsletterUnfollow = _this.NewsletterUnfollow;
-                _this.NewsletterSubscriber.Email = _this.Email;
                 return true;
             } else {
                 $(_this.ErrorMessageDiv).show();
                 return false;
             }
+        };
+
+        var preSubscribe = function () {
+            if (!_this.Recaptcha.GetResponse()) {
+                $(_this.ErrorCaptchaMessageDiv).show();
+                return false;
+            }
+
+            checkNewslettersBeforeSend();
+            _this.NewsletterSubscriber.NewsletterFollow = _this.NewsletterFollow;
+            _this.NewsletterSubscriber.NewsletterUnfollow = _this.NewsletterUnfollow;
+            _this.NewsletterSubscriber.Email = _this.Email;
+
+            return preSubmit();
         };
 
         var postSubscribe = function () {
@@ -14016,7 +14230,7 @@
 
         var saveSubscribedNewslettersCookie = function () {
             var cookieManager = FXStreet.Class.Patterns.Singleton.FxsCookiesManager.Instance();
-            cookieManager.UpdateCookie(FXStreet.Util.FxsCookie.SubscribedNewsletters, JSON.stringify(_this.SelectedNewsletters), 20 * 365);
+            cookieManager.UpdateCookie(FXStreet.Util.FxsCookie.SubscribedNewsletters, JSON.stringify(_this.NewsletterFollow), 20 * 365);
         }
 
 
@@ -14220,13 +14434,6 @@
                 _this.ResponsiveDesignObj.whenWindowResizesToMobile(_this.ResizeToMobile);
                 _this.ResponsiveDesignObj.whenWindowResizesToTablet(_this.ResizeToMobile);
                 _this.ResponsiveDesignObj.whenWindowResizesToDesktop(_this.ResizeToDesktop);
-                _this.ResponsiveDesignObj.whenWindowIncreaseToSize(_this.DesignTeamIncreaseLimit, designTeamLimit);
-                _this.ResponsiveDesignObj.whenWindowDecreaseToSize(_this.DesignTeamReduceLimit, designTeamLimit);
-
-                _this.removeSwipe();
-                if (!_this.ResponsiveDesignObj.IsDesktop()) {
-                    _this.setSwipe();
-                }
             }
         };
 
@@ -14259,49 +14466,20 @@
                 var stickyManager = FXStreet.Class.Patterns.Singleton.StickyManager.Instance();
                 stickyManager.setSticky();
             }
-        }
-
-        _this.SidebarLeft_ShowButton_Click = function () {
-            _this.SidebarLeft_ShowButton.toggleClass('active');
-            _this.Body.toggleClass('cbp-spmenu-push-toright');
-            _this.Body.removeClass('fxs_push_timezone');
-            _this.SidebarLeft_Container.toggleClass('cbp-spmenu-open');
-            _this.SidebarLeft_Container.toggleClass('cbp-spmenu-open');
         };
 
         _this.ResizeToMobile = function () {
             _this.setTouch();
-            _this.removeSwipe();
-            _this.setSwipe();
         };
 
         _this.ResizeToDesktop = function () {
             if (typeof _this.removeTouch === "function") {
                 _this.removeTouch();
             }
-            if (typeof _this.removeSwip === "function") {
-                _this.removeSwip();
-            }
-        };
-
-        _this.DesignTeamReduceLimit = function () {
-            _this.resetMenu();
-            _this.removeSwipe();
-        };
-
-        _this.DesignTeamIncreaseLimit = function () {
-            _this.resetMenu();
-            _this.removeSwipe();
         };
 
         _this.disableAll = function () {
             _this.SidebarLeft_ShowButton.toggleClass('disable');
-        };
-
-        _this.resetMenu = function () {
-            _this.Body.removeClass('cbp-spmenu-push-toright');
-            _this.Body.removeClass('cbp-spmenu-push-toleft');
-            _this.SidebarLeft_Container.removeClass('cbp-spmenu-open');
         };
 
         _this.setTouch = function () {
@@ -14312,16 +14490,10 @@
             _this.Body.removeClass('fxs_touch');
         };
 
-        _this.removeSwipe = function () {
-            _this.SidebarLeft_Container.off('swipeleft');
-        };
-
-        _this.setSwipe = function () {
-            _this.SidebarLeft_Container.on('swipeleft', _this.SidebarLeft_ShowButton_Click);
-        };
-
         return _this;
     };
+
+
     FXStreet.Class.TemplateList = function () {
         var parent = FXStreet.Class.TemplateBase(),
           _this = FXStreet.Util.extendObject(parent);
@@ -14471,19 +14643,22 @@
         _this.ContainerId = '';
         _this.MySuscriptionsUrl = '';
 
-        const logoutButtonId = 'logout';
-        const signupButtonId = 'signup';
-        const loginButtonId = 'login';
-        const userOptionsButtonId = 'user-option-button';
-        const userOptionsId = 'fxs_user_options';
-        const logoutUrl = FXStreet.Resource.FxsApiRoutes["LogoutUrl"];
-        const usermenu_HtmlTemplateFile = 'usermenu.html';
+        var logoutButtonId = 'logout';
+        var signupButtonId = 'signup';
+        var loginButtonId = 'login';
+        var userOptionsButtonId = 'user-option-button';
+        var userShowButtonId = 'user-show-button';
+        var userOptionsId = 'fxs_user_options';
+        var userShowId = 'fxs_user_access';
+        var logoutUrl = FXStreet.Resource.FxsApiRoutes["LogoutUrl"];
+        var usermenu_HtmlTemplateFile = 'usermenu.html';
 
 
         var logoutButton = null;
         var signupButton = null;
         var loginButton = null;
         var userOptionsContainer = null;
+        var userShowContainer = null;
         var container = null;
 
         _this.init = function (json) {
@@ -14511,15 +14686,7 @@
                 logoutButton = FXStreet.Util.getjQueryObjectById(logoutButtonId);
                 logoutButton.click(logoutButtonClick);
 
-                userOptionsContainer = FXStreet.Util.getjQueryObjectById(userOptionsId);
-
-                var userOptionsButton = FXStreet.Util.getjQueryObjectById(userOptionsButtonId);
-                userOptionsButton.click(function () {
-                    userOptionsContainer.toggleClass("fxs_hideElements");
-                });
-                userOptionsContainer.find(".fa-times").click(function () {
-                    userOptionsContainer.toggleClass("fxs_hideElements");
-                });
+                initUserOptions();
             }
             else {
                 signupButton = FXStreet.Util.getjQueryObjectById(signupButtonId);
@@ -14527,7 +14694,33 @@
 
                 signupButton.click(_this.Signup);
                 loginButton.click(_this.Login);
+
+                initUserShow();
             }
+        }
+
+        var initUserOptions = function () {
+            userOptionsContainer = FXStreet.Util.getjQueryObjectById(userOptionsId);
+
+            var userOptionsButton = FXStreet.Util.getjQueryObjectById(userOptionsButtonId);
+
+            userOptionsButton.click(function () {
+                userOptionsContainer.toggleClass("fxs_hideElements");
+            });
+
+            userOptionsContainer.find(".fa-times").click(function () {
+                userOptionsContainer.toggleClass("fxs_hideElements");
+            });
+        }
+
+        var initUserShow = function () {
+            userShowContainer = FXStreet.Util.getjQueryObjectById(userShowId);
+
+            var userShowButton = FXStreet.Util.getjQueryObjectById(userShowButtonId);
+            userShowButton.click(function () {
+                userShowContainer.toggleClass("fxs_hidden_s");
+            });
+
         }
 
         var logoutButtonClick = function () {
@@ -14577,7 +14770,7 @@
         };
 
         _this.containerClick = function () {
-           
+
         };
 
         _this.updateClock = function () {
@@ -14595,7 +14788,7 @@
             if (_this.TimeZoneIsFromUserDevice === true) {
                 date = moment();
             } else {
-                var hourToSet = moment.utc().hour() + _this.HoursUtcOffset;       
+                var hourToSet = moment.utc().hour() + _this.HoursUtcOffset;
                 var minutesToAdd = 60 * (hourToSet % 1);
                 date = moment.utc().hour(hourToSet).add(minutesToAdd, "minutes");
             }
@@ -14645,7 +14838,7 @@
             });
         };
 
-        _this.setVars = function () {      
+        _this.setVars = function () {
             container = FXStreet.Util.getjQueryObjectById(_this.ContainerId);
         };
 
@@ -14722,7 +14915,7 @@
             this.TimeZone = function () {
                 return _timeZone;
             };
-           
+
             this.GetTTTimeZoneValue = function () {
                 var result = 'Etc/GMT';
                 var timezone = this.TimeZone();
