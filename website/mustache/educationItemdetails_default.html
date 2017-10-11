@@ -42,8 +42,14 @@
                         </span>
 
                         <button id="fxs_cta_authorfollow_{{Value.Id}}" type="button" class="fxs_btn fxs_btn_line fxs_btn_small btn" aria-pressed="false">
-                            <span class="fxs_togglebtn_txt init_txt" data-placement="bottom" title="Follow autor's updates">{{Translations.AuthorFollowButton}}</span>
-                            <span class="fxs_togglebtn_txt toggled_txt" data-placement="bottom" title="Stop following autor's updates">{{Translations.AuthorFollowingButton}}</span>
+                            <span class="fxs_togglebtn_txt init_txt" data-placement="bottom" title="Follow autor's updates">
+                                <i class="fa fa-envelope-o"></i>
+                                <span>{{Translations.AuthorFollowButton}}</span>
+                            </span>
+                            <span class="fxs_togglebtn_txt toggled_txt" data-placement="bottom" title="Stop following autor's updates">
+                                <i class="fa fa-envelope-o"></i>
+                                <span>{{Translations.AuthorFollowingButton}}</span>
+                            </span>
                         </button>
                     </span>
                 </address>
@@ -61,28 +67,28 @@
                 <div class="fxs_flex_col fxs_flex_ad_col sticky">
                     <div id="fxs_article_ad_{{Value.Id}}" class="fxs_article_ad"></div>
                 </div>
-             </div>
+            </div>
 
-                    <!-- Disclaimer in post! -->
-                    <div class="fxs_disclaimer_block">
-                        <p>
-                            {{{Value.Company.DisclaimerHtml}}}
-                        </p>
-                    </div>
-                    <!-- /Disclaimer in post! -->
-                    <footer class="fxs_article_tags">
-                        <div class="fxs_helperLabel_title">{{Translations.RelatedTopicsDisplay}}</div>
-                        <ul>
-                            {{#Value.Categories}}
-                            {{#FullUrl}}
-                            <li><a href="{{FullUrl}}" title="{{Name}}" class="fxs_tag">{{Name}}</a></li>
-                            {{/FullUrl}}
-                            {{^FullUrl}}
-                            <li>{{Name}}</li>
-                            {{/FullUrl}}
-                            {{/Value.Categories}}
-                        </ul>
-                    </footer>
+            <!-- Disclaimer in post! -->
+            <div class="fxs_disclaimer_block">
+                <p>
+                    {{{Value.Company.DisclaimerHtml}}}
+                </p>
+            </div>
+            <!-- /Disclaimer in post! -->
+            <footer class="fxs_article_tags">
+                <div class="fxs_helperLabel_title">{{Translations.RelatedTopicsDisplay}}</div>
+                <ul>
+                    {{#Value.Categories}}
+                    {{#FullUrl}}
+                    <li><a href="{{FullUrl}}" title="{{Name}}" class="fxs_tag">{{Name}}</a></li>
+                    {{/FullUrl}}
+                    {{^FullUrl}}
+                    <li>{{Name}}</li>
+                    {{/FullUrl}}
+                    {{/Value.Categories}}
+                </ul>
+            </footer>
         </article>
         <div id="fxs_article_related_{{Value.Id}}"></div>
         {{>seo}}

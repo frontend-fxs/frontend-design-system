@@ -125,7 +125,7 @@
             _this.FilterContainerId = "fxs_header_filter_" + _this.ContainerId;
             _this.FilterOpenDropDownId = "fxs_filter_open_dropdown_button_" + _this.ContainerId;
             _this.FilterCloseDropDownId = "fxs_filter_close_dropdown_button_" + _this.ContainerId;
-
+            
             _this.FilterDropDownId = "fxs_customize_" + _this.ContainerId;
             _this.Container = FXStreet.Util.getjQueryObjectById(_this.FilterContainerId);
 

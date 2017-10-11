@@ -34,6 +34,7 @@
             hasArea: false,
             zerobased: false
         };
+        var xSort = true;
         var showY = false;
         var showY2 = true;
         var tooltipGrouped = true;
@@ -114,6 +115,11 @@
             return _this;
         };
 
+        _this.withXSort = function(value) {
+            xSort = value;
+            return _this;
+        };
+
         _this.withShowY = function (value) {
             showY = value;
             return _this;
@@ -154,6 +160,7 @@
                 data: {
                     xs: {},
                     xFormat: '%m/%d/%Y',
+                    xSort: xSort,
                     columns: columns,
                     axes: {},
                     names: {},

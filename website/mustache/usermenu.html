@@ -1,5 +1,5 @@
 ﻿<script id="timezone" type="x-tmpl-mustache">
-    <a href="/search" class="fxs_seach_responsive_btn fxs_visible_s"><i class="fa fa-search"></i></a>
+    <a href="/search" class="fxs_seach_responsive_btn fxs_visible_st"><i class="fa fa-search"></i></a>
     <a id="fxs_changetimezone_button" href="javascript:void(0)" title="{{ChangeTimeZoneTitle}}" class="fxs_timezone_btn_navbar">
         <span class="fxs_event_time">
             <i class="fa fa-clock-o"></i>
@@ -49,7 +49,7 @@
     </div>
     {{/UserInfo.IsLogged}}
     {{^UserInfo.IsLogged}}
-    <a id="user-show-button" href="javascript:void(0)"><i class="fa fa-user fxs_visible_s"></i></a>
+    <a id="user-show-button" href="javascript:void(0)" class="fxs_visible_st"><i class="fa fa-user"></i></a>
     <div class="fxs_user_access fxs_hidden_s" id="fxs_user_access">
         <a id="login" class="fxs_user_login_btn" href="javascript:void(0)">{{LoginLabel}}</a>
         <a id="signup" class="fxs_btn fxs_btn_cta fxs_btn_small" role="button" href="javascript:void(0)">{{SignupLabel}}</a>

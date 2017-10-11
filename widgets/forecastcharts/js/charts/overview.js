@@ -44,7 +44,9 @@
 
                 configTimeseries.push({ AxisName: key + '_x', Values: shiftedValues });
 
-                var entries = scatterColumns[periodType.Order];
+                var entries = scatterColumns[periodType.Order].filter(function(value, index) {
+                    return index > 0;
+                });
                 var transformedValues = entries.map(function () {
                     var value = {
                         Date: moment(lastDate).add(offset, 'weeks').format()
@@ -143,6 +145,7 @@
                 .withTooltipContentsDelegate(tooltipContentsDelegate)
                 .withTooltipGrouped(false)
                 .withRightPadding(100)
+                .withXSort(false)
                 .build(values, cssClass, assetDecimals);
             return result;
         };
@@ -223,6 +226,8 @@
             result.push(column[0]);
             $.each(ranges, function (index, range) {
                 var values = $.grep(column, function (forecastPeriodEntry) {
+                    if (typeof forecastPeriodEntry.Value === 'undefined') return false;
+
                     if (index < ranges.length - 1) {
                         return forecastPeriodEntry.Value >= ranges[index] && forecastPeriodEntry.Value < ranges[index + 1];
                     }
@@ -271,7 +276,7 @@
                     if (j === 0) {
                         return entry;
                     }
-                    return entry.Value;
+                    return entry.TooltipValue;
                 });
                 result.push(entryValues);
             });

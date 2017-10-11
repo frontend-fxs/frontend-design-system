@@ -43,7 +43,7 @@
                 _this.loaderBase.config.Mustaches[_this.loaderBase.config.WidgetName], jsonData);
             _this.Container.html(rendered);
             manageRenderedHtml();
-            _this.subscribeHttpPush(_this.data.HttpPushServerUrl);
+            _this.subscribeHttpPush(_this.data);
         };
 
         var replaceUrValues = function (url) {
@@ -180,17 +180,21 @@
             return '<span><span class="fxs_widget_custom_data_lable">' + symbol + '</span>' + value + '</span>';
         };
 
-        _this.subscribeHttpPush = function (httpPushServerUrl) {
+        _this.subscribeHttpPush = function (data) {
+            debugger;
             if (!isHttpPushSubscribed) {
-                if (FXStreetPush !== undefined) {
-                    var options = {
-                        tokenUrl: httpPushServerUrl + "api/clientkeys",
-                        httpPushServerUrl: httpPushServerUrl + "signalr/hubs",
-                        culture: FXStreetWidgets.Configuration.getCulture()
-                    };
-                    var push = FXStreetPush.PushNotification.getInstance(options);
-                    push.calendarSubscribe(updateValuesFromPush);
-                    isHttpPushSubscribed = true;
+                if (FXStreetPush) {
+                    FXStreetWidgets.Util.getTokenByDomain().then(function (token) {
+                        var options = {
+                            token: token,
+                            tokenUrl: data.AuthorizationUrl,
+                            httpPushServerUrl: data.HttpPushServerUrl + "signalr/hubs",
+                            culture: FXStreetWidgets.Configuration.getCulture()
+                        };
+                        var push = FXStreetPush.PushNotification.getInstance(options);
+                        push.calendarSubscribe(updateValuesFromPush);
+                        isHttpPushSubscribed = true;
+                    });
                 }
                 else {
                     console.log("FXStreetPush load failed");

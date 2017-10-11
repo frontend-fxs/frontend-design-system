@@ -1313,7 +1313,7 @@
         _this.getBrowserHeight = function () {
 
             var footerAdWidget = 30;
-            var menusSiteHeight = 155;
+            var menusSiteHeight = 51;
             var alertHeight = 50;
             var heightOffset = 50;
 

@@ -452,7 +452,7 @@
             var result = parentGetJsonAds();
             result.push({
                 "ContainerId": "fxs_leaderboard_ad_" + parent.Id,
-                "SlotName": "/7138/FXS30/News",
+                "SlotName": FXStreet.Resource.DfpSlots.News,
                 "AdvertiseType": "normal",
                 "RefreshSeconds": 0,
                 "MobileSize": "[320, 50]",
@@ -468,7 +468,7 @@
             });
             result.push({
                 "ContainerId": "fxs_article_ad_" + parent.Id,
-                "SlotName": "/7138/FXS30/News",
+                "SlotName": FXStreet.Resource.DfpSlots.News,
                 "AdvertiseType": "normal",
                 "RefreshSeconds": 0,
                 "MobileSize": "[250, 250]",
@@ -487,7 +487,7 @@
                 item.id = FXStreet.Util.guid();
                 result.push({
                     "ContainerId": item.id,
-                    "SlotName": "/7138/FXS30/News",
+                    "SlotName": FXStreet.Resource.DfpSlots.News,
                     "AdvertiseType": "normal",
                     "RefreshSeconds": 0,
                     "MobileSize": "[580, 70]",
@@ -557,7 +557,7 @@
             var result = parentGetJsonAds();
             result.push({
                 "ContainerId": "fxs_leaderboard_ad_" + parent.Id,
-                "SlotName": "/7138/FXS30/Analysis",
+                "SlotName": FXStreet.Resource.DfpSlots.Analysis,
                 "AdvertiseType": "normal",
                 "RefreshSeconds": 0,
                 "MobileSize": "[320, 50]",
@@ -573,7 +573,7 @@
             });
             result.push({
                 "ContainerId": "fxs_article_ad_" + parent.Id,
-                "SlotName": "/7138/FXS30/Analysis",
+                "SlotName": FXStreet.Resource.DfpSlots.Analysis,
                 "AdvertiseType": "normal",
                 "RefreshSeconds": 0,
                 "MobileSize": "[250, 250]",
@@ -592,7 +592,7 @@
                 item.id = FXStreet.Util.guid();
                 result.push({
                     "ContainerId": item.id,
-                    "SlotName": "/7138/FXS30/Analysis",
+                    "SlotName": FXStreet.Resource.DfpSlots.Analysis,
                     "AdvertiseType": "normal",
                     "RefreshSeconds": 0,
                     "MobileSize": "[580, 70]",
@@ -629,7 +629,7 @@
             var result = parentGetJsonAds();
             result.push({
                 "ContainerId": "fxs_leaderboard_ad_" + parent.Id,
-                "SlotName": "/7138/FXS30/Education",
+                "SlotName": FXStreet.Resource.DfpSlots.Education,
                 "AdvertiseType": "normal",
                 "RefreshSeconds": 0,
                 "MobileSize": "[320, 50]",
@@ -645,7 +645,7 @@
             });
             result.push({
                 "ContainerId": "fxs_article_ad_" + parent.Id,
-                "SlotName": "/7138/FXS30/Education",
+                "SlotName": FXStreet.Resource.DfpSlots.Education,
                 "AdvertiseType": "normal",
                 "RefreshSeconds": 0,
                 "MobileSize": "[250, 250]",
@@ -664,7 +664,7 @@
                 item.id = FXStreet.Util.guid();
                 result.push({
                     "ContainerId": item.id,
-                    "SlotName": "/7138/FXS30/Education",
+                    "SlotName": FXStreet.Resource.DfpSlots.Education,
                     "AdvertiseType": "normal",
                     "RefreshSeconds": 0,
                     "MobileSize": "[580, 70]",
@@ -943,7 +943,7 @@
             var result = parentGetJsonAds();
             result.push({
                 "ContainerId": "fxs_leaderboard_ad_" + parent.Id,
-                "SlotName": "/7138/FXS30/Rates_Charts",
+                "SlotName": FXStreet.Resource.DfpSlots.RatesCharts,
                 "AdvertiseType": "normal",
                 "RefreshSeconds": 0,
                 "MobileSize": "[320, 50]",
@@ -959,7 +959,7 @@
             });
             result.push({
                 "ContainerId": "fxs_ad_" + parent.Id,
-                "SlotName": "/7138/FXS30/Rates_Charts",
+                "SlotName": FXStreet.Resource.DfpSlots.RatesCharts,
                 "AdvertiseType": "normal",
                 "RefreshSeconds": 0,
                 "MobileSize": "[250, 250]",
@@ -975,7 +975,7 @@
             });
             result.push({
                 "ContainerId": "fxs_ad_2_" + parent.Id,
-                "SlotName": "/7138/FXS30/Rates_Charts",
+                "SlotName": FXStreet.Resource.DfpSlots.RatesCharts,
                 "AdvertiseType": "normal",
                 "RefreshSeconds": 0,
                 "MobileSize": "[250, 250]",
@@ -1147,7 +1147,7 @@
             var result = parentGetJsonAds();
             result.push({
                 "ContainerId": "fxs_leaderboard_ad_" + parent.Id,
-                "SlotName": "/7138/FXS30/LiveVideo",
+                "SlotName": FXStreet.Resource.DfpSlots.LiveVideo,
                 "AdvertiseType": "normal",
                 "RefreshSeconds": 0,
                 "MobileSize": "[320, 50]",
@@ -1163,7 +1163,7 @@
             });
             result.push({
                 "ContainerId": "fxs_article_ad_" + parent.Id,
-                "SlotName": "/7138/FXS30/LiveVideo",
+                "SlotName": FXStreet.Resource.DfpSlots.LiveVideo,
                 "AdvertiseType": "normal",
                 "RefreshSeconds": 0,
                 "MobileSize": "[250, 250]",
@@ -1182,7 +1182,7 @@
                 item.id = FXStreet.Util.guid();
                 result.push({
                     "ContainerId": item.id,
-                    "SlotName": "/7138/FXS30/LiveVideo",
+                    "SlotName": FXStreet.Resource.DfpSlots.LiveVideo,
                     "AdvertiseType": "normal",
                     "RefreshSeconds": 0,
                     "MobileSize": "[580, 70]",

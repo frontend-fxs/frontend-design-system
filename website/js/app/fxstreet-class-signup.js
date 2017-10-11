@@ -113,6 +113,8 @@
             switch (response)
             {
                 case 'Success':
+                    _this.NewslettersSubscribeAtSignUp(_this.RegisterData);
+
                     var jsonData = {
                         UserName: _this.FullNameSignupTextbox.val(),
                         UserEmail: _this.EmailSignupTextbox.val(),
@@ -242,24 +244,29 @@
         }
 
         var validatePhoneNumber = function (callback) {
-
             var phone = encodeURIComponent(getCompletePhoneNumber());
-
-            $.ajax({
-                type: "GET",
-                url: FXStreet.Resource.PhoneServiceUrl.format(phone)
-            }).done(function (phoneData) {
-                if (phoneData && phoneData.IsPhoneValid) {
-                    _this.PhoneContainer.removeClass(_this.FxsUserErrorClass);
-                    _this.PhoneValid = true;
+            
+            var auth = FXStreet.Class.Patterns.Singleton.Authorization.Instance();
+            auth.getTokenPromise().then(function (token) {
+                $.ajax({
+                    type: "GET",
+                    url: FXStreet.Resource.PhoneServiceUrl.format(phone),
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("Authorization", token.token_type + ' ' + token.access_token);
+                    }
+                })
+                .done(function (phoneData) {
+                    if (phoneData && phoneData.IsPhoneValid) {
+                        _this.PhoneContainer.removeClass(_this.FxsUserErrorClass);
+                        _this.PhoneValid = true;
+                        if (callback) callback(_this.PhoneValid);
+                    }})
+                .fail(function () {
+                    _this.PhoneContainer.addClass(_this.FxsUserErrorClass);
+                    _this.PhoneValid = false;
                     if (callback) callback(_this.PhoneValid);
-                }
-            }).fail(function () {
-                _this.PhoneContainer.addClass(_this.FxsUserErrorClass);
-                _this.PhoneValid = false;
-                if (callback) callback(_this.PhoneValid);
-            });;
-
+                });
+            });
         }
 
         function getParameterByName(name, url) {

@@ -141,11 +141,11 @@
 }
 
     .fxs_tooltip .fxs_tooltiptext {
-        visibility: hidden;
+        display:none;
         width: 145px;
-        background-color: black;
-        color: #fff;
-        text-align: center;
+        background-color: @tooltip-bg;
+        color: @tooltip-color;
+        text-align: left;
         padding: 5px 2px 5px 2px;
         font-family: @txt_fontfamily;
         /* Position the tooltip */
@@ -154,7 +154,7 @@
     }
 
     .fxs_tooltip:hover .fxs_tooltiptext {
-        visibility: visible;
+        display:block;
     }
 
 // tooltip position
@@ -537,7 +537,7 @@
 
 // Content rail items dimensions and margins
 .fxs_contentRail_box {
-    margin: 0 auto !important;
+    margin: 0 auto;
     max-width: @content_rail_width;
 }
 

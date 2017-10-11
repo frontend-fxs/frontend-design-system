@@ -45,8 +45,14 @@
                             {{Value.Author.Position}} <a href="{{{Value.Company.Url}}}" rel="nofollow" class="fxs_mutedLink">{{Value.Company.Name}}</a>
                         </span>
                         <button id="fxs_cta_authorfollow_{{Value.Id}}" type="button" class="fxs_btn fxs_btn_line fxs_btn_small btn" aria-pressed="false">
-                            <span class="fxs_togglebtn_txt init_txt" data-placement="bottom" title="Follow autor's updates">{{Translations.AuthorFollowButton}}</span>
-                            <span class="fxs_togglebtn_txt toggled_txt" data-placement="bottom" title="Stop following autor's updates">{{Translations.AuthorFollowingButton}}</span>
+                            <span class="fxs_togglebtn_txt init_txt" data-placement="bottom" title="Follow autor's updates">
+                                <i class="fa fa-envelope-o"></i>
+                                <span>{{Translations.AuthorFollowButton}}</span>
+                            </span>
+                            <span class="fxs_togglebtn_txt toggled_txt" data-placement="bottom" title="Stop following autor's updates">
+                                <i class="fa fa-envelope-o"></i>
+                                <span>{{Translations.AuthorFollowingButton}}</span>
+                            </span>
                         </button>
                     </span>
                     {{> seo}}
@@ -75,25 +81,25 @@
                     {{/Value.Sponsored}}
                 </footer>
                 {{#Value.Video.PublicView}}
-                    {{#Value.Video.RegistrationRequired}}
-                    <div id="fxs_live_video_show_{{Value.Id}}">
-                        <div class="fxs_live_event_cta_content fxs_mediaContainer">
-                            <div class="fxs_timer_countdown_block fxs_absolute_center">
-                                <button id="fxs_cta_show_video_{{Value.Id}}" data-toggle="" class="fxs_btn fxs_btn_cta fxs_btn_block fxs_not_onAir_item">
-                                    {{Translations.ShowVideo}}
-                                </button>
-                            </div>
+                {{#Value.Video.RegistrationRequired}}
+                <div id="fxs_live_video_show_{{Value.Id}}">
+                    <div class="fxs_live_event_cta_content fxs_mediaContainer">
+                        <div class="fxs_timer_countdown_block fxs_absolute_center">
+                            <button id="fxs_cta_show_video_{{Value.Id}}" data-toggle="" class="fxs_btn fxs_btn_cta fxs_btn_block fxs_not_onAir_item">
+                                {{Translations.ShowVideo}}
+                            </button>
                         </div>
-                        <footer class="fxs_txt_center fxs_marginBase_bottom fxs_relativePositioning">
-                            <small>{{Translations.AcceptThirdPartyText}}</small>
-                        </footer>
                     </div>
-                    {{/Value.Video.RegistrationRequired}}
-                    <div id="fxs_live_video_container_{{Value.Id}}" class="fxs_mediaContainer fxs_video_post_container {{#Value.Video.RegistrationRequired}}fxs_hideElements{{/Value.Video.RegistrationRequired}}">
-                        <!-- Embed Youtube -->
-                        <iframe class="fxs_media_item" src="{{{Value.Video.VideoEmbedUrl}}}?enablejsapi=1" allowfullscreen="" frameborder="0" width="1280" height="720"></iframe>
-                        <!-- /Embed Youtube -->
-                    </div>
+                    <footer class="fxs_txt_center fxs_marginBase_bottom fxs_relativePositioning">
+                        <small>{{Translations.AcceptThirdPartyText}}</small>
+                    </footer>
+                </div>
+                {{/Value.Video.RegistrationRequired}}
+                <div id="fxs_live_video_container_{{Value.Id}}" class="fxs_mediaContainer fxs_video_post_container {{#Value.Video.RegistrationRequired}}fxs_hideElements{{/Value.Video.RegistrationRequired}}">
+                    <!-- Embed Youtube -->
+                    <iframe class="fxs_media_item" src="{{{Value.Video.VideoEmbedUrl}}}?enablejsapi=1" allowfullscreen="" frameborder="0" width="1280" height="720"></iframe>
+                    <!-- /Embed Youtube -->
+                </div>
                 {{/Value.Video.PublicView}}
                 {{#Value.Video.RegistrationView}}
                 <div class="fxs_live_event_cta_content fxs_mediaContainer">

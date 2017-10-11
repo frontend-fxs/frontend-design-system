@@ -28,7 +28,7 @@
 
     var tokenPromise;
     var token;
-    var getTokenByDomain = function(){
+    FXStreetWidgets.Util.getTokenByDomain = function(){
         if(tokenPromise)
             return tokenPromise;
         if(token){
@@ -56,7 +56,7 @@
     };
 
     FXStreetWidgets.Util.ajaxJsonGetter = function (url, data) {
-        var result = getTokenByDomain().then(function(token){
+        var result = FXStreetWidgets.Util.getTokenByDomain().then(function(token){
             return FXStreetWidgets.$.ajax({
                 type: "GET",
                 url: url,
