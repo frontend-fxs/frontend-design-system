@@ -11,6 +11,7 @@
 // items nav list (2nd level navigations)
 .fxs_items_list_nav {
     .fxs_list_nav(@txt_size_small, @light_3_clr, 0.72rem 1rem);
+
     .fxs_menuList_header {
         .fxs_stiled_text_variants(block; @light_1_clr; @txt_size_xsmall);
         padding: 1.38rem 1rem 0.75rem;
@@ -20,10 +21,25 @@
 .fxs_tabs_nav {
     .fxs_tab_item(1px solid @light_3_clr; @dark_4_clr; @light_3_clr; @base_module_size;@txt_size_xsmall);
     white-space: nowrap;
+
     .fxs_pageSidebar & {
         .fxs_tab_item(1px solid @dark_4_clr; @light_2_clr; @dark_4_clr; @main_header_height;@txt_size_xsmall);
     }
+
+    &.fxs_tabs_nav_small {
+        height: 25px;
+
+        li {
+            a {
+                font-size: @txt_size_nano;
+                line-height: 21px;
+                height: 25px;
+                padding: 0 5px;
+            }
+        }
+    }
 }
+
 // SECTION & SUBSECTION TITLES
 .fxs_sectionTitle_header {
     .fxs_stiled_text_variants(inline-block; @dark_3_clr; @txt_defaultsize_rem);
@@ -347,11 +363,11 @@
 .fxs_btn {
     .fa {
         &:nth-child(1) {
-            padding-right: 10px;
+            padding-right: 5px;
         }
 
         &:nth-child(2) {
-            padding-left: 10px;
+            padding-left: 5px;
         }
     }
 
@@ -693,6 +709,10 @@
             display: inherit;
         }
     }
+}
+
+.fxs_label_highlight {
+    .fxs_label_variants(@lightest_clr; @highlight_clr);
 }
 
 .fxs_label_featured {
@@ -1087,11 +1107,15 @@
     }
 
     .fxs_btn_filter {
-        left: 7px;
+        left: 12px;
     }
 
     .fxs_advanced_search_pag {
         margin-bottom: 3rem;
+    }
+
+    .ais-search-box--input{
+        padding-left:40px;
     }
 }
 
@@ -1165,6 +1189,13 @@
     padding: 0 5px 0 5px;
 }
 
+.fxs_advanced_search_pag {
+    .ais-pagination {
+        .ais-pagination--item__disabled {
+            display: none;
+        }
+    }
+}
 // LATEST NEWS CUSTOM SEARCH HEADER
 
 
@@ -1281,7 +1312,7 @@
             padding-top: @main_headercookies_height;
 
             @media(min-width:@screen-s) {
-                padding-top: @main_header_height + 5px;
+                padding-top: 44px;
             }
 
             .fxs_wallpaper_wrap {
@@ -2777,7 +2808,7 @@
 
 .c3-tooltip {
     th {
-        .fxs_stiled_text_variants(table-cell; @lightest_clr; @txt_size_xsmall);
+        .fxs_stiled_text_variants(table-cell; @dark_1_clr; @txt_size_xsmall);
     }
 }
 

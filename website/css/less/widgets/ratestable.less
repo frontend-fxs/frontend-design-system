@@ -1,5 +1,6 @@
 ﻿// Vendor imports
-@import "../vendor/lesshat.less"; // lesshat - LESS Mixins library
+@import "../vendor/lesshat.less";
+// lesshat - LESS Mixins library
 // Application variables & mixins
 @import "../vars.less";
 @import "../mixins.less";
@@ -94,6 +95,16 @@
                     border: 0;
                     float: left;
 
+                    tbody tr td, thead tr th {
+                        &.fxs_ratestable_change {
+                            display: none;
+
+                            @media (min-width:@screen-m) {
+                                display: table-cell;
+                            }
+                        }
+                    }
+
                     tbody {
                         tr {
                             &.fxs_widget_ratestable {
@@ -120,7 +131,7 @@
 
                                     .fxs_ratestable_change_bg {
                                         width: auto;
-                                        padding: 0 3px;
+                                        padding: 1px 3px 0 3px;
                                         line-height: 100%;
 
                                         &.price_up {
@@ -142,7 +153,6 @@
                                         }
 
                                         > span {
-                                            padding-left: 22px;
                                             position: relative;
                                             float: left;
                                             display: block;
@@ -166,7 +176,7 @@
                                             }
                                         }
 
-                                        .fxs_ratestable_slightlybullish {
+                                        .fxs_ratestable_stronglybullish {
                                             color: @success_clr;
                                             font-weight: bold;
 
@@ -208,49 +218,53 @@
                                             }
                                         }
 
-                                        .custom_tooltip {
-                                            display: none;
-
-                                            @media(min-width:@screen-hd) {
-                                                display: inline-block;
-                                                padding: 0 .5rem;
-                                            }
-                                        }
-
-                                        &:hover {
-                                            position: relative;
+                                        .fxs_ratestable_stronglybullish, .fxs_ratestable_bullish, .fxs_ratestable_neutral, .fxs_ratestable_bearish, .fxs_ratestable_stronglybearish {
+                                            padding-left: 22px;
 
                                             .custom_tooltip {
-                                                @media(max-width:@screen-hd) {
-                                                    display: block;
-                                                    z-index: @zindex-tooltip;
-                                                    max-width: @tooltip-max-width;
-                                                    color: @tooltip-color;
-                                                    font-size: @txt_size_nano;
-                                                    background-color: @tooltip-bg;
-                                                    opacity: @tooltip-opacity;
-                                                    position: absolute;
-                                                    top: -8px;
-                                                    left: 20px;
-                                                    width: auto;
-                                                    padding: .5rem;
+                                                display: none;
+
+                                                @media(min-width:@screen-hd) {
+                                                    display: inline-block;
+                                                    padding: 0 .5rem;
+                                                }
+                                            }
+
+                                            &:hover {
+                                                position: relative;
+
+                                                .custom_tooltip {
+                                                    @media(max-width:@screen-hd) {
+                                                        display: block;
+                                                        z-index: @zindex-tooltip;
+                                                        max-width: @tooltip-max-width;
+                                                        color: @tooltip-color;
+                                                        font-size: @txt_size_nano;
+                                                        background-color: @tooltip-bg;
+                                                        opacity: @tooltip-opacity;
+                                                        position: absolute;
+                                                        top: -8px;
+                                                        left: 20px;
+                                                        width: auto;
+                                                        padding: .2rem;
+                                                        border: 1px solid @tooltip-border-color;
+                                                    }
                                                 }
                                             }
                                         }
                                     }
 
                                     &.fxs_ratestable_obos {
-                                        width: auto;
                                         overflow: visible;
                                         text-align: left;
 
                                         > span {
-                                            padding-left: 16px;
                                             position: relative;
                                             float: left;
                                             display: block;
                                             width: 100%;
                                             height: 20px;
+                                            text-align:center;
 
                                             &::before {
                                                 left: 50%;
@@ -288,34 +302,39 @@
                                                     content: "\f0c9";
                                                 }
                                             }
-                                        }
 
-                                        .custom_tooltip {
-                                            display: none;
+                                            &.fxs_ratestable_overbought, &.fxs_ratestable_neutral, &.fxs_ratestable_oversold {
+                                                padding-left: 16px;
 
-                                            @media(min-width:@screen-hd) {
-                                                display: inline-block;
-                                                padding: 0 .5rem;
-                                            }
-                                        }
+                                                .custom_tooltip {
+                                                    display: none;
 
-                                        &:hover {
-                                            position: relative;
+                                                    @media(min-width:@screen-hd) {
+                                                        display: inline-block;
+                                                        padding: 0 .5rem;
+                                                    }
+                                                }
 
-                                            .custom_tooltip {
-                                                @media(max-width:@screen-hd) {
-                                                    display: block;
-                                                    z-index: @zindex-tooltip;
-                                                    max-width: @tooltip-max-width;
-                                                    color: @tooltip-color;
-                                                    font-size: @txt_size_nano;
-                                                    background-color: @tooltip-bg;
-                                                    opacity: @tooltip-opacity;
-                                                    position: absolute;
-                                                    top: -8px;
-                                                    left: 20px;
-                                                    width: auto;
-                                                    padding: .5rem;
+                                                &:hover {
+                                                    position: relative;
+
+                                                    .custom_tooltip {
+                                                        @media(max-width:@screen-hd) {
+                                                            display: block;
+                                                            z-index: @zindex-tooltip;
+                                                            max-width: @tooltip-max-width;
+                                                            color: @tooltip-color;
+                                                            font-size: @txt_size_nano;
+                                                            background-color: @tooltip-bg;
+                                                            opacity: @tooltip-opacity;
+                                                            border: 1px solid @tooltip-border-color;
+                                                            position: absolute;
+                                                            top: -8px;
+                                                            left: 20px;
+                                                            width: auto;
+                                                            padding: .2rem;
+                                                        }
+                                                    }
                                                 }
                                             }
                                         }
@@ -323,15 +342,14 @@
 
                                     &.fxs_ratestable_shorcuts {
                                         text-align: center;
-                                        min-width: auto;
+                                        min-width: 60px;
 
                                         a {
                                             display: inline-block;
                                             font-size: 15px;
-                                            float: none;
 
                                             &:first-child {
-                                                padding-right: 1rem;
+                                                padding-right: .3rem;
                                             }
                                         }
                                     }
@@ -439,8 +457,8 @@
 
             a {
                 display: inline-block;
-                width: 1rem;
-                height: 1rem;
+                width: .7rem;
+                height: .7rem;
                 background-color: @lightest_clr;
                 border: 1px solid @light_2_clr;
                 border-radius: 1rem;
@@ -461,7 +479,6 @@
         padding: 0 @base_module_size 1rem @base_module_size;
         border: 1px solid @light_4_clr;
         z-index: 9999;
-
 
         label {
             float: left;
@@ -628,8 +645,7 @@
                     }
                 }
 
-                .fxs_queryResults,
-                .fxs_scrollableContent {
+                .fxs_queryResults, .fxs_scrollableContent {
                     display: none;
                 }
 
@@ -699,6 +715,7 @@
 
             .fxs_col {
                 float: left;
+                white-space: nowrap;
 
                 &.fxs_col_20 {
                     width: 100%;
@@ -762,7 +779,7 @@
     }
 }
 
-.fxs_col_50 {
+.fxs_col_50, .fxs_col_67 {
     .fxs_ratestable_container {
         &.new {
             .fxs_filter_wrapper {
@@ -774,11 +791,14 @@
                                     td {
                                         padding: .3rem;
 
-                                        &.fxs_ratestable_obos,
-                                        &.fxs_ratestable_trend {
-                                            width: auto;
+                                        &.fxs_ratestable_obos, &.fxs_ratestable_trend {
                                             overflow: visible;
                                             text-align: center;
+
+                                            @media(min-width:@screen-hd) {
+                                                text-align: center;
+                                            }
+
 
                                             > span {
                                                 float: left;
@@ -792,43 +812,46 @@
                                                 }
                                             }
 
-                                            .custom_tooltip {
-                                                display: none;
-                                            }
-
-                                            &:hover {
-                                                position: relative;
-
+                                            .fxs_ratestable_stronglybullish, .fxs_ratestable_bullish, .fxs_ratestable_neutral, .fxs_ratestable_bearish, .fxs_ratestable_stronglybearish, .fxs_ratestable_overbought, .fxs_ratestable_neutral, .fxs_ratestable_oversold {
                                                 .custom_tooltip {
-                                                    display: block;
-                                                    z-index: @zindex-tooltip;
-                                                    max-width: @tooltip-max-width;
-                                                    color: @tooltip-color;
-                                                    font-size: @txt_size_nano;
-                                                    background-color: @tooltip-bg;
-                                                    opacity: @tooltip-opacity;
-                                                    position: absolute;
-                                                    top: -8px;
-                                                    left: 20px;
-                                                    width: auto;
-                                                    padding: .5rem;
+                                                    display: none;
+                                                }
+
+                                                &:hover {
+                                                    position: relative;
+
+                                                    .custom_tooltip {
+                                                        display: block;
+                                                        z-index: @zindex-tooltip;
+                                                        max-width: @tooltip-max-width;
+                                                        color: @tooltip-color;
+                                                        font-size: @txt_size_nano;
+                                                        background-color: @tooltip-bg;
+                                                        opacity: @tooltip-opacity;
+                                                        border: 1px solid @tooltip-border-color;
+                                                        position: absolute;
+                                                        top: -8px;
+                                                        left: 20px;
+                                                        width: auto;
+                                                        padding: .2rem;
+                                                    }
                                                 }
                                             }
                                         }
-                                    }
 
-                                    &.fxs_ratestable_shorcuts {
-                                        min-width: auto;
-                                        width: auto;
+                                        &.fxs_ratestable_shorcuts {
+                                            min-width: 60px;
+                                            width: auto;
+                                            text-align: center;
 
-                                        a {
-                                            display: inline-block;
-                                            font-size: 15px;
-                                            float: left;
-                                            padding: 0;
+                                            a {
+                                                display: inline-block;
+                                                font-size: 15px;
+                                                padding: 0;
 
-                                            &:first-child {
-                                                padding-right: .3rem;
+                                                &:first-child {
+                                                    padding-right: .3rem;
+                                                }
                                             }
                                         }
                                     }
@@ -874,8 +897,11 @@
                                     td {
                                         padding: 0 .3rem;
 
-                                        &.fxs_ratestable_trend,
-                                        &.fxs_ratestable_obos {
+                                        &.fxs_ratestable_trend, &.fxs_ratestable_obos {
+                                            @media(min-width:@screen-hd) {
+                                                text-align: center;
+                                            }
+
                                             > span {
                                                 &::before {
                                                     width: 100%;
@@ -883,31 +909,44 @@
                                                 }
                                             }
 
-                                            .custom_tooltip {
-                                                display: none;
-                                            }
-
-                                            &:hover {
-                                                position: relative;
+                                            .fxs_ratestable_stronglybullish,
+                                            .fxs_ratestable_bullish,
+                                            .fxs_ratestable_neutral,
+                                            .fxs_ratestable_bearish,
+                                            .fxs_ratestable_stronglybearish,
+                                            .fxs_ratestable_overbought,
+                                            .fxs_ratestable_neutral,
+                                            .fxs_ratestable_oversold {
 
                                                 .custom_tooltip {
-                                                    display: block;
-                                                    z-index: @zindex-tooltip;
-                                                    max-width: @tooltip-max-width;
-                                                    color: @tooltip-color;
-                                                    font-size: @txt_size_nano;
-                                                    background-color: @tooltip-bg;
-                                                    opacity: @tooltip-opacity;
-                                                    position: absolute;
-                                                    top: -8px;
-                                                    left: 20px;
-                                                    width: auto;
-                                                    padding: .5rem;
+                                                    display: none;
+                                                }
+
+                                                &:hover {
+                                                    position: relative;
+
+                                                    .custom_tooltip {
+                                                        display: block;
+                                                        z-index: @zindex-tooltip;
+                                                        max-width: @tooltip-max-width;
+                                                        color: @tooltip-color;
+                                                        font-size: @txt_size_nano;
+                                                        background-color: @tooltip-bg;
+                                                        opacity: @tooltip-opacity;
+                                                        border: 1px solid @tooltip-border-color;
+                                                        position: absolute;
+                                                        top: -8px;
+                                                        left: 20px;
+                                                        width: auto;
+                                                        padding: .2rem;
+                                                    }
                                                 }
                                             }
                                         }
 
                                         &.fxs_ratestable_shorcuts {
+                                            min-width: 60px;
+
                                             a {
                                                 padding: 0;
 

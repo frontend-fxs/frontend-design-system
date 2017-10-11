@@ -1,4 +1,4 @@
-﻿<script id="menu_desktop" type="x-tmpl-mustache">    
+﻿<script id="menu_desktop" type="x-tmpl-mustache">
     <nav class="fxs_nav_menu fxs_main_nav" role="navigation">
         <ul>
             {{#SectionEntries}}
@@ -13,8 +13,9 @@
                                 <span class="fxs_headline_from_nano_to_tiny">{{Text}}</span>
                                 <ul class="fxs_subNav_col_{{ColumnCount}} fxs_list_unstyled">
                                     {{#ItemEntries}}
-                                    <li><i class="fa fa-angle-right" aria-hidden="true"></i> 
-                                        <a fxs-desktop-menu-item-entry href="{{Url}}" {{#NoFollow}} rel="nofollow" {{/NoFollow}}>{{Text}}</a>
+                                    <li>
+                                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                                        <a fxs-desktop-menu-item-entry href="{{Url}}" {{#NoFollow}} rel="nofollow" {{/NoFollow}}>{{Text}} <span class="fxs_label fxs_label_highlight">{{Status}}</span></a>
                                     </li>
                                     {{/ItemEntries}}
                                 </ul>
@@ -27,5 +28,5 @@
             </li>
             {{/SectionEntries}}
         </ul>
- </nav>
+    </nav>
 </script>

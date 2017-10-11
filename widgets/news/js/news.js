@@ -518,19 +518,22 @@
 
         _this.subscribeHttpPush = function () {
             if (FXStreetPush) {
-                var options = {
-                    tokenUrl: _this.Configuration.HttpPushServer + "api/clientkeys",
-                    httpPushServerUrl: _this.Configuration.HttpPushServer + "signalr/hubs",
-                    culture: FXStreetWidgets.Configuration.getCulture()
-                };
-                var push = FXStreetPush.PushNotification.getInstance(options);
+                FXStreetWidgets.Util.getTokenByDomain().then(function (token) {
+                    var options = {
+                        token: token,
+                        tokenUrl: _this.Configuration.AuthorizationUrl,
+                        httpPushServerUrl: _this.Configuration.HttpPushServer + "signalr/hubs",
+                        culture: FXStreetWidgets.Configuration.getCulture()
+                    };
+                    var push = FXStreetPush.PushNotification.getInstance(options);
 
-                var channels = [_this.Configuration.NewsHttpPushFeature];
-                push.postSubscribe(channels,
-                    function (news) {
-                        _this.newsNotify(news);
-                    }
-                );
+                    var channels = [_this.Configuration.NewsHttpPushFeature];
+                    push.postSubscribe(channels,
+                        function (news) {
+                            _this.newsNotify(news);
+                        }
+                    );
+                });
             }
             else {
                 console.log("FXStreetPush load failed");

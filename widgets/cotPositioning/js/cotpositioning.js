@@ -489,11 +489,12 @@
             var dates = ['noncommercial'];
             
             nonCommercialData.forEach(function (item) {
-                columns.push(moment(item.Date.Value, "YYYY-MM-DD"));                
-                dates.push(item.Value);                
+                var formattedDate = moment(item.Date).format("YYYY-MM-DD");
+                columns.push(formattedDate);
+                dates.push(item.Value);
             });
 
-            var chart = c3.generate({
+            var nonCommercialChart = c3.generate({
                 bindto: '#non_commercial',
                 data: {
                     x: 'x',
@@ -524,11 +525,12 @@
             dates = ['commercial'];
 
             commercialData.forEach(function (item) {
-                columns.push(moment(item.Date.Value, "YYYY-MM-DD"));
+                var formattedDate = moment(item.Date).format("YYYY-MM-DD");
+                columns.push(formattedDate);
                 dates.push(item.Value);
             });
 
-            var commercial = c3.generate({
+            var commercialChart = c3.generate({
                 bindto: '#commercial',
                 data: {
                     x: 'x',
@@ -553,15 +555,13 @@
                         select: { r: 3 }
                     }
                 }
-            });          
-
+            });
         }
 
         _this.setToolTip = function () {
             _this.Container.find('[data-toggle="tooltip"]').tooltip();
         };
         
-
         return _this;
     };
 }(FXStreetWidgets.$));

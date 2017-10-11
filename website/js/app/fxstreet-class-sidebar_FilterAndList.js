@@ -70,7 +70,7 @@
                 var ads = new FXStreet.Class.AdvertiseNormal();
                 ads.init({
                     "ContainerId": _this.StickAdSidebar,
-                    "SlotName": "/7138/FXS30/SponsorBroker",
+                    "SlotName": FXStreet.Resource.DfpSlots.SponsorBroker,
                     "AdvertiseType": "normal",
                     "RefreshSeconds": 0,
                     "MobileSize": "[320, 40]",

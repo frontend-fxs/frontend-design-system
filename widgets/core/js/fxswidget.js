@@ -36,7 +36,7 @@
 
     var tokenPromise;
     var token;
-    var getTokenByDomain = function(){
+    FXStreetWidgets.Util.getTokenByDomain = function(){
         if(tokenPromise)
             return tokenPromise;
         if(token){
@@ -64,7 +64,7 @@
     };
 
     FXStreetWidgets.Util.ajaxJsonGetter = function (url, data) {
-        var result = getTokenByDomain().then(function(token){
+        var result = FXStreetWidgets.Util.getTokenByDomain().then(function(token){
             return FXStreetWidgets.$.ajax({
                 type: "GET",
                 url: url,
@@ -358,7 +358,7 @@
             UseMin: true,
             ServerName: "https://staticcontent.fxstreet.com/",
             AuthorizationUrl: "https://authorization.fxstreet.com/token",
-            StaticContentQueryStringRefresh: "?t=2017081013",
+            StaticContentQueryStringRefresh: "?t=20171006",
             Culture: "en-US",
             StaticContentName: "widgets/",
             JsJqueryName: "jquery-1.11.3.min.js",

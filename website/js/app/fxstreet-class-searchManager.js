@@ -508,13 +508,17 @@
 
         var subscribeHttpPush = function () {
             if (typeof FXStreetPush !== 'undefined') {
-                var options = {
-                    tokenUrl: _this.HttpPushServerKeysUrl,
-                    httpPushServerUrl: _this.HttpPushServerUrl,
-                    culture: FXStreet.Resource.CultureName
-                };
-                var push = FXStreetPush.PushNotification.getInstance(options);
-                push.postSubscribe(_this.HttpPushFeatures, postNotify);
+                var auth = FXStreet.Class.Patterns.Singleton.Authorization.Instance();
+                auth.getTokenPromise().then(function (token) {
+                    var options = {
+                        token: token,
+                        tokenUrl: _this.HttpPushServerKeysUrl,
+                        httpPushServerUrl: _this.HttpPushServerUrl,
+                        culture: FXStreet.Resource.CultureName
+                    };
+                    var push = FXStreetPush.PushNotification.getInstance(options);
+                    push.postSubscribe(_this.HttpPushFeatures, postNotify);
+                });
             }
             else {
                 console.log("FXStreetPush load failed");

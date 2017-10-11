@@ -43,12 +43,16 @@
         };
 
         var stablishHubConnection = function () {
-            var instance = FXStreetPush.PushNotification.getInstance({
-                culture: FXStreet.Resource.CultureName,
-                tokenUrl: _this.HttpPushServerKeysUrl,
-                httpPushServerUrl: _this.HttpPushServerUrl
+            var auth = FXStreet.Class.Patterns.Singleton.Authorization.Instance();
+            auth.getTokenPromise().then(function (token) {
+                var instance = FXStreetPush.PushNotification.getInstance({
+                    token: token,
+                    culture: FXStreet.Resource.CultureName,
+                    tokenUrl: _this.HttpPushServerKeysUrl,
+                    httpPushServerUrl: _this.HttpPushServerUrl
+                });
+                instance.postSubscribe([_this.PushNotificationChannel], postCreatedOnServer);
             });
-            instance.postSubscribe([_this.PushNotificationChannel], postCreatedOnServer);
         }
 
         var postCreatedOnServer = function (post) {

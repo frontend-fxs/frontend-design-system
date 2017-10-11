@@ -28,7 +28,7 @@
         _this.setVars = function (json) {
             _this.PonderationManager = new FXStreetWidgets.Widget.Ktl.PonderationManager();
             _this.PonderationManager.init(json);
-            
+
             _this.KtlSettings = new FXStreetWidgets.Widget.Ktl.Settings();
             _this.KtlSettings.init();
 
@@ -52,11 +52,11 @@
         };
 
         var loadCalculations = function () {
-            _this.Calculations = _this.PonderationManager.getData(_this.data,_this.loaderBase.config.Translations);
+            _this.Calculations = _this.PonderationManager.getData(_this.data, _this.loaderBase.config.Translations);
         };
 
         var changeTab = function (e) {
-            var items = $.grep(periods, function (element) { return element.Id === e.currentTarget.id;});
+            var items = $.grep(periods, function (element) { return element.Id === e.currentTarget.id; });
             if (items.length === 0) return null;
 
             var item = items[0];
@@ -71,35 +71,35 @@
                 }
             });
 
-           _this.renderHtml(period);
+            _this.renderHtml(period);
         };
 
-        
-        var getTooltipObj = function(e) {
+
+        var getTooltipObj = function (e) {
             var rowId = e.currentTarget.getAttribute('fxs-row-id');
-            var result = FXStreet.Util.getjQueryObjectById("fxs_ktl_data_row_tooltip_" + rowId,false);
+            var result = FXStreet.Util.getjQueryObjectById("fxs_ktl_data_row_tooltip_" + rowId, false);
             return result;
         }
 
         var mouseOverRow = function (e) {
             var tooltip = getTooltipObj(e);
             if (!tooltip) return;
-            tooltip.css({ top: e.clientY, left:e.clientX});
+            tooltip.css({ top: e.clientY, left: e.clientX + 10 + "px" });
         };
 
         var addEvents = function (rows) {
 
             $.each(periods, function (key, value) {
-                    var tab = FXStreet.Util.getjQueryObjectById(value.Id);
-                    tab.click(changeTab);
+                var tab = FXStreet.Util.getjQueryObjectById(value.Id);
+                tab.click(changeTab);
             });
 
             $.each(rows,
                 function (data, row) {
                     var rowObj = FXStreet.Util.getjQueryObjectById("fxs_ktl_data_row_" + row.Id);
-                        rowObj.on('mousemove', mouseOverRow);
-                        rowObj.on('scroll', mouseOverRow);
-            });
+                    rowObj.on('mousemove', mouseOverRow);
+                    rowObj.on('scroll', mouseOverRow);
+                });
         };
 
         var getRowsToDrawByPeriod = function (period) {
@@ -154,7 +154,7 @@
         _this.setVars = function () {
             _this.PonderationStrategies = new FXStreetWidgets.Widget.Ktl.PonderationStrategies();
             _this.PonderationStrategies.init();
-            
+
             _this.KtlLogging = new FXStreetWidgets.Widget.Ktl.Logging();
             _this.KtlLogging.init();
 
@@ -248,7 +248,7 @@
             return result;
         };
 
-        var createTicks = function(data, maxRange, minRange) {
+        var createTicks = function (data, maxRange, minRange) {
 
             var ticks = [];
             var asset = data.Asset;
@@ -268,13 +268,13 @@
         var calculateTicks = function (data, maxRange, minRange) {
 
             var technicalData = data.TechnicalData;
-            var ticks = createTicks(data,maxRange, minRange);
+            var ticks = createTicks(data, maxRange, minRange);
 
             $.each(ticks, function (tickKey, tick) {
                 var ponderations = getPonderation(technicalData, tick.Price);
                 $.each(ponderations, function (ponderationKey, ponderation) {
 
-                    if(_this.Translations[ponderation.Translation.Key])
+                    if (_this.Translations[ponderation.Translation.Key])
                         tick.Ponderation.Calculations.push(_this.Translations[ponderation.Translation.Key]);
 
                     tick.Ponderation.Value += ponderation.Value;
@@ -291,10 +291,10 @@
             return ticks;
         };
 
-        var calculateRowData = function(ticks, minPrice, maxPrice) {
+        var calculateRowData = function (ticks, minPrice, maxPrice) {
             var rowData = { Value: 0, Matches: 0, Calculations: [] };
             $.each(ticks,
-                function(key, value) {
+                function (key, value) {
                     if (value.Price >= minPrice && value.Price < maxPrice) {
                         _this.KtlLogging.logRowTick(value.Price, value.Ponderation.Value, value.Ponderation.Matches);
 
@@ -306,8 +306,8 @@
                 });
             return rowData;
         };
-        
-        var isCurrentPriceInRange = function(data,minRange,maxPrice) {
+
+        var isCurrentPriceInRange = function (data, minRange, maxPrice) {
             var lastCandleStick = getLastCandleStick(data);
 
             var result = (lastCandleStick >= minRange && lastCandleStick < maxPrice);
@@ -315,22 +315,22 @@
 
         };
 
-        var createRow = function(data,ticks,minPrice,maxPrice,asset) {
+        var createRow = function (data, ticks, minPrice, maxPrice, asset) {
             var ponderation = calculateRowData(ticks, minPrice, maxPrice);
 
             var row = {
-                Id :FXStreetWidgets.Util.guid(),
+                Id: FXStreetWidgets.Util.guid(),
                 Ponderation: ponderation,
                 MaxPrice: priceRoundWithZero(maxPrice, asset.DecimalPlaces),
                 MinPrice: priceRoundWithZero(minPrice, asset.DecimalPlaces),
                 IsCurrentPriceInRange: isCurrentPriceInRange(data, minPrice, maxPrice)
-        };
+            };
             return row;
         }
 
         var calculateRows = function (data, numberOfRows, periodType) {
 
-            _this.KtlLogging.logCalculateRows(periodType,numberOfRows);
+            _this.KtlLogging.logCalculateRows(periodType, numberOfRows);
 
             var maxRange = getMaxRange(data, periodType, data.Asset.DecimalPlaces);
             var minRange = getMinRange(data, periodType, data.Asset.DecimalPlaces);
@@ -338,7 +338,7 @@
             var rows = [];
             var partitionPrice = ((maxRange - minRange) / numberOfRows);
             var maxPrice = maxRange;
-            var ticks = calculateTicks(data, maxRange,minRange);
+            var ticks = calculateTicks(data, maxRange, minRange);
             var asset = data.Asset;
 
             for (var i = 0; i < numberOfRows; i++) {
@@ -354,7 +354,7 @@
 
             setPonderationPercentage(rows);
             setPonderationColor(rows);
-           
+
             _this.KtlLogging.logSeparator();
             return rows;
         };
@@ -363,23 +363,23 @@
 
             var candleStick = $.grep(data.TechnicalData.CandleSticks,
                 function (element) {
-                    return element.PeriodType === _this.KtlSettings.PeriodTypes.Period15M;
+                    return element.PeriodType === _this.KtlSettings.PeriodTypes.IntraDay15;
                 });
 
             var result = candleStick[0].Close;
             return result;
         };
 
-        _this.getData = function (data,translations) {
+        _this.getData = function (data, translations) {
             _this.KtlLogging.logDataReceived(data);
             _this.Translations = translations;
 
             var result =
             {
-                "15M": calculateRows(data, _this.NumberOfRows, _this.KtlSettings.PeriodTypes.Period15M),
-                "1H": calculateRows(data, _this.NumberOfRows, _this.KtlSettings.PeriodTypes.Period1H),
-                "4H": calculateRows(data, _this.NumberOfRows, _this.KtlSettings.PeriodTypes.Period4H),
-                "1D": calculateRows(data, _this.NumberOfRows, _this.KtlSettings.PeriodTypes.Period1D)
+                "IntraDay15": calculateRows(data, _this.NumberOfRows, _this.KtlSettings.PeriodTypes.IntraDay15),
+                "IntraDay60": calculateRows(data, _this.NumberOfRows, _this.KtlSettings.PeriodTypes.IntraDay60),
+                "IntraDay240": calculateRows(data, _this.NumberOfRows, _this.KtlSettings.PeriodTypes.IntraDay240),
+                "Daily": calculateRows(data, _this.NumberOfRows, _this.KtlSettings.PeriodTypes.Daily)
             };
             return result;
         };
@@ -389,7 +389,7 @@
     FXStreetWidgets.Widget.Ktl.PonderationStrategies = function (loaderBase) {
 
         var parent = FXStreetWidgets.Widget.Base(loaderBase),
-        _this = FXStreetWidgets.Util.extendObject(parent);
+            _this = FXStreetWidgets.Util.extendObject(parent);
 
         _this.KtlLogging = null;
         _this.KtlSettings = null;
@@ -419,14 +419,14 @@
             var ponderationSettings = settings;
             var allowedElements = ["CandleSticks", "PivotPoints", "Sma", "BollingerBands", "Fibonacci"];
 
-            this.isMatch = function(property) {
+            this.isMatch = function (property) {
                 var result = $.inArray(property, allowedElements) !== -1;
                 return result;
             };
 
-            this.getPonderation = function(objectName, object, price) {
+            this.getPonderation = function (objectName, object, price) {
                 var result = [];
-                object.forEach(function(key) {
+                object.forEach(function (key) {
                     var periodType = key.PeriodType;
                     for (var propertyName in key) {
                         if (propertyName !== "PeriodType") {
@@ -434,7 +434,7 @@
                             if (value === price) {
                                 var ponderationValue = getPonderationValue(objectName, periodType, propertyName);
                                 if (ponderationValue) {
-                                    var ponderation = { Id: propertyName,Value: ponderationValue, Translation: { Key: objectName + "_" + propertyName + "_" + periodType ,Value: "" }};
+                                    var ponderation = { Id: propertyName, Value: ponderationValue, Translation: { Key: objectName + "_" + propertyName + "_" + periodType, Value: "" } };
                                     _this.KtlLogging.logMathOperation(ponderation.Id, ponderation.Value, price);
                                     result.push(ponderation);
                                 };
@@ -469,18 +469,18 @@
             var ponderationSettings = settings;
             var allowedElements = ["HistoricalPrice"];
 
-            this.isMatch = function(property) {
+            this.isMatch = function (property) {
                 var result = $.inArray(property, allowedElements) !== -1;
                 return result;
             };
 
-            this.getPonderation = function(objectName, object, price) {
+            this.getPonderation = function (objectName, object, price) {
                 var result = [];
                 for (var propertyName in object) {
                     if (object[propertyName] === price) {
                         var ponderationValue = getPonderationValue(objectName, propertyName);
                         if (ponderationValue) {
-                            var ponderation = { Id: propertyName, Value: ponderationValue, Translation: { Key: objectName+"_" +propertyName,Value: ""}}
+                            var ponderation = { Id: propertyName, Value: ponderationValue, Translation: { Key: objectName + "_" + propertyName, Value: "" } }
                             _this.KtlLogging.logMathOperation(ponderation.Id, ponderation.Value, price);
                             result.push(ponderation);
                         }
@@ -510,15 +510,15 @@
 
             var allowedElements = ["RoundNumbers"];
 
-            this.isMatch = function(property) {
+            this.isMatch = function (property) {
                 var result = $.inArray(property, allowedElements) !== -1;
                 return result;
             };
 
-            this.getPonderation = function(objectName, object, price) {
+            this.getPonderation = function (objectName, object, price) {
                 var result = [];
                 for (var propertyName in object) {
-                    object[propertyName].forEach(function(value) {
+                    object[propertyName].forEach(function (value) {
                         if (value === price) {
                             var ponderationValue = getPonderationValue(objectName, propertyName);
                             if (ponderationValue) {
@@ -551,17 +551,17 @@
             _this.setVars(json);
 
             ponderationStrategies = [new CalculationWithPeriodTypes(ponderationSettings),
-                                     new CalculationListDoubles(ponderationSettings),
-                                     new CalculationObject(ponderationSettings)];
+                new CalculationListDoubles(ponderationSettings),
+                new CalculationObject(ponderationSettings)];
         };
 
         return _this;
     };
 
-    FXStreetWidgets.Widget.Ktl.Logging = function(loaderBase) {
+    FXStreetWidgets.Widget.Ktl.Logging = function (loaderBase) {
 
         var parent = FXStreetWidgets.Widget.Base(loaderBase),
-        _this = FXStreetWidgets.Util.extendObject(parent);
+            _this = FXStreetWidgets.Util.extendObject(parent);
 
         _this.loggingEnabled = false;
 
@@ -569,25 +569,24 @@
             _this.setSettingsByObject(json);
             _this.setVars(json);
         };
-    
+
         var logger = function (message) {
-            if (_this.loggingEnabled)  console.log(message);
+            if (_this.loggingEnabled) console.log(message);
         };
 
-        _this.setVars = function ()
-        {
+        _this.setVars = function () {
             _this.loggingEnabled = FXStreetWidgets.Util.getQueryStringParameterByName('fxslogging') !== '';
         };
 
-        _this.logDataReceived = function(data) {
-            logger("Data Received :" + JSON.stringify(data) );
+        _this.logDataReceived = function (data) {
+            logger("Data Received :" + JSON.stringify(data));
         };
 
-        _this.logCalculateRows = function (periodType,numberOfRows) {
+        _this.logCalculateRows = function (periodType, numberOfRows) {
             logger("[Calculate Rows: # PeriodType " + periodType + " / " + numberOfRows + " rows]");
         };
 
-        _this.logMathOperation = function(id, ponderationValue, price) {
+        _this.logMathOperation = function (id, ponderationValue, price) {
             logger("[MathOperation: " + id + " # PonderationValue: " + ponderationValue + " # Price: " + price + "]");
         };
 
@@ -599,33 +598,33 @@
             logger("[ROW_Tick: " + price + " # Ponderation Value : " + ponderationValue + " # Matches: " + matches);
         };
 
-        _this.logMinRange = function(minRange) {
+        _this.logMinRange = function (minRange) {
             logger("[MinRange:" + minRange + "]");
         };
-       
+
         _this.logMaxRange = function (maxRange) {
             logger("[MaxRange:" + maxRange + "]");
         };
 
-        _this.logTicks = function(ticks) {
+        _this.logTicks = function (ticks) {
             $.each(ticks, function (key, value) {
                 logger("[Tick: " + value.Price + " # Ponderation Value: " + value.Ponderation.Value + " # Matches: " + JSON.stringify(value.Ponderation.Matches));
             });
         };
 
-        _this.logSeparator = function() {
+        _this.logSeparator = function () {
             logger(".......................................................");
         };
 
         return _this;
     };
-    
-    FXStreetWidgets.Widget.Ktl.Settings = function (loaderBase) {
+
+    FXStreetWidgets.Widget.Ktl.Settings = function(loaderBase) {
 
         var parent = FXStreetWidgets.Widget.Base(loaderBase),
-        _this = FXStreetWidgets.Util.extendObject(parent);
+            _this = FXStreetWidgets.Util.extendObject(parent);
 
-        _this.init = function (json) {
+        _this.init = function(json) {
             _this.setSettingsByObject(json);
             _this.setVars(json);
         };
@@ -633,103 +632,117 @@
         _this.Ponderations = {
             "HistoricalPrice":
             {
-                "LastYearHigh": 7, "LastYearLow": 7,
-                "LastMonthHigh": 6, "LastMonthLow": 6,
-                "LastWeekHigh": 5, "LastWeekLow": 5,
-                "Last1DHigh": 4, "Last1DLow": 4,
-                "Last4HHigh": 3, "Last4HLow": 3,
-                "Last1HHigh": 2, "Last1HLow": 2,
-                "Last15MHigh": 1, "Last15MkLow": 1
+                "LastYearHigh": 7,
+                "LastYearLow": 7,
+                "LastMonthHigh": 6,
+                "LastMonthLow": 6,
+                "LastWeekHigh": 5,
+                "LastWeekLow": 5,
+                "Last1DHigh": 4,
+                "Last1DLow": 4,
+                "Last4HHigh": 3,
+                "Last4HLow": 3,
+                "Last1HHigh": 2,
+                "Last1HLow": 2,
+                "Last15MHigh": 1,
+                "Last15MkLow": 1
             },
             "RoundNumbers":
             {
-              "ThreeZeroPattern": 0.75
+                "ThreeZeroPattern": 0.75
             },
             "CandleSticks": [
-                { "PeriodType": "15M", "High": 1, "Low": 1 },
-                { "PeriodType": "1H", "High": 2, "Low": 2 },
-                { "PeriodType": "4H", "High": 3, "Low": 3 },
-                { "PeriodType": "1D", "High": 4, "Low": 4 }
+                { "PeriodType": "IntraDay15", "High": 1, "Low": 1 },
+                { "PeriodType": "IntraDay60", "High": 2, "Low": 2 },
+                { "PeriodType": "IntraDay240", "High": 3, "Low": 3 },
+                { "PeriodType": "Daily", "High": 4, "Low": 4 }
             ],
             "PivotPoints": [
-                { "PeriodType": "1D", "PivotPoint": 4, "R3": 4, "R2": 4, "R1": 4, "S3": 4, "S2": 4, "S1": 4 },
-                { "PeriodType": "1W", "PivotPoint": 5, "R3": 5, "R2": 5, "R1": 5, "S3": 5, "S2": 5, "S1": 5 },
-                { "PeriodType": "1M", "PivotPoint": 6, "R3": 6, "R2": 6, "R1": 6, "S3": 6, "S2": 6, "S1": 6 }
+                { "PeriodType": "Daily", "PivotPoint": 4, "R3": 4, "R2": 4, "R1": 4, "S3": 4, "S2": 4, "S1": 4 },
+                { "PeriodType": "Weekly", "PivotPoint": 5, "R3": 5, "R2": 5, "R1": 5, "S3": 5, "S2": 5, "S1": 5 },
+                { "PeriodType": "Monthly", "PivotPoint": 6, "R3": 6, "R2": 6, "R1": 6, "S3": 6, "S2": 6, "S1": 6 }
             ],
             "Sma": [
-                { "PeriodType": "15M", "Sma5": 1, "Sma10": 1, "Sma20": 1, "Sma50": 1, "Sma100": 1, "Sma200": 1 },
-                { "PeriodType": "1H", "Sma5": 2, "Sma10": 2, "Sma20": 2, "Sma50": 2, "Sma100": 2, "Sma200": 2 },
-                { "PeriodType": "4H", "Sma5": 3, "Sma10": 3, "Sma20": 3, "Sma50": 3, "Sma100": 3, "Sma200": 3 },
-                { "PeriodType": "1D", "Sma5": 4, "Sma10": 4, "Sma20": 4, "Sma50": 4, "Sma100": 4, "Sma200": 4 }
+                { "PeriodType": "IntraDay15", "Sma5": 1, "Sma10": 1, "Sma20": 1, "Sma50": 1, "Sma100": 1, "Sma200": 1 },
+                { "PeriodType": "IntraDay60", "Sma5": 2, "Sma10": 2, "Sma20": 2, "Sma50": 2, "Sma100": 2, "Sma200": 2 },
+                {
+                    "PeriodType": "IntraDay240",
+                    "Sma5": 3,
+                    "Sma10": 3,
+                    "Sma20": 3,
+                    "Sma50": 3,
+                    "Sma100": 3,
+                    "Sma200": 3
+                },
+                { "PeriodType": "Daily", "Sma5": 4, "Sma10": 4, "Sma20": 4, "Sma50": 4, "Sma100": 4, "Sma200": 4 }
             ],
             "BollingerBands": [
-                { "PeriodType": "15M", "MiddleBand": 1, "UpperBand": 1, "LowerBand": 1 },
-                { "PeriodType": "1H", "MiddleBand": 2, "UpperBand": 2, "LowerBand": 2 },
-                { "PeriodType": "4H", "MiddleBand": 3, "UpperBand": 3, "LowerBand": 3 },
-                { "PeriodType": "1D", "MiddleBand": 4, "UpperBand": 4, "LowerBand": 4 }
+                { "PeriodType": "IntraDay15", "MiddleBand": 1, "UpperBand": 1, "LowerBand": 1 },
+                { "PeriodType": "IntraDay60", "MiddleBand": 2, "UpperBand": 2, "LowerBand": 2 },
+                { "PeriodType": "IntraDay240", "MiddleBand": 3, "UpperBand": 3, "LowerBand": 3 },
+                { "PeriodType": "Daily", "MiddleBand": 4, "UpperBand": 4, "LowerBand": 4 }
             ],
             "Fibonacci": [
-                { "PeriodType": "1D", "FiboLevel23": 4, "FiboLevel38": 4, "FiboLevel61": 4, "FiboLevel161": 4 },
-                { "PeriodType": "1W", "FiboLevel23": 5, "FiboLevel38": 5, "FiboLevel61": 5, "FiboLevel161": 5 },
-                { "PeriodType": "1M", "FiboLevel23": 6, "FiboLevel38": 6, "FiboLevel61": 6, "FiboLevel161": 6 }
+                { "PeriodType": "Daily", "FiboLevel23": 4, "FiboLevel38": 4, "FiboLevel61": 4, "FiboLevel161": 4 },
+                { "PeriodType": "Weekly", "FiboLevel23": 5, "FiboLevel38": 5, "FiboLevel61": 5, "FiboLevel161": 5 },
+                { "PeriodType": "Monthly", "FiboLevel23": 6, "FiboLevel38": 6, "FiboLevel61": 6, "FiboLevel161": 6 }
             ]
         };
 
         _this.Range = {
-            "15M": 0.01,
-            "1H": 0.012,
-            "4H": 0.014,
-            "1D": 0.026,
+            "IntraDay15": 0.01,
+            "IntraDay60": 0.012,
+            "IntraDay240": 0.014,
+            "Daily": 0.026,
             "Weekly": 0.04,
             "Monthly": 0.08,
             "Annually": 0.40
         };
 
         _this.PeriodTypes = {
-            Period15M: "15M",
-            Period1H: "1H",
-            Period4H: "4H",
-            Period1D: "1D",
+            IntraDay15: "IntraDay15",
+            IntraDay60: "IntraDay60",
+            IntraDay240: "IntraDay240",
+            Daily: "Daily",
             PeriodWeekly: "Weekly",
             PeriodMonthly: "Monthly",
             PeriodAnnually: "Annually"
         };
 
         _this.getDefaultPeriodType = function() {
-            var result = _this.PeriodTypes.Period15M;
+            var result = _this.PeriodTypes.IntraDay15;
             return result;
         };
 
         _this.RowReductionLengthPercentage = 10;
 
         _this.Periods = [
-                {
-                    Id: "fxs_period_selection_15M_" + FXStreetWidgets.Util.guid(),
-                    IsActive: true,
-                    PeriodName: _this.PeriodTypes.Period15M,
-                    Translation: "15M"
-                },
-                {
-                    Id: "fxs_period_selection_1H_" + FXStreetWidgets.Util.guid(),
-                    IsActive: false,
-                    PeriodName: _this.PeriodTypes.Period1H,
-                    Translation: "1H"
-                },
-                {
-                    Id: "fxs_period_selection_4H_" + FXStreetWidgets.Util.guid(),
-                    IsActive: false,
-                    PeriodName: _this.PeriodTypes.Period4H,
-                    Translation: "4H"
-                },
-                {
-                    Id: "fxs_period_selection_1D_" + FXStreetWidgets.Util.guid(),
-                    IsActive: false,
-                    PeriodName: _this.PeriodTypes.Period1D,
-                    Translation: "1D"
-                }
+            {
+                Id: "fxs_period_selection_IntraDay15_" + FXStreetWidgets.Util.guid(),
+                IsActive: true,
+                PeriodName: _this.PeriodTypes.IntraDay15,
+                Translation: "15M"
+            },
+            {
+                Id: "fxs_period_selection_IntraDay60_" + FXStreetWidgets.Util.guid(),
+                IsActive: false,
+                PeriodName: _this.PeriodTypes.IntraDay60,
+                Translation: "1H"
+            },
+            {
+                Id: "fxs_period_selection_IntraDay240_" + FXStreetWidgets.Util.guid(),
+                IsActive: false,
+                PeriodName: _this.PeriodTypes.IntraDay240,
+                Translation: "4H"
+            },
+            {
+                Id: "fxs_period_selection_Daily_" + FXStreetWidgets.Util.guid(),
+                IsActive: false,
+                PeriodName: _this.PeriodTypes.Daily,
+                Translation: "1D"
+            }
         ];
-
         return _this;
-    }
+    };
 
 }(FXStreetWidgets.$));

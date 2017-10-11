@@ -5305,12 +5305,16 @@
         };
 
         var stablishHubConnection = function () {
-            var instance = FXStreetPush.PushNotification.getInstance({
-                culture: FXStreet.Resource.CultureName,
-                tokenUrl: _this.HttpPushServerKeysUrl,
-                httpPushServerUrl: _this.HttpPushServerUrl
+            var auth = FXStreet.Class.Patterns.Singleton.Authorization.Instance();
+            auth.getTokenPromise().then(function (token) {
+                var instance = FXStreetPush.PushNotification.getInstance({
+                    token: token,
+                    culture: FXStreet.Resource.CultureName,
+                    tokenUrl: _this.HttpPushServerKeysUrl,
+                    httpPushServerUrl: _this.HttpPushServerUrl
+                });
+                instance.postSubscribe([_this.PushNotificationChannel], postCreatedOnServer);
             });
-            instance.postSubscribe([_this.PushNotificationChannel], postCreatedOnServer);
         }
 
         var postCreatedOnServer = function (post) {
@@ -7058,7 +7062,7 @@
         _this.getBrowserHeight = function () {
 
             var footerAdWidget = 30;
-            var menusSiteHeight = 155;
+            var menusSiteHeight = 51;
             var alertHeight = 50;
             var heightOffset = 50;
 
@@ -7813,7 +7817,7 @@
             _this.FilterContainerId = "fxs_header_filter_" + _this.ContainerId;
             _this.FilterOpenDropDownId = "fxs_filter_open_dropdown_button_" + _this.ContainerId;
             _this.FilterCloseDropDownId = "fxs_filter_close_dropdown_button_" + _this.ContainerId;
-
+            
             _this.FilterDropDownId = "fxs_customize_" + _this.ContainerId;
             _this.Container = FXStreet.Util.getjQueryObjectById(_this.FilterContainerId);
 
@@ -9510,13 +9514,17 @@
 
         var subscribeHttpPush = function () {
             if (typeof FXStreetPush !== 'undefined') {
-                var options = {
-                    tokenUrl: _this.HttpPushServerKeysUrl,
-                    httpPushServerUrl: _this.HttpPushServerUrl,
-                    culture: FXStreet.Resource.CultureName
-                };
-                var push = FXStreetPush.PushNotification.getInstance(options);
-                push.postSubscribe(_this.HttpPushFeatures, postNotify);
+                var auth = FXStreet.Class.Patterns.Singleton.Authorization.Instance();
+                auth.getTokenPromise().then(function (token) {
+                    var options = {
+                        token: token,
+                        tokenUrl: _this.HttpPushServerKeysUrl,
+                        httpPushServerUrl: _this.HttpPushServerUrl,
+                        culture: FXStreet.Resource.CultureName
+                    };
+                    var push = FXStreetPush.PushNotification.getInstance(options);
+                    push.postSubscribe(_this.HttpPushFeatures, postNotify);
+                });
             }
             else {
                 console.log("FXStreetPush load failed");
@@ -11680,7 +11688,7 @@
             var result = parentGetJsonAds();
             result.push({
                 "ContainerId": "fxs_leaderboard_ad_" + parent.Id,
-                "SlotName": "/7138/FXS30/News",
+                "SlotName": FXStreet.Resource.DfpSlots.News,
                 "AdvertiseType": "normal",
                 "RefreshSeconds": 0,
                 "MobileSize": "[320, 50]",
@@ -11696,7 +11704,7 @@
             });
             result.push({
                 "ContainerId": "fxs_article_ad_" + parent.Id,
-                "SlotName": "/7138/FXS30/News",
+                "SlotName": FXStreet.Resource.DfpSlots.News,
                 "AdvertiseType": "normal",
                 "RefreshSeconds": 0,
                 "MobileSize": "[250, 250]",
@@ -11715,7 +11723,7 @@
                 item.id = FXStreet.Util.guid();
                 result.push({
                     "ContainerId": item.id,
-                    "SlotName": "/7138/FXS30/News",
+                    "SlotName": FXStreet.Resource.DfpSlots.News,
                     "AdvertiseType": "normal",
                     "RefreshSeconds": 0,
                     "MobileSize": "[580, 70]",
@@ -11785,7 +11793,7 @@
             var result = parentGetJsonAds();
             result.push({
                 "ContainerId": "fxs_leaderboard_ad_" + parent.Id,
-                "SlotName": "/7138/FXS30/Analysis",
+                "SlotName": FXStreet.Resource.DfpSlots.Analysis,
                 "AdvertiseType": "normal",
                 "RefreshSeconds": 0,
                 "MobileSize": "[320, 50]",
@@ -11801,7 +11809,7 @@
             });
             result.push({
                 "ContainerId": "fxs_article_ad_" + parent.Id,
-                "SlotName": "/7138/FXS30/Analysis",
+                "SlotName": FXStreet.Resource.DfpSlots.Analysis,
                 "AdvertiseType": "normal",
                 "RefreshSeconds": 0,
                 "MobileSize": "[250, 250]",
@@ -11820,7 +11828,7 @@
                 item.id = FXStreet.Util.guid();
                 result.push({
                     "ContainerId": item.id,
-                    "SlotName": "/7138/FXS30/Analysis",
+                    "SlotName": FXStreet.Resource.DfpSlots.Analysis,
                     "AdvertiseType": "normal",
                     "RefreshSeconds": 0,
                     "MobileSize": "[580, 70]",
@@ -11857,7 +11865,7 @@
             var result = parentGetJsonAds();
             result.push({
                 "ContainerId": "fxs_leaderboard_ad_" + parent.Id,
-                "SlotName": "/7138/FXS30/Education",
+                "SlotName": FXStreet.Resource.DfpSlots.Education,
                 "AdvertiseType": "normal",
                 "RefreshSeconds": 0,
                 "MobileSize": "[320, 50]",
@@ -11873,7 +11881,7 @@
             });
             result.push({
                 "ContainerId": "fxs_article_ad_" + parent.Id,
-                "SlotName": "/7138/FXS30/Education",
+                "SlotName": FXStreet.Resource.DfpSlots.Education,
                 "AdvertiseType": "normal",
                 "RefreshSeconds": 0,
                 "MobileSize": "[250, 250]",
@@ -11892,7 +11900,7 @@
                 item.id = FXStreet.Util.guid();
                 result.push({
                     "ContainerId": item.id,
-                    "SlotName": "/7138/FXS30/Education",
+                    "SlotName": FXStreet.Resource.DfpSlots.Education,
                     "AdvertiseType": "normal",
                     "RefreshSeconds": 0,
                     "MobileSize": "[580, 70]",
@@ -12171,7 +12179,7 @@
             var result = parentGetJsonAds();
             result.push({
                 "ContainerId": "fxs_leaderboard_ad_" + parent.Id,
-                "SlotName": "/7138/FXS30/Rates_Charts",
+                "SlotName": FXStreet.Resource.DfpSlots.RatesCharts,
                 "AdvertiseType": "normal",
                 "RefreshSeconds": 0,
                 "MobileSize": "[320, 50]",
@@ -12187,7 +12195,7 @@
             });
             result.push({
                 "ContainerId": "fxs_ad_" + parent.Id,
-                "SlotName": "/7138/FXS30/Rates_Charts",
+                "SlotName": FXStreet.Resource.DfpSlots.RatesCharts,
                 "AdvertiseType": "normal",
                 "RefreshSeconds": 0,
                 "MobileSize": "[250, 250]",
@@ -12203,7 +12211,7 @@
             });
             result.push({
                 "ContainerId": "fxs_ad_2_" + parent.Id,
-                "SlotName": "/7138/FXS30/Rates_Charts",
+                "SlotName": FXStreet.Resource.DfpSlots.RatesCharts,
                 "AdvertiseType": "normal",
                 "RefreshSeconds": 0,
                 "MobileSize": "[250, 250]",
@@ -12375,7 +12383,7 @@
             var result = parentGetJsonAds();
             result.push({
                 "ContainerId": "fxs_leaderboard_ad_" + parent.Id,
-                "SlotName": "/7138/FXS30/LiveVideo",
+                "SlotName": FXStreet.Resource.DfpSlots.LiveVideo,
                 "AdvertiseType": "normal",
                 "RefreshSeconds": 0,
                 "MobileSize": "[320, 50]",
@@ -12391,7 +12399,7 @@
             });
             result.push({
                 "ContainerId": "fxs_article_ad_" + parent.Id,
-                "SlotName": "/7138/FXS30/LiveVideo",
+                "SlotName": FXStreet.Resource.DfpSlots.LiveVideo,
                 "AdvertiseType": "normal",
                 "RefreshSeconds": 0,
                 "MobileSize": "[250, 250]",
@@ -12410,7 +12418,7 @@
                 item.id = FXStreet.Util.guid();
                 result.push({
                     "ContainerId": item.id,
-                    "SlotName": "/7138/FXS30/LiveVideo",
+                    "SlotName": FXStreet.Resource.DfpSlots.LiveVideo,
                     "AdvertiseType": "normal",
                     "RefreshSeconds": 0,
                     "MobileSize": "[580, 70]",
@@ -12961,7 +12969,7 @@
                 var ads = new FXStreet.Class.AdvertiseNormal();
                 ads.init({
                     "ContainerId": _this.StickAdSidebar,
-                    "SlotName": "/7138/FXS30/SponsorBroker",
+                    "SlotName": FXStreet.Resource.DfpSlots.SponsorBroker,
                     "AdvertiseType": "normal",
                     "RefreshSeconds": 0,
                     "MobileSize": "[320, 40]",
@@ -13483,6 +13491,8 @@
             switch (response)
             {
                 case 'Success':
+                    _this.NewslettersSubscribeAtSignUp(_this.RegisterData);
+
                     var jsonData = {
                         UserName: _this.FullNameSignupTextbox.val(),
                         UserEmail: _this.EmailSignupTextbox.val(),
@@ -13612,24 +13622,29 @@
         }
 
         var validatePhoneNumber = function (callback) {
-
             var phone = encodeURIComponent(getCompletePhoneNumber());
-
-            $.ajax({
-                type: "GET",
-                url: FXStreet.Resource.PhoneServiceUrl.format(phone)
-            }).done(function (phoneData) {
-                if (phoneData && phoneData.IsPhoneValid) {
-                    _this.PhoneContainer.removeClass(_this.FxsUserErrorClass);
-                    _this.PhoneValid = true;
+            
+            var auth = FXStreet.Class.Patterns.Singleton.Authorization.Instance();
+            auth.getTokenPromise().then(function (token) {
+                $.ajax({
+                    type: "GET",
+                    url: FXStreet.Resource.PhoneServiceUrl.format(phone),
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("Authorization", token.token_type + ' ' + token.access_token);
+                    }
+                })
+                .done(function (phoneData) {
+                    if (phoneData && phoneData.IsPhoneValid) {
+                        _this.PhoneContainer.removeClass(_this.FxsUserErrorClass);
+                        _this.PhoneValid = true;
+                        if (callback) callback(_this.PhoneValid);
+                    }})
+                .fail(function () {
+                    _this.PhoneContainer.addClass(_this.FxsUserErrorClass);
+                    _this.PhoneValid = false;
                     if (callback) callback(_this.PhoneValid);
-                }
-            }).fail(function () {
-                _this.PhoneContainer.addClass(_this.FxsUserErrorClass);
-                _this.PhoneValid = false;
-                if (callback) callback(_this.PhoneValid);
-            });;
-
+                });
+            });
         }
 
         function getParameterByName(name, url) {
@@ -14462,7 +14477,7 @@
 
                 var jsonAd = {
                     "ContainerId": "fxs_stickyFooterAd",
-                    "SlotName": "/7138/FXS30/FooterMobile",
+                    "SlotName": FXStreet.Resource.DfpSlots.FooterMobile,
                     "AdvertiseType": "normal",
                     "RefreshSeconds": 0,
                     "MobileSize": "[320, 50]"

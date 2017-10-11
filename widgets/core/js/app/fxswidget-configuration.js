@@ -7,7 +7,7 @@
             UseMin: true,
             ServerName: "https://staticcontent.fxstreet.com/",
             AuthorizationUrl: "https://authorization.fxstreet.com/token",
-            StaticContentQueryStringRefresh: "?t=2017081013",
+            StaticContentQueryStringRefresh: "?t=20171006",
             Culture: "en-US",
             StaticContentName: "widgets/",
             JsJqueryName: "jquery-1.11.3.min.js",

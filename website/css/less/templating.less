@@ -24,18 +24,12 @@
     }
 
     .fxs_logo_reduced {
-        display: block !important;
-    }
-
-
-
-    .fxs_info_signup_bg {
-        top: 23% !important;
+        display: block;
     }
 
     .fxs_contentView {
         &.fxs_contentView-full {
-            padding-top: 50px !important;
+            padding-top: 50px;
         }
     }
 
@@ -57,6 +51,41 @@
     width: 100%;
 }
 
+.fxs_simpleHeader {
+    background-color: @corp_clr;
+    height: 50px;
+
+    .fxs_container {
+        max-width: 1280px;
+        margin: auto;
+        text-align: center;
+        padding: 0 1rem;
+        position: relative;
+
+        .fxs_btn {
+            position: absolute;
+            left: 1rem;
+            margin: 0;
+            padding: 0;
+            line-height: 48px;
+            color: #fff;
+        }
+
+        .fxs_logo {
+            float: none;
+            text-align: center;
+            height: 50px;
+            background-position: 50%;
+            background-size: 100%;
+            margin:0 auto;
+            padding:0;
+            @media (min-width:@screen-m) {
+                margin: 0;
+            }
+        }
+    }
+}
+
 .fxs_navControl {
     width: 100%;
     background-color: @corp_clr;
@@ -71,28 +100,27 @@
 
 .fxs_item_active {
     .fxs_nav_itemsContainer {
-        display: block !important;
+        display: block;
     }
 }
 
 .fxs_nav_itemsContainer {
     display: none;
     position: absolute;
-    right: 0;
-    width: 100%;
+    left: 0;
     background-color: @lightest_clr;
     padding: 20px;
     border-bottom: 2px solid @light_3_clr;
-    border-left: @light_3_clr;
-    border-right: @light_3_clr;
+    border-left: 2px solid @light_3_clr;
+    border-right: 2px solid @light_3_clr;
 
     .fxs_navItemsBox {
-        display: inline-block !important;
+        display: inline-block;
         vertical-align: top;
-        border-right: 1px solid @light_3_clr;
+        border-left: 1px solid @light_3_clr;
 
-        @media(min-width:@screen-m) {
-            height: 135px;
+        &:first-child {
+            border-left: 0px solid transparent;
         }
 
         .fxs_headline_from_nano_to_tiny {
@@ -164,7 +192,7 @@
 
     @media (min-width: @screen-s) {
         ul {
-            padding: 10px 2rem 1rem 2rem !important;
+            padding: 10px 2rem 0 2rem !important;
         }
 
             ul.fxs_subNav_col_1 {
@@ -204,10 +232,8 @@
 
 .fxs_wrapper {
     background-color: @light_4_clr;
-    //height: 100%;
     width: 100%;
     overflow: hidden;
-    //padding-top: @main_header_height_custom;
     position: relative;
 
     @media(min-width:@screen-m) {
@@ -221,7 +247,6 @@
     background-color: @light_4_clr;
     overflow: visible;
     height: 100%;
-    //padding-top: @base_module_size;
     .calc(height, ~'100% - @{double_module_size}');
     z-index: 3;
 
@@ -449,7 +474,6 @@
 }
 
 
-
 ////////// PUSH LEFT & RIGHT MENU BEHAVIOUR ////////////
 // refactor candidate //
 .cbp-spmenu-push {
@@ -505,6 +529,7 @@
         }
     }
 }
+
 ////////// HEADER INNER ELEMENTS //////////
 .fxs_logo {
     display: inline-block;
@@ -566,6 +591,9 @@
         display: none;
 
         li {
+            white-space: nowrap;
+            position: relative;
+
             &:hover {
                 .fxs_nav_itemsContainer {
                     &.fxs_hideElements {
@@ -579,6 +607,27 @@
                 border-top: 0px solid transparent;
                 border-left: 0px solid transparent;
                 border-right: 0px solid transparent;
+                .fxs_label_highlight{
+                    font-weight:700;
+                }
+            }
+
+            #ANALYSIS_SECTION {
+                + .fxs_nav_itemsContainer {
+                    left: -200%;
+                }
+            }
+
+            #ECONOMIC_CALENDAR_SECTION {
+                + .fxs_nav_itemsContainer {
+                    left: -150%;
+                }
+            }
+
+            #LIVE_VIDEO_SECTION {
+                + .fxs_nav_itemsContainer {
+                    left: -300%;
+                }
             }
         }
     }
@@ -825,7 +874,7 @@ body.cbp-spmenu-push-toright {
         }
     }
 
-    margin: 0 auto !important;
+    margin: 0 auto;
 
     .fxs_wallpaper_wrap {
         z-index: 2;
@@ -4099,3 +4148,10 @@ clean rules for new calendar widget
 /////////////////////////////////////////////////////////////
 /////////////////////// FLEXBOX COLS ///////////////////////
 ///////////////////////////////////////////////////////////
+
+
+
+
+
+
+@import 'templating/user.less';

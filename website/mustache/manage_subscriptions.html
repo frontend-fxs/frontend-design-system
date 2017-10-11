@@ -19,10 +19,10 @@
                     </div>
                     <hr class="fxs_divider_third">
                     {{/Translations.NewslettersMessage}}
-                    
+
                     <div id="newsletters_{{ContainerId}}"></div>
                     <div class="fxs_disclaimer_block">
-                        <p>{{{Translations.NewslettersFooter}}}</p> 
+                        <p>{{{Translations.NewslettersFooter}}}</p>
                     </div>
                 </div>
             </div>
@@ -50,8 +50,14 @@
                         </span>
 
                         <button id="fxs_cta_authorfollow_{{Author.Id}}" type="button" class="fxs_btn fxs_btn_line fxs_btn_small btn" aria-pressed="false">
-                            <span class="fxs_togglebtn_txt init_txt" data-placement="bottom" title="Follow">{{Translations.AuthorFollowButton}}</span>
-                            <span class="fxs_togglebtn_txt toggled_txt" data-placement="bottom" title="Following">{{Translations.AuthorFollowingButton}}</span>
+                            <span class="fxs_togglebtn_txt init_txt" data-placement="bottom" title="Follow">
+                                <i class="fa fa-envelope-o"></i>
+                                <span>{{Translations.AuthorFollowButton}}</span>
+                            </span>
+                            <span class="fxs_togglebtn_txt toggled_txt" data-placement="bottom" title="Following">
+                                <i class="fa fa-envelope-o"></i>
+                                <span>{{Translations.AuthorFollowingButton}}</span>
+                            </span>
                         </button>
                     </address>
                 </div>
@@ -76,8 +82,14 @@
                         </span>
 
                         <button id="fxs_cta_authorfollow_{{Author.Id}}" type="button" class="fxs_btn fxs_btn_line fxs_btn_small btn" aria-pressed="false">
-                            <span class="fxs_togglebtn_txt init_txt" data-placement="bottom" title="Follow">{{Translations.AuthorFollowButton}}</span>
-                            <span class="fxs_togglebtn_txt toggled_txt" data-placement="bottom" title="Following">{{Translations.AuthorFollowingButton}}</span>
+                            <span class="fxs_togglebtn_txt init_txt" data-placement="bottom" title="Follow">
+                                <i class="fa fa-envelope-o"></i>
+                                <span>{{Translations.AuthorFollowButton}}</span>
+                            </span>
+                            <span class="fxs_togglebtn_txt toggled_txt" data-placement="bottom" title="Following">
+                                <i class="fa fa-envelope-o"></i>
+                                <span>{{Translations.AuthorFollowingButton}}</span>
+                            </span>
                         </button>
                     </address>
                 </div>
@@ -88,7 +100,7 @@
                     {{Translations.MustLogin}}
                 </button>
                 {{/UserPersonalization.UserEmail}}
-                
+
                 <div class="fxs_clearfix">
                     {{{Translations.AuthorsLinkToPage}}}
                 </div>

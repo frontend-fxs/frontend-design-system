@@ -114,7 +114,7 @@
 
                 var jsonAd = {
                     "ContainerId": "fxs_stickyFooterAd",
-                    "SlotName": "/7138/FXS30/FooterMobile",
+                    "SlotName": FXStreet.Resource.DfpSlots.FooterMobile,
                     "AdvertiseType": "normal",
                     "RefreshSeconds": 0,
                     "MobileSize": "[320, 50]"

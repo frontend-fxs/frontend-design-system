@@ -43,9 +43,15 @@
                             {{Value.Author.Position}} <a href="{{{Value.Company.Url}}}" rel="nofollow" class="fxs_mutedLink">{{Value.Company.Name}}</a>
                         </span>
 
-                        <button id="fxs_cta_authorfollow_{{Value.Id}}"  type="button" class="fxs_btn fxs_btn_line fxs_btn_small btn" aria-pressed="false">
-                            <span class="fxs_togglebtn_txt init_txt" data-placement="bottom" title="Follow autor's updates">{{Translations.AuthorFollowButton}}</span>
-                            <span class="fxs_togglebtn_txt toggled_txt" data-placement="bottom" title="Stop following autor's updates">{{Translations.AuthorFollowingButton}}</span>
+                        <button id="fxs_cta_authorfollow_{{Value.Id}}" type="button" class="fxs_btn fxs_btn_line fxs_btn_small btn" aria-pressed="false">
+                            <span class="fxs_togglebtn_txt init_txt" data-placement="bottom" title="Follow autor's updates">
+                                <i class="fa fa-envelope-o"></i>
+                                <span>{{Translations.AuthorFollowButton}}</span>
+                            </span>
+                            <span class="fxs_togglebtn_txt toggled_txt" data-placement="bottom" title="Stop following autor's updates">
+                                <i class="fa fa-envelope-o"></i>
+                                <span>{{Translations.AuthorFollowingButton}}</span>
+                            </span>
                         </button>
                     </span>
                     {{> seo}}
@@ -65,7 +71,7 @@
                 <div class="fxs_flex_col fxs_flex_ad_col sticky">
                     <div id="fxs_article_ad_{{Value.Id}}" class="fxs_article_ad"></div>
                 </div>
-            </div> 
+            </div>
             <!--</div>-->
             <!-- Disclaimer in post! -->
             <div class="fxs_disclaimer_block">
@@ -335,8 +341,14 @@
                         </span>
 
                         <button id="fxs_cta_authorfollow_{{Value.Id}}" type="button" class="fxs_btn fxs_btn_line fxs_btn_small btn" aria-pressed="false">
-                            <span class="fxs_togglebtn_txt init_txt" data-placement="bottom" title="Follow autor's updates"><i class="fa fa-envelope-o"></i><span>{{Translations.AuthorFollowButton}}</span></span>
-                            <span class="fxs_togglebtn_txt toggled_txt" data-placement="bottom" title="Stop following autor's updates"><i class="fa fa-envelope-o"></i><span>{{Translations.AuthorFollowingButton}}</span></span>
+                            <span class="fxs_togglebtn_txt init_txt" data-placement="bottom" title="Follow autor's updates">
+                                <i class="fa fa-envelope-o"></i>
+                                <span>{{Translations.AuthorFollowButton}}</span>
+                            </span>
+                            <span class="fxs_togglebtn_txt toggled_txt" data-placement="bottom" title="Stop following autor's updates">
+                                <i class="fa fa-envelope-o"></i>
+                                <span>{{Translations.AuthorFollowingButton}}</span>
+                            </span>
                         </button>
 
                     </div>
@@ -1642,8 +1654,14 @@
                         </span>
 
                         <button id="fxs_cta_authorfollow_{{Value.Id}}" type="button" class="fxs_btn fxs_btn_line fxs_btn_small btn" aria-pressed="false">
-                            <span class="fxs_togglebtn_txt init_txt" data-placement="bottom" title="Follow autor's updates">{{Translations.AuthorFollowButton}}</span>
-                            <span class="fxs_togglebtn_txt toggled_txt" data-placement="bottom" title="Stop following autor's updates">{{Translations.AuthorFollowingButton}}</span>
+                            <span class="fxs_togglebtn_txt init_txt" data-placement="bottom" title="Follow autor's updates">
+                                <i class="fa fa-envelope-o"></i>
+                                <span>{{Translations.AuthorFollowButton}}</span>
+                            </span>
+                            <span class="fxs_togglebtn_txt toggled_txt" data-placement="bottom" title="Stop following autor's updates">
+                                <i class="fa fa-envelope-o"></i>
+                                <span>{{Translations.AuthorFollowingButton}}</span>
+                            </span>
                         </button>
                     </span>
                 </address>
@@ -1661,28 +1679,28 @@
                 <div class="fxs_flex_col fxs_flex_ad_col sticky">
                     <div id="fxs_article_ad_{{Value.Id}}" class="fxs_article_ad"></div>
                 </div>
-             </div>
+            </div>
 
-                    <!-- Disclaimer in post! -->
-                    <div class="fxs_disclaimer_block">
-                        <p>
-                            {{{Value.Company.DisclaimerHtml}}}
-                        </p>
-                    </div>
-                    <!-- /Disclaimer in post! -->
-                    <footer class="fxs_article_tags">
-                        <div class="fxs_helperLabel_title">{{Translations.RelatedTopicsDisplay}}</div>
-                        <ul>
-                            {{#Value.Categories}}
-                            {{#FullUrl}}
-                            <li><a href="{{FullUrl}}" title="{{Name}}" class="fxs_tag">{{Name}}</a></li>
-                            {{/FullUrl}}
-                            {{^FullUrl}}
-                            <li>{{Name}}</li>
-                            {{/FullUrl}}
-                            {{/Value.Categories}}
-                        </ul>
-                    </footer>
+            <!-- Disclaimer in post! -->
+            <div class="fxs_disclaimer_block">
+                <p>
+                    {{{Value.Company.DisclaimerHtml}}}
+                </p>
+            </div>
+            <!-- /Disclaimer in post! -->
+            <footer class="fxs_article_tags">
+                <div class="fxs_helperLabel_title">{{Translations.RelatedTopicsDisplay}}</div>
+                <ul>
+                    {{#Value.Categories}}
+                    {{#FullUrl}}
+                    <li><a href="{{FullUrl}}" title="{{Name}}" class="fxs_tag">{{Name}}</a></li>
+                    {{/FullUrl}}
+                    {{^FullUrl}}
+                    <li>{{Name}}</li>
+                    {{/FullUrl}}
+                    {{/Value.Categories}}
+                </ul>
+            </footer>
         </article>
         <div id="fxs_article_related_{{Value.Id}}"></div>
         {{>seo}}
@@ -2354,10 +2372,10 @@
                     </div>
                     <hr class="fxs_divider_third">
                     {{/Translations.NewslettersMessage}}
-                    
+
                     <div id="newsletters_{{ContainerId}}"></div>
                     <div class="fxs_disclaimer_block">
-                        <p>{{{Translations.NewslettersFooter}}}</p> 
+                        <p>{{{Translations.NewslettersFooter}}}</p>
                     </div>
                 </div>
             </div>
@@ -2385,8 +2403,14 @@
                         </span>
 
                         <button id="fxs_cta_authorfollow_{{Author.Id}}" type="button" class="fxs_btn fxs_btn_line fxs_btn_small btn" aria-pressed="false">
-                            <span class="fxs_togglebtn_txt init_txt" data-placement="bottom" title="Follow">{{Translations.AuthorFollowButton}}</span>
-                            <span class="fxs_togglebtn_txt toggled_txt" data-placement="bottom" title="Following">{{Translations.AuthorFollowingButton}}</span>
+                            <span class="fxs_togglebtn_txt init_txt" data-placement="bottom" title="Follow">
+                                <i class="fa fa-envelope-o"></i>
+                                <span>{{Translations.AuthorFollowButton}}</span>
+                            </span>
+                            <span class="fxs_togglebtn_txt toggled_txt" data-placement="bottom" title="Following">
+                                <i class="fa fa-envelope-o"></i>
+                                <span>{{Translations.AuthorFollowingButton}}</span>
+                            </span>
                         </button>
                     </address>
                 </div>
@@ -2411,8 +2435,14 @@
                         </span>
 
                         <button id="fxs_cta_authorfollow_{{Author.Id}}" type="button" class="fxs_btn fxs_btn_line fxs_btn_small btn" aria-pressed="false">
-                            <span class="fxs_togglebtn_txt init_txt" data-placement="bottom" title="Follow">{{Translations.AuthorFollowButton}}</span>
-                            <span class="fxs_togglebtn_txt toggled_txt" data-placement="bottom" title="Following">{{Translations.AuthorFollowingButton}}</span>
+                            <span class="fxs_togglebtn_txt init_txt" data-placement="bottom" title="Follow">
+                                <i class="fa fa-envelope-o"></i>
+                                <span>{{Translations.AuthorFollowButton}}</span>
+                            </span>
+                            <span class="fxs_togglebtn_txt toggled_txt" data-placement="bottom" title="Following">
+                                <i class="fa fa-envelope-o"></i>
+                                <span>{{Translations.AuthorFollowingButton}}</span>
+                            </span>
                         </button>
                     </address>
                 </div>
@@ -2423,7 +2453,7 @@
                     {{Translations.MustLogin}}
                 </button>
                 {{/UserPersonalization.UserEmail}}
-                
+
                 <div class="fxs_clearfix">
                     {{{Translations.AuthorsLinkToPage}}}
                 </div>
@@ -2905,7 +2935,7 @@
                                 <amp-ad width="250"
                                         height="250"
                                         type="doubleclick"
-                                        data-slot="/7138/FXS30/Analysis"
+                                        data-slot="{{Slot}}"
                                         json="{&quot;targeting&quot;:{&quot;ros&quot;:[&quot;horizontal&quot;]}}">
                                 </amp-ad>
                             </div>
@@ -4517,7 +4547,7 @@
 
                         <div class="fxs_formGroup" id="fxs_terms_container_">
                             <label class="fxs_checkboxGroup">
-                                <input id="singupNewslettersSubscription" type="checkbox" name="newsletterssubscriptions" data-newsletters-list="45478a57-cb54-40be-89a8-f982a4ac6bf6;c4a2bad4-566e-4db3-a833-e323e2c751ac;7df67c26-9452-40f0-804d-a1d4beea3e24;340b3fe7-6bab-40d0-94af-47aa8192c080;a6e2be51-7cb4-49b8-973d-3c12963fcab8;aa637dec-154b-49ab-9b6d-28b21d7d799c" checked="">
+                                <input id="singupNewslettersSubscription" type="checkbox" name="newsletterssubscriptions" data-newsletters-list="45478a57-cb54-40be-89a8-f982a4ac6bf6;c4a2bad4-566e-4db3-a833-e323e2c751ac;7df67c26-9452-40f0-804d-a1d4beea3e24;340b3fe7-6bab-40d0-94af-47aa8192c080;a6e2be51-7cb4-49b8-973d-3c12963fcab8;aa637dec-154b-49ab-9b6d-28b21d7d799c;6280A273-ADD7-4B48-82B1-83ED93B90797;FCE882F5-B9B7-41DC-9E06-4C3C517145FF;B3383352-10B1-4A4A-BDF6-8625949158DE" checked="">
                                 <small class="fxs_signup_custom_small">{{Translations.SignUp_Page_EmailUpdates}}</small>
                             </label>
                             <label class="fxs_checkboxGroup">
@@ -4771,7 +4801,7 @@
     </ul>
 </script>
 <script id="timezone" type="x-tmpl-mustache">
-    <a href="/search" class="fxs_seach_responsive_btn fxs_visible_s"><i class="fa fa-search"></i></a>
+    <a href="/search" class="fxs_seach_responsive_btn fxs_visible_st"><i class="fa fa-search"></i></a>
     <a id="fxs_changetimezone_button" href="javascript:void(0)" title="{{ChangeTimeZoneTitle}}" class="fxs_timezone_btn_navbar">
         <span class="fxs_event_time">
             <i class="fa fa-clock-o"></i>
@@ -4821,7 +4851,7 @@
     </div>
     {{/UserInfo.IsLogged}}
     {{^UserInfo.IsLogged}}
-    <a id="user-show-button" href="javascript:void(0)"><i class="fa fa-user fxs_visible_s"></i></a>
+    <a id="user-show-button" href="javascript:void(0)" class="fxs_visible_st"><i class="fa fa-user"></i></a>
     <div class="fxs_user_access fxs_hidden_s" id="fxs_user_access">
         <a id="login" class="fxs_user_login_btn" href="javascript:void(0)">{{LoginLabel}}</a>
         <a id="signup" class="fxs_btn fxs_btn_cta fxs_btn_small" role="button" href="javascript:void(0)">{{SignupLabel}}</a>
@@ -4875,8 +4905,14 @@
                             {{Value.Author.Position}} <a href="{{{Value.Company.Url}}}" rel="nofollow" class="fxs_mutedLink">{{Value.Company.Name}}</a>
                         </span>
                         <button id="fxs_cta_authorfollow_{{Value.Id}}" type="button" class="fxs_btn fxs_btn_line fxs_btn_small btn" aria-pressed="false">
-                            <span class="fxs_togglebtn_txt init_txt" data-placement="bottom" title="Follow autor's updates">{{Translations.AuthorFollowButton}}</span>
-                            <span class="fxs_togglebtn_txt toggled_txt" data-placement="bottom" title="Stop following autor's updates">{{Translations.AuthorFollowingButton}}</span>
+                            <span class="fxs_togglebtn_txt init_txt" data-placement="bottom" title="Follow autor's updates">
+                                <i class="fa fa-envelope-o"></i>
+                                <span>{{Translations.AuthorFollowButton}}</span>
+                            </span>
+                            <span class="fxs_togglebtn_txt toggled_txt" data-placement="bottom" title="Stop following autor's updates">
+                                <i class="fa fa-envelope-o"></i>
+                                <span>{{Translations.AuthorFollowingButton}}</span>
+                            </span>
                         </button>
                     </span>
                     {{> seo}}
@@ -4905,25 +4941,25 @@
                     {{/Value.Sponsored}}
                 </footer>
                 {{#Value.Video.PublicView}}
-                    {{#Value.Video.RegistrationRequired}}
-                    <div id="fxs_live_video_show_{{Value.Id}}">
-                        <div class="fxs_live_event_cta_content fxs_mediaContainer">
-                            <div class="fxs_timer_countdown_block fxs_absolute_center">
-                                <button id="fxs_cta_show_video_{{Value.Id}}" data-toggle="" class="fxs_btn fxs_btn_cta fxs_btn_block fxs_not_onAir_item">
-                                    {{Translations.ShowVideo}}
-                                </button>
-                            </div>
+                {{#Value.Video.RegistrationRequired}}
+                <div id="fxs_live_video_show_{{Value.Id}}">
+                    <div class="fxs_live_event_cta_content fxs_mediaContainer">
+                        <div class="fxs_timer_countdown_block fxs_absolute_center">
+                            <button id="fxs_cta_show_video_{{Value.Id}}" data-toggle="" class="fxs_btn fxs_btn_cta fxs_btn_block fxs_not_onAir_item">
+                                {{Translations.ShowVideo}}
+                            </button>
                         </div>
-                        <footer class="fxs_txt_center fxs_marginBase_bottom fxs_relativePositioning">
-                            <small>{{Translations.AcceptThirdPartyText}}</small>
-                        </footer>
                     </div>
-                    {{/Value.Video.RegistrationRequired}}
-                    <div id="fxs_live_video_container_{{Value.Id}}" class="fxs_mediaContainer fxs_video_post_container {{#Value.Video.RegistrationRequired}}fxs_hideElements{{/Value.Video.RegistrationRequired}}">
-                        <!-- Embed Youtube -->
-                        <iframe class="fxs_media_item" src="{{{Value.Video.VideoEmbedUrl}}}?enablejsapi=1" allowfullscreen="" frameborder="0" width="1280" height="720"></iframe>
-                        <!-- /Embed Youtube -->
-                    </div>
+                    <footer class="fxs_txt_center fxs_marginBase_bottom fxs_relativePositioning">
+                        <small>{{Translations.AcceptThirdPartyText}}</small>
+                    </footer>
+                </div>
+                {{/Value.Video.RegistrationRequired}}
+                <div id="fxs_live_video_container_{{Value.Id}}" class="fxs_mediaContainer fxs_video_post_container {{#Value.Video.RegistrationRequired}}fxs_hideElements{{/Value.Video.RegistrationRequired}}">
+                    <!-- Embed Youtube -->
+                    <iframe class="fxs_media_item" src="{{{Value.Video.VideoEmbedUrl}}}?enablejsapi=1" allowfullscreen="" frameborder="0" width="1280" height="720"></iframe>
+                    <!-- /Embed Youtube -->
+                </div>
                 {{/Value.Video.PublicView}}
                 {{#Value.Video.RegistrationView}}
                 <div class="fxs_live_event_cta_content fxs_mediaContainer">
@@ -5795,7 +5831,7 @@
     <blockquote class="fxs_featured_quote" fxs_name="highlightedEducationQuote">
         <div class="fxs_avatar_circleImage">
             <a href="{{Value.Author.Url}}" title="{{Value.Author.Name}}" rel="nofollow">
-                <img class="lazyload" data-src="{{Value.Author.ImageResponse.Url_Nano}}" alt="{{Value.Author.Name}}" width="75" height="75">
+                <img class="lazyload" data-src="{{Value.Author.ImageResponse.Url_XtraSmall}}" alt="{{Value.Author.Name}}" width="75" height="75">
             </a>
         </div>
         <p>
@@ -6031,7 +6067,7 @@
     <blockquote class="fxs_featured_quote" fxs_name="highlightedNewsQuote">
         <div class="fxs_avatar_circleImage">
             <a href="{{Value.Author.Url}}" rel="nofollow" title="{{Value.Author.Name}}">
-                <img class="lazyload" data-src="{{Value.Author.ImageResponse.Url_Nano}}" alt="{{Value.Author.Name}}" width="75" height="75">
+                <img class="lazyload" data-src="{{Value.Author.ImageResponse.Url_XtraSmall}}" alt="{{Value.Author.Name}}" width="75" height="75">
             </a>
         </div>
         <p>
@@ -6341,7 +6377,7 @@
     <blockquote class="fxs_featured_quote" fxs_name="highlightedVideoQuote">
         <div class="fxs_avatar_circleImage">
             <a href="{{Value.Author.Url}}" title="{{Value.Author.Name}}" rel="nofollow">
-                <img class="lazyload" data-src="{{Value.Author.ImageResponse.Url_Nano}}" alt="{{Value.Author.Name}}" width="75" height="75">
+                <img class="lazyload" data-src="{{Value.Author.ImageResponse.Url_XtraSmall}}" alt="{{Value.Author.Name}}" width="75" height="75">
             </a>
         </div>
         <p>
@@ -6458,7 +6494,7 @@
         </article>
     </div>
 </script>
-<script id="menu_desktop" type="x-tmpl-mustache">    
+<script id="menu_desktop" type="x-tmpl-mustache">
     <nav class="fxs_nav_menu fxs_main_nav" role="navigation">
         <ul>
             {{#SectionEntries}}
@@ -6473,8 +6509,9 @@
                                 <span class="fxs_headline_from_nano_to_tiny">{{Text}}</span>
                                 <ul class="fxs_subNav_col_{{ColumnCount}} fxs_list_unstyled">
                                     {{#ItemEntries}}
-                                    <li><i class="fa fa-angle-right" aria-hidden="true"></i> 
-                                        <a fxs-desktop-menu-item-entry href="{{Url}}" {{#NoFollow}} rel="nofollow" {{/NoFollow}}>{{Text}}</a>
+                                    <li>
+                                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                                        <a fxs-desktop-menu-item-entry href="{{Url}}" {{#NoFollow}} rel="nofollow" {{/NoFollow}}>{{Text}} <span class="fxs_label fxs_label_highlight">{{Status}}</span></a>
                                     </li>
                                     {{/ItemEntries}}
                                 </ul>
@@ -6487,7 +6524,7 @@
             </li>
             {{/SectionEntries}}
         </ul>
- </nav>
+    </nav>
 </script>
 
 
@@ -6693,7 +6730,7 @@
         <main>
             {{#MyList}}
             <label class="fxs_col fxs_col_25">
-                <input id="fxs_filter_mylist_{{ContainerId}}_{{Id}}" fxs-assetId="{{Id}}" type="checkbox" name="" {{#Selected}} checked{{/Selected}}>{{Name}}
+                <input id="fxs_filter_mylist_{{ContainerId}}_{{Id}}" fxs-assetId="{{Id}}" type="checkbox" name="" checked>{{Name}}
             </label>
             {{/MyList}}
         </main>
