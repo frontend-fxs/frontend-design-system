@@ -1789,6 +1789,7 @@
                             return token;
                         }, function (error) {
                             tokenPromise = null;
+                            console.log(error);
                         });
                     }
                     return tokenPromise;
@@ -4400,8 +4401,8 @@
                 if ($(window).scrollTop() > 80) {
                     body.addClass(_this.HeaderScrolledClass);
                     menuBar.addClass(_this.PositionFixedClass);
-                    wallpaper.css({ 'top': '47px' });
-                    listView.css({ 'top': '47px' });
+                    wallpaper.css({ 'top': '44px' });
+                    listView.css({ 'top': '44px' });
                 } else {
                     menuBar.removeClass(_this.PositionFixedClass);
                     body.removeClass(_this.HeaderScrolledClass);
@@ -6657,6 +6658,7 @@
                 _this.Chart = chart;
                 _this.ChartOptions["dialogs.limitingElementId"] = _this.ChartId;
                 _this.ChartOptions["global.verticalAxisZoom"] = true;
+
                 setTimezone();
                 _this.Chart.setOptions(_this.ChartOptions);
                 _this.Chart.setOption("history.show", _this.DisplayHistory);
@@ -6706,7 +6708,7 @@
             }
             _this.Chart.addEventListener("eventClicked", _this.CustomExtensions.OnEventClicked);
             _this.Chart.addTemporaryEventListener('display', _this.display);
-            _this.Chart.addEventListener("symbolRequested", _this.symbolRequested);
+             _this.Chart.addEventListener("symbolRequested", _this.symbolRequested);
         };
 
         _this.symbolRequested = function (e) {
@@ -6719,7 +6721,7 @@
                     var timeZone = _this.Chart.getOption("data.timeZone");
                     var url = FXStreet.Resource.TeletraderPriceProviderUrl
                         + "?request=HISTORY" + ' ' + e.symbolId + ' ' + e.period + ' ' + e.numberOfBars + ' ' + e.dateRange
-                        + '&dataLoader=ttws&timeZone=' + timeZone;
+                        + '&dataLoader=ttws&timeZone=' + encodeURIComponent(timeZone);
 
                     $.ajax({
                         type: "GET",
@@ -6727,28 +6729,35 @@
                         beforeSend: function (xhr) {
                             xhr.setRequestHeader("Authorization", token.token_type + ' ' + token.access_token);
                         }
-                    }).done(function (historicData) {
+                    }).then(function (historicData) {
                         var candles = [];
                         var candleSplit = historicData.split('\n');
                         for (var i = 1; i < candleSplit.length - 1; i++) {
-                            const barParts = candleSplit[i].split(';');
-                            const isTickFormat = barParts.length < 5;
-                            const dt = barParts[0].split('-');
+                            try {
+                                const barParts = candleSplit[i].split(';');
+                                const isTickFormat = barParts.length < 5;
+                                const dt = barParts[0].split('-');
 
-                            var candle = {
-                                dateTime: new Date(dt[0], dt[1] - 1, dt[2], dt[3], dt[4], dt[5] || 0, dt[6] || 0),
-                                open: parseFloat(barParts[1]),
-                                high: parseFloat(barParts[isTickFormat ? 1 : 2]),
-                                low: parseFloat(barParts[isTickFormat ? 1 : 3]),
-                                close: parseFloat(barParts[isTickFormat ? 1 : 4]),
-                                volume: parseFloat(barParts[isTickFormat ? 2 : 5]),
-                                openInterest: parseInt(barParts[6])
-                            };
-                            candles.push(candle);
+                                var candle = {
+                                    dateTime: new Date(dt[0], dt[1] - 1, dt[2], dt[3], dt[4], dt[5] || 0, dt[6] || 0),
+                                    open: parseFloat(barParts[1]),
+                                    high: parseFloat(barParts[isTickFormat ? 1 : 2]),
+                                    low: parseFloat(barParts[isTickFormat ? 1 : 3]),
+                                    close: parseFloat(barParts[isTickFormat ? 1 : 4]),
+                                    volume: parseFloat(barParts[isTickFormat ? 2 : 5]),
+                                    openInterest: parseInt(barParts[6])
+                                };
+                                candles.push(candle);
+                            }
+                            catch (ex) {
+                                console.log(ex);
+                            }
                         }
                         e.setHistory({
                             data: candles
                         });
+                    }, function (error) {
+                        console.log(error);
                     });
                 });
         };
@@ -7206,6 +7215,7 @@
             fxs_widget_full: {
                 "global.locale": "en",
                 "data.period": 'INTRADAY 15',
+                "data.numberOfBars": 5000,
                 "data.dateRange": '6m',
                 "grid.show": true,
                 "main.chartType": 'candle',
@@ -7236,6 +7246,7 @@
             fxs_widget_bigToolbar: {
                 "global.locale": "en",
                 "data.period": 'INTRADAY 15',
+                "data.numberOfBars": 1000,
                 "data.dateRange": '6m',
                 "grid.show": true,
                 "main.chartType": 'candle',

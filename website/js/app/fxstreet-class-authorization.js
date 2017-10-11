@@ -28,6 +28,7 @@
                             return token;
                         }, function (error) {
                             tokenPromise = null;
+                            console.log(error);
                         });
                     }
                     return tokenPromise;

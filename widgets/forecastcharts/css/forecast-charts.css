@@ -1,0 +1,50 @@
+.fxs_widget_forecast_charts .fa-calendar {
+  float: left;
+  line-height: 2rem;
+  font-size: 1.1rem;
+  padding-right: 1rem;
+  padding-left: 1rem;
+}
+.fxs_widget_forecast_charts .c3-area {
+  opacity: 1 !important;
+}
+.fxs_widget_forecast_charts .fxs_forecast_charts_overview {
+  display: none;
+}
+.fxs_widget_forecast_charts .fxs_forecast_charts_tabs {
+  display: block;
+}
+.fxs_widget_forecast_charts .c3-line.c3-line-ClosePrice-Row {
+  stroke-width: 2px;
+  opacity: .5;
+}
+.fxs_forecast_charts_container_Overview .c3-line.c3-line-quarter-Average-Row,
+.fxs_forecast_charts_container_Overview .c3-line.c3-line-month-Average-Row,
+.fxs_forecast_charts_container_Overview .c3-line.c3-line-week-Average-Row {
+  stroke-dasharray: 2;
+}
+.fxs_forecast_charts_container_Overview .fxs_forecast_charts_overview {
+  display: block;
+}
+.fxs_forecast_charts_container_Overview .fxs_forecast_charts_tabs {
+  display: none;
+}
+.fxs_forecast_charts_container_Overview .fxs_tooltip_table {
+  background-color: #FFF;
+  border: 10px solid #FFF;
+}
+.fxs_forecast_charts_container_Overview .fxs_tooltip_table .fxs_tooltip_table_price {
+  color: #000;
+}
+.fxs_forecast_charts_container_Overview .fxs_tooltip_table .fxs_tooltip_table_Bearish {
+  color: #D25746;
+}
+.fxs_forecast_charts_container_Overview .fxs_tooltip_table .fxs_tooltip_table_Bullish {
+  color: #338473;
+}
+.fxs_forecast_charts_container_Overview .fxs_tooltip_table .fxs_tooltip_table_Sideways {
+  color: #A3A3A8;
+}
+.fxs_forecast_charts_container_Overview .fxs_tooltip_table .fxs_tooltip_table_analysts {
+  color: #000;
+}
