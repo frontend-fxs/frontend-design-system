@@ -137,8 +137,8 @@
                 if ($(window).scrollTop() > 80) {
                     body.addClass(_this.HeaderScrolledClass);
                     menuBar.addClass(_this.PositionFixedClass);
-                    wallpaper.css({ 'top': '47px' });
-                    listView.css({ 'top': '47px' });
+                    wallpaper.css({ 'top': '44px' });
+                    listView.css({ 'top': '44px' });
                 } else {
                     menuBar.removeClass(_this.PositionFixedClass);
                     body.removeClass(_this.HeaderScrolledClass);

@@ -4154,33 +4154,38 @@
 </script><script id=signup type=x-tmpl-mustache>
     <section class="fxs_detail fxs_detail_user">
         <div class="fxs_signup_container">
-            <div class="fxs_info_signup_bg"></div>
-            <div class="fxs_col fxs_col_50 fxs_signup_info">
-                <h2 class="fxs_headline_medium">{{{Translations.SignUp_Page_JoinTitle}}}</h2>
-                <ol class="fxs_list_unstyled">
-                    <li><i class="fa fa-check" aria-hidden="true"></i>{{{Translations.SignUp_Page_Newsletter}}}</li>
-                    <li><i class="fa fa-check" aria-hidden="true"></i>{{{Translations.SignUp_Page_Premium}}}</li>
-                    <li><i class="fa fa-check" aria-hidden="true"></i>{{{Translations.SignUp_Page_FollowUs}}}</li>
-                </ol>
+            <div class="fxs_info_signup_bg">
+                <div class="fxs_col fxs_col_50">
+                    <div class="fxs_signup_info">
+                        <h2 class="fxs_headline_medium">{{{Translations.SignUp_Page_JoinTitle}}}</h2>
+                        <ol class="fxs_list_unstyled">
+                            <li><i class="fa fa-check" aria-hidden="true"></i>{{{Translations.SignUp_Page_Newsletter}}}</li>
+                            <li><i class="fa fa-check" aria-hidden="true"></i>{{{Translations.SignUp_Page_Premium}}}</li>
+                            <li><i class="fa fa-check" aria-hidden="true"></i>{{{Translations.SignUp_Page_FollowUs}}}</li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="fxs_col fxs_col_50"></div>
             </div>
+            <div class="fxs_col fxs_col_50"></div>
             <div class="fxs_col fxs_col_50 fxs_signup_content">
-                <form class="fxs_user_form"  id="fxs_signup_form_{{{ContainerId}}}" >
+                <form class="fxs_user_form" id="fxs_signup_form_{{{ContainerId}}}">
                     <fieldset class="fxs_fieldset">
                         <legend>{{{Translations.SignUp_Page_SignUp}}}</legend>
-                        <div class="fxs_formGroup"   id ="fxs_fullname_container_">
+                        <div class="fxs_formGroup" id="fxs_fullname_container_">
                             <label title="name" for="example-name">
                                 {{{Translations.SignUp_Page_FullName}}}
                             </label>
-                            <input type="text" id ="fullnameSignupTB" class="fxs_textInput" required=""  aria-required="true" placeholder="{{{Translations.SignUp_PlaceHolder_UserName}}}">
+                            <input type="text" id="fullnameSignupTB" class="fxs_textInput" required="" aria-required="true" placeholder="{{{Translations.SignUp_PlaceHolder_UserName}}}">
                             <span class="fxs_hideElements">
                                 <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>{{{Translations.SignUp_Page_FullNameError}}}
                             </span>
                         </div>
-                        <div class="fxs_formGroup" id ="fxs_email_container_">
+                        <div class="fxs_formGroup" id="fxs_email_container_">
                             <label title="Your email" for="example-name">
                                 {{{Translations.SignUp_Page_Email}}}
                             </label>
-                            <input type="email" id ="emailSignupTB"  required=""  minlength="1" aria-required="true" class="fxs_textInput" placeholder="{{{Translations.SignUp_PlaceHolder_Email}}}">
+                            <input type="email" id="emailSignupTB" required="" minlength="1" aria-required="true" class="fxs_textInput" placeholder="{{{Translations.SignUp_PlaceHolder_Email}}}">
                             <span class="fxs_hideElements">
                                 <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>{{{Translations.SignUp_Page_EmailError}}}
                             </span>
@@ -4190,12 +4195,12 @@
                                 <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>{{{Translations.Signup_Page_EmailError_Duplicate}}}
                             </span>
                         </div>
-                        <div class="fxs_formGroup"  id ="fxs_password_container_">
+                        <div class="fxs_formGroup" id="fxs_password_container_">
                             <i class="fa fa-fw fa-eye active field-icon toggle-password" toggle="#password-field" aria-hidden="true" id="signupPasswordEyeId"></i>
                             <label title="Password">
                                 {{{Translations.SignUp_Page_Password}}}
                             </label>
-                            <input type="password" id="passwordSignupTB"  required=""  minlength="7" aria-required="true" class="fxs_textInput" placeholder="7 or + characters">
+                            <input type="password" id="passwordSignupTB" required="" minlength="7" aria-required="true" class="fxs_textInput" placeholder="7 or + characters">
                             <span class="fxs_hideElements">
                                 <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{{Translations.SignUp_Page_PasswordError}}}
                             </span>
@@ -4208,7 +4213,7 @@
                                 <option value="">{{{Translations.Signup_Page_SelectYourCountry}}}</option>
                             </select>
                         </div>
-                        <div id ="fxs_phone_container_"class="fxs_formGroup fxs_fields_inline fxs_disbale_fields">
+                        <div id="fxs_phone_container_" class="fxs_formGroup fxs_fields_inline fxs_disbale_fields">
                             <label title="Phone number">
                                 {{{Translations.SignUp_Page_PhoneNumber}}}
                             </label>
@@ -4238,7 +4243,7 @@
                                 <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>{{{Translations.SignUp_Page_YouNeedToAccept}}}
                             </span>
                         </div>
-                        <button class="fxs_btn fxs_btn_cta fxs_btn_block" id ="submitButtonId" type="submit">{{{Translations.SignUp_Page_SignUpNow}}}</button>
+                        <button class="fxs_btn fxs_btn_cta fxs_btn_block" id="submitButtonId" type="submit">{{{Translations.SignUp_Page_SignUpNow}}}</button>
                         <div class="fxs_formGroup fxs_marginBase_top">
                             <label title="sign up option" for="example-signup option">{{{Translations.SignUp_Page_AlreadyAnFxstreet}}}</label>
                             <a class="fxs_group_link fxs_group_link_signup" href="{{{Translations.SignUp_Href_Login}}}">{{{Translations.SignUp_Page_LogIn}}}</a>
@@ -4252,30 +4257,37 @@
 </script><script id=signup_confirmation type=x-tmpl-mustache>
     <section class="fxs_detail fxs_detail_user">
         <div class="fxs_signup_container">
-            <div class="fxs_info_signup_bg"></div>
-            <div class="fxs_col fxs_col_50 fxs_signup_info">
-                <h2 class="fxs_headline_medium">{{{Translations.SignUp_Page_Confirmation_PremiumTitle}}}</h2>
-                <ol class="fxs_list_unstyled">
-                    <li><i class="fa fa-check" aria-hidden="true"></i>{{{Translations.SignUp_Page_Confirmation_ExperiencedTraders}}}</li>
-                    <li><i class="fa fa-check" aria-hidden="true"></i>{{{Translations.SignUp_Page_Confirmation_Sessions}}}</li>
-                    <li><i class="fa fa-check" aria-hidden="true"></i>{{{Translations.SignUp_Page_Confirmation_AdvancedMarket}}}</li>
-                    <li><i class="fa fa-check" aria-hidden="true"></i>{{{Translations.SignUp_Page_Confirmation_Archives}}}</li>
-                    <li><i class="fa fa-check" aria-hidden="true"></i>{{{Translations.SignUp_Page_Confirmation_MultiDevice}}}</li>
-                </ol>
-            </div>
-            <div class="fxs_col fxs_col_50 fxs_signup_content">
-                <div class="fxs_confirm_signup">
-                    <h2 class="fxs_headline_from_tiny_to_small">
-                        {{{Translations.SignUp_Page_Confirmation_Hello}}} {{{UserName}}}, <span class="fxs_dBlock">{{{Translations.SignUp_Page_Confirmation_Thanks}}}</span>
-                    </h2>
-                    <i class="fa fa-check fa-3x" aria-hidden="true"></i>
-                    <div class="fxs_user_msg_congrats">{{{Translations.SignUp_Page_Confirmation_AccountCreated}}}</div>
-                    <p>{{{Translations.SignUp_Page_Confirmation_EmailSent}}}</p>
-                    <p>{{{UserEmail}}}</p>
-                    <p>{{{Translations.SignUp_Page_Confirmation_PleaseCheck}}}</p>
-                    <p>{{{Translations.SignUp_Page_Confirmation_Spam}}}</p>
+            <div class="fxs_info_signup_bg">
+                <div class="fxs_col fxs_col_50">
+                    <div class="fxs_signup_info">
+                        <h2 class="fxs_headline_medium">{{{Translations.SignUp_Page_Confirmation_PremiumTitle}}}</h2>
+                        <ol class="fxs_list_unstyled">
+                            <li><i class="fa fa-check" aria-hidden="true"></i>{{{Translations.SignUp_Page_Confirmation_ExperiencedTraders}}}</li>
+                            <li><i class="fa fa-check" aria-hidden="true"></i>{{{Translations.SignUp_Page_Confirmation_Sessions}}}</li>
+                            <li><i class="fa fa-check" aria-hidden="true"></i>{{{Translations.SignUp_Page_Confirmation_AdvancedMarket}}}</li>
+                            <li><i class="fa fa-check" aria-hidden="true"></i>{{{Translations.SignUp_Page_Confirmation_Archives}}}</li>
+                            <li><i class="fa fa-check" aria-hidden="true"></i>{{{Translations.SignUp_Page_Confirmation_MultiDevice}}}</li>
+                        </ol>
+                        <a href="#" class="fxs_txt_center">{{{Translations.SignUp_Page_Confirmation_knowMore}}}</a>
+                    </div>
                 </div>
+                <div class="fxs_col fxs_col_50"></div>
             </div>
+        </div>
+        <div class="fxs_col fxs_col_50"></div>
+        <div class="fxs_col fxs_col_50 fxs_signup_content">
+            <div class="fxs_confirm_signup">
+                <h2 class="fxs_headline_from_tiny_to_small">
+                    {{{Translations.SignUp_Page_Confirmation_Hello}}} {{{UserName}}}, <span class="fxs_dBlock">{{{Translations.SignUp_Page_Confirmation_Thanks}}}</span>
+                </h2>
+                <i class="fa fa-check fa-3x fxs_txt_success" aria-hidden="true"></i>
+                <div class="fxs_user_msg_congrats fxs_txt_success">{{{Translations.SignUp_Page_Confirmation_AccountCreated}}}</div>
+                <p>{{{Translations.SignUp_Page_Confirmation_EmailSent}}}</p>
+                <p>{{{UserEmail}}}</p>
+                <p>{{{Translations.SignUp_Page_Confirmation_PleaseCheck}}}</p>
+                <p>{{{Translations.SignUp_Page_Confirmation_Spam}}}</p>
+            </div>
+        </div>
         </div>
     </section>
 </script><script id=socialmediabar_boxed type=x-tmpl-mustache>
@@ -6126,7 +6138,7 @@
                     <th>
                         {{Translations.HeaderAsk}}
                     </th>
-                    <th>
+                    <th class="fxs_ratestable_change">
                         {{Translations.HeaderChg}}
                     </th>
                     <th>
@@ -6147,7 +6159,7 @@
                     <th>
                         {{Translations.HeaderObos}}
                     </th>
-                    <th>
+                    <th class="fxs_ratestable_volat">
                         {{Translations.HeaderVolatility}}
                     </th>
                     <th>
@@ -6173,7 +6185,7 @@
                             {{Ask}}
                         </span>
                     </td>
-                    <td class="fxs_ratestable_number">
+                    <td class="fxs_ratestable_number fxs_ratestable_change">
                         <span id="fxs_{{ContainerId}}_data_{{ProviderCode}}_Change">
                             {{Change}}
                         </span>
@@ -6189,13 +6201,13 @@
                         </span>
                     </td>
                     <td class="fxs_ratestable_number">
-                        <span id="fxs_{{ContainerId}}_data_{{ProviderCode}}_Low">
-                            {{DayLow}}
+                        <span id="fxs_{{ContainerId}}_data_{{ProviderCode}}_High">
+                            {{DayHigh}}
                         </span>
                     </td>
                     <td class="fxs_ratestable_number">
-                        <span id="fxs_{{ContainerId}}_data_{{ProviderCode}}_High">
-                            {{DayHigh}}
+                        <span id="fxs_{{ContainerId}}_data_{{ProviderCode}}_Low">
+                            {{DayLow}}
                         </span>
                     </td>
                     <td class="fxs_ratestable_trend">

@@ -631,155 +631,9 @@
         return _this;
     };
 })(FXStreetWidgets.$);
-(function ($) {
-    FXStreetWidgets.Widget.ForecastChartsManager = function (loaderBase) {
-        var parent = FXStreetWidgets.Widget.Base(loaderBase),
-            _this = FXStreetWidgets.Util.extendObject(parent);
-
-        _this.Asset = null;
-        _this.ClassSize = null;
-        _this.WidgetId = "";
-        _this.Seo = false;
-        _this.ForecastData = null;
-        _this.TooltipMustacheName = "";
-        _this.jsonData = {};
-
-        var Translations = {};
-        var filterButtons = {};
-        var activeContainerClass = "";
-
-        var charts = {};
-
-        _this.init = function (json) {
-            _this.setSettingsByObject(json);
-            _this.setVars();
-        };
-
-        _this.setVars = function () {
-            var url = getUrl();
-            _this.loadDataFromUrl(url);
-        };
-
-        _this.renderHtml = function () {
-            initJsonData();
-            var mustache = _this.loaderBase.config.Mustaches[_this.loaderBase.config.WidgetName];
-            var rendered = FXStreetWidgets.Util.renderByHtmlTemplate(mustache, _this.jsonData);
-            _this.Container.html(rendered);
-
-            initChartObjects();
-            initFilters();
-            charts["Overview"].render();
-        };
-
-        var getUrl = function () {
-            var currentDate = new Date();
-            var UTCdateNow = currentDate.toISOString();
-
-            currentDate.setMonth(currentDate.getMonth() - 12);
-            var UTCdateFrom = currentDate.toISOString();
-
-            var result = _this.loaderBase.config.EndPoint + "?assetIds=" + _this.Asset + "&dateFrom=" + UTCdateFrom + "&dateTo=" + UTCdateNow;
-            return result;
-        };
-
-        var initJsonData = function () {
-            Translations = _this.loaderBase.config.Translations;
-
-            _this.jsonData = {
-                Values: {},
-                Filters: {},
-                Translations: Translations,
-                WidgetId: _this.WidgetId
-            };
-            setFiltersToJson();
-        };
-
-        var initChartObjects = function() {
-            var json = {
-                Data: _this.data,
-                WidgetId: _this.WidgetId,
-                ForecastData: _this.ForecastData,
-                TooltipTemplate: _this.loaderBase.config.Mustaches[_this.TooltipMustacheName],
-                Translations: Translations
-            };
-
-            $.each(_this.jsonData.Filters, function (index, filter) {
-                var obj = new FXStreetWidgets.Widget.ForecastChart[filter.Selector]();
-                obj.init(json);
-                charts[filter.Selector] = obj;
-            });
-        };
-
-        var setFiltersToJson = function () {
-            _this.jsonData.Filters =
-            [
-                {
-                    'Title': Translations.Overview,
-                    'Selector': 'Overview'
-                }, {
-                    'Title': Translations.Bias,
-                    'Selector': 'Bias'
-                }, {
-                    'Title': Translations.Averages,
-                    'Selector': 'Averages'
-                }, {
-                    'Title': Translations.ShiftedPrice,
-                    'Selector': 'ShiftedPrice'
-                }, {
-                    'Title': Translations.PriceChange,
-                    'Selector': 'PriceChange'
-                }, {
-                    'Title': Translations.SmoothAverage,
-                    'Selector': 'SmoothAverage'
-                }, {
-                    'Title': Translations.MinimMax,
-                    'Selector': 'MinMax'
-                }
-            ];
-        };
-
-        var initFilters = function () {
-            $.each(_this.jsonData.Filters,
-                function (i, filter) {
-                    var selector = "#forecast_charts_filter_{0}_{1}".replace('{0}', filter.Selector).replace('{1}', _this.WidgetId);
-                    var filterBtn = _this.Container.find(selector);
-
-                    filterBtn.click(function () {
-                        onFilterClick(filter);
-                    });
-
-                    if (filter.Selector === 'Overview') {
-                        filterBtn.addClass('active');
-                        var containerClass = "fxs_forecast_charts_container_" + filter.Selector;
-                        _this.Container.addClass(containerClass);
-                        activeContainerClass = containerClass;
-                    }
-
-                    filterButtons[filter.Selector] = filterBtn;
-                });
-        };
-
-        var onFilterClick = function (filter) {
-            for (var objKey in filterButtons) {
-                if (filterButtons.hasOwnProperty(objKey)) {
-                    filterButtons[objKey].removeClass('active');
-                }
-            }
-            filterButtons[filter.Selector].addClass('active');
-
-            var containerClass = "fxs_forecast_charts_container_" + filter.Selector;
-            _this.Container.removeClass(activeContainerClass);
-            _this.Container.addClass(containerClass);
-            activeContainerClass = containerClass;
-
-            charts[filter.Selector].render();
-        };
-
-        return _this;
-    };
-
+(function($) {
     FXStreetWidgets.Widget.ForecastChart = {};
-    FXStreetWidgets.Widget.ForecastChart.Base = function() {
+    FXStreetWidgets.Widget.ForecastChart.Base = function () {
         var _this = {};
 
         _this.Data = null;
@@ -787,12 +641,12 @@
         _this.Translations = null;
         _this.JsonC3 = {};
 
-        _this.init = function(json) {
+        _this.init = function (json) {
             _this.setSettingsByObject(json);
             _this.initJsonC3();
         };
 
-        _this.initJsonC3 = function() {
+        _this.initJsonC3 = function () {
             $.each(_this.ForecastPeriodType, function (key, periodType) {
                 var periodTypeStatics = periodType.Statics;
 
@@ -809,22 +663,22 @@
             });
         };
 
-        _this.getTimeseriesConfigs = function() {
+        _this.getTimeseriesConfigs = function () {
             var result = [{ AxisName: 'x', Values: _this.Data.Values }];
             return result;
         };
 
-        _this.getColumnsConfigsByPeriodType = function(periodType) {
+        _this.getColumnsConfigsByPeriodType = function (periodType) {
             return [];
         };
 
-        _this.buildJson = function(columns, key) { };
+        _this.buildJson = function (columns, key) { };
 
         _this.render = function () {
             renderChart(_this.JsonC3);
         };
 
-        _this.setSettingsByObject = function(json) {
+        _this.setSettingsByObject = function (json) {
             for (var propName in json) {
                 if (json.hasOwnProperty(propName)) {
                     if (this[propName] !== undefined) {
@@ -954,7 +808,8 @@
 
         return _this;
     };
-
+})(FXStreetWidgets.$);
+(function($) {
     FXStreetWidgets.Widget.ForecastChart.Overview = function () {
         var parent = FXStreetWidgets.Widget.ForecastChart.Base(),
             _this = FXStreetWidgets.Util.extendObject(parent);
@@ -976,11 +831,11 @@
             _this.JsonC3['WeekStatics'] = json;
         };
 
-        var setLocalVariables = function() {
+        var setLocalVariables = function () {
             forecastStudies = getForecastEntries();
         };
 
-        var getColumnValues = function() {
+        var getColumnValues = function () {
             var configTimeseries = [];
             var configColumns = [];
 
@@ -1028,7 +883,7 @@
             return result;
         };
 
-        var buildOverviewJson = function(values) {
+        var buildOverviewJson = function (values) {
             var cssClass = '#fxs_forecast_charts_overview_' + _this.WidgetId;
             var cssClassGraph = 'fxs_overview';
             var assetDecimals = _this.getAssetDecimalPlaces();
@@ -1236,11 +1091,13 @@
 
         return _this;
     };
+})(FXStreetWidgets.$);
+(function($) {
     FXStreetWidgets.Widget.ForecastChart.Bias = function () {
         var parent = FXStreetWidgets.Widget.ForecastChart.Base(),
             _this = FXStreetWidgets.Util.extendObject(parent);
 
-        parent.getColumnsConfigsByPeriodType = function(periodTypeStatics) {
+        parent.getColumnsConfigsByPeriodType = function (periodTypeStatics) {
             var closePriceConfig = {
                 RowTitle: "ClosePrice_Row",
                 PropertyName: "ClosePrice"
@@ -1270,7 +1127,7 @@
             return result;
         };
 
-        parent.buildJson = function(columns, key) {
+        parent.buildJson = function (columns, key) {
             var cssClass = '#fxs_' + key + '_' + _this.WidgetId;
             var cssClassGraph = 'fxs_bias_' + key;
             var assetDecimals = _this.getAssetDecimalPlaces();
@@ -1351,7 +1208,9 @@
 
         return _this;
     };
-    FXStreetWidgets.Widget.ForecastChart.Averages = function() {
+})(FXStreetWidgets.$);
+(function($) {
+    FXStreetWidgets.Widget.ForecastChart.Averages = function () {
         var parent = FXStreetWidgets.Widget.ForecastChart.Base(),
             _this = FXStreetWidgets.Util.extendObject(parent);
 
@@ -1421,6 +1280,8 @@
 
         return _this;
     };
+})(FXStreetWidgets.$);
+(function($) {
     FXStreetWidgets.Widget.ForecastChart.ShiftedPrice = function () {
         var parent = FXStreetWidgets.Widget.ForecastChart.Base(),
             _this = FXStreetWidgets.Util.extendObject(parent);
@@ -1434,7 +1295,7 @@
         };
 
         var setShiftedValues = function () {
-            $.each(_this.ForecastPeriodType, function(key, periodType) {
+            $.each(_this.ForecastPeriodType, function (key, periodType) {
                 var offset = _this.getOffsetByForecastPeriodType(periodType.Statics);
                 var values = _this.getValuesWithTimeOffset(_this.Data.Values, -offset, true, _this.Data.Values[_this.Data.Values.length - 1].Date);
                 shiftedValues[periodType.Statics] = values;
@@ -1523,6 +1384,8 @@
 
         return _this;
     };
+})(FXStreetWidgets.$);
+(function($) {
     FXStreetWidgets.Widget.ForecastChart.PriceChange = function () {
         var parent = FXStreetWidgets.Widget.ForecastChart.Base(),
             _this = FXStreetWidgets.Util.extendObject(parent);
@@ -1553,7 +1416,7 @@
         };
 
         parent.buildJson = function (columns, key) {
-            var cssClass = '#fxs_' + key + '_' +_this.WidgetId;
+            var cssClass = '#fxs_' + key + '_' + _this.WidgetId;
             var cssClassGraph = 'fxs_pricechange_' + key;
             var assetDecimals = _this.getAssetDecimalPlaces();
 
@@ -1561,14 +1424,14 @@
                 .addDataColumnConfig({
                     name: "PriceChange_Row",
                     axes: "y",
-                    names : _this.Translations.PriceChange,
-                    types : "bar",
+                    names: _this.Translations.PriceChange,
+                    types: "bar",
                     colors: "#a3a3a8",
-                    classes : cssClassGraph + "_pricechange"
+                    classes: cssClassGraph + "_pricechange"
                 })
                 .addDataColumnConfig({
                     name: "Mean_Row",
-                    axes : "y2",
+                    axes: "y2",
                     names: _this.Translations.Mean,
                     colors: "#04aab2",
                     classes: cssClassGraph + "_mean"
@@ -1581,7 +1444,7 @@
                     classes: cssClassGraph + "_median"
                 })
                 .addDataColumnConfig({
-                    name : "Mode_Row",
+                    name: "Mode_Row",
                     axes: "y2",
                     names: _this.Translations.Mode,
                     colors: "#d1495b",
@@ -1604,6 +1467,8 @@
 
         return _this;
     };
+})(FXStreetWidgets.$);
+(function($) {
     FXStreetWidgets.Widget.ForecastChart.SmoothAverage = function () {
         var parent = FXStreetWidgets.Widget.ForecastChart.Base(),
             _this = FXStreetWidgets.Util.extendObject(parent);
@@ -1649,6 +1514,8 @@
 
         return _this;
     };
+})(FXStreetWidgets.$);
+(function($) {
     FXStreetWidgets.Widget.ForecastChart.MinMax = function () {
         var parent = FXStreetWidgets.Widget.ForecastChart.Base(),
             _this = FXStreetWidgets.Util.extendObject(parent);
@@ -1702,6 +1569,153 @@
                 })
                 .build(columns, cssClass, assetDecimals);
             return result;
+        };
+
+        return _this;
+    };
+})(FXStreetWidgets.$);
+(function ($) {
+    FXStreetWidgets.Widget.ForecastChartsManager = function (loaderBase) {
+        var parent = FXStreetWidgets.Widget.Base(loaderBase),
+            _this = FXStreetWidgets.Util.extendObject(parent);
+
+        _this.Asset = null;
+        _this.ClassSize = null;
+        _this.WidgetId = "";
+        _this.Seo = false;
+        _this.ForecastData = null;
+        _this.TooltipMustacheName = "";
+        _this.jsonData = {};
+
+        var Translations = {};
+        var filterButtons = {};
+        var activeContainerClass = "";
+
+        var charts = {};
+
+        _this.init = function (json) {
+            _this.setSettingsByObject(json);
+            _this.setVars();
+        };
+
+        _this.setVars = function () {
+            var url = getUrl();
+            _this.loadDataFromUrl(url);
+        };
+
+        _this.renderHtml = function () {
+            initJsonData();
+            var mustache = _this.loaderBase.config.Mustaches[_this.loaderBase.config.WidgetName];
+            var rendered = FXStreetWidgets.Util.renderByHtmlTemplate(mustache, _this.jsonData);
+            _this.Container.html(rendered);
+
+            initChartObjects();
+            initFilters();
+            charts["Overview"].render();
+        };
+
+        var getUrl = function () {
+            var currentDate = new Date();
+            var UTCdateNow = currentDate.toISOString();
+
+            currentDate.setMonth(currentDate.getMonth() - 12);
+            var UTCdateFrom = currentDate.toISOString();
+
+            var result = _this.loaderBase.config.EndPoint + "?assetIds=" + _this.Asset + "&dateFrom=" + UTCdateFrom + "&dateTo=" + UTCdateNow;
+            return result;
+        };
+
+        var initJsonData = function () {
+            Translations = _this.loaderBase.config.Translations;
+
+            _this.jsonData = {
+                Values: {},
+                Filters: {},
+                Translations: Translations,
+                WidgetId: _this.WidgetId
+            };
+            setFiltersToJson();
+        };
+
+        var initChartObjects = function() {
+            var json = {
+                Data: _this.data,
+                WidgetId: _this.WidgetId,
+                ForecastData: _this.ForecastData,
+                TooltipTemplate: _this.loaderBase.config.Mustaches[_this.TooltipMustacheName],
+                Translations: Translations
+            };
+
+            $.each(_this.jsonData.Filters, function (index, filter) {
+                var obj = new FXStreetWidgets.Widget.ForecastChart[filter.Selector]();
+                obj.init(json);
+                charts[filter.Selector] = obj;
+            });
+        };
+
+        var setFiltersToJson = function () {
+            _this.jsonData.Filters =
+            [
+                {
+                    'Title': Translations.Overview,
+                    'Selector': 'Overview'
+                }, {
+                    'Title': Translations.Bias,
+                    'Selector': 'Bias'
+                }, {
+                    'Title': Translations.Averages,
+                    'Selector': 'Averages'
+                }, {
+                    'Title': Translations.ShiftedPrice,
+                    'Selector': 'ShiftedPrice'
+                }, {
+                    'Title': Translations.PriceChange,
+                    'Selector': 'PriceChange'
+                }, {
+                    'Title': Translations.SmoothAverage,
+                    'Selector': 'SmoothAverage'
+                }, {
+                    'Title': Translations.MinimMax,
+                    'Selector': 'MinMax'
+                }
+            ];
+        };
+
+        var initFilters = function () {
+            $.each(_this.jsonData.Filters,
+                function (i, filter) {
+                    var selector = "#forecast_charts_filter_{0}_{1}".replace('{0}', filter.Selector).replace('{1}', _this.WidgetId);
+                    var filterBtn = _this.Container.find(selector);
+
+                    filterBtn.click(function () {
+                        onFilterClick(filter);
+                    });
+
+                    if (filter.Selector === 'Overview') {
+                        filterBtn.addClass('active');
+                        var containerClass = "fxs_forecast_charts_container_" + filter.Selector;
+                        _this.Container.addClass(containerClass);
+                        activeContainerClass = containerClass;
+                    }
+
+                    filterButtons[filter.Selector] = filterBtn;
+                });
+        };
+
+        var onFilterClick = function (filter) {
+            for (var objKey in filterButtons) {
+                if (filterButtons.hasOwnProperty(objKey)) {
+                    filterButtons[objKey].removeClass('active');
+                }
+            }
+            filterButtons[filter.Selector].addClass('active');
+
+            var containerClass = "fxs_forecast_charts_container_" + filter.Selector;
+            _this.Container.removeClass(activeContainerClass);
+            _this.Container.addClass(containerClass);
+            activeContainerClass = containerClass;
+
+            charts[filter.Selector].render();
         };
 
         return _this;
