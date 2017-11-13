@@ -387,7 +387,11 @@
             initShownTabs();
             initSelectedTab();
 
-            var url = this.loaderBase.config.EndPoint + _this.EventId + "/" + _this.AssetId + "?assets=" + _this.Assets.join(",");
+            var assetIds = $.map(_this.Assets, function(value){ 
+                    return value.Id; 
+            });
+            
+            var url = this.loaderBase.config.EndPoint + _this.EventId + "/" + _this.AssetId + "?assets=" + assetIds.join(",");
             _this.loadDataFromUrl(url);
         };
 

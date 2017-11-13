@@ -1,0 +1,24 @@
+﻿<div class="fxs_filter_wrapper fxs_clearfix">
+    <table class="fxs_table fxs_table_striped">
+        <thead>
+            <tr>
+                <th>{{Translations.TechnicalByAsset}}</th>
+                {{#Pairs}}
+                <th>
+                    <a href="{{Translations.AssetUrlBase}}{{Url}}">{{Name}}</a>
+                </th>
+                {{/Pairs}}
+            </tr>
+        </thead>
+        <tbody>
+            {{#Technicals}}
+            <tr>
+                <th>{{TechnicalName}}</th>
+                {{#Values}}
+                <td class="fxs_table_number"><span>{{Data}}</span></td>
+                {{/Values}}
+            </tr>
+            {{/Technicals}}
+        </tbody>
+    </table>
+</div>

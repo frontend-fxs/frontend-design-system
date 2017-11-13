@@ -15,6 +15,7 @@
     FXStreetWidgets.ResourceManagerObj = null;
     FXStreetWidgets.ExternalLib = {};
     FXStreetWidgets.ExternalLib.Mustache = null;
+    FXStreetWidgets.Authorization = null;
     FXStreetWidgets.$ = null;
 
     FXStreetWidgets.Util.guid = function () {
@@ -26,47 +27,19 @@
         return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
     };
 
-    var tokenPromise;
-    var token;
-    FXStreetWidgets.Util.getTokenByDomain = function(){
-        if(tokenPromise)
-            return tokenPromise;
-        if(token){
-            return FXStreetWidgets.$.when(token);
-        }
-        else {
-            tokenPromise = FXStreetWidgets.$.ajax({
-                type: "POST",
-                url: FXStreetWidgets.Configuration.config.AuthorizationUrl,
-                contentType: "application/x-www-form-urlencoded",
-                dataType: "json",
-                data: {
-                    grant_type: "domain",
-                    client_id: "client_id"
-                }
-            }).then(function(data){
-                token = data;
-                tokenPromise = null;
-                return token;
-            }, function(error){
-                tokenPromise = null;
-            });
-            return tokenPromise;
-        }
-    };
-
     FXStreetWidgets.Util.ajaxJsonGetter = function (url, data) {
-        var result = FXStreetWidgets.Util.getTokenByDomain().then(function(token){
-            return FXStreetWidgets.$.ajax({
-                type: "GET",
-                url: url,
-                data: data,
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader ("Authorization", token.token_type + ' ' + token.access_token);
-                }
-            });
+        var result = FXStreetWidgets.Authorization.getTokenPromise()
+            .then(function(token){
+                return FXStreetWidgets.$.ajax({
+                    type: "GET",
+                    url: url,
+                    data: data,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader ("Authorization", token.token_type + ' ' + token.access_token);
+                    }
+                });
         });
         return result;
     };

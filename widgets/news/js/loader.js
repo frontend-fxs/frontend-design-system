@@ -83,7 +83,7 @@
             var version = _this.getVersion(container);
             var culture = FXStreetWidgets.Configuration.getCulture();
 
-            var endPoint = host + version + "/" + culture + "/" + options.EndPointTags;
+            var endPoint = host + "/" + version + "/" + culture + "/" + options.EndPointTags;
             return endPoint;
         };
 
@@ -93,7 +93,7 @@
             var version = _this.getVersion(container);
             var culture = FXStreetWidgets.Configuration.getCulture();
 
-            var endPoint = host + version + "/" + culture + "/" + options.EndPointConfiguration;
+            var endPoint = host + "/" + version + "/" + culture + "/" + options.EndPointConfiguration;
             return endPoint;
         };
 

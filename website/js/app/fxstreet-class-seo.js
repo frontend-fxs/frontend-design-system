@@ -45,7 +45,7 @@
                 $("meta[property='og\\:title']").attr('content', seo.MetaTitle);
                 $("meta[property='og\\:description']").attr('content', seo.MetaDescription);
                 if (_this.isValid(image)){
-                    $("meta[property='og\\:image']").attr('content', image.Url_Small);
+                    $("meta[property='og\\:image']").attr('content', image.Url_Large);
                 }
                 
                 $("meta[property='og\\:url']").attr('content', seo.FullUrl);
@@ -120,7 +120,7 @@
                 
                 $("meta[property='og\\:title']").attr('content', homeSeoItemSaved.MetaTitle);
                 $("meta[property='og\\:description']").attr('content', homeSeoItemSaved.Summary);
-                $("meta[property='og\\:image']").attr('content', homeSeoItemSaved.Image ? homeSeoItemSaved.Image.Url_Small : "");
+                $("meta[property='og\\:image']").attr('content', homeSeoItemSaved.Image ? homeSeoItemSaved.Image.Url_Large : "");
                 $("meta[property='og\\:url']").attr('content', homeSeoItemSaved.FullUrl);
             }
         };
@@ -175,7 +175,7 @@
                 $("meta[property='og\\:title']").attr('content', seo.MetaTitle);
                 $("meta[property='og\\:description']").attr('content', seo.MetaDescription);
                 if (_this.isValid(image)){
-                    $("meta[property='og\\:image']").attr('content', image.Url_Small);
+                    $("meta[property='og\\:image']").attr('content', image.Url_Large);
                 }
                 $("meta[property='og\\:url']").attr('content', seo.FullUrl);
             }
@@ -240,7 +240,7 @@
                 $("meta[property='og\\:title']").attr('content', seo.MetaTitle);
                 $("meta[property='og\\:description']").attr('content', seo.MetaDescription);
                 if (_this.isValid(image)){
-                    $("meta[property='og\\:image']").attr('content', image.Url_Small);
+                    $("meta[property='og\\:image']").attr('content', image.Url_Large);
                 }
                 $("meta[property='og\\:url']").attr('content', seo.FullUrl);
             }

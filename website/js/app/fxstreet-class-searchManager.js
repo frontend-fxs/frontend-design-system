@@ -508,7 +508,9 @@
 
         var subscribeHttpPush = function () {
             if (typeof FXStreetPush !== 'undefined') {
-                var auth = FXStreet.Class.Patterns.Singleton.Authorization.Instance();
+                var auth = FXStreetAuth.Authorization.getInstance({
+                    authorizationUrl: FXStreet.Resource.AuthorizationUrl
+                });
                 auth.getTokenPromise().then(function (token) {
                     var options = {
                         token: token,

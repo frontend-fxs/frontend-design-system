@@ -23,6 +23,7 @@
     FXStreetWidgets.ResourceManagerObj = null;
     FXStreetWidgets.ExternalLib = {};
     FXStreetWidgets.ExternalLib.Mustache = null;
+    FXStreetWidgets.Authorization = null;
     FXStreetWidgets.$ = null;
 
     FXStreetWidgets.Util.guid = function () {
@@ -34,47 +35,19 @@
         return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
     };
 
-    var tokenPromise;
-    var token;
-    FXStreetWidgets.Util.getTokenByDomain = function(){
-        if(tokenPromise)
-            return tokenPromise;
-        if(token){
-            return FXStreetWidgets.$.when(token);
-        }
-        else {
-            tokenPromise = FXStreetWidgets.$.ajax({
-                type: "POST",
-                url: FXStreetWidgets.Configuration.config.AuthorizationUrl,
-                contentType: "application/x-www-form-urlencoded",
-                dataType: "json",
-                data: {
-                    grant_type: "domain",
-                    client_id: "client_id"
-                }
-            }).then(function(data){
-                token = data;
-                tokenPromise = null;
-                return token;
-            }, function(error){
-                tokenPromise = null;
-            });
-            return tokenPromise;
-        }
-    };
-
     FXStreetWidgets.Util.ajaxJsonGetter = function (url, data) {
-        var result = FXStreetWidgets.Util.getTokenByDomain().then(function(token){
-            return FXStreetWidgets.$.ajax({
-                type: "GET",
-                url: url,
-                data: data,
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader ("Authorization", token.token_type + ' ' + token.access_token);
-                }
-            });
+        var result = FXStreetWidgets.Authorization.getTokenPromise()
+            .then(function(token){
+                return FXStreetWidgets.$.ajax({
+                    type: "GET",
+                    url: url,
+                    data: data,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader ("Authorization", token.token_type + ' ' + token.access_token);
+                    }
+                });
         });
         return result;
     };
@@ -358,11 +331,12 @@
             UseMin: true,
             ServerName: "https://staticcontent.fxstreet.com/",
             AuthorizationUrl: "https://authorization.fxstreet.com/token",
-            StaticContentQueryStringRefresh: "?t=20171006",
+            StaticContentQueryStringRefresh: "?t=20171024",
             Culture: "en-US",
             StaticContentName: "widgets/",
             JsJqueryName: "jquery-1.11.3.min.js",
             JsMustacheName: "mustache.js",
+            JsAuth: { container: 'auth/', fileName: "fxsauth.js" },
             JsCores: ["moment.min.js", "bootstrap.min.js"],
             CssCores: ["fxswidget.min.css"],
             FontAwesome: ["font-awesome", "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css"],
@@ -444,7 +418,7 @@
         _this.widgetsLoader = {};
         _this.interval = null;
         _this.isReady = false;
-        
+
        _this.init = function () {
            if (typeof jQuery === "undefined") {
                var jqueryName = FXStreetWidgets.Configuration.config.JsJqueryName;
@@ -464,9 +438,22 @@
         
         _this.jqueryLoadedCallback = function () {
             FXStreetWidgets.$ = jQuery;
-            _this.loadMustache();
+            _this.loadAuthJs();
         };
-        
+
+        _this.loadAuthJs = function () {
+            if (!_this.authIsReady()) {
+                var authConfig = FXStreetWidgets.Configuration.config.JsAuth;
+                var url = FXStreetWidgets.Configuration.createResourceUrl(authConfig.container, authConfig.fileName);
+
+                FXStreetWidgets.ResourceManagerObj.load(authConfig.fileName, FXStreetWidgets.ResourceType.Js,
+                    url, _this.authLoadedCallback, _this.authIsReady);
+            }
+            else {
+                _this.authLoaded();
+            }
+        };
+
         _this.loadMustache = function () {
             if (!_this.mustacheIsReady()) {
                 var mustacheName = FXStreetWidgets.Configuration.config.JsMustacheName;
@@ -487,6 +474,22 @@
             }, 10);
         };
 
+        _this.authLoadedCallback = function () {
+            _this.Interval = setInterval(function () {
+                if (_this.authIsReady()) {
+                    clearInterval(_this.Interval);
+                    _this.authLoaded();
+                }
+            }, 10);
+        };
+
+        _this.authLoaded = function(){
+             FXStreetWidgets.Authorization = FXStreetAuth.Authorization.getInstance({
+                authorizationUrl: FXStreetWidgets.Configuration.config.AuthorizationUrl
+            });
+            _this.loadMustache();
+        };
+    
         _this.mustacheLoaded = function () {
             FXStreetWidgets.ExternalLib.Mustache = Mustache;
 
@@ -501,6 +504,11 @@
 
         _this.mustacheIsReady = function () {
             var result = typeof Mustache !== "undefined";
+            return result;
+        };
+
+        _this.authIsReady = function () {
+            var result = typeof FXStreetAuth !== "undefined";
             return result;
         };
         

@@ -42,7 +42,7 @@
                         <span class="fxs_author_description">
                             {{Value.Author.Position}} <a href="{{{Value.Company.Url}}}" rel="nofollow" class="fxs_mutedLink">{{Value.Company.Name}}</a>
                         </span>
-
+                        {{#Value.Author.FollowEnabled}}
                         <button id="fxs_cta_authorfollow_{{Value.Id}}" type="button" class="fxs_btn fxs_btn_line fxs_btn_small btn" aria-pressed="false">
                             <span class="fxs_togglebtn_txt init_txt" data-placement="bottom" title="Follow autor's updates">
                                 <i class="fa fa-envelope-o"></i>
@@ -53,6 +53,7 @@
                                 <span>{{Translations.AuthorFollowingButton}}</span>
                             </span>
                         </button>
+                        {{/Value.Author.FollowEnabled}}
                     </span>
                     {{> seo}}
                 </address>
@@ -339,7 +340,7 @@
                             {{Position}}
                             <a href="{{CompanyUrl}}" class="fxs_mutedLink">{{CompanyName}}</a>
                         </span>
-
+                        {{#FollowEnabled}}
                         <button id="fxs_cta_authorfollow_{{Value.Id}}" type="button" class="fxs_btn fxs_btn_line fxs_btn_small btn" aria-pressed="false">
                             <span class="fxs_togglebtn_txt init_txt" data-placement="bottom" title="Follow autor's updates">
                                 <i class="fa fa-envelope-o"></i>
@@ -350,6 +351,7 @@
                                 <span>{{Translations.AuthorFollowingButton}}</span>
                             </span>
                         </button>
+                        {{/FollowEnabled}}
 
                     </div>
                 </div>
@@ -914,7 +916,7 @@
             </div>
         </aside>
         <div class="fxs_flex_col">
-            <ul class="fxs_tabs_nav">
+            <ul class="fxs_tabs_nav fxs_tabs_nav_small">
                 <li class="active"><a data-toggle="tab" href="#broker-trading-details" title="{{Translations.TradingDetails}}">{{Translations.TradingDetails}}</a></li>
                 <li><a data-toggle="tab" href="#broker-services" title="{{Translations.Services}}">{{Translations.Services}}</a></li>
                 <li><a data-toggle="tab" href="#broker-promotions" title="{{Translations.Promotions}}">{{Translations.Promotions}}</a></li>
@@ -1107,7 +1109,7 @@
                 </div>
                 <div role="tabpanel" id="broker-promotions" class="tab-pane fade">
                     {{#Broker.Promotions}}
-                    <h2 class="fxs_headline_from_tiny_to_small">
+                    <h2 class="fxs_headline_small">
                         {{Title}}
                     </h2>
                     <div class="fxs_entryPlain_txt">
@@ -1229,7 +1231,7 @@
                         {{/Sentiment}}
                         <div class="fxs_widget_divider_module">
                             <div class="fxs_indexes_tabpanel fxs_indexes_cag tab-content">
-                                <ul class="fxs_tabs_nav">
+                                <ul class="fxs_tabs_nav fxs_tabs_nav_small">
                                     {{#Sentiment}}
                                     <li class="{{Class}}"><a data-toggle="tab" href="#{{Id}}">{{Type}}</a></li>
                                     {{/Sentiment}}
@@ -1652,7 +1654,7 @@
                         <span class="fxs_author_description">
                             {{Value.Author.Position}} <a href="{{Value.Company.Url}}" class="fxs_mutedLink">{{Value.Company.Name}}</a>
                         </span>
-
+                        {{#Value.Author.FollowEnabled}}
                         <button id="fxs_cta_authorfollow_{{Value.Id}}" type="button" class="fxs_btn fxs_btn_line fxs_btn_small btn" aria-pressed="false">
                             <span class="fxs_togglebtn_txt init_txt" data-placement="bottom" title="Follow autor's updates">
                                 <i class="fa fa-envelope-o"></i>
@@ -1663,6 +1665,7 @@
                                 <span>{{Translations.AuthorFollowingButton}}</span>
                             </span>
                         </button>
+                        {{/Value.Author.FollowEnabled}}
                     </span>
                 </address>
                 <!-- Social Media share widget -->
@@ -2358,7 +2361,7 @@
             {{{Translations.Message}}}
         </div>
         <!-- tabs -->
-        <ul class="fxs_tabs_nav">
+        <ul class="fxs_tabs_nav fxs_tabs_nav_small">
             <li class="{{NewslettersActiveClass}}"><a subscription-tab data-tabselector="#newslettersTab" href="#" title="{{Translations.TabNewsletters}}">{{Translations.TabNewsletters}}</a></li>
             <li class="{{AuthorsActiveClass}}"><a subscription-tab data-tabselector="#authorsTab" href="#" title="{{Translations.TabAuthors}}">{{Translations.TabAuthors}}</a></li>
         </ul>
@@ -2415,7 +2418,7 @@
                     </address>
                 </div>
                 {{/UserPersonalization.Authors}}
-                <h2 class="fxs_headline_from_tiny_to_small">{{Translations.SuggestedAuthorsTitle}}</h2>
+                <h2 class="fxs_headline_small">{{Translations.SuggestedAuthorsTitle}}</h2>
                 <hr class="fxs_divider_third" />
                 {{#UserPersonalization.SuggestedAuthors}}
                 <div class="fxs_iBlock fxs_marginBase_bottom fxs_author_subscription_listItem">
@@ -2544,8 +2547,8 @@
             "headline": "{{{Value.Title}}}",
             "name": "{{{Value.SEO.MetaTitle}}}",
             "keywords": "{{#Value.Categories}}{{Name}},{{/Value.Categories}}",
-            "datePublished" : "{{{Value.PublicationDate}}}",
-            "dateModified":  "{{{Value.PublicationDate}}}",
+            "datePublished" : "{{{Value.SEO.PublicationDate}}}",
+            "dateModified":  "{{{Value.SEO.PublicationDate}}}",
             "mainEntityOfPage" : "{{{Value.SEO.FullUrl}}}",
             "url" : "{{{Value.SEO.FullUrl}}}",
             "articleBody" : "{{{Value.ContentPlainText}}}",
@@ -3024,7 +3027,7 @@
     <div class="fxs_col fxs_col_33">
         <div class="fxs_pricing_table_item fxs_marginBase_bottom">
             <div class="fxs_pricing_table_price fxs_clearfix">
-                <span class="fxs_headline_from_tiny_to_medium">{{Translations.Premium1Month}}</span>
+                <span class="fxs_headline_medium">{{Translations.Premium1Month}}</span>
                 <span class="fxs_pricing_table_value">{{Subscription.OneMonth.Price}}{{Translations.Euro}}</span>
             </div>
             <form action="{{Subscription.PaypalUrl}}" method="post" target="_top">
@@ -3043,7 +3046,7 @@
     <div class="fxs_col fxs_col_33">
         <div class="fxs_pricing_table_item fxs_marginBase_bottom">
             <div class="fxs_pricing_table_price fxs_clearfix">
-                <span class="fxs_headline_from_tiny_to_medium">{{Translations.Premium3Months}}</span>
+                <span class="fxs_headline_medium">{{Translations.Premium3Months}}</span>
                 <span class="fxs_pricing_table_value">{{Subscription.ThreeMonth.Price}}{{Translations.Euro}}</span>
                 <span class="fxs_label">{{Translations.PremiumSave}} {{Subscription.ThreeMonth.Saved}}{{Translations.Euro}}</span>
             </div>
@@ -3064,7 +3067,7 @@
         <div class="fxs_pricing_table_item fxs_pricing_featured_offer fxs_marginBase_bottom">
             <div class="fxs_pricing_table_price fxs_clearfix">
                 <span class="fxs_pricing_table_subtitle">{{Translations.PremiumBestDeal}}</span>
-                <span class="fxs_headline_from_tiny_to_medium">{{Translations.Premium12Months}}</span>
+                <span class="fxs_headline_medium">{{Translations.Premium12Months}}</span>
                 <span class="fxs_pricing_table_value">{{Subscription.TwelfthMonth.Price}}{{Translations.Euro}}</span>
                 <span class="fxs_label">{{Translations.PremiumSave}} {{Subscription.TwelfthMonth.Saved}}{{Translations.Euro}}</span>
             </div>
@@ -3086,7 +3089,7 @@
     <div class="fxs_col fxs_col_33">
         <div class="fxs_pricing_table_item fxs_marginBase_bottom">
             <div class="fxs_pricing_table_price fxs_clearfix">
-                <span class="fxs_headline_from_tiny_to_medium">{{Translations.Premium1Month}}</span>
+                <span class="fxs_headline_medium">{{Translations.Premium1Month}}</span>
                 <span class="fxs_pricing_table_value">{{Subscription.OneMonth.Price}}{{Translations.Euro}}</span>
             </div>            
                 <button id="fxs_button_month_1" type="submit" class="fxs_btn fxs_btn_cta fxs_btn_block">{{Translations.PremiumSubscribe}}</button>            
@@ -3095,7 +3098,7 @@
     <div class="fxs_col fxs_col_33">
         <div class="fxs_pricing_table_item fxs_marginBase_bottom">
             <div class="fxs_pricing_table_price fxs_clearfix">
-                <span class="fxs_headline_from_tiny_to_medium">{{Translations.Premium3Months}}</span>
+                <span class="fxs_headline_medium">{{Translations.Premium3Months}}</span>
                 <span class="fxs_pricing_table_value">{{Subscription.ThreeMonth.Price}}{{Translations.Euro}}</span>
                 <span class="fxs_label">{{Translations.PremiumSave}} {{Subscription.ThreeMonth.Saved}}{{Translations.Euro}}</span>
             </div>                          
@@ -3106,7 +3109,7 @@
         <div class="fxs_pricing_table_item fxs_pricing_featured_offer fxs_marginBase_bottom">
             <div class="fxs_pricing_table_price fxs_clearfix">
                 <span class="fxs_pricing_table_subtitle">{{Translations.PremiumBestDeal}}</span>
-                <span class="fxs_headline_from_tiny_to_medium">{{Translations.Premium12Months}}</span>
+                <span class="fxs_headline_medium">{{Translations.Premium12Months}}</span>
                 <span class="fxs_pricing_table_value">{{Subscription.TwelfthMonth.Price}}{{Translations.Euro}}</span>
                 <span class="fxs_label">{{Translations.PremiumSave}} {{Subscription.TwelfthMonth.Saved}}{{Translations.Euro}}</span>
             </div>
@@ -4314,7 +4317,7 @@
 </div> 
 <script id="sidebar_right_user" type="x-tmpl-mustache">
     {{^User.IsAuthenticated}}
-    <ul class="fxs_tabs_nav">
+    <ul class="fxs_tabs_nav fxs_tabs_nav_small">
         <li class="active"><a data-toggle="tab" href="#login" id="fxs_login_btn" title="{{{Translations.LoginLabel}}}">{{{Translations.LoginLabel}}}</a></li>
         <li><a data-toggle="tab" href="#signup" id="fxs_signup_btn" title="{{{Translations.SignupLabel}}}">{{{Translations.SignupLabel}}}</a></li>
     </ul>
@@ -4593,7 +4596,7 @@
         <div class="fxs_col fxs_col_50"></div>
         <div class="fxs_col fxs_col_50 fxs_signup_content">
             <div class="fxs_confirm_signup">
-                <h2 class="fxs_headline_from_tiny_to_small">
+                <h2 class="fxs_headline_small">
                     {{{Translations.SignUp_Page_Confirmation_Hello}}} {{{UserName}}}, <span class="fxs_dBlock">{{{Translations.SignUp_Page_Confirmation_Thanks}}}</span>
                 </h2>
                 <i class="fa fa-check fa-3x fxs_txt_success" aria-hidden="true"></i>
@@ -4845,7 +4848,9 @@
         <div id="fxs_user_options" class="fxs_user_options fxs_hideElements">
             <i class="fa fa-caret-up fa-3x" aria-hidden="true"></i>
             <i class="fa fa-times" aria-hidden="true"></i>
+            {{#MySuscriptionsLabel}}
             <a href="{{MySuscriptionsUrl}}" class="fxs_suscriptions_btn">{{MySuscriptionsLabel}}</a>
+            {{/MySuscriptionsLabel}}
             <a id="logout" href="javascript:void(0)">{{LogoutLabel}}</a>
         </div>
     </div>
@@ -4904,6 +4909,7 @@
                         <span class="fxs_author_description">
                             {{Value.Author.Position}} <a href="{{{Value.Company.Url}}}" rel="nofollow" class="fxs_mutedLink">{{Value.Company.Name}}</a>
                         </span>
+                        {{#Value.Author.FollowEnabled}}
                         <button id="fxs_cta_authorfollow_{{Value.Id}}" type="button" class="fxs_btn fxs_btn_line fxs_btn_small btn" aria-pressed="false">
                             <span class="fxs_togglebtn_txt init_txt" data-placement="bottom" title="Follow autor's updates">
                                 <i class="fa fa-envelope-o"></i>
@@ -4914,6 +4920,7 @@
                                 <span>{{Translations.AuthorFollowingButton}}</span>
                             </span>
                         </button>
+                        {{/Value.Author.FollowEnabled}}
                     </span>
                     {{> seo}}
                 </address>
@@ -4981,7 +4988,7 @@
                             <div class="fxs_col fxs_col_33">
                                 <div class="fxs_pricing_table_item fxs_marginBase_bottom">
                                     <div class="fxs_pricing_table_price fxs_clearfix">
-                                        <span class="fxs_headline_from_tiny_to_medium">{{Translations.Premium1Month}}</span>
+                                        <span class="fxs_headline_medium">{{Translations.Premium1Month}}</span>
                                         <span class="fxs_pricing_table_value">{{Value.Video.Subscription.OneMonth.Price}}{{Translations.Euro}}</span>
                                     </div>
                                     <form action="{{Value.Video.Subscription.PaypalUrl}}" method="post" target="_top">
@@ -5000,7 +5007,7 @@
                             <div class="fxs_col fxs_col_33">
                                 <div class="fxs_pricing_table_item fxs_marginBase_bottom">
                                     <div class="fxs_pricing_table_price fxs_clearfix">
-                                        <span class="fxs_headline_from_tiny_to_medium">{{Translations.Premium3Months}}</span>
+                                        <span class="fxs_headline_medium">{{Translations.Premium3Months}}</span>
                                         <span class="fxs_pricing_table_value">{{Value.Video.Subscription.ThreeMonth.Price}}{{Translations.Euro}}</span>
                                         <span class="fxs_label">{{Translations.PremiumSave}} {{Value.Video.Subscription.ThreeMonth.Saved}}{{Translations.Euro}}</span>
                                     </div>
@@ -5021,7 +5028,7 @@
                                 <div class="fxs_pricing_table_item fxs_pricing_featured_offer fxs_marginBase_bottom">
                                     <div class="fxs_pricing_table_price fxs_clearfix">
                                         <span class="fxs_pricing_table_subtitle">{{Translations.PremiumBestDeal}}</span>
-                                        <span class="fxs_headline_from_tiny_to_medium">{{Translations.Premium12Months}}</span>
+                                        <span class="fxs_headline_medium">{{Translations.Premium12Months}}</span>
                                         <span class="fxs_pricing_table_value">{{Value.Video.Subscription.TwelfthMonth.Price}}{{Translations.Euro}}</span>
                                         <span class="fxs_label">{{Translations.PremiumSave}} {{Value.Video.Subscription.TwelfthMonth.Saved}}{{Translations.Euro}}</span>
                                     </div>
@@ -5273,7 +5280,7 @@
 
 <script id="filteredpostslist" type="x-tmpl-mustache">
     {{#Value}}
-    <ul class="fxs_tabs_nav">
+    <ul class="fxs_tabs_nav fxs_tabs_nav_small">
         {{#HasAnalysis}}
         <li class=""><a data-toggle="tab" href="#Analysis" title="{{Translations.TabAnalysis}}" aria-expanded="false">{{Translations.TabAnalysis}}</a></li>
         {{/HasAnalysis}}
@@ -6506,7 +6513,7 @@
                         <div class="fxs_subNav_rates">
                             {{#SubSectionEntries}}
                             <div class="fxs_navItemsBox">
-                                <span class="fxs_headline_from_nano_to_tiny">{{Text}}</span>
+                                <span class="fxs_headline_tiny">{{Text}}</span>
                                 <ul class="fxs_subNav_col_{{ColumnCount}} fxs_list_unstyled">
                                     {{#ItemEntries}}
                                     <li>
@@ -6540,7 +6547,7 @@
                         <div class="fxs_subNav_rates">
                             {{#SubSectionEntries}}
                             <div class="fxs_navItemsBox">
-                                <span class="fxs_headline_from_nano_to_tiny">{{Text}}</span>
+                                <span class="fxs_headline_tiny">{{Text}}</span>
 
                                 <ul class="fxs_subNav_col_{{ColumnCount}} fxs_list_unstyled">
                                     {{#ItemEntries}}

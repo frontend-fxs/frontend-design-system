@@ -5,7 +5,7 @@
             {{{Translations.Message}}}
         </div>
         <!-- tabs -->
-        <ul class="fxs_tabs_nav">
+        <ul class="fxs_tabs_nav fxs_tabs_nav_small">
             <li class="{{NewslettersActiveClass}}"><a subscription-tab data-tabselector="#newslettersTab" href="#" title="{{Translations.TabNewsletters}}">{{Translations.TabNewsletters}}</a></li>
             <li class="{{AuthorsActiveClass}}"><a subscription-tab data-tabselector="#authorsTab" href="#" title="{{Translations.TabAuthors}}">{{Translations.TabAuthors}}</a></li>
         </ul>
@@ -62,7 +62,7 @@
                     </address>
                 </div>
                 {{/UserPersonalization.Authors}}
-                <h2 class="fxs_headline_from_tiny_to_small">{{Translations.SuggestedAuthorsTitle}}</h2>
+                <h2 class="fxs_headline_small">{{Translations.SuggestedAuthorsTitle}}</h2>
                 <hr class="fxs_divider_third" />
                 {{#UserPersonalization.SuggestedAuthors}}
                 <div class="fxs_iBlock fxs_marginBase_bottom fxs_author_subscription_listItem">

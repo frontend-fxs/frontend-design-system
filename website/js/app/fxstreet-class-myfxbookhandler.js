@@ -1,7 +1,7 @@
 ﻿(function () {
     FXStreet.Class.MyFxBookHandler = function () {
         var parent = FXStreet.Class.Base(),
-        _this = FXStreet.Util.extendObject(parent);
+            _this = FXStreet.Util.extendObject(parent);
 
         // ***** json properties ***** //
         _this.GetSpreadsDelegated = null;
@@ -19,10 +19,12 @@
         };
 
         _this.setVars = function () {
+            _this.SpreadServer = getValidSpreadsServer();
         };
 
         _this.PollSpreads = function () {
-            if (!_this.SpreadServer.join(',')) {
+            if (!_this.SpreadServer.join(',') || _this.SpreadServer.length === 0) {
+                _this.ExecuteDelegate('');
                 console.warn('The spread brokers has a wrong configuration');
                 return;
             }
@@ -31,13 +33,21 @@
                 type: 'GET',
                 dataType: "jsonp",
                 url: _this.CreateUrl(),
-                success: _this.PollSpreadsSucceed,
+                success: _this.ExecuteDelegate,
                 error: _this.PollSpreadsFailed,
                 complete: _this.PollSpreadsFinally
             });
+
         };
 
-        _this.PollSpreadsSucceed = function (data) {
+        var getValidSpreadsServer = function () {
+            var result = $.grep(_this.SpreadServer, function (spread) {
+                return spread !== -1;
+            });
+            return result;
+        }
+
+        _this.ExecuteDelegate = function (data) {
             if (typeof _this.GetSpreadsDelegated === 'function') {
                 _this.GetSpreadsDelegated(data);
             }

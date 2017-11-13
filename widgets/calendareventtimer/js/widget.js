@@ -184,7 +184,7 @@
             debugger;
             if (!isHttpPushSubscribed) {
                 if (FXStreetPush) {
-                    FXStreetWidgets.Util.getTokenByDomain().then(function (token) {
+                    FXStreetWidgets.Authorization.getTokenPromise().then(function (token) {
                         var options = {
                             token: token,
                             tokenUrl: data.AuthorizationUrl,

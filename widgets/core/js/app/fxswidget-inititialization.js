@@ -5,7 +5,7 @@
         _this.widgetsLoader = {};
         _this.interval = null;
         _this.isReady = false;
-        
+
        _this.init = function () {
            if (typeof jQuery === "undefined") {
                var jqueryName = FXStreetWidgets.Configuration.config.JsJqueryName;
@@ -25,9 +25,22 @@
         
         _this.jqueryLoadedCallback = function () {
             FXStreetWidgets.$ = jQuery;
-            _this.loadMustache();
+            _this.loadAuthJs();
         };
-        
+
+        _this.loadAuthJs = function () {
+            if (!_this.authIsReady()) {
+                var authConfig = FXStreetWidgets.Configuration.config.JsAuth;
+                var url = FXStreetWidgets.Configuration.createResourceUrl(authConfig.container, authConfig.fileName);
+
+                FXStreetWidgets.ResourceManagerObj.load(authConfig.fileName, FXStreetWidgets.ResourceType.Js,
+                    url, _this.authLoadedCallback, _this.authIsReady);
+            }
+            else {
+                _this.authLoaded();
+            }
+        };
+
         _this.loadMustache = function () {
             if (!_this.mustacheIsReady()) {
                 var mustacheName = FXStreetWidgets.Configuration.config.JsMustacheName;
@@ -48,6 +61,22 @@
             }, 10);
         };
 
+        _this.authLoadedCallback = function () {
+            _this.Interval = setInterval(function () {
+                if (_this.authIsReady()) {
+                    clearInterval(_this.Interval);
+                    _this.authLoaded();
+                }
+            }, 10);
+        };
+
+        _this.authLoaded = function(){
+             FXStreetWidgets.Authorization = FXStreetAuth.Authorization.getInstance({
+                authorizationUrl: FXStreetWidgets.Configuration.config.AuthorizationUrl
+            });
+            _this.loadMustache();
+        };
+    
         _this.mustacheLoaded = function () {
             FXStreetWidgets.ExternalLib.Mustache = Mustache;
 
@@ -62,6 +91,11 @@
 
         _this.mustacheIsReady = function () {
             var result = typeof Mustache !== "undefined";
+            return result;
+        };
+
+        _this.authIsReady = function () {
+            var result = typeof FXStreetAuth !== "undefined";
             return result;
         };
         

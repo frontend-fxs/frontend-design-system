@@ -178,7 +178,7 @@
 
         _this.subscribeHttpPush = function () {
             if (FXStreetPush) {
-                FXStreetWidgets.Util.getTokenByDomain().then(function (token) {
+                FXStreetWidgets.Authorization.getTokenPromise().then(function (token) {
                     var options = {
                         token: token,
                         tokenUrl: _this.Configuration.AuthorizationUrl,

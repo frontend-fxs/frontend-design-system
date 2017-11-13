@@ -1,0 +1,79 @@
+﻿<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>
+		Key Technical Levels Table
+	</title>
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,300,500,300italic,400italic,500italic,700,700italic" rel="stylesheet" type="text/css">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="../../website/css/fxs_screen.css">
+<!--[if lt IE 9]>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js">
+</script>
+<![endif]-->
+</head>
+<body class="cbp-spmenu-push">
+	<div class="fxs_wrapper fxs_content_wide">
+		<div class="fxs_content">
+				<div class="fxs_contentView">
+                    <div class="fxs_leaderboard fxs_leaderboard_transition">
+                        <div class="fxs_roadblock_slide">
+                            <div class="fxs_ad">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fxs_wallpaper_wrap">
+                        <div class="fxs_wallpaper_img fxs_image_left">
+
+                            <div class="fxs_ad">
+                            </div>
+                        </div> <div class="fxs_wallpaper_img fxs_image_right">
+
+                            <div class="fxs_ad">
+                            </div>
+                        </div>
+                    </div>
+                    <main>
+						<div class="fxs_detail">
+							<div class="fxs_row">
+								<div class="fxs_col fxs_col_100">
+									
+                                    <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+                                            integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+                                            crossorigin="anonymous"></script>
+                                    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
+
+                                    <script>
+                                        function init() {
+                                            $.get('../../widgets/ktltable/mustache/ktltable.html', function (templates) {
+                                                template = $(templates).filter('#fxs_ktl').html();
+                                                $('#ktl').html(Mustache.render(template, foo));
+                                            });
+                                            switch (period) {
+                                                case 2:
+                                                    foo = { Data: data.Monthly, Height: data.Height, Period2: true };
+                                                    break;
+                                                case 3:
+                                                    foo = { Data: data.Annually, Height: data.Height, Period3: true };
+                                                    break;
+                                                default:
+                                                    foo = { Data: data.Weekly, Height: data.Height, Period1: true };
+                                            }
+                                        }
+                                        init();
+
+                                    </script>
+
+								</div>
+							</div>
+						</div>
+					</main>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

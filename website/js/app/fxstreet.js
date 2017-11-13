@@ -1760,54 +1760,6 @@
     };
 }());
 (function () {
-    FXStreet.Class.Patterns.Singleton.Authorization = (function () {
-        var instance;
-
-        var authorization = function () {
-            var tokenPromise;
-            var token;
-
-            this.getTokenPromise = function () {
-                if (token) {
-                    return $.when(token);
-                }
-                else {
-                    if (!tokenPromise) {
-                        var url = FXStreet.Resource.AuthorizationUrl || "https://authorization.fxstreet.com/token";
-                        tokenPromise = $.ajax({
-                            type: "POST",
-                            url: url,
-                            contentType: "application/x-www-form-urlencoded",
-                            dataType: "json",
-                            data: {
-                                grant_type: "domain",
-                                client_id: "client_id"
-                            }
-                        }).then(function (data) {
-                            token = data;
-                            tokenPromise = null;
-                            return token;
-                        }, function (error) {
-                            tokenPromise = null;
-                            console.log(error);
-                        });
-                    }
-                    return tokenPromise;
-                }
-            };
-        };
-
-        return {
-            Instance: function () {
-                if (!instance) {
-                    instance = new authorization();
-                }
-                return instance;
-            }
-        };
-    })();
-}());
-(function () {
     /*
     Name: 
     Base
@@ -2405,7 +2357,9 @@
         };
 
         var callMarketTools = function () {
-            var auth = FXStreet.Class.Patterns.Singleton.Authorization.Instance();
+            var auth = FXStreetAuth.Authorization.getInstance({
+                authorizationUrl: FXStreet.Resource.AuthorizationUrl
+            });
 
             auth.getTokenPromise()
                 .then(function (token) {
@@ -4908,7 +4862,7 @@
 (function () {
     FXStreet.Class.MyFxBookHandler = function () {
         var parent = FXStreet.Class.Base(),
-        _this = FXStreet.Util.extendObject(parent);
+            _this = FXStreet.Util.extendObject(parent);
 
         // ***** json properties ***** //
         _this.GetSpreadsDelegated = null;
@@ -4926,10 +4880,12 @@
         };
 
         _this.setVars = function () {
+            _this.SpreadServer = getValidSpreadsServer();
         };
 
         _this.PollSpreads = function () {
-            if (!_this.SpreadServer.join(',')) {
+            if (!_this.SpreadServer.join(',') || _this.SpreadServer.length === 0) {
+                _this.ExecuteDelegate('');
                 console.warn('The spread brokers has a wrong configuration');
                 return;
             }
@@ -4938,13 +4894,21 @@
                 type: 'GET',
                 dataType: "jsonp",
                 url: _this.CreateUrl(),
-                success: _this.PollSpreadsSucceed,
+                success: _this.ExecuteDelegate,
                 error: _this.PollSpreadsFailed,
                 complete: _this.PollSpreadsFinally
             });
+
         };
 
-        _this.PollSpreadsSucceed = function (data) {
+        var getValidSpreadsServer = function () {
+            var result = $.grep(_this.SpreadServer, function (spread) {
+                return spread !== -1;
+            });
+            return result;
+        }
+
+        _this.ExecuteDelegate = function (data) {
             if (typeof _this.GetSpreadsDelegated === 'function') {
                 _this.GetSpreadsDelegated(data);
             }
@@ -5305,7 +5269,9 @@
         };
 
         var stablishHubConnection = function () {
-            var auth = FXStreet.Class.Patterns.Singleton.Authorization.Instance();
+            var auth = FXStreetAuth.Authorization.getInstance({
+                authorizationUrl: FXStreet.Resource.AuthorizationUrl
+            });
             auth.getTokenPromise().then(function (token) {
                 var instance = FXStreetPush.PushNotification.getInstance({
                     token: token,
@@ -5380,7 +5346,9 @@
             };
 
             var tokenCallback = function (tokenSuccessCallback) {
-                var auth = FXStreet.Class.Patterns.Singleton.Authorization.Instance();
+                var auth = FXStreetAuth.Authorization.getInstance({
+                    authorizationUrl: FXStreet.Resource.AuthorizationUrl
+                });
                 auth.getTokenPromise()
                     .then(function (token) {
                         $.ajax({
@@ -6719,7 +6687,9 @@
             if (console)
                 console.log(e);
 
-            var auth = FXStreet.Class.Patterns.Singleton.Authorization.Instance();
+            var auth = FXStreetAuth.Authorization.getInstance({
+                authorizationUrl: FXStreet.Resource.AuthorizationUrl
+            });
             auth.getTokenPromise()
                 .then(function (token) {
                     var timeZone = _this.Chart.getOption("data.timeZone");
@@ -9514,7 +9484,9 @@
 
         var subscribeHttpPush = function () {
             if (typeof FXStreetPush !== 'undefined') {
-                var auth = FXStreet.Class.Patterns.Singleton.Authorization.Instance();
+                var auth = FXStreetAuth.Authorization.getInstance({
+                    authorizationUrl: FXStreet.Resource.AuthorizationUrl
+                });
                 auth.getTokenPromise().then(function (token) {
                     var options = {
                         token: token,
@@ -9672,7 +9644,7 @@
                 $("meta[property='og\\:title']").attr('content', seo.MetaTitle);
                 $("meta[property='og\\:description']").attr('content', seo.MetaDescription);
                 if (_this.isValid(image)){
-                    $("meta[property='og\\:image']").attr('content', image.Url_Small);
+                    $("meta[property='og\\:image']").attr('content', image.Url_Large);
                 }
                 
                 $("meta[property='og\\:url']").attr('content', seo.FullUrl);
@@ -9747,7 +9719,7 @@
                 
                 $("meta[property='og\\:title']").attr('content', homeSeoItemSaved.MetaTitle);
                 $("meta[property='og\\:description']").attr('content', homeSeoItemSaved.Summary);
-                $("meta[property='og\\:image']").attr('content', homeSeoItemSaved.Image ? homeSeoItemSaved.Image.Url_Small : "");
+                $("meta[property='og\\:image']").attr('content', homeSeoItemSaved.Image ? homeSeoItemSaved.Image.Url_Large : "");
                 $("meta[property='og\\:url']").attr('content', homeSeoItemSaved.FullUrl);
             }
         };
@@ -9802,7 +9774,7 @@
                 $("meta[property='og\\:title']").attr('content', seo.MetaTitle);
                 $("meta[property='og\\:description']").attr('content', seo.MetaDescription);
                 if (_this.isValid(image)){
-                    $("meta[property='og\\:image']").attr('content', image.Url_Small);
+                    $("meta[property='og\\:image']").attr('content', image.Url_Large);
                 }
                 $("meta[property='og\\:url']").attr('content', seo.FullUrl);
             }
@@ -9867,7 +9839,7 @@
                 $("meta[property='og\\:title']").attr('content', seo.MetaTitle);
                 $("meta[property='og\\:description']").attr('content', seo.MetaDescription);
                 if (_this.isValid(image)){
-                    $("meta[property='og\\:image']").attr('content', image.Url_Small);
+                    $("meta[property='og\\:image']").attr('content', image.Url_Large);
                 }
                 $("meta[property='og\\:url']").attr('content', seo.FullUrl);
             }
@@ -13624,7 +13596,9 @@
         var validatePhoneNumber = function (callback) {
             var phone = encodeURIComponent(getCompletePhoneNumber());
             
-            var auth = FXStreet.Class.Patterns.Singleton.Authorization.Instance();
+            var auth = FXStreetAuth.Authorization.getInstance({
+                authorizationUrl: FXStreet.Resource.AuthorizationUrl
+            });
             auth.getTokenPromise().then(function (token) {
                 $.ajax({
                     type: "GET",
@@ -15608,3 +15582,184 @@
     };
     loadFxs();
 }());
+(function ($, window) {
+    if(window.FXStreetAuth)
+        return;
+    
+    window.FXStreetAuth = {};
+    var FXStreetAuth = window.FXStreetAuth;
+
+    FXStreetAuth.Authorization = (function () {
+        var instance;
+
+        var utils = (function () {
+            var getUrlParameter = function (name) {
+                name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+                var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+                var results = regex.exec(location.search);
+                return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+            };
+
+            var isJQueryGreaterThan_1_8 = function () {
+                var vernums = $.fn.jquery.split('.');
+                var result = parseInt(vernums[0]) > 0 && parseInt(vernums[1]) >= 8;
+                return result;
+            };
+
+            var invokeThen = function (promise, ok, err, notify) {
+                if (isJQueryGreaterThan_1_8()) {
+                    return promise.then(ok, err, notify);
+                }
+                else {
+                    return promise.pipe(ok, err, notify);
+                }
+            };
+
+            var isObject = function (obj) {
+                return obj !== null && typeof obj === 'object'
+            };
+
+            return {
+                getUrlParameter: getUrlParameter,
+                invokeThen: invokeThen,
+                isObject: isObject
+            };
+        })();
+
+        var tokenRepository = function(){
+            var storage = window.localStorage;
+            const tokenKeyName = 'authByDomain';
+            const creationDateProp = 'creationDateISO';
+
+            this.setToken = function(token){
+                if(storage && token){
+                    try{
+                        var tokenExtend = $.extend({}, token);
+                        tokenExtend[creationDateProp] = new Date().toISOString();
+
+                        var valueStr = JSON.stringify(tokenExtend);
+                        storage.setItem(tokenKeyName, valueStr);
+                    }
+                    catch(error){}
+                }
+            };
+
+            this.getToken = function(){
+                var result;                
+                if(storage){
+                    try{
+                        var valueStr = storage.getItem(tokenKeyName);
+                        var token = JSON.parse(valueStr);
+                        if(isTokenValid(token)){
+                            result = $.extend({}, token);
+                            delete result[creationDateProp];
+                        }
+                    }
+                    catch(error){}
+                }
+                return result;
+            };
+
+            var isTokenValid = function(token){
+                var result = false;
+                if(token){
+                    const creationDateISO = token[creationDateProp];
+                    const expires_in = token['expires_in'];
+                    if(hasExpired(creationDateISO, expires_in)){
+                        storage.removeItem(tokenKeyName);
+                    }
+                    else{
+                        result = true;
+                    }
+                }
+                return result;
+            };
+
+            var hasExpired = function(creationDateISO, expires_in){
+                var result = false;
+                const neighborhoodInSeconds = 120;
+                if(creationDateISO && expires_in){
+                    var creationDate = new Date(creationDateISO);
+                    var actualDate = new Date();
+                    
+                    var timeDiffMilliseconds = Math.abs(actualDate.getTime() - creationDate.getTime());
+                    var timeDiffSeconds = Math.ceil(timeDiffMilliseconds / 1000);
+
+                    result = (timeDiffSeconds + neighborhoodInSeconds) >= parseInt(expires_in);
+                }
+                return result;
+            };
+        };
+                
+        var authorization = function (options) {
+            var config = {
+                authorizationUrl : "https://authorization.fxstreet.com/token",
+                logging: true,
+                client_id: "client_id"
+            };
+            var repository;
+            var tokenPromise;
+
+            var logger = function (message) {
+                if (config.logging) {
+                    console.log(message);
+                }
+            };
+
+            this.getTokenPromise = function () {
+                if (tokenPromise){
+                    return tokenPromise;
+                }
+                var token = repository.getToken();
+                if (token) {
+                    return $.when(token);
+                }
+                else {
+                    tokenPromise = utils.invokeThen(getToken(), 
+                        function (data) {
+                            repository.setToken(data);
+                            tokenPromise = null;
+                            return data;
+                        }, 
+                        function (error) {
+                            tokenPromise = null;
+                            logger(error);
+                        });
+                    return tokenPromise;
+                }
+            };
+
+            var getToken = function(){
+                return jQuery.ajax({
+                        type: "POST",
+                        url: config.authorizationUrl,
+                        contentType: "application/x-www-form-urlencoded",
+                        dataType: "json",
+                        data: {
+                            grant_type: "domain",
+                            client_id: config.client_id
+                        }
+                    });
+            };
+
+            (function (){
+                if ($.type(options) === "object") {
+                    $.extend(true, config, options);
+                }
+                config.logging = config.logging
+                    || utils.getUrlParameter('fxslogging') !== '';
+
+                repository = new tokenRepository();
+            }());
+        };
+
+        return {
+            getInstance: function (options) {
+                if (!instance) {
+                    instance = new authorization(options);
+                }
+                return instance;
+            }
+        };
+    })();
+}(window.jQuery, window));

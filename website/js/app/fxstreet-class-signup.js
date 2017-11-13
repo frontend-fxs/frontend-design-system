@@ -246,7 +246,9 @@
         var validatePhoneNumber = function (callback) {
             var phone = encodeURIComponent(getCompletePhoneNumber());
             
-            var auth = FXStreet.Class.Patterns.Singleton.Authorization.Instance();
+            var auth = FXStreetAuth.Authorization.getInstance({
+                authorizationUrl: FXStreet.Resource.AuthorizationUrl
+            });
             auth.getTokenPromise().then(function (token) {
                 $.ajax({
                     type: "GET",
