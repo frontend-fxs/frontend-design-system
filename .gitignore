@@ -1,4 +1,3 @@
-widgets-bo/
-website/css/mini-responsive.css
-website/js/packages
-website/static-html/timeline examples
+*.*
+!index.html
+!website/css/fxs_screen.min.css
